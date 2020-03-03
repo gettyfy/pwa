@@ -26,6 +26,9 @@ export const identify = (name: string, ...rest: any) => {
 		plan: "premium",
 		logins: 5
 	  });
+	  // declare global {
+//   interface Window { analytics: SegmentAnalytics.AnalyticsJS; }
+// }
 	  
  */
 	window.analytics.identify(name, { ...rest });
