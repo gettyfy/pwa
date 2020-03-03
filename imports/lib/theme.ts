@@ -1,21 +1,33 @@
-// example theme.js
-export default {
-	breakpoints: [ '30em', '48em', '62em', '80em' ],
-	fonts: {
-		heading: '"Barlow", sans-serif',
-		body: 'system-ui, Barlow, Cantarell, Ubuntu, sans-serif',
-		mono: 'Menlo, Fira Code, Monaco, Roboto Mono, monospace'
+import { theme as chakraTheme } from '@chakra-ui/core';
+
+const fonts = { ...chakraTheme.fonts, mono: `'Menlo', monospace`, heading: `"Barlow", sans-serif'` };
+const fontSizes = {
+	xs: '0.75rem',
+	sm: '0.875rem',
+	md: '1rem',
+	lg: '1.125rem',
+	xl: '1.25rem',
+	'2xl': '1.5rem',
+	'3xl': '1.875rem',
+	'4xl': '2.25rem',
+	'5xl': '3rem',
+	'6xl': '4rem'
+};
+const breakpoints = [ '40em', '52em', '64em' ];
+
+const theme = {
+	...chakraTheme,
+	colors: {
+		...chakraTheme.colors,
+		black: '#16161D'
 	},
-	fontSizes: {
-		xs: '0.75rem',
-		sm: '0.875rem',
-		md: '1rem',
-		lg: '1.125rem',
-		xl: '1.25rem',
-		'2xl': '1.5rem',
-		'3xl': '1.875rem',
-		'4xl': '2.25rem',
-		'5xl': '3rem',
-		'6xl': '4rem'
+	fonts,
+	fontSizes,
+	breakpoints,
+	icons: {
+		...chakraTheme.icons,
+		viewBox: '0 0 3000 3163'
 	}
 };
+
+export default theme;

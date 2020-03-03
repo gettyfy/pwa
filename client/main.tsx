@@ -4,14 +4,15 @@ import { render } from 'react-dom';
 import { ThemeProvider, CSSReset } from '@chakra-ui/core'
 import AppRouter from '/imports/ui/routes';
 import * as serviceWorker from '/imports/ui/serviceWorker'
+import theme from '/imports/lib/theme'
 
 
 const Mount: React.FC = () => {
   return (
-    <ThemeProvider>
+    <ThemeProvider theme={theme}>
       <CSSReset />
       <AppRouter />
-    </ThemeProvider>
+    </ThemeProvider >
   )
 }
 
