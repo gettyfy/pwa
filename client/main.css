@@ -1,0 +1,50 @@
+@font-face {
+  font-family: 'Neue Einstellung';
+  src: url('./fonts/');
+  src: url('./fonts/?#iefix') format('embedded-opentype'), url('./fonts/NeueEinstellung-Medium.woff2') format('woff2'), url('./fonts/NeueEinstellung-Medium.woff') format('woff'), url('./fonts/NeueEinstellung-Medium.ttf') format('truetype'), url('./fonts/NeueEinstellung-Medium.svg#NeueEinstellung-Medium') format('svg');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Neue Einstellung';
+  src: url('./fonts/NeueEinstellung-Regular.eot');
+  src: url('./fonts/NeueEinstellung-Regular.eot?#iefix') format('embedded-opentype'), url('./fonts/NeueEinstellung-Regular.woff2') format('woff2'), url('./fonts/NeueEinstellung-Regular.woff') format('woff'), url('./fonts/NeueEinstellung-Regular.ttf') format('truetype'), url('./fonts/NeueEinstellung-Regular.svg#NeueEinstellung-Regular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Neue Einstellung', "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+}
+
+@media (min-width: 620px) {
+  body {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  height: 100%;
+  font-family: -apple-system, BlinkMacSystemFont, 'Neue Einstellung', "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  overflow: hidden;
+}
+
+body {
+  margin: 0 auto;
+  font-family: 'Neue Einstellung', sans-serif;
+  height: 100%;
+  font-size: 16px;
+  color: #444444;
+  text-align: left;
+  line-height: 1.5;
+}
+
+section#drawer-1 {
+  background-color: #38a169;
+}
