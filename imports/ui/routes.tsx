@@ -6,8 +6,8 @@ import * as Analytics from './analytics'
 import Layout from './Layout'
 import App from '/imports/ui/App'
 
-import { Login, Signup } from './pages/Auth'
-import Wizard from './pages/Wizard'
+import { Login, Signup } from './pages/auth'
+import Wizard from './pages/wizard'
 
 
 
