@@ -3,31 +3,28 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, 'Barlow', "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
 }
 
-@media (min-width: 620px) {
+/* @media (min-width: 620px) {
   body {
     max-width: 600px;
     margin: 0 auto;
   }
-}
+} */
 
 * {
   box-sizing: border-box;
 }
 
 html {
-  height: 100%;
   font-family: -apple-system, BlinkMacSystemFont, 'Barlow', "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
-  overflow: hidden;
 }
 
 body {
-  margin: 0 auto;
   font-family: 'Barlow', sans-serif;
   height: 100%;
   font-size: 16px;
-  color: #444444;
-  text-align: left;
+  background-color: #FCFDFF;
   line-height: 1.5;
+  /* margin: 0 auto; */
 }
 
 section#drawer-1 {
