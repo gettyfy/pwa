@@ -42,22 +42,13 @@ export default class Hello extends React.Component {
     return (
       <div>
         <Box d="flex" my="6" flexDirection="column" alignItems="center" justifyContent="center">
-          <Avatar name="Kwame" >
+          <Avatar name="Friend" >
             <AvatarBadge size="1.25em" bg="green.500" />
           </Avatar>
-          Hello Kwame
+          Hello Friend
         </Box>
 
-        <Stack spacing={3} width="100%">
-          <TrackedLink eventName="ClickTo Convert Page" destination="/convert" buttonName="Currency Converter" />
-          <TrackedLink eventName="ClickTo Kitchen Menu" destination="/kitchen" buttonName="Kitchen Menu" />
-          <TrackedLink eventName="ClickTo Fund Wallet" destination="/wallet" buttonName="Wallet Money" />
-          <TrackedLink eventName="ClickTo Chat Room" destination="/chat" buttonName="Chat Room" />
-          {/* <Button variant="outline" size="lg" variantColor="green" >Chat Room</Button>
-          <Button variant="outline" size="lg" variantColor="green" >Kitchen Menu</Button>
-          <Button variant="outline" size="lg" variantColor="green" >Find Friends</Button>
-          <Button variant="outline" size="lg" variantColor="green" >Fund Wallet</Button> */}
-        </Stack>
+
       </div>
     );
   }

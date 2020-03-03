@@ -2,9 +2,9 @@
 export default {
 	breakpoints: [ '30em', '48em', '62em', '80em' ],
 	fonts: {
-		heading: '"Avenir Next", sans-serif',
-		body: 'system-ui, Cantarell, Ubuntu, sans-serif',
-		mono: 'Menlo, monospace'
+		heading: '"Barlow", sans-serif',
+		body: 'system-ui, Barlow, Cantarell, Ubuntu, sans-serif',
+		mono: 'Menlo, Fira Code, Monaco, Roboto Mono, monospace'
 	},
 	fontSizes: {
 		xs: '0.75rem',

@@ -1,17 +1,20 @@
 import React, { ChangeEvent } from 'react';
 import { InputGroup, Box, Link, Stack, Input, Button, InputRightElement } from '@chakra-ui/core'
 import { Accounts } from 'meteor/accounts-base';
-import * as Analytics from '/imports/ui/analytics'
+// import * as Analytics from '/imports/ui/analytics'
 
 
 const Signup: React.FunctionComponent = (): any => {
     interface AuthInterface {
+        fullname: string,
         username: string,
-        password: string
+        password: string,
+        [key: string]: string
     }
     const authInit: AuthInterface = {
         username: "",
-        password: ""
+        password: "",
+        fullname: "",
     }
     const [show, setShow] = React.useState<boolean>(false);
     const [value, setValue] = React.useState<AuthInterface>(authInit);
@@ -26,6 +29,9 @@ const Signup: React.FunctionComponent = (): any => {
             case 'username':
                 updatedValue['username'] = event.target.value
                 break;
+            case 'fullname':
+                updatedValue['fullname'] = event.target.value
+                break;
             default:
                 updatedValue = value
                 break;
@@ -37,18 +43,33 @@ const Signup: React.FunctionComponent = (): any => {
     const handleSubmit = (e: any) => {
         e.preventDefault()
         const options = value
-        Analytics.identify(options.username)
-        Analytics.track("New User Signup", options)
+        // Analytics.identify(options.username)
+        // Analytics.track("New User Signup", options)
         console.log("MEROS===>", options);
-        Accounts.createUser(options, (err) => {
-            if (err) {
-                console.log(err);
+        Accounts.createUser({
+            email: options.username,
+            password: options.password,
+            profile: {
+                name: options.fullname
+            }
+        }, (error) => {
+            if (error) {
+                console.log(error.message);
                 return alert('An Error Occured')
             }
-            // else {
-            return window.location.replace('/');
-            // }
-        });
+            else {
+                return window.location.replace('/');
+            }
+        })
+        // Accounts.createUser(options, (err) => {
+        //     if (err) {
+        //         console.log(err);
+        //         return alert('An Error Occured')
+        //     }
+        //     // else {
+        //     return window.location.replace('/');
+        //     // }
+        // });
     }
 
 
@@ -57,6 +78,12 @@ const Signup: React.FunctionComponent = (): any => {
 
             <form onSubmit={(e) => handleSubmit(e)}>
                 <Stack spacing="6" >
+                    <Input
+                        size="lg"
+                        type={'fullname'}
+                        onChange={(e: any) => handleChange('fullname', e)}
+                        placeholder="Enter Fullname"
+                    />
                     <Input
                         size="lg"
                         type={'username'}

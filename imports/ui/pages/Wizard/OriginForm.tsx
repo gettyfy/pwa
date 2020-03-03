@@ -24,7 +24,7 @@ const OriginForm: React.FunctionComponent = (props: any) => {
             </Select>
             <br />
             <Button type="button" className="next" onClick={() => {
-                history.push('/kitchen/recipe');
+                history.push('/wizard/recipe');
             }}>Next</Button>
         </Box>
     )

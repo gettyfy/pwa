@@ -25,7 +25,7 @@ const WizardFormFirstPage: React.FunctionComponent = (props: any) => {
             <br />
             <Button type="button" className="next" onClick={() => {
                 Analytics.track("Menu Item", { menu });
-                history.push('/kitchen/food');
+                history.push('/wizard/food');
             }}>Next</Button>
         </Box>
     );

@@ -10,7 +10,7 @@ const FoodItem: React.FunctionComponent = (props: any) => {
     return (
         <Box p={4}>
             <Heading as="h4" size="md">Enter the Food and Nutritional Value</Heading>
-            <br/>
+            <br />
             <Field
                 name="food"
                 type="text"
@@ -18,7 +18,7 @@ const FoodItem: React.FunctionComponent = (props: any) => {
                 placeholder="Enter Your Food"
                 onChange={e => props.updateState('food', e.target.value)}
             />
-            <br/>
+            <br />
             <Field
                 name="nutrition"
                 type="text"
@@ -26,10 +26,10 @@ const FoodItem: React.FunctionComponent = (props: any) => {
                 placeholder="Enter Nutritional Value"
                 onChange={e => props.updateState('nutrition', e.target.value)}
             />
-            <br/>
+            <br />
             <Button type="button" className="next" onClick={() => {
                 Analytics.track("Food Item", { food: props.data.food, nutrition: props.data.nutrition });
-                history.push('/kitchen/country');
+                history.push('/wizard/country');
             }}>Next</Button>
         </Box>
     )
