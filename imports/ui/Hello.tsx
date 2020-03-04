@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled'
-import { Link } from 'react-router-dom'
-import { Flex, Stack, Box, Avatar, AvatarBadge, Stat, StatNumber, StatHelpText, Text, StatGroup, Heading, Icon, } from '@chakra-ui/core'
+import { Flex, Stack, Box, Avatar, AvatarBadge, Stat, StatNumber, StatHelpText, Text, StatGroup, Heading, Icon, Divider } from '@chakra-ui/core'
 // import * as Analytics from '/imports/ui/analytics';
 import { ActionCard, ActionCardRow } from './components'
 
@@ -119,8 +118,11 @@ export default class Hello extends React.Component {
               />
           </ActionCardRow>
 
-        </Dashboard>
+          <Box justify="space-between" mt="10">
+              <Divider borderColor="grey.200" />
+            </Box>
 
+        </Dashboard>
 
 
     )
