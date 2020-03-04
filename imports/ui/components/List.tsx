@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled'
-import { Box, Stack,Avatar, Text,Icon , Flex} from '@chakra-ui/core'
+import { Link } from 'react-router-dom'
+import { Box, Stack,Avatar, Text,Icon,Flex } from '@chakra-ui/core'
 import * as Analytics from '/imports/ui/analytics';
 
 
@@ -18,15 +19,18 @@ interface ITransactionList {
     paymentStatus: string,
     overdueAmount: string,
     overdueStatus: string,
-    boxPadding: number,
-    customerProfile: any
+    boxPadding: any,
+    customerProfile: any,
+    cardLink: string,
+    iconName: string,
+    iconSize: any
 }
 
 
 
 
 const TransactionList= (props: ITransactionList) => {
-    const { analyticName,boxPadding, customerProfile,customerName, customerStatus, amount,paymentStatus,overdueAmount,overdueStatus,iconName, iconSize} = props
+    const { analyticName,boxPadding, customerProfile,customerName, customerStatus, amount,paymentStatus,overdueAmount,overdueStatus,iconName, iconSize, cardLink} = props
     
     const handleClick = (analyticName: string): any => {
 
@@ -38,8 +42,10 @@ const TransactionList= (props: ITransactionList) => {
 
     return(
         <Flex>
+            {/* <Box d="flex"> */}
+            {/* <Link to={cardLink}> */}
                  <Box p={boxPadding}>
-                <Stack isInline>
+                 <Stack isInline>
                   <Avatar name={customerProfile} src="/" />
                 </Stack>
                  </Box>
@@ -62,10 +68,15 @@ const TransactionList= (props: ITransactionList) => {
 
                 <Box p={boxPadding} onClick={handleClick(analyticName)}>
                 <Stack isInline>
+                    <Link to={cardLink}> 
                       <Icon name= {iconName} size={iconSize} />
+                      </Link>
                     </Stack>
                     
                 </Box>
+                
+                {/* </Link> */}
+                {/* </Box> */}
               </Flex>
 
                
