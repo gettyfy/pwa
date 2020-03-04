@@ -1,0 +1,22 @@
+<svg width="48" height="48" viewBox="0 0 48 48" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="Canvas" fill="none">
+<g id="user">
+<g id="Combined Shape">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M 18 20C 12.4775 20 8 15.5228 8 10C 8 4.47717 12.4775 0 18 0C 23.5225 0 28 4.47717 28 10C 28 15.5228 23.5225 20 18 20ZM 36 38L 36 34C 36 28.4772 31.5225 24 26 24L 10 24C 4.47754 24 0 28.4772 0 34L 0 38C 0 39.1046 0.895508 40 2 40C 3.10449 40 4 39.1046 4 38L 4 34C 4 30.6863 6.68652 28 10 28L 26 28C 29.3135 28 32 30.6863 32 34L 32 38C 32 39.1046 32.8955 40 34 40C 35.1045 40 36 39.1046 36 38ZM 24 10C 24 13.3137 21.3135 16 18 16C 14.6865 16 12 13.3137 12 10C 12 6.68628 14.6865 4 18 4C 21.3135 4 24 6.68628 24 10Z" transform="translate(6 4)" fill="#919191"/>
+</g>
+<mask id="mask0" mask-type="alpha" maskUnits="userSpaceOnUse" x="6" y="4" width="36" height="40">
+<g id="Combined Shape_2">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M 18 20C 12.4775 20 8 15.5228 8 10C 8 4.47717 12.4775 0 18 0C 23.5225 0 28 4.47717 28 10C 28 15.5228 23.5225 20 18 20ZM 36 38L 36 34C 36 28.4772 31.5225 24 26 24L 10 24C 4.47754 24 0 28.4772 0 34L 0 38C 0 39.1046 0.895508 40 2 40C 3.10449 40 4 39.1046 4 38L 4 34C 4 30.6863 6.68652 28 10 28L 26 28C 29.3135 28 32 30.6863 32 34L 32 38C 32 39.1046 32.8955 40 34 40C 35.1045 40 36 39.1046 36 38ZM 24 10C 24 13.3137 21.3135 16 18 16C 14.6865 16 12 13.3137 12 10C 12 6.68628 14.6865 4 18 4C 21.3135 4 24 6.68628 24 10Z" transform="translate(6 4)" fill="white"/>
+</g>
+</mask>
+<g mask="url(#mask0)">
+<g id="COLOR/ black">
+<g id="Rectangle">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M 0 0L 48 0L 48 48L 0 48L 0 0Z" fill="#F2994A"/>
+</g>
+</g>
+</g>
+</g>
+</g>
+</svg>
+
