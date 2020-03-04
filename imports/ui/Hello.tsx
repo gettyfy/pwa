@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled'
-import { Flex, Stack, Box, Avatar, AvatarBadge, Stat, StatNumber, StatHelpText, Text, StatGroup, Heading, Icon, Divider } from '@chakra-ui/core'
+import { Flex, Stack, Box, Avatar, AvatarBadge, Stat, StatNumber, StatHelpText, Text, StatGroup, Heading, Icon, Divider,Avatar } from '@chakra-ui/core'
 // import * as Analytics from '/imports/ui/analytics';
 import { ActionCard, ActionCardRow } from './components'
 
@@ -117,10 +117,37 @@ export default class Hello extends React.Component {
               iconColor="green.800" 
               />
           </ActionCardRow>
-
-          <Box justify="space-between" mt="10">
+              
+              {/* Added a divider */}
+          <Box justify="space-between" mt="6">
               <Divider borderColor="grey.200" />
             </Box>
+
+            <Flex flexDirection="row">
+              <Box pr ="2">
+            <Icon name="phone"/></Box>
+            <Box pr="1">
+             <Text fontSize="15px" color="tomato" mr="2">
+                 ACTION REQUIRED </Text>                        
+                 </Box>
+               </Flex>
+
+               <Box justify="space-between">
+              <Divider borderColor="grey.200" />
+            </Box>
+                    {/* //Individual customer list */}
+             <Flex flexDirection="row" mt="3">
+               <Box>
+             <Stack isInline>
+                  <Avatar name="Oshigaki Kisame" src="https://bit.ly/broken-link" />
+                </Stack>
+                </Box>
+                <Box flexDirection="row" mt="3" pl="2">
+                <Text fontSize="md">Evans Boateng</Text>
+                </Box>
+
+              </Flex>
+
 
         </Dashboard>
 
@@ -131,7 +158,7 @@ export default class Hello extends React.Component {
 
 
 
-
+{/* Default size is 1em => 16px */} 
 
 
 
