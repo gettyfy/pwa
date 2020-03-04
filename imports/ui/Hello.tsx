@@ -3,6 +3,7 @@ import styled from '@emotion/styled'
 import { Flex, Stack, Box, Avatar, AvatarBadge, Stat, StatNumber, StatHelpText, Text, StatGroup, Heading, Icon, Divider,Avatar } from '@chakra-ui/core'
 // import * as Analytics from '/imports/ui/analytics';
 import { ActionCard, ActionCardRow } from './components'
+import { TransactionList, CustomerList} from './components'
 
 
 const Dashboard = styled.main`
@@ -90,7 +91,6 @@ export default class Hello extends React.Component {
             cardHeading="Create a Transation" 
             cardSubHeading="Record" 
             analyticName="Create Record" 
-            name="edit" 
             iconColor="blue.500" 
           />
           </ActionCardRow>
@@ -135,39 +135,21 @@ export default class Hello extends React.Component {
                <Box justify="space-between">
               <Divider borderColor="grey.200" />
               </Box>
-                    {/* //Individual customer list */}
-            
 
-              <Flex flexDirection="row" alignItems="center">
-                 <Box p="2">
-                <Stack isInline>
-                  <Avatar name="Sasuke Uchiha" src="https://bit.ly/broken-link" />
-                </Stack>
-                 </Box>
+             {/* //Individual customer list */}
+              <TransactionList
 
-                <Box>
-                    <Text fontSize="xs">10 days overdue</Text>
-                  <Text fontSize="xs">EVANS BOATENG</Text>
-                </Box>
+              boxPadding= "2"
+               customerProfile= "Sasuke Uchiha"
+                customerStatus ="10 days to overdue"
+                customerName = "Evans Boateng"
+                amount = "GHc233"
+                paymentStatus ="PAID"
+                overdueAmount ="GHC346"
+                overdueStatus = "OVERDUE" >
+                            
 
-                <Box p="3">
-                    <Text fontSize="xs">GHC233</Text>
-                    <Text fontSize="xs">PAID</Text>
-                </Box>
-
-                <Box p="2">
-                    <Text fontSize="xs">GHC346</Text>
-                    <Text fontSize="xs">OVERDUE</Text>
-
-                </Box>
-
-                <Box p="2">
-                <Stack isInline>
-                      <Icon name="chevron-right" size="24px" />
-                    </Stack>
-                </Box>
-              </Flex>
-
+              </TransactionList>
 
         </Dashboard>
 
