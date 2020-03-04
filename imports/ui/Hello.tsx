@@ -150,6 +150,19 @@ export default class Hello extends React.Component {
                             
 
               </TransactionList>
+              <TransactionList
+
+              boxPadding= "2"
+               customerProfile= "Sasuke Uchiha"
+                customerStatus ="10 days to overdue"
+                customerName = "Evans Boateng"
+                amount = "GHc233"
+                paymentStatus ="PAID"
+                overdueAmount ="GHC346"
+                overdueStatus = "OVERDUE" >
+                            
+
+              </TransactionList>
 
         </Dashboard>
 
