@@ -1,46 +1,29 @@
-import React, { ReactComponentElement } from 'react';
-import { Button, Link, Flex, Stack, Box, Avatar, AvatarBadge } from '@chakra-ui/core'
-// import { Link } from '
-import * as Analytics from '/imports/ui/analytics';
+import React from 'react';
+import styled from '@emotion/styled'
+import { Flex, Stack, Box, Avatar, AvatarBadge, Stat, StatNumber, StatHelpText, Text, StatGroup, Heading, Icon, } from '@chakra-ui/core'
+// import * as Analytics from '/imports/ui/analytics';
+import { ActionCard, ActionCardRow } from './components'
 
-interface ITrackedClick {
-  destination: string,
-  buttonName: string,
-  // buttonName: JSX.Element,
-  eventName: string
-}
 
-class TrackedLink extends React.Component<ITrackedClick> {
-  handleClick = (eventName: string, destination: string) => {
-    Analytics.track(eventName, { attr: destination })
-  }
-  render() {
-    const { eventName, destination, buttonName } = this.props;
-    return (
-      <Box>
-        <Link onClick={() => this.handleClick(eventName, destination)} href={`${destination}?utm_source=home?utm_medium=mobile`}>
-          <Button width="100%" my="1" variant="outline" size="lg" variantColor="green" >{buttonName}</Button>
-        </Link>
-      </Box >
-    )
-  }
-}
+const Dashboard = styled.main`
+  display: flex;
+  flex-direction: column;
+`
+
+const DashboardStat = styled(StatGroup)`
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+
+`
+
 
 
 export default class Hello extends React.Component {
-  state = {
-    counter: 0,
-  }
-
-  increment() {
-    this.setState({
-      counter: this.state.counter + 1
-    });
-  }
-
   render() {
     return (
-      <div>
+      <Dashboard>
+
         <Box d="flex" my="6" flexDirection="column" alignItems="center" justifyContent="center">
           <Avatar name="Friend" >
             <AvatarBadge size="1.25em" bg="green.500" />
@@ -48,8 +31,105 @@ export default class Hello extends React.Component {
           Hello Friend
         </Box>
 
+        <DashboardStat>
+          <Stat>
+            <StatNumber>345</StatNumber>
+            <StatHelpText>
+              DEALS
+              </StatHelpText>
+          </Stat>
 
-      </div>
-    );
+          <Stat>
+            <StatNumber>45</StatNumber>
+            <StatHelpText>
+              PAYMENT DUE
+              </StatHelpText>
+          </Stat>
+          <Stat>
+            <StatNumber>39</StatNumber>
+            <StatHelpText>
+              OVERDUE
+              </StatHelpText>
+          </Stat>
+        </DashboardStat>
+
+        {/* Earnings Section ---- */}
+        <Flex justify="space-between" mt="10">
+
+          <Stack spacing={3}>
+            <Heading as="h3" size="lg">
+              Earnings
+            </Heading>
+            <Text>Total Balance</Text>
+          </Stack>
+
+          <Stack>
+            <Heading as="h1" size="lg">
+              ₵ 65,430
+          </Heading>
+          </Stack>
+        </Flex>
+
+
+        {/* A row can house only two ActionCardRow */}
+
+        <ActionCardRow>
+          <ActionCard 
+            cardLink="/login" 
+            cardBg="#FFEAE9" 
+            cardHeading="Add a Customer" 
+            cardSubHeading="Profile" 
+            analyticName="Profile" 
+            name="edit" 
+            iconColor="red.500" 
+          />          
+
+          <ActionCard 
+            cardLink="/login" 
+            cardBg="#E3EDFF" 
+            cardHeading="Create a Transation" 
+            cardSubHeading="Record" 
+            analyticName="Create Record" 
+            name="edit" 
+            iconColor="blue.500" 
+          />
+          </ActionCardRow>
+
+
+          <ActionCardRow>
+            <ActionCard 
+              cardLink="/signup" 
+              cardBg="#EDE4FF" 
+              cardHeading="Manage Pulse" 
+              cardSubHeading="Remind" 
+              analyticName="Create Reminder" 
+              name="repeat-clock" 
+              iconColor="purple.500" 
+              />
+
+            <ActionCard 
+              cardLink="/signup" 
+              cardBg="#E3FFEF" 
+              cardHeading="Escalate Transaction" 
+              cardSubHeading="Recover a Debt" 
+              analyticName="Escalate Transaction" 
+              name="unlock" 
+              iconColor="green.800" 
+              />
+          </ActionCardRow>
+
+        </Dashboard>
+
+
+
+    )
   }
 }
+
+
+
+
+
+
+
+

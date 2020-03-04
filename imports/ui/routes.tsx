@@ -8,6 +8,7 @@ import App from '/imports/ui/App'
 
 import { Login, Signup } from './pages/auth'
 import Wizard from './pages/wizard'
+import Onboarding from './pages/onboarding'
 
 
 
@@ -28,6 +29,7 @@ export default function AppRouter(this: any) {
                     <Route path='/login' component={Login} />
                     <Route path='/signup' component={Signup} />
                     <Route path='/wizard' component={Wizard} />
+                    <Route path='/onboarding' component={Onboarding} />
                     <Route exact={true} path="/"><App /></Route>
                 </Switch>
             </Layout>

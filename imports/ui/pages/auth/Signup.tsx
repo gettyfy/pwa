@@ -43,9 +43,6 @@ const Signup: React.FunctionComponent = (): any => {
     const handleSubmit = (e: any) => {
         e.preventDefault()
         const options = value
-        // Analytics.identify(options.username)
-        // Analytics.track("New User Signup", options)
-        console.log("MEROS===>", options);
         Accounts.createUser({
             email: options.username,
             password: options.password,
@@ -55,21 +52,12 @@ const Signup: React.FunctionComponent = (): any => {
         }, (error) => {
             if (error) {
                 console.log(error.message);
-                return alert('An Error Occured')
+                return alert(error.message)
             }
             else {
-                return window.location.replace('/');
+                return window.location.replace('/wizard');
             }
         })
-        // Accounts.createUser(options, (err) => {
-        //     if (err) {
-        //         console.log(err);
-        //         return alert('An Error Occured')
-        //     }
-        //     // else {
-        //     return window.location.replace('/');
-        //     // }
-        // });
     }
 
 

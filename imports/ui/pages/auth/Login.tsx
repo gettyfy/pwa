@@ -41,7 +41,7 @@ const Login: React.FunctionComponent = (): JSX.Element => {
         Analytics.identify(value.username)
         Analytics.track("User Login", value)
         Meteor.loginWithPassword(value.username, value.password);
-        history.push('/wizard');
+        history.push('/');
     }
 
 
