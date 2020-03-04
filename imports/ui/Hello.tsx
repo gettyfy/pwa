@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled'
-import { Flex, Stack, Box, Avatar, AvatarBadge, Stat, StatNumber, StatHelpText, Text, StatGroup, Heading, Icon, Divider,Avatar } from '@chakra-ui/core'
+import { Flex, Stack, Box, Avatar, AvatarBadge, Stat, StatNumber, StatHelpText, Text, StatGroup, Heading, Icon, Divider, } from '@chakra-ui/core'
 // import * as Analytics from '/imports/ui/analytics';
 import { ActionCard, ActionCardRow } from './components'
 import { TransactionList, CustomerList} from './components'
@@ -146,7 +146,11 @@ export default class Hello extends React.Component {
                 amount = "GHc233"
                 paymentStatus ="PAID"
                 overdueAmount ="GHC346"
-                overdueStatus = "OVERDUE" >
+                overdueStatus = "OVERDUE" 
+                cardLink= "/signup"
+                iconName="chevron-right"
+                iconSize="24px" 
+                >
                             
 
               </TransactionList>
@@ -159,7 +163,12 @@ export default class Hello extends React.Component {
                 amount = "GHc233"
                 paymentStatus ="PAID"
                 overdueAmount ="GHC346"
-                overdueStatus = "OVERDUE" >
+                overdueStatus = "OVERDUE" 
+                cardLink= "/signup"
+                iconName="chevron-right"
+                iconSize="24px" 
+                
+                >
                             
 
               </TransactionList>
