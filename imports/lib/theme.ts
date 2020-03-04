@@ -1,6 +1,6 @@
 import { theme as chakraTheme } from '@chakra-ui/core';
 
-const fonts = { ...chakraTheme.fonts, mono: `'Menlo', monospace`, heading: `"Barlow", sans-serif'` };
+const fonts = { ...chakraTheme.fonts,  body: "Barlow, sans-serif", mono: `'Menlo', monospace`, heading: `"Barlow", sans-serif'` };
 const fontSizes = {
 	xs: '0.75rem',
 	sm: '0.875rem',
