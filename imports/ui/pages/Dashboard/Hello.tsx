@@ -2,13 +2,8 @@ import React from 'react';
 import styled from '@emotion/styled'
 import { Flex, Stack, Box, Avatar, AvatarBadge, Stat, StatNumber, StatHelpText, Text, StatGroup, Heading, Icon, Divider, } from '@chakra-ui/core'
 // import * as Analytics from '/imports/ui/analytics';
-<<<<<<< HEAD:imports/ui/pages/Dashboard/Hello.tsx
 import { ActionCard, ActionCardRow } from '../../components'
 import { TransactionList, CustomerList} from '../../components'
-=======
-import { ActionCard, ActionCardRow } from './components'
-import { TransactionList, CustomerList } from './components'
->>>>>>> dev:imports/ui/Hello.tsx
 
 
 const Dashboard = styled.main`
