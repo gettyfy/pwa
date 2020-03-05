@@ -3,8 +3,8 @@ import { theme as chakraTheme } from '@chakra-ui/core';
 const fonts = {
 	...chakraTheme.fonts,
 	mono: `'Menlo', Monaco, Fira Code, Ubuntu Mono, monospace`,
-	heading: `"Cereal", sans-serif'`,
-	body: `'Cereal', "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif`
+	heading: `"Barlow", sans-serif'`,
+	body: `'Barlow', "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif`
 };
 const fontSizes = {
 	xs: '0.75rem',
