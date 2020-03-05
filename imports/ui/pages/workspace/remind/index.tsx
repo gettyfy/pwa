@@ -26,23 +26,34 @@ export default class record extends React.Component {
           </Stack>
 
             {/* Channels */}
-          <Flex flexDirection="row" mt="10px" justify="space-between">
-        <Box border="1px" borderRadius="md" borderColor="yellow" w="16%" h="59px">
-          Card
+          <Flex flexDirection="row" mt="10px" justify="space-between" textAlign="center">
+        <Box border="1px" borderRadius="md" w="25%" h="59px" mr="3" style={{borderColor: "blue"}}>
+            <Box mt="3">
+              <Icon name="phone" size="24px" />
+            </Box>
+           
           </Box>
-          <Box border="1px" borderRadius="md" borderColor="blue" w="16%" h="59px">
-            Card
+          <Box border="1px" borderRadius="md" borderColor="blue" w="25%" h="59px" mr="3" style={{ borderColor: "blue" }}>
+            <Box mt="3">
+              <Icon name="email" size="24px" />
+            </Box>
           </Box>
-          <Box border="1px" borderRadius="md" borderColor="blue" w="16%" h="59px">
-            Card
+          <Box border="1px" borderRadius="md" borderColor="blue" w="25%" h="59px" mr="3" style={{ borderColor: "blue" }}>
+            <Box mt="3">
+              <Icon name="chat" size="24px" />
+            </Box>
           </Box>
-          <Box border="1px" borderRadius="md" borderColor="blue" w="16%" h="59px">
-            Card
-          </Box>
-          <Box border="1px" borderRadius="md" borderColor="blue" w="16%" h="59px">
-            Card
+          <Box border="1px" borderRadius="md" borderColor="blue" w="25%" h="59px" style={{ borderColor: "blue" }}>
+            <Box mt="3">
+              <Icon name="at-sign" size="24px" />
+            </Box>
           </Box>
         </Flex>
+
+            Set reminders
+            
+
+
       </StyledRecord>
 
 
