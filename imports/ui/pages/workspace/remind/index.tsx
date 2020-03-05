@@ -16,6 +16,15 @@ export default class record extends React.Component {
         <Box>
           <Icon name="arrow-back" size="24px" />
         </Box>
+    
+
+
+
+
+
+
+
+
       </StyledRecord>
 
 
