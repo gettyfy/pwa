@@ -1,6 +1,7 @@
 import React, { ChangeEvent } from 'react';
 import { InputGroup, Box, Link, Stack, Input, Button, InputRightElement } from '@chakra-ui/core'
 import { Accounts } from 'meteor/accounts-base';
+import { Formik, Form, Field } from 'formik'
 // import * as Analytics from '/imports/ui/analytics'
 
 
