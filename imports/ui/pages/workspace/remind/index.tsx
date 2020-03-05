@@ -2,7 +2,7 @@ import React from 'react';
 import {
   Icon, Box, Stack, Heading, Flex, Text, Select, NumberInput, NumberInputField,NumberInputStepper, NumberIncrementStepper, NumberDecrementStepper, Textarea} from "@chakra-ui/core";
 import styled from '@emotion/styled'
-
+import { FormButton } from '/imports/ui/components'
 
 const StyledRecord = styled.main`
   display: flex;
@@ -85,9 +85,9 @@ export default class record extends React.Component {
           <Textarea placeholder="Here is a sample placeholder" />
         </Box>
         
-         
-
-
+        <Box mt="10"> 
+        <FormButton buttonName="Send" analyticName="Verify" buttonColor="#0B69FF" color="#FFF" handleAction={() => handleSubmit()} />
+        </Box>
 
       </StyledRecord>
 
