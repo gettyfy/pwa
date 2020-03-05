@@ -16,10 +16,10 @@ const WizardFormFirstPage: React.FunctionComponent = (props: any) => {
             <Heading>Verify Identity</Heading>
             <Box mt="5"><Divider  borderColor="blue.500" /></Box>
             <Box mb="20"><p>Verify your mobile number to continue</p></Box>
-            
+            <Box height="5.5rem"></Box>
             <Box mb="10"><Input placeholder="Type code here" size="lg"/></Box>
             
-            <FormButton buttonName="Verify Me" analyticName="Verify" buttonColor="#0B69FF" handleAction={() => handleSubmit()} />
+            <FormButton buttonName="Verify" analyticName="Verify" buttonColor="#0B69FF" color="#FFF" handleAction={() => handleSubmit()} />
         </Box>
     );
 }
