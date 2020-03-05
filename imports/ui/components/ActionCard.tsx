@@ -57,5 +57,4 @@ const ActionCard = (props: IActionCard) => {
 
 
 // export the components as modules to be resuable by other component
-export default ActionCard
-export { ActionCardRow }
+export { ActionCardRow, ActionCard }
