@@ -68,7 +68,7 @@ export default class record extends React.Component {
 
 
 
-
+        {/* Set intervals */}
         <Stack shouldWrapChildren isInline mt="10"> 
           <NumberInput size="sm" defaultValue={15} min={10}>
             <NumberInputField />
@@ -88,7 +88,7 @@ export default class record extends React.Component {
         <Text fontSize="md">Message Template</Text>
           <Textarea placeholder="Here is a sample placeholder" />
         </Box>
-        
+          {/* Button */}
         <Box mt="10"> 
         <FormButton buttonName="Send" analyticName="Verify" buttonColor="#0B69FF" color="#FFF" handleAction={() => handleSubmit()} />
         </Box>
