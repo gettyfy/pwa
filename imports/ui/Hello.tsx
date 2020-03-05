@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from '@emotion/styled'
-import { Flex, Stack, Box, Avatar, AvatarBadge, Stat, StatNumber, StatHelpText, Text, StatGroup, Heading, Icon, } from '@chakra-ui/core'
+import { Flex, Stack, Box, Avatar, AvatarBadge, Stat, StatNumber, StatHelpText, Text, StatGroup, Heading, Icon, Divider, } from '@chakra-ui/core'
 // import * as Analytics from '/imports/ui/analytics';
 import { ActionCard, ActionCardRow } from './components'
+import { TransactionList, CustomerList} from './components'
 
 
 const Dashboard = styled.main`
@@ -90,7 +91,6 @@ export default class Hello extends React.Component {
             cardHeading="Create a Transation" 
             cardSubHeading="Record" 
             analyticName="Create Record" 
-            name="edit" 
             iconColor="blue.500" 
           />
           </ActionCardRow>
@@ -117,15 +117,68 @@ export default class Hello extends React.Component {
               iconColor="green.800" 
               />
           </ActionCardRow>
+              
+              {/* Added a divider */}
+          <Box justify="space-between" mt="6">
+              <Divider borderColor="grey.200" />
+            </Box>
+
+            <Flex flexDirection="row">
+              <Box pr ="2">
+            <Icon name="phone"/></Box>
+            <Box pr="1">
+             <Text fontSize="15px" color="tomato" mr="2">
+                 ACTION REQUIRED </Text>                        
+                 </Box>
+               </Flex>
+
+               <Box justify="space-between">
+              <Divider borderColor="grey.200" />
+              </Box>
+
+             {/* //Individual customer list */}
+              <TransactionList
+
+              boxPadding= "2"
+               customerProfile= "Sasuke Uchiha"
+                customerStatus ="10 days to overdue"
+                customerName = "Evans Boateng"
+                amount = "GHc233"
+                paymentStatus ="PAID"
+                overdueAmount ="GHC346"
+                overdueStatus = "OVERDUE" 
+                cardLink= "/signup"
+                iconName="chevron-right"
+                iconSize="24px" 
+                >
+                            
+
+              </TransactionList>
+              <TransactionList
+
+              boxPadding= "2"
+               customerProfile= "Sasuke Uchiha"
+                customerStatus ="10 days to overdue"
+                customerName = "Evans Boateng"
+                amount = "GHc233"
+                paymentStatus ="PAID"
+                overdueAmount ="GHC346"
+                overdueStatus = "OVERDUE" 
+                cardLink= "/signup"
+                iconName="chevron-right"
+                iconSize="24px" 
+                
+                >
+                            
+
+              </TransactionList>
 
         </Dashboard>
-
 
 
     )
   }
 }
-
 
 
 

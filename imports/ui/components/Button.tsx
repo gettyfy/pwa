@@ -35,7 +35,7 @@ const FormButton = (props: IButton) => {
 
 
         Analytics.track(analyticName, {
-            component: "button"
+            component: `Click LinkTo${buttonName}`
         })
         handleAction && handleAction()
     }
