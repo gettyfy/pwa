@@ -25,16 +25,16 @@ interface IActionCard {
     iconColor: string, 
     cardHeading: string, 
     cardSubHeading: string
-    children: any
+    children?: any
 }
 
 const ActionCard = (props: IActionCard) => {
     const { analyticName, cardBg, cardLink, name, iconColor, cardHeading, cardSubHeading} = props
 
-    const handleClick = (analyticName: string): void => {
+    const handleClick = (analyticName: string): any => {
         // we will write the handle analytics here
         Analytics.track(analyticName, {
-            ...props.children
+            component: "Action Card"
         })
 
     }

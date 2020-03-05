@@ -13,7 +13,10 @@ const fontSizes = {
 	'5xl': '3rem',
 	'6xl': '4rem'
 };
-const breakpoints = [ '40em', '52em', '64em' ];
+const breakpoints = ['40em', '52em', '64em'];
+const custom = {
+	buttonHeight: '48px',
+}
 
 const theme = {
 	...chakraTheme,
@@ -24,6 +27,7 @@ const theme = {
 	fonts,
 	fontSizes,
 	breakpoints,
+	custom,
 	icons: {
 		...chakraTheme.icons,
 		viewBox: '0 0 3000 3163'
