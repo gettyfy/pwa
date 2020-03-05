@@ -1,6 +1,11 @@
 import { theme as chakraTheme } from '@chakra-ui/core';
 
-const fonts = { ...chakraTheme.fonts,  body: "Barlow, sans-serif", mono: `'Menlo', monospace`, heading: `"Barlow", sans-serif'` };
+const fonts = {
+	...chakraTheme.fonts,
+	mono: `'Menlo', Monaco, Fira Code, Ubuntu Mono, monospace`,
+	heading: `"Cereal", sans-serif'`,
+	body: `'Cereal', "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif`
+};
 const fontSizes = {
 	xs: '0.75rem',
 	sm: '0.875rem',
@@ -13,14 +18,25 @@ const fontSizes = {
 	'5xl': '3rem',
 	'6xl': '4rem'
 };
+const colors = {
+	...chakraTheme.colors,
+	black: '#010203',
+	default: '#4EB191',
+	tomato: 'FF5238',
+	text: '#1D1D1D',
+	background: '#FCFDFF',
+	blue: {
+		100: '#0476D0'
+	},
+	green: {
+		100: '#028248'
+	}
+};
 const breakpoints = [ '40em', '52em', '64em' ];
 
 const theme = {
 	...chakraTheme,
-	colors: {
-		...chakraTheme.colors,
-		black: '#16161D'
-	},
+	colors,
 	fonts,
 	fontSizes,
 	breakpoints,
