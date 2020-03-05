@@ -1,5 +1,5 @@
 import React from 'react';
-import Hello from './pages/dashboard';
+import Hello from '/imports/ui/pages/workspace/dashboard';
 
 // import Layout from './Layout'
 type AppProps = {
