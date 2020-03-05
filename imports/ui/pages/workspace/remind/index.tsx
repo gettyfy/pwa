@@ -1,5 +1,6 @@
 import React from 'react';
-import { Icon, Box, Stack, Heading, Flex } from "@chakra-ui/core";
+import {
+  Icon, Box, Stack, Heading, Flex, Text, Select, NumberInput, NumberInputField,NumberInputStepper, NumberIncrementStepper, NumberDecrementStepper, Textarea} from "@chakra-ui/core";
 import styled from '@emotion/styled'
 
 
@@ -50,8 +51,42 @@ export default class record extends React.Component {
           </Box>
         </Flex>
 
-            Set reminders
-            
+            {/* Set reminders */}
+        <Stack spacing={2} mt="10">
+          
+          
+          <Text fontSize="md">Set Intervals</Text>
+         
+          <Text fontSize="xs">With intervals you can set what frequency how many times your 
+          reminder will be fired to this user.</Text>
+        </Stack>
+
+
+
+
+
+        <Stack shouldWrapChildren isInline mt="10"> 
+          <NumberInput size="sm" defaultValue={15} min={10}>
+            <NumberInputField />
+            <NumberInputStepper>
+              <NumberIncrementStepper />
+              <NumberDecrementStepper />
+            </NumberInputStepper>
+          </NumberInput>
+          <Select placeholder="Select option">
+            <option value="option1">Daily</option>
+            <option value="option2">Weekly</option>
+            <option value="option3">Monthly </option>
+          </Select>
+          </Stack>
+
+          <Box mt="10">
+        <Text fontSize="md">Message Template</Text>
+          <Textarea placeholder="Here is a sample placeholder" />
+        </Box>
+        
+         
+
 
 
       </StyledRecord>
