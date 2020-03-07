@@ -28,7 +28,7 @@ interface IActionCard {
     children?: any
 }
 
-const ActionCard = (props: IActionCard) => {
+const ActionCard: React.FC<IActionCard> = (props) => {
     const { analyticName, cardBg, cardLink, name, iconColor, cardHeading, cardSubHeading } = props
 
     const handleClick = (analyticName: string): any => {
