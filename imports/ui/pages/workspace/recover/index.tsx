@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Stack, Heading, Icon, Divider, Flex, Text} from '@chakra-ui/core'
+import { Box, Stack, Heading, Icon, Divider, Flex, Text, Input} from '@chakra-ui/core'
 import styled from '@emotion/styled'
 import { CustomerList, TransactionList} from '/imports/ui/components'
 
@@ -24,22 +24,27 @@ export default class recover extends React.Component{
           </Box>
           </Stack>
 
-          <Flex  mt="40px">
-          <Box mt="3">
-            <Icon name="search" size="13px" />
-        
-          </Box>
+          <Flex  mt="40px" flexDirection="row">
+          <Box ml="100px">
+            {/* <Icon name="search" size="13px" /> */}
+            <Input placeholder="Find a transaction" />
+            </Box>
 
           </Flex>
 
-        <Flex FlexDirection="row" justify="space-between" mt="6">
-         <Text fontSize="xs">Payment overdue</Text>
-          <Icon name="drag-handle" size="13px" ml="20"/>
-    
-          {/* <Box justify="space-between">
-            <Divider borderColor="grey.200" />
-          </Box> */}
+        <Flex FlexDirection="row" justify="space-between" mt="6" ml="8" mr="8">
+            <Text fontSize="xs" color="tomato">Payments overdue</Text>
+           <Icon name="drag-handle" size="13px" ml="200px"/> 
+          
+
+          <Box justify="space-between">
+          <Divider borderColor="grey.200" />
+          </Box>  
+
+
         </Flex>
+
+        <Box mt="10">
 
         <TransactionList
 
@@ -114,7 +119,7 @@ export default class recover extends React.Component{
           iconName="chevron-right"
           iconSize="24px"
         />
-
+        </Box>
 
 
         </StyledRecover>
