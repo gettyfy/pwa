@@ -60,38 +60,44 @@ const InputField = (props: InputFieldProps): JSX.Element => {
 }
 
 
+interface IFormikForm {
+    analyticName: string,
+    children: any,
+    isLoading: boolean,
+    buttonName: string,
+    formProps: {
+        errors: object,
+        values: object,
+        [key: string]: any
+    }
+}
 
 
-const FormikForm = (props: any): JSX.Element => {
-    const { children, initialValues, handleFormSubmit } = props;
-    console.log("HERE ARE FORMIK FIELD PROPS", props);
+const FormikForm = (props: IFormikForm): JSX.Element => {
+    const { children, buttonName, isLoading, formProps: { errors, values }, analyticName, ...rest } = props;
+    console.log("HERE ARE FORMIK FORM PROPS", props);
+
+    // Call Analytics on all Form Submissions
+    Analytics.track(analyticName, {
+        errors: errors,
+        value: values
+    })
+
     return (
-        <Formik
-            initialValues={initialValues}
-            onSubmit={(values, actions) => {
-                setTimeout(() => {
-                    console.log("HERE ARE FORMIK FIELD VALUES", values);
-                    handleFormSubmit(values)
-                    actions.setSubmitting(false);
-                }, 300);
-            }}
-        >
-            {(props: FormikProps<any>) => (
-                <Form>
-                    {children}
-                    <Button
-                        mt={10}
-                        variantColor="teal"
-                        isLoading={props.isSubmitting}
-                        type="submit"
-                        size='lg'
-                        width="100%"
-                    >
-                        Submit
-                    </Button>
-                </Form>
-            )}
-        </Formik>
+        <Form {...rest}>
+            {children}
+            <Button
+                mt={10}
+                variantColor="teal"
+                isLoading={isLoading}
+                type="submit"
+                size='lg'
+                width="100%"
+                {...rest}
+            >
+                {buttonName}
+            </Button>
+        </Form>
     )
 }
 

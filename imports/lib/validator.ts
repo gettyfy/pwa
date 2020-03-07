@@ -1,31 +1,36 @@
-// import validator from 'validator';
+/**
+ * This utility will manage all the validation for our forms on the client side
+ * Using the validator[props] in any Fields we can pass a validator function for any user input on the client side
+ */
 
-// const nigerian = /^([0]{1})([7-9]{1})([0|1]{1})([\d]{1})([\d]{7,8})$/g;
+import validator from 'validator';
 
-// export function isRequired(value, values = {}) {
-// 	if (value === undefined || value === null) return [ 'This field is required' ];
-// 	if (value && typeof value === 'string' && validator.isEmpty(value)) return [ 'This field is required' ];
-// 	if (value && typeof value === 'object' && Object.keys(value).length === 0) return [ 'This field is required' ];
-// }
+const nigerian = /^([0]{1})([7-9]{1})([0|1]{1})([\d]{1})([\d]{7,8})$/g;
 
-// export function isEmail(value, values = {}) {
-// 	if (!value) return [ 'This field is required' ];
-// 	if (value && !validator.isEmail(value)) return [ 'Invalid email supplied' ];
-// }
+export function isRequired(value: string, values = {}) {
+	if (!value || value === null) return [ 'Missing Required Field' ];
+	if (value && typeof value === 'string' && validator.isEmpty(value)) return [ 'Field cannot be Empty' ];
+	if (value && typeof value === 'object' && Object.keys(value).length === 0) return [ 'Missing Required Field' ];
+}
 
-// export function isNumeric(value, values = {}) {
-// 	if (!value) return [ 'This field is required' ];
-// 	if (value && !validator.isNumeric(value)) return [ 'Not a number' ];
-// }
+export function isEmail(value: string, values = {}) {
+	if (!value) return [ 'This field is required' ];
+	if (value && !validator.isEmail(value)) return [ 'Email address is invalid' ];
+}
 
-// export function notLessThan(value, base, minimum) {
-// 	if (value === undefined || value === null) return [ 'This field is required' ];
-// 	if ((value && value <= base) || value <= minimum) return [ 'Cannot withdraw below the minimum amount' ];
-// }
+export function isNumeric(value: string, values = {}) {
+	if (!value) return [ 'This field is required' ];
+	if (value && !validator.isNumeric(value)) return [ 'Please Input a Number' ];
+}
 
-// // helper function to validate Nigerian Phone numbers
-// // https://github.com/chriso/validator.js/blob/master/src/lib/isMobilePhone.js
-// export function isPhoneNigerian(value, values = {}) {
-// 	if (!value) return [ 'This field is required' ];
-// 	if ((value && !nigerian.test(value)) || value.length < 5) return [ 'Not Nigerian' ];
-// }
+export function notLessThan(value: number, base: number, minimum: number) {
+	if (value === undefined || value === null) return [ 'This field is required' ];
+	if ((value && value <= base) || value <= minimum) return [ 'Cannot Fund below minimum amount' ];
+}
+
+// helper function to validate Nigerian Phone numbers
+// https://github.com/chriso/validator.js/blob/master/src/lib/isMobilePhone.js
+export function isPhoneNigerian(value: string) {
+	if (!value) return [ 'Missing required field' ];
+	if ((value && !nigerian.test(value)) || value.length < 5) return [ 'Your phone number is invalid' ];
+}

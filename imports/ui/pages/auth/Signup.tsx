@@ -1,10 +1,9 @@
 import React, { ChangeEvent } from 'react';
-import { FormControl, FormLabel, FormErrorMessage, Input, Button, InputRightElement } from '@chakra-ui/core'
+import * as Validator from '/imports/lib/validator'
 import { Accounts } from 'meteor/accounts-base';
 import { Meteor } from 'meteor/meteor'
-import { Formik, Form, FormikProps } from 'formik'
-import { InputField } from '/imports/ui/components'
-// import * as Analytics from '/imports/ui/analytics'
+import { Formik, FormikProps } from 'formik'
+import { InputField, FormikForm } from '/imports/ui/components'
 
 
 const Signup: React.FC = () => {
@@ -42,48 +41,22 @@ const Signup: React.FC = () => {
     }
 
 
-    function validateName(value: string) {
-        console.log(value);
-        let error;
-        if (!value) {
-            error = "Name is required";
-        } else if (value !== "Andrew") {
-            error = "Jeez! You're not a fan 😱";
-        }
-        return error;
-    }
-
-
-
-
     return (
         <Formik
-            initialValues={{ ...authInit }}
+            initialValues={authInit}
             onSubmit={(values, actions) => {
                 setTimeout(() => {
                     handleSubmit(values)
                     actions.setSubmitting(false);
-                }, 1000);
+                }, 300);
             }}
         >
             {(props: FormikProps<any>) => (
-                <form onSubmit={props.handleSubmit}>
-
-                    <InputField label="Your Full Name" placeholder="enter your name" name="fullname" validate={validateName} />
-                    <InputField label="Your Emails" placeholder="enter an email address" name="username" />
-                    <InputField label="Your Password" placeholder="set a password" name="password" />
-
-                    <Button
-                        mt={10}
-                        variantColor="teal"
-                        isLoading={props.isSubmitting}
-                        type="submit"
-                        size='lg'
-                        width="100%"
-                    >
-                        Submit
-            </Button>
-                </form>
+                <FormikForm isLoading={props.isSubmitting} analyticName="Signup Form" formProps={props} buttonName="Signup">
+                    <InputField label="Your Full Name" placeholder="enter your name" name="fullname" validate={Validator.isRequired} />
+                    <InputField label="Your Emails" placeholder="enter an email address" name="username" validate={Validator.isEmail} />
+                    <InputField label="Your Password" placeholder="set a password" name="password" validate={Validator.isRequired} />
+                </FormikForm>
             )}
         </Formik>
     );
