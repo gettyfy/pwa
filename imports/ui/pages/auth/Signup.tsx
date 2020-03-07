@@ -2,7 +2,8 @@ import React, { ChangeEvent } from 'react';
 import { FormControl, FormLabel, FormErrorMessage, Input, Button, InputRightElement } from '@chakra-ui/core'
 import { Accounts } from 'meteor/accounts-base';
 import { Meteor } from 'meteor/meteor'
-import { Formik, Form, FormikProps, Field, FieldInputProps, FieldMetaProps, FieldProps, FormikBag, FormikFormProps, FormikHandlers } from 'formik'
+import { Formik, Form, FormikProps } from 'formik'
+import { InputField } from '/imports/ui/components'
 // import * as Analytics from '/imports/ui/analytics'
 
 
@@ -17,7 +18,7 @@ const Signup: React.FC = () => {
     const authInit: AuthInterface = {
         fullname: "",
         username: "",
-        password: "io",
+        password: "",
     }
 
     const handleSubmit = (values: AuthInterface) => {
@@ -40,23 +41,13 @@ const Signup: React.FC = () => {
         })
     }
 
-    /**
-     * Formik Field Props to be aware of
-     *  field, { name, value, onChange, onBlur }
-        form: {touched, errors}, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
-        meta => uses action handlers like touched... to trigger validation and other login on the Fields component
-     */
-
-
-
-
 
     function validateName(value: string) {
         console.log(value);
         let error;
         if (!value) {
             error = "Name is required";
-        } else if (value !== "Naruto") {
+        } else if (value !== "Andrew") {
             error = "Jeez! You're not a fan 😱";
         }
         return error;
@@ -77,40 +68,11 @@ const Signup: React.FC = () => {
         >
             {(props: FormikProps<any>) => (
                 <form onSubmit={props.handleSubmit}>
-                    <Field name="fullname" validate={validateName}>
-                        {({ field, form }: FieldProps) => (
-                            //@ts-ignore
-                            <FormControl isInvalid={form.errors.fullname && form.touched.fullname}>
-                                <FormLabel htmlFor="fullname">Full name</FormLabel>
-                                <Input {...field} id="fullname" placeholder="fullname" focusBorderColor="gray.500" errorBorderColor="red.500" size="lg" />
-                                <FormErrorMessage>{form.errors.fullname}</FormErrorMessage>
-                            </FormControl>
-                        )}
-                    </Field>
-                    <Field name="username">
-                        {({ field, form }: FieldProps) => (
-                            //@ts-ignore
-                            <>
-                                {/* <FormControl isInvalid={form.errors.name && form.touched.name} mt="2"> */}
-                                <FormLabel htmlFor="username">Your Email</FormLabel>
-                                <Input {...field} id="username" placeholder="email@getfynance.com" focusBorderColor="gray.500" errorBorderColor="red.500" size="lg" />
-                                <FormErrorMessage>{form.errors.name}</FormErrorMessage>
-                                {/* </FormControl> */}
-                            </>
-                        )}
-                    </Field>
-                    <Field name="password">
-                        {({ field, form }: FieldProps) => (
-                            //@ts-ignore
-                            <>
-                                {/* <FormControl isInvalid={form.errors.name && form.touched.name} mt="2"> */}
-                                <FormLabel htmlFor="name">Set a Password</FormLabel>
-                                <Input {...field} id="password" placeholder="password" focusBorderColor="gray.500" errorBorderColor="red.500" size="lg" />
-                                <FormErrorMessage>{form.errors.name}</FormErrorMessage>
-                                {/* </FormControl> */}
-                            </>
-                        )}
-                    </Field>
+
+                    <InputField label="Your Full Name" placeholder="enter your name" name="fullname" validate={validateName} />
+                    <InputField label="Your Emails" placeholder="enter an email address" name="username" />
+                    <InputField label="Your Password" placeholder="set a password" name="password" />
+
                     <Button
                         mt={10}
                         variantColor="teal"

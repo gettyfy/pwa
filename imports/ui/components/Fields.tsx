@@ -2,8 +2,12 @@
 /**
  * This File will house the Form Fields that would be re-used across the project
  */
-import { Formik, useFormik, Field } from 'formik'
-import { FormControl, Button, FormLabel, FormErrorMessage, Input } from '@chakra-ui/core'
+
+import React from 'react';
+import { FormControl, FormLabel, FormErrorMessage, Input, Button, InputRightElement } from '@chakra-ui/core'
+import Proptypes from 'proptypes'
+import { Formik, Form, FormikProps, Field, FieldInputProps, FieldMetaProps, FieldProps, FormikBag, FormikFormProps, FormikHandlers } from 'formik'
+import * as Analytics from '/imports/ui/analytics'
 
 
 
@@ -20,120 +24,74 @@ import { FormControl, Button, FormLabel, FormErrorMessage, Input } from '@chakra
 interface InputFieldProps {
     name: string,
     label: string,
-    placeholder: string
-
+    placeholder: string,
+    validate?: Function
 }
 
 
 
 
-const InputField: React.FC<InputFieldProps> = (props) => {
-    function validateName(value: string) {
-        let error;
-        if (!value) {
-            error = "Name is required";
-        } else if (value !== "Naruto") {
-            error = "Jeez! You're not a fan 😱";
-        }
-        return error;
-    }
+/**
+ * This component extends a chakra input field and ties it up with the formik utility while exposing a few props to utilize across other pages
+ * The form takes in a form name and calls a validation function that will be used within the pages
+ */
+const InputField = (props: InputFieldProps): JSX.Element => {
+    const { validate, name, placeholder, label } = props
+
+    /**
+     * Formik Field Props to be aware of
+     *  field, { name, value, onChange, onBlur }
+        form: {touched, errors}, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
+        meta => uses action handlers like touched... to trigger validation and other login on the Fields component
+     */
 
     return (
+        <Field name={name} validate={validate} {...props}>
+            {({ field, form }: FieldProps) => (
+                //@ts-ignore
+                <FormControl isInvalid={form.errors[name] && form.touched[name]}>
+                    <FormLabel htmlFor={name}>{label}</FormLabel>
+                    <Input {...field} id={name} placeholder={placeholder} focusBorderColor="gray.500" errorBorderColor="red.500" size="lg" />
+                    <FormErrorMessage>{form.errors[name]}</FormErrorMessage>
+                </FormControl>
+            )}
+        </Field>
+    );
+}
+
+
+
+
+const FormikForm = (props: any): JSX.Element => {
+    const { children, initialValues, handleFormSubmit } = props;
+    return (
         <Formik
-            initialValues={{ name: "Sasuke" }}
+            initialValues={initialValues}
             onSubmit={(values, actions) => {
                 setTimeout(() => {
-                    alert(JSON.stringify(values, null, 2));
+                    handleFormSubmit(values)
                     actions.setSubmitting(false);
-                }, 1000);
+                }, 300);
             }}
         >
-            {props => (
-                <form onSubmit={props.handleSubmit}>
-                    <Field name="name" validate={validateName}>
-                        {({ field, form }) => (
-                            <FormControl isInvalid={form.errors.name && form.touched.name}>
-                                <FormLabel htmlFor="name">First name</FormLabel>
-                                <Input {...field} id="name" placeholder="name" />
-                                <FormErrorMessage>{form.errors.name}</FormErrorMessage>
-                            </FormControl>
-                        )}
-                    </Field>
+            {(props: FormikProps<any>) => (
+                <Form>
+                    {children}
                     <Button
-                        mt={4}
+                        mt={10}
                         variantColor="teal"
                         isLoading={props.isSubmitting}
                         type="submit"
+                        size='lg'
+                        width="100%"
                     >
                         Submit
-            </Button>
-                </form>
+                    </Button>
+                </Form>
             )}
         </Formik>
-    );
+    )
 }
-
-
-
-
-
-
-
-
-
-const SignupForm = () => {
-    const formik = useFormik({
-        initialValues: {
-            firstName: '',
-            lastName: '',
-            email: '',
-        },
-        onSubmit: values => {
-            alert(JSON.stringify(values, null, 2));
-        },
-    });
-    return (
-        <form onSubmit={formik.handleSubmit}>
-            <label htmlFor="firstName">First Name</label>
-            <input
-                id="firstName"
-                name="firstName"
-                type="text"
-                onChange={formik.handleChange}
-                value={formik.values.firstName}
-            />
-            <label htmlFor="lastName">Last Name</label>
-            <input
-                id="lastName"
-                name="lastName"
-                type="text"
-                onChange={formik.handleChange}
-                value={formik.values.lastName}
-            />
-            <label htmlFor="email">Email Address</label>
-            <input
-                id="email"
-                name="email"
-                type="email"
-                onChange={formik.handleChange}
-                value={formik.values.email}
-            />
-            <button type="submit">Submit</button>
-        </form>
-    );
-};
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -151,3 +109,134 @@ const SignupForm = () => {
 
 // ====== Export Field Components here ===========
 export { InputField }
+
+
+
+
+
+
+
+
+
+
+
+
+
+// const Signup: React.FC = () => {
+
+//     interface AuthInterface {
+//         fullname: string,
+//         username: string,
+//         password: string,
+//         [key: string]: string
+//     }
+//     const authInit: AuthInterface = {
+//         fullname: "",
+//         username: "",
+//         password: "",
+//     }
+
+//     const handleSubmit = (values: AuthInterface) => {
+//         console.log(values);
+//         const options = values
+//         Accounts.createUser({
+//             email: options.username,
+//             password: options.password,
+//             profile: {
+//                 name: options.fullname
+//             }
+//         }, (error) => {
+//             if (error) {
+//                 console.log(error.message);
+//                 return alert(error.message)
+//             }
+//             else {
+//                 alert(`SIGNUP WAS SUCCESSFUL FOR ${JSON.stringify(Meteor.user())}`)
+//             }
+//         })
+//     }
+
+//     /**
+//      * Formik Field Props to be aware of
+//      *  field, { name, value, onChange, onBlur }
+//         form: {touched, errors}, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
+//         meta => uses action handlers like touched... to trigger validation and other login on the Fields component
+//      */
+
+
+
+
+
+//     function validateName(value: string) {
+//         console.log(value);
+//         let error;
+//         if (!value) {
+//             error = "Name is required";
+//         } else if (value !== "Andrew") {
+//             error = "Jeez! You're not a fan 😱";
+//         }
+//         return error;
+//     }
+
+
+
+
+//     return (
+//         <Formik
+//             initialValues={{ ...authInit }}
+//             onSubmit={(values, actions) => {
+//                 setTimeout(() => {
+//                     handleSubmit(values)
+//                     actions.setSubmitting(false);
+//                 }, 1000);
+//             }}
+//         >
+//             {(props: FormikProps<any>) => (
+//                 <form onSubmit={props.handleSubmit}>
+//                     <Field name="fullname" validate={validateName}>
+//                         {({ field, form }: FieldProps) => (
+//                             //@ts-ignore
+//                             <FormControl isInvalid={form.errors.fullname && form.touched.fullname}>
+//                                 <FormLabel htmlFor="fullname">Full name</FormLabel>
+//                                 <Input {...field} id="fullname" placeholder="fullname" focusBorderColor="gray.500" errorBorderColor="red.500" size="lg" />
+//                                 <FormErrorMessage>{form.errors.fullname}</FormErrorMessage>
+//                             </FormControl>
+//                         )}
+//                     </Field>
+//                     <Field name="username">
+//                         {({ field, form }: FieldProps) => (
+//                             //@ts-ignore
+//                             <FormControl isInvalid={form.errors.username && form.touched.username} mt="2">
+//                                 <FormLabel htmlFor="username">Your Email</FormLabel>
+//                                 <Input {...field} id="username" placeholder="email@getfynance.com" focusBorderColor="gray.500" errorBorderColor="red.500" size="lg" />
+//                                 <FormErrorMessage>{form.errors.username}</FormErrorMessage>
+//                             </FormControl>
+//                         )}
+//                     </Field>
+//                     <Field name="password">
+//                         {({ field, form }: FieldProps) => (
+//                             //@ts-ignore
+//                             <>
+//                                 {/* <FormControl isInvalid={form.errors.name && form.touched.name} mt="2"> */}
+//                                 <FormLabel htmlFor="name">Set a Password</FormLabel>
+//                                 <Input {...field} id="password" placeholder="password" focusBorderColor="gray.500" errorBorderColor="red.500" size="lg" />
+//                                 <FormErrorMessage>{form.errors.name}</FormErrorMessage>
+//                                 {/* </FormControl> */}
+//                             </>
+//                         )}
+//                     </Field>
+//                     <Button
+//                         mt={10}
+//                         variantColor="teal"
+//                         isLoading={props.isSubmitting}
+//                         type="submit"
+//                         size='lg'
+//                         width="100%"
+//                     >
+//                         Submit
+//             </Button>
+//                 </form>
+//             )}
+//         </Formik>
+//     );
+// }
