@@ -5,6 +5,58 @@ import { Meteor } from 'meteor/meteor';
 import * as Analytics from '/imports/ui/analytics';
 
 
+
+
+import { useFormik } from 'formik';
+
+const SignupForm = () => {
+    const formik = useFormik({
+        initialValues: {
+            firstName: '',
+            lastName: '',
+            email: '',
+        },
+        onSubmit: values => {
+            alert(JSON.stringify(values, null, 2));
+            console.log(formik);
+        },
+    });
+    return (
+        <form onSubmit={formik.handleSubmit}>
+            <label htmlFor="firstName">First Name</label>
+            <input
+                id="firstName"
+                name="firstName"
+                type="text"
+                onChange={formik.handleChange}
+                value={formik.values.firstName}
+            />
+            <label htmlFor="lastName">Last Name</label>
+            <input
+                id="lastName"
+                name="lastName"
+                type="text"
+                onChange={formik.handleChange}
+                value={formik.values.lastName}
+            />
+            <label htmlFor="email">Email Address</label>
+            <input
+                id="email"
+                name="email"
+                type="email"
+                onChange={formik.handleChange}
+                value={formik.values.email}
+            />
+            <button type="submit">Submit</button>
+        </form>
+    );
+};
+
+
+
+
+
+
 const Login: React.FunctionComponent = (): JSX.Element => {
     const [show, setShow] = React.useState(false);
     const handleClick = () => setShow(!show);
@@ -40,7 +92,15 @@ const Login: React.FunctionComponent = (): JSX.Element => {
         e.preventDefault()
         Analytics.identify(value.username)
         Analytics.track("User Login", value)
-        Meteor.loginWithPassword(value.username, value.password);
+        Meteor.loginWithPassword(value.username, value.password, (error) => {
+            if (error) {
+                console.log(error.message);
+                return alert(error.message)
+            }
+            else {
+                alert(`SIGNUP WAS SUCCESSFUL FOR ${JSON.stringify(Meteor.user())}`)
+            }
+        });
         history.push('/');
     }
 
@@ -76,6 +136,8 @@ const Login: React.FunctionComponent = (): JSX.Element => {
                     <Link href="/signup">Don't have an account, Create one</Link>
                 </Stack>
             </form>
+
+            <SignupForm />
         </Box>
     );
 }

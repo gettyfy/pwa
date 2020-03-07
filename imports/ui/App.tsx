@@ -1,13 +1,10 @@
 import React from 'react';
-import Hello from './Hello';
+import Hello from '/imports/ui/pages/workspace/dashboard';
 
 // import Layout from './Layout'
 type AppProps = {
   msg: string
 }
-// declare global {
-//   interface Window { analytics: SegmentAnalytics.AnalyticsJS; }
-// }
 
 export default class App extends React.Component<{}, AppProps> {
   constructor(props: any) {
@@ -15,7 +12,7 @@ export default class App extends React.Component<{}, AppProps> {
   }
 
   componentDidMount() {
-    window && window.analytics ? window.analytics.page() : ''
+    // window && window.analytics ? window.analytics.page() : ''
   }
 
   render() {
