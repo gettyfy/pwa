@@ -1,11 +1,13 @@
 import React, { ChangeEvent } from 'react';
-import { InputGroup, Box, Link, Stack, Input, Button, InputRightElement } from '@chakra-ui/core'
+import { FormControl, FormLabel, FormErrorMessage, Input, Button, InputRightElement } from '@chakra-ui/core'
 import { Accounts } from 'meteor/accounts-base';
-import { Formik, Form, Field } from 'formik'
+import { Meteor } from 'meteor/meteor'
+import { Formik, Form, FormikProps, Field, FieldInputProps, FieldMetaProps, FieldProps, FormikBag, FormikFormProps, FormikHandlers } from 'formik'
 // import * as Analytics from '/imports/ui/analytics'
 
 
-const Signup: React.FunctionComponent = (): any => {
+const Signup: React.FC = () => {
+
     interface AuthInterface {
         fullname: string,
         username: string,
@@ -13,37 +15,14 @@ const Signup: React.FunctionComponent = (): any => {
         [key: string]: string
     }
     const authInit: AuthInterface = {
-        username: "",
-        password: "",
         fullname: "",
-    }
-    const [show, setShow] = React.useState<boolean>(false);
-    const [value, setValue] = React.useState<AuthInterface>(authInit);
-    const handleClick = () => setShow(!show);
-
-    const handleChange = (input: string, event: any) => {
-        let updatedValue: AuthInterface = value
-        switch (input) {
-            case 'password':
-                updatedValue['password'] = event.target.value
-                break;
-            case 'username':
-                updatedValue['username'] = event.target.value
-                break;
-            case 'fullname':
-                updatedValue['fullname'] = event.target.value
-                break;
-            default:
-                updatedValue = value
-                break;
-        }
-        setValue(Object.assign(value, updatedValue));
-        console.log(value)
+        username: "",
+        password: "io",
     }
 
-    const handleSubmit = (e: any) => {
-        e.preventDefault()
-        const options = value
+    const handleSubmit = (values: AuthInterface) => {
+        console.log(values);
+        const options = values
         Accounts.createUser({
             email: options.username,
             password: options.password,
@@ -56,51 +35,95 @@ const Signup: React.FunctionComponent = (): any => {
                 return alert(error.message)
             }
             else {
-                return window.location.replace('/wizard');
+                alert(`SIGNUP WAS SUCCESSFUL FOR ${JSON.stringify(Meteor.user())}`)
             }
         })
     }
 
+    /**
+     * Formik Field Props to be aware of
+     *  field, { name, value, onChange, onBlur }
+        form: {touched, errors}, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
+        meta => uses action handlers like touched... to trigger validation and other login on the Fields component
+     */
+
+
+
+
+
+    function validateName(value: string) {
+        console.log(value);
+        let error;
+        if (!value) {
+            error = "Name is required";
+        } else if (value !== "Naruto") {
+            error = "Jeez! You're not a fan 😱";
+        }
+        return error;
+    }
+
+
+
 
     return (
-        <Box my="6">
-
-            <form onSubmit={(e) => handleSubmit(e)}>
-                <Stack spacing="6" >
-                    <Input
-                        size="lg"
-                        type={'fullname'}
-                        onChange={(e: any) => handleChange('fullname', e)}
-                        placeholder="Enter Fullname"
-                    />
-                    <Input
-                        size="lg"
-                        type={'username'}
-                        onChange={(e: any) => handleChange('username', e)}
-                        placeholder="Enter Username"
-                    />
-
-                    <InputGroup size="lg">
-                        <Input
-                            pr="4.5rem"
-                            size="lg"
-                            onChange={(e: any) => handleChange('password', e)}
-                            type={show ? "text" : "password"}
-                            placeholder="Enter password"
-                        />
-                        <InputRightElement width="4.5rem">
-                            <Button h="1.75rem" size="sm" onClick={handleClick}>
-                                {show ? "Hide" : "Show"}
-                            </Button>
-                        </InputRightElement>
-                    </InputGroup>
-
-                    <Button type="submit" size='lg'>Signup</Button>
-                    <Link href="/login">Have an account, Login</Link>
-
-                </Stack>
-            </form>
-        </Box>
+        <Formik
+            initialValues={{ ...authInit }}
+            onSubmit={(values, actions) => {
+                setTimeout(() => {
+                    handleSubmit(values)
+                    actions.setSubmitting(false);
+                }, 1000);
+            }}
+        >
+            {(props: FormikProps<any>) => (
+                <form onSubmit={props.handleSubmit}>
+                    <Field name="fullname" validate={validateName}>
+                        {({ field, form }: FieldProps) => (
+                            //@ts-ignore
+                            <FormControl isInvalid={form.errors.fullname && form.touched.fullname}>
+                                <FormLabel htmlFor="fullname">Full name</FormLabel>
+                                <Input {...field} id="fullname" placeholder="fullname" focusBorderColor="gray.500" errorBorderColor="red.500" size="lg" />
+                                <FormErrorMessage>{form.errors.fullname}</FormErrorMessage>
+                            </FormControl>
+                        )}
+                    </Field>
+                    <Field name="username">
+                        {({ field, form }: FieldProps) => (
+                            //@ts-ignore
+                            <>
+                                {/* <FormControl isInvalid={form.errors.name && form.touched.name} mt="2"> */}
+                                <FormLabel htmlFor="username">Your Email</FormLabel>
+                                <Input {...field} id="username" placeholder="email@getfynance.com" focusBorderColor="gray.500" errorBorderColor="red.500" size="lg" />
+                                <FormErrorMessage>{form.errors.name}</FormErrorMessage>
+                                {/* </FormControl> */}
+                            </>
+                        )}
+                    </Field>
+                    <Field name="password">
+                        {({ field, form }: FieldProps) => (
+                            //@ts-ignore
+                            <>
+                                {/* <FormControl isInvalid={form.errors.name && form.touched.name} mt="2"> */}
+                                <FormLabel htmlFor="name">Set a Password</FormLabel>
+                                <Input {...field} id="password" placeholder="password" focusBorderColor="gray.500" errorBorderColor="red.500" size="lg" />
+                                <FormErrorMessage>{form.errors.name}</FormErrorMessage>
+                                {/* </FormControl> */}
+                            </>
+                        )}
+                    </Field>
+                    <Button
+                        mt={10}
+                        variantColor="teal"
+                        isLoading={props.isSubmitting}
+                        type="submit"
+                        size='lg'
+                        width="100%"
+                    >
+                        Submit
+            </Button>
+                </form>
+            )}
+        </Formik>
     );
 }
 
