@@ -64,11 +64,13 @@ const InputField = (props: InputFieldProps): JSX.Element => {
 
 const FormikForm = (props: any): JSX.Element => {
     const { children, initialValues, handleFormSubmit } = props;
+    console.log("HERE ARE FORMIK FIELD PROPS", props);
     return (
         <Formik
             initialValues={initialValues}
             onSubmit={(values, actions) => {
                 setTimeout(() => {
+                    console.log("HERE ARE FORMIK FIELD VALUES", values);
                     handleFormSubmit(values)
                     actions.setSubmitting(false);
                 }, 300);
@@ -108,7 +110,7 @@ const FormikForm = (props: any): JSX.Element => {
 
 
 // ====== Export Field Components here ===========
-export { InputField }
+export { InputField, FormikForm }
 
 
 
