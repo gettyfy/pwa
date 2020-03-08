@@ -2,6 +2,7 @@
 /**
  * This File will house the Form Fields that would be re-used across the project
  */
+// CREATE FIELDS FOR CONTROL BOX https://chakra-ui.com/controlbox
 
 import React from 'react';
 import { FormControl, FormLabel, FormErrorMessage, Input, Button, InputRightElement } from '@chakra-ui/core'
@@ -75,7 +76,8 @@ interface IFormikForm {
 
 const FormikForm = (props: IFormikForm): JSX.Element => {
     const { children, buttonName, isLoading, formProps: { errors, values }, analyticName, ...rest } = props;
-    console.log("HERE ARE FORMIK FORM PROPS", props);
+    console.log("HERE ARE FORMIK FORM ON SUBMISSION", props);
+    // alert(`CALLED ON SUBMIT ${JSON.stringify(values)}`)
 
     // Call Analytics on all Form Submissions
     Analytics.track(analyticName, {
