@@ -90,7 +90,7 @@ const FormikForm = (props: IFormikForm): JSX.Element => {
             {children}
             <Button
                 mt={10}
-                variantColor="teal"
+                variantColor="blue"
                 isLoading={isLoading}
                 type="submit"
                 size='lg'

@@ -54,7 +54,7 @@ const Signup: React.FC = () => {
             {(props: FormikProps<any>) => (
                 <FormikForm isLoading={props.isSubmitting} analyticName="Signup Form" formProps={props} buttonName="Signup">
                     <InputField label="Your Full Name" placeholder="enter your name" name="fullname" validate={Validator.isRequired} />
-                    <InputField label="Your Emails" placeholder="enter an email address" name="username" validate={Validator.isEmail} />
+                    <InputField label="Your Email" placeholder="enter an email address" name="username" validate={Validator.isEmail} />
                     <InputField label="Your Password" placeholder="set a password" name="password" validate={Validator.isRequired} />
                 </FormikForm>
             )}

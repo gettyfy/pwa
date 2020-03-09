@@ -28,9 +28,9 @@ const colors = {
 	tomato: 'FF5238',
 	text: '#1D1D1D',
 	background: '#FCFDFF',
-	blue: {
-		900: '#0476D0'
-	},
+	// blue: {
+	// 	900: '#0476D0'
+	// },
 	green: {
 		900: '#028248'
 	}
