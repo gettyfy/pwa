@@ -1,5 +1,6 @@
 import React from 'react'
 import { useHistory, Link } from 'react-router-dom';
+import { useFormik } from 'formik'
 
 import { Box, Heading, Divider, Button} from '@chakra-ui/core'
 import { FormButton } from '/imports/ui/components';
@@ -8,9 +9,27 @@ import { FormButton } from '/imports/ui/components';
 
 const WizardFormSecondPage: React.FunctionComponent = (props: any) => {
     const history = useHistory();
-    const handleSubmit = () => {
-        history.push('/onboarding/company-setup');
+
+    const handleButton = (variable: string) => {
+        formik.values.type = variable
+        formik.handleSubmit()
     }
+
+    const formik = useFormik({
+        initialValues: {
+            type: ''
+        },
+        onSubmit: async values => {
+            console.log(values, "FROM FORMIK")
+            await props.updateState(values)
+            history.push('/onboarding/company-setup');
+        }
+    })
+
+    // const handleSubmit = async (values) => {
+    //     await props.updateState(values)
+    //     history.push('/onboarding/company-setup');
+    // }
 
 
     return (
@@ -23,9 +42,12 @@ const WizardFormSecondPage: React.FunctionComponent = (props: any) => {
 
             <Box mb="5"><p>I will use Fynance to manage</p></Box>
 
+        
+
+
             
-            <FormButton handleAction={() => handleSubmit()} buttonName="Business Transaction" buttonColor="#0B69FF" color="#FFF"  mb="10" /> 
-            <FormButton  buttonName="Individual"buttonColor="#0B69FF" color="#FFF"  mb="10"/> 
+            <FormButton handleAction={() => handleButton("business")} buttonName="Business Transaction" buttonColor="#0B69FF" color="#FFF"  mb="10" /> 
+            <FormButton handleAction={() => handleButton("individual")} value="ind" buttonName="Individual"buttonColor="#0B69FF" color="#FFF"  mb="10"/> 
             
         </Box>
     );
