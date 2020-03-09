@@ -16,7 +16,7 @@ import Onboarding from '/imports/ui/pages/onboarding'
 // =============== Workspace Components ============
 import Remind from '/imports/ui/pages/workspace/remind'
 import Record from '/imports/ui/pages/workspace/record'
-import Recover from '/imports/ui/pages/workspace/recover'
+import Recover from '/imports/ui/pages/workspace/recover/review'
 import Transaction from '/imports/ui/pages/workspace/transaction'
 import Customer from '/imports/ui/pages/workspace/customer'
 import Account from '/imports/ui/pages/workspace/account'
