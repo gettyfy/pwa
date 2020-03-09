@@ -26,7 +26,7 @@ interface IButton {
 }
 
 
-const FormButton = (props: IButton) => {
+const FormButton: React.FC<IButton> = (props) => {
     const { analyticName, handleAction, borderColor, buttonColor, buttonName, color, border } = props
 
     const handleClick = (analyticName: string): any => {
