@@ -5,12 +5,51 @@
 // CREATE FIELDS FOR CONTROL BOX https://chakra-ui.com/controlbox
 
 import React from 'react';
-import { FormControl, FormLabel, FormErrorMessage, Input, Button, InputRightElement } from '@chakra-ui/core'
-import Proptypes from 'proptypes'
+import { FormControl, FormLabel, Icon, FormErrorMessage, Input, Button, InputGroup, InputLeftElement, InputRightElement } from '@chakra-ui/core'
+import PropTypes from 'prop-types'
+import styled from '@emotion/styled'
 import { Formik, Form, FormikProps, Field, FieldInputProps, FieldMetaProps, FieldProps, FormikBag, FormikFormProps, FormikHandlers } from 'formik'
 import * as Analytics from '/imports/ui/analytics'
 
 
+
+const FormikButton = styled(Button)`
+    border-radius: 0;
+    min-height: 54px;
+    justify-content: space-between;
+    align-content: center;
+`
+
+const FormikInput = styled(Input)`
+    border-radius: 0px;
+    border-width: 1.3px;
+    /* border-right: none;
+    border-top: none;
+    border-left: none; */
+    min-height: 64px;
+    line-height: 1px;
+
+    ::placeholder,
+    ::-webkit-input-placeholder {
+        font-size: 16px;
+        padding-bottom: 0;
+        line-height: 1rem;
+        vertical-align: bottom;
+    }
+`
+const FormikLabel = styled(FormLabel)`
+    font-size: 12px;
+    position: absolute;
+    top: 0;
+    transition: ease-in 0.2s;
+    z-index: 11111;
+    padding: .1rem;
+    padding-left: 1rem;
+    /* background: #999999; */
+    /* color: white; */
+    padding-right: 10px;
+   
+`
 
 /**
  * This will be the Formik Fields Hook that extends formik functionality into chakra form fields
@@ -28,8 +67,6 @@ interface InputFieldProps {
     placeholder: string,
     validate?: Function
 }
-
-
 
 
 /**
@@ -50,15 +87,23 @@ const InputField = (props: InputFieldProps): JSX.Element => {
         <Field name={name} validate={validate} {...props}>
             {({ field, form }: FieldProps) => (
                 //@ts-ignore
-                <FormControl isInvalid={form.errors[name] && form.touched[name]}>
-                    <FormLabel htmlFor={name}>{label}</FormLabel>
-                    <Input {...field} id={name} placeholder={placeholder} focusBorderColor="gray.500" errorBorderColor="red.500" size="lg" />
+                <FormControl isInvalid={form.errors[name] && form.touched[name]} mt="5" position="relative">
+                    <FormikLabel htmlFor={name} color="gray.600">{label}</FormikLabel>
+                    <InputGroup size="lg">
+                        <FormikInput isFullWidth variant="filled" {...field} id={name} placeholder={placeholder} focusBorderColor="gray.500" borderColor="gray.500" errorBorderColor="red.500" size="lg" />
+                    </InputGroup>
                     <FormErrorMessage>{form.errors[name]}</FormErrorMessage>
                 </FormControl>
             )}
         </Field>
     );
 }
+InputField.propTypes = {
+    name: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
+    placeholder: PropTypes.string.isRequired,
+    validate: PropTypes.func,
+};
 
 
 interface IFormikForm {
@@ -88,9 +133,10 @@ const FormikForm = (props: IFormikForm): JSX.Element => {
     return (
         <Form {...rest}>
             {children}
-            <Button
+            <FormikButton
                 mt={10}
                 variantColor="blue"
+                rightIcon="arrow-forward"
                 isLoading={isLoading}
                 type="submit"
                 size='lg'
@@ -98,7 +144,7 @@ const FormikForm = (props: IFormikForm): JSX.Element => {
                 {...rest}
             >
                 {buttonName}
-            </Button>
+            </FormikButton>
         </Form>
     )
 }
