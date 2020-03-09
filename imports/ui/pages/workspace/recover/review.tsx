@@ -6,6 +6,7 @@ import { FormButton } from '/imports/ui/components'
 const StyledReview= styled.main`
   display: flex;
   flex-direction: column;
+  background-color: inherit;
 `
 
 const ReviewStat = styled(StatGroup)`
@@ -20,6 +21,7 @@ export default class review extends React.Component {
     render() {
         return (
             <StyledReview>
+                <Box bg="#F3F5FD">
                 <Flex flexDirection="row" mt="10">
                 <Box>
                     <Icon name="arrow-back" size="24px" />
@@ -34,7 +36,7 @@ export default class review extends React.Component {
                     <Flex flexDirection="row" mt="2">
                     <StatNumber>GHC9.00</StatNumber>
                     <Box mt="2" p="2" >
-                        <Text fontSize="xs" color="tomato">In Debt</Text>
+                        <Text fontSize="xs" color="red.500">In Debt</Text>
                         </Box>
                     </Flex>
                     <Flex flexDirection="row" >
@@ -46,28 +48,31 @@ export default class review extends React.Component {
                     </Flex>
                 </Stat>
                 
+                
+                
                 {/* <Box bg='tomato' /> */}
                 <ReviewStat mt="10">
                     <Stat>
-                        <Icon name="download" size="20px" />
+                        <Icon name="download" size="15px" color="#4EB191"/>
                         <StatHelpText>
                             AGREEMENT DOC
               </StatHelpText>
                     </Stat>
 
                     <Stat>
-                        <Icon name="calendar" size="20px" />
+                            <Icon name="calendar" size="15px" color="#4EB191"/>
                         <StatHelpText>
                             REMINDER LOG
               </StatHelpText>
                     </Stat>
                     <Stat>
-                        <Icon name="copy" size="20px" />
+                            <Icon name="copy" size="15px" color="#4EB191" />
                         <StatHelpText>
                             PAYMENT PLAN
               </StatHelpText>
                     </Stat>
                 </ReviewStat>
+                </Box>
                 
 
                 <Divider />
