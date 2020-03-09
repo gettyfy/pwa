@@ -5,10 +5,10 @@
 // CREATE FIELDS FOR CONTROL BOX https://chakra-ui.com/controlbox
 
 import React from 'react';
-import PropTypes from 'prop-types'
+import PropTypes, { object } from 'prop-types'
 import styled from '@emotion/styled'
 import { Formik, Form, Field, FieldProps } from 'formik'
-import { FormControl, FormLabel, RadioGroup, Icon, IconButton, FormErrorMessage, Input, Button, InputGroup, Radio, InputRightElement } from '@chakra-ui/core'
+import { FormControl, Checkbox, FormLabel, RadioGroup, Icon, IconButton, FormErrorMessage, Input, Button, InputGroup, Radio, InputRightElement } from '@chakra-ui/core'
 import * as Analytics from '/imports/ui/analytics'
 
 
@@ -84,9 +84,9 @@ const InputField = (props: InputFieldProps): JSX.Element => {
             {({ field, form }: FieldProps) => (
                 //@ts-ignore
                 <FormControl isInvalid={form.errors[name] && form.touched[name]} mt="5" position="relative">
-                    <FormikLabel htmlFor={name} color="gray.600">{label}</FormikLabel>
+                    <FormikLabel id={[name, 'label'].join('-')} htmlFor={[name, 'input'].join('-')} color="gray.600">{label}</FormikLabel>
                     <InputGroup size="lg">
-                        <FormikInput isFullWidth variant="filled" {...field} id={name} placeholder={placeholder} focusBorderColor="gray.500" borderColor="gray.500" errorBorderColor="red.500" size="lg" />
+                        <FormikInput isFullWidth variant="filled" {...field} id={[name, 'input'].join('-')} placeholder={placeholder} focusBorderColor="gray.500" borderColor="gray.500" errorBorderColor="red.500" size="lg" />
                     </InputGroup>
                     <FormErrorMessage>{form.errors[name]}</FormErrorMessage>
                 </FormControl>
@@ -149,6 +149,18 @@ const FormikForm = (props: IFormikForm): JSX.Element => {
             </FormikButton>
         </Form>
     )
+}
+
+FormikForm.propTypes = {
+    children: PropTypes.oneOfType([
+        PropTypes.arrayOf(PropTypes.node),
+        PropTypes.node
+    ]).isRequired,
+    analyticName: PropTypes.string,
+    isLoading: PropTypes.bool,
+    buttonName: PropTypes.string.isRequired,
+    formProps: PropTypes.object
+
 }
 // ++ ================================= END SECTION =================================================================++
 
@@ -252,30 +264,25 @@ RadioField.propTypes = {
  * Formik Field for Radio Selections
  */
 
-interface RadioFieldProps {
+interface CheckFieldProps {
     validate: Function,
     name: string
-    label: string,
-    defaultValue?: string
-    options: Array<string>,
+    label?: string,
+    isChecked?: boolean
 }
 
-const RadioField = (props: RadioFieldProps): JSX.Element => {
-    const { validate, name, defaultValue, options, label } = props
+const CheckField = (props: CheckFieldProps): JSX.Element => {
+    const { validate, isChecked, name, label } = props
 
     return (
         <Field name={name} validate={validate} {...props}>
             {({ field, form }: FieldProps) => (
                 //@ts-ignore
                 <FormControl isInvalid={form.errors[name] && form.touched[name]} mt="5" position="relative">
-                    <FormLabel htmlFor={name} color="gray.600">{label}</FormLabel>
-                    <RadioGroup name={name} id={name} defaultValue={defaultValue} {...field} size="lg">
-                        {options.map((val, idx) => {
-                            return (
-                                <Radio key={`${val}-${idx}`} value={val.toLowerCase()}>{val}</Radio>
-                            )
-                        })}
-                    </RadioGroup>
+                    {label && <FormLabel id={[name, 'label'].join('-')} htmlFor={[name, 'input'].join('-')} color="gray.600">{label}</FormLabel>}
+                    <Checkbox isChecked={isChecked} id={[name, 'input'].join('-')} size="lg" name={name} variantColor="blue" {...field}>
+                        {name}
+                    </Checkbox>
                     <FormErrorMessage>{form.errors[name]}</FormErrorMessage>
                 </FormControl>
             )}
@@ -283,12 +290,11 @@ const RadioField = (props: RadioFieldProps): JSX.Element => {
     );
 }
 
-RadioField.propTypes = {
+CheckField.propTypes = {
     name: PropTypes.string.isRequired,
-    label: PropTypes.string.isRequired,
+    label: PropTypes.string,
     validate: PropTypes.func,
-    defaultValue: PropTypes.string,
-    options: PropTypes.array.isRequired
+    isChecked: PropTypes.bool,
 };
 
 // ++ ================================= END SECTION =================================================================++
@@ -299,7 +305,7 @@ RadioField.propTypes = {
 
 
 // ====== Export Field Components here ===========
-export { InputField, PasswordField, RadioField, FormikForm }
+export { InputField, PasswordField, CheckField, RadioField, FormikForm }
 
 
 
