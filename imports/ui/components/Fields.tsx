@@ -248,6 +248,55 @@ RadioField.propTypes = {
 
 
 
+/**
+ * Formik Field for Radio Selections
+ */
+
+interface RadioFieldProps {
+    validate: Function,
+    name: string
+    label: string,
+    defaultValue?: string
+    options: Array<string>,
+}
+
+const RadioField = (props: RadioFieldProps): JSX.Element => {
+    const { validate, name, defaultValue, options, label } = props
+
+    return (
+        <Field name={name} validate={validate} {...props}>
+            {({ field, form }: FieldProps) => (
+                //@ts-ignore
+                <FormControl isInvalid={form.errors[name] && form.touched[name]} mt="5" position="relative">
+                    <FormLabel htmlFor={name} color="gray.600">{label}</FormLabel>
+                    <RadioGroup name={name} id={name} defaultValue={defaultValue} {...field} size="lg">
+                        {options.map((val, idx) => {
+                            return (
+                                <Radio key={`${val}-${idx}`} value={val.toLowerCase()}>{val}</Radio>
+                            )
+                        })}
+                    </RadioGroup>
+                    <FormErrorMessage>{form.errors[name]}</FormErrorMessage>
+                </FormControl>
+            )}
+        </Field>
+    );
+}
+
+RadioField.propTypes = {
+    name: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
+    validate: PropTypes.func,
+    defaultValue: PropTypes.string,
+    options: PropTypes.array.isRequired
+};
+
+// ++ ================================= END SECTION =================================================================++
+
+
+
+
+
 
 // ====== Export Field Components here ===========
 export { InputField, PasswordField, RadioField, FormikForm }
