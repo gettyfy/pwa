@@ -1,8 +1,8 @@
 import React from 'react'
 import { useHistory } from 'react-router-dom';
 
-import { Box, Heading } from '@chakra-ui/core'
-//import * as Analytics from '/imports/ui/analytics'
+import { Button, Select, Box, Heading } from '@chakra-ui/core'
+import * as Analytics from '/imports/ui/analytics'
 import * as Validator from '/imports/lib/validator'
 import { Formik, FormikProps } from 'formik'
 import { InputField, FormikForm } from '/imports/ui/components'
