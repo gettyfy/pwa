@@ -92,7 +92,15 @@ const Login: React.FunctionComponent = (): JSX.Element => {
         e.preventDefault()
         Analytics.identify(value.username)
         Analytics.track("User Login", value)
-        Meteor.loginWithPassword(value.username, value.password);
+        Meteor.loginWithPassword(value.username, value.password, (error) => {
+            if (error) {
+                console.log(error.message);
+                return alert(error.message)
+            }
+            else {
+                alert(`SIGNUP WAS SUCCESSFUL FOR ${JSON.stringify(Meteor.user())}`)
+            }
+        });
         history.push('/');
     }
 

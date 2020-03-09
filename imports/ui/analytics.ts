@@ -8,7 +8,7 @@ declare global {
 }
 
 export const load = () => {
-	window.analytics.load('o70p979wkDHRD0Rahy0mEMMN2xhovIDL');
+	window.analytics.load('NWKqq2W8V3cTrwF3ScnaLK3H7CDKSRSS');
 };
 
 export const page = () => {

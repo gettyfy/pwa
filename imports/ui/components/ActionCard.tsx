@@ -18,23 +18,23 @@ const ActionCardRow = styled.section`
 `
 
 interface IActionCard {
-    analyticName: string, 
-    cardBg: string, 
-    cardLink: string, 
-    name: string, 
-    iconColor: string, 
-    cardHeading: string, 
+    analyticName: string,
+    cardBg: string,
+    cardLink: string,
+    name: string,
+    iconColor: string,
+    cardHeading: string,
     cardSubHeading: string
     children?: any
 }
 
-const ActionCard = (props: IActionCard) => {
-    const { analyticName, cardBg, cardLink, name, iconColor, cardHeading, cardSubHeading} = props
+const ActionCard: React.FC<IActionCard> = (props) => {
+    const { analyticName, cardBg, cardLink, name, iconColor, cardHeading, cardSubHeading } = props
 
     const handleClick = (analyticName: string): any => {
         // we will write the handle analytics here
         Analytics.track(analyticName, {
-            component: "Action Card"
+            action: `Click LinkTo ${props.cardSubHeading}`
         })
 
     }
@@ -45,9 +45,9 @@ const ActionCard = (props: IActionCard) => {
 
                     <Icon name={name} mb="6" color={iconColor} size="20px" {...props}></Icon>
                     <Box mb="3" w="65%">
-    <Heading as="h2" size="sm">{cardHeading}</Heading>
+                        <Heading as="h2" size="sm">{cardHeading}</Heading>
                     </Box>
-    <Heading as="h6" size="xs">{cardSubHeading}</Heading>
+                    <Heading as="h6" size="xs">{cardSubHeading}</Heading>
                 </Box>
             </Link>
         </Box>
@@ -57,5 +57,4 @@ const ActionCard = (props: IActionCard) => {
 
 
 // export the components as modules to be resuable by other component
-export default ActionCard
-export {ActionCardRow}
+export { ActionCardRow, ActionCard }

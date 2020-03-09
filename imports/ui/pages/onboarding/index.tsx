@@ -7,7 +7,7 @@ import Verification from './Verification';
 import CompanySetup from './CompanySetup';
 import * as Analytics from '/imports/ui/analytics'
 
-export default class Kitchen extends Component {
+export default class Onboarding extends Component {
 	constructor(props: any) {
 		super(props);
 		this.state = {
@@ -31,7 +31,11 @@ export default class Kitchen extends Component {
 	};
 
 	render() {
-		return (																																																																																																																																					
+<<<<<<< HEAD
+		return (
+=======
+		return (
+>>>>>>> lady/dev
 			<Switch>
 				<Route path="/onboarding" exact><Verification data={this.state} updateState={this.updateState} /></Route>
 				<Route path="/onboarding/account-setup" exact><AccountSetup data={this.state} updateState={this.updateState} /></Route>

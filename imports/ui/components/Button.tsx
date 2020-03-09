@@ -14,7 +14,7 @@ const Box = styled(ChakraBox)`
 
 
 interface IButton {
-    analyticName: string, 
+    analyticName: string,
     buttonName: string,
     handleAction: Function,
     buttonColor?: string,
@@ -26,8 +26,8 @@ interface IButton {
 }
 
 
-const FormButton = (props: IButton) => {
-    const { analyticName, handleAction, borderColor, buttonColor, buttonName, color, border} = props
+const FormButton: React.FC<IButton> = (props) => {
+    const { analyticName, handleAction, borderColor, buttonColor, buttonName, color, border } = props
 
     const handleClick = (analyticName: string): any => {
         // we will write the handle analytics here
@@ -41,11 +41,11 @@ const FormButton = (props: IButton) => {
     }
     return (
         <Box as="button" width="16.5rem" rounded="0" bg={buttonColor || 'blue.500'} size="lg" border={border} borderColor={borderColor} color={color} px={4} h={8} {...props} onClick={() => handleClick(analyticName)}>
-        {buttonName}
+            {buttonName}
         </Box>
     )
 }
 
 
 // export the components as modules to be resuable by other component
-export default FormButton
+export { FormButton }
