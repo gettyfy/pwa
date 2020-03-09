@@ -7,8 +7,8 @@
 import React from 'react';
 import PropTypes, { object } from 'prop-types'
 import styled from '@emotion/styled'
-import { Formik, Form, Field, FieldProps } from 'formik'
-import { FormControl, Checkbox, FormLabel, RadioGroup, Icon, IconButton, FormErrorMessage, Input, Button, InputGroup, Radio, InputRightElement } from '@chakra-ui/core'
+import { Formik, useField, Form, Field, FieldProps, FieldConfig } from 'formik'
+import { FormControl, Checkbox, FormLabel, RadioGroup, RadioButtonGroup, Icon, IconButton, FormErrorMessage, Input, Button, InputGroup, Radio, InputRightElement } from '@chakra-ui/core'
 import * as Analytics from '/imports/ui/analytics'
 
 
@@ -123,8 +123,7 @@ interface IFormikForm {
 
 const FormikForm = (props: IFormikForm): JSX.Element => {
     const { children, buttonName, isLoading, formProps: { errors, values }, analyticName, ...rest } = props;
-    console.log("HERE ARE FORMIK FORM ON SUBMISSION", props);
-    // alert(`CALLED ON SUBMIT ${JSON.stringify(values)}`)
+    console.log("HERE ARE FORMIK FORM ON SUBMISSION", props.formProps);
 
     // Call Analytics on all Form Submissions
     Analytics.track(analyticName, {
@@ -233,7 +232,7 @@ const RadioField = (props: RadioFieldProps): JSX.Element => {
                 <FormControl isInvalid={form.errors[name] && form.touched[name]} mt="5" position="relative">
                     <FormLabel htmlFor={name} color="gray.600">{label}</FormLabel>
                     <RadioGroup name={name} id={name} defaultValue={defaultValue} {...field} size="lg">
-                        {options.map((val, idx) => {
+                        {options && options.map((val, idx) => {
                             return (
                                 <Radio key={`${val}-${idx}`} value={val.toLowerCase()}>{val}</Radio>
                             )
@@ -254,6 +253,75 @@ RadioField.propTypes = {
     options: PropTypes.array.isRequired
 };
 
+interface ICustomRadio {
+    isChecked: boolean,
+    isDisabled: boolean,
+    name: string,
+    value: string,
+    children: any,
+    [key: string]: any
+
+}
+
+const ButtonComponent = React.forwardRef((props: ICustomRadio, ref) => {
+    // Step 1: Create a component that accepts `isChecked` and `isDisabled` prop
+    const { isChecked, children, isDisabled, value, ...rest } = props;
+    return (
+        <Button
+            ref={ref}
+            variantColor={isChecked ? "red" : "blue"}
+            aria-checked={isChecked}
+            width="inherit"
+            borderRadius="0"
+            m="1"
+            ml="0"
+            role="radio"
+            isDisabled={isDisabled}
+            {...rest}
+        >{children}</Button>
+
+    )
+});
+
+
+const RadioButtonField = (props: RadioFieldProps): JSX.Element => {
+    const { validate, name, defaultValue, options, label, ...rest } = props
+    //@ts-ignore
+    const [field, meta, helpers] = useField(props);
+
+    console.log(field, meta, helpers);
+
+    // directly call meta in place of meta.touched to show all errors ::: FIX ISSUE with component not displaying error onDirty
+    return (
+        <FormControl isInvalid={meta['error'] && meta.touched} mt="5" position="relative">
+            <FormLabel {...field} htmlFor={[name, 'radio-button'].join('__')} color="gray.600">{label}</FormLabel>
+            <RadioButtonGroup
+                name={name}
+                id={[name, 'radio-button'].join('__')}
+                onChange={val => helpers.setTouched(true) && helpers.setValue(val)}
+                defaultValue={"org"}
+                isInline
+            >
+                {options && options.map((val, idx) => {
+                    return (
+                        <ButtonComponent name={val} key={[val, idx].join('--')} value={val} {...rest}>{val}</ButtonComponent>
+                    )
+                })}
+            </RadioButtonGroup>
+            <FormErrorMessage>{meta.error && meta.error}</FormErrorMessage>
+        </FormControl>
+    );
+}
+
+
+RadioButtonField.propTypes = {
+    name: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
+    validate: PropTypes.func,
+    defaultValue: PropTypes.string,
+    options: PropTypes.array.isRequired
+};
+
 // ++ ================================= END SECTION =================================================================++
 
 
@@ -261,18 +329,19 @@ RadioField.propTypes = {
 
 
 /**
- * Formik Field for Radio Selections
+ * Formik Field for Checkbox Selections
  */
 
 interface CheckFieldProps {
     validate: Function,
     name: string
+    boxLabel: string
     label?: string,
     isChecked?: boolean
 }
 
 const CheckField = (props: CheckFieldProps): JSX.Element => {
-    const { validate, isChecked, name, label } = props
+    const { validate, boxLabel, isChecked, name, label } = props
 
     return (
         <Field name={name} validate={validate} {...props}>
@@ -281,7 +350,7 @@ const CheckField = (props: CheckFieldProps): JSX.Element => {
                 <FormControl isInvalid={form.errors[name] && form.touched[name]} mt="5" position="relative">
                     {label && <FormLabel id={[name, 'label'].join('-')} htmlFor={[name, 'input'].join('-')} color="gray.600">{label}</FormLabel>}
                     <Checkbox isChecked={isChecked} id={[name, 'input'].join('-')} size="lg" name={name} variantColor="blue" {...field}>
-                        {name}
+                        {boxLabel}
                     </Checkbox>
                     <FormErrorMessage>{form.errors[name]}</FormErrorMessage>
                 </FormControl>
@@ -292,6 +361,7 @@ const CheckField = (props: CheckFieldProps): JSX.Element => {
 
 CheckField.propTypes = {
     name: PropTypes.string.isRequired,
+    boxLabel: PropTypes.string.isRequired,
     label: PropTypes.string,
     validate: PropTypes.func,
     isChecked: PropTypes.bool,
@@ -305,7 +375,7 @@ CheckField.propTypes = {
 
 
 // ====== Export Field Components here ===========
-export { InputField, PasswordField, CheckField, RadioField, FormikForm }
+export { InputField, PasswordField, CheckField, RadioField, RadioButtonField, FormikForm }
 
 
 
