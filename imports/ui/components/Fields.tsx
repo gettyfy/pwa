@@ -5,10 +5,10 @@
 // CREATE FIELDS FOR CONTROL BOX https://chakra-ui.com/controlbox
 
 import React from 'react';
-import { FormControl, FormLabel, Icon, FormErrorMessage, Input, Button, InputGroup, InputLeftElement, InputRightElement } from '@chakra-ui/core'
 import PropTypes from 'prop-types'
 import styled from '@emotion/styled'
-import { Formik, Form, FormikProps, Field, FieldInputProps, FieldMetaProps, FieldProps, FormikBag, FormikFormProps, FormikHandlers } from 'formik'
+import { Formik, Form, Field, FieldProps } from 'formik'
+import { FormControl, FormLabel, RadioGroup, Icon, IconButton, FormErrorMessage, Input, Button, InputGroup, Radio, InputRightElement } from '@chakra-ui/core'
 import * as Analytics from '/imports/ui/analytics'
 
 
@@ -23,9 +23,9 @@ const FormikButton = styled(Button)`
 const FormikInput = styled(Input)`
     border-radius: 0px;
     border-width: 1.3px;
-    /* border-right: none;
+    border-right: none;
     border-top: none;
-    border-left: none; */
+    border-left: none;
     min-height: 64px;
     line-height: 1px;
 
@@ -58,7 +58,8 @@ const FormikLabel = styled(FormLabel)`
 
 
 /**
- * Extend the Formik form fields
+ * This component extends a chakra input field and ties it up with the formik utility while exposing a few props to utilize across other pages
+ * The form takes in a form name and calls a validation function that will be used within the pages
  */
 
 interface InputFieldProps {
@@ -68,11 +69,6 @@ interface InputFieldProps {
     validate?: Function
 }
 
-
-/**
- * This component extends a chakra input field and ties it up with the formik utility while exposing a few props to utilize across other pages
- * The form takes in a form name and calls a validation function that will be used within the pages
- */
 const InputField = (props: InputFieldProps): JSX.Element => {
     const { validate, name, placeholder, label } = props
 
@@ -105,6 +101,13 @@ InputField.propTypes = {
     validate: PropTypes.func,
 };
 
+// ++ ============================================= END SECTION =====================================================
+
+
+
+/**
+ * Extend the Form Component to Manage the Analytics provider, expose a Button component and HandleSubmit Action
+ */
 
 interface IFormikForm {
     analyticName: string,
@@ -117,7 +120,6 @@ interface IFormikForm {
         [key: string]: any
     }
 }
-
 
 const FormikForm = (props: IFormikForm): JSX.Element => {
     const { children, buttonName, isLoading, formProps: { errors, values }, analyticName, ...rest } = props;
@@ -148,15 +150,99 @@ const FormikForm = (props: IFormikForm): JSX.Element => {
         </Form>
     )
 }
+// ++ ================================= END SECTION =================================================================++
+
+
+
+/**
+ * Formik Field for Password Inputs
+ */
+const PasswordField = (props: InputFieldProps): JSX.Element => {
+    const { validate, name, placeholder, label } = props
+    const [show, setShow] = React.useState(false);
+    const handleClick = () => setShow(!show);
+
+    return (
+        <Field name={name} validate={validate} {...props}>
+            {({ field, form }: FieldProps) => (
+                //@ts-ignore
+                <FormControl isInvalid={form.errors[name] && form.touched[name]} mt="5" position="relative">
+                    <FormikLabel htmlFor={name} color="gray.600">{label}</FormikLabel>
+                    <InputGroup size="lg">
+                        <FormikInput type={show ? "text" : "password"} isFullWidth variant="filled" {...field} id={name} placeholder={placeholder} focusBorderColor="gray.500" borderColor="gray.500" errorBorderColor="red.500" size="lg" />
+                        <InputRightElement width="4.5rem" pt="4">
+                            <IconButton
+                                variant="outline"
+                                size="sm"
+                                isRound
+                                aria-label="Reveal Password"
+                                icon={show ? "view" : "view-off"}
+                                onClick={handleClick}>
+                                ></IconButton>
+                        </InputRightElement>
+                    </InputGroup>
+                    <FormErrorMessage>{form.errors[name]}</FormErrorMessage>
+                </FormControl>
+            )}
+        </Field>
+    );
+}
+PasswordField.propTypes = {
+    name: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
+    placeholder: PropTypes.string.isRequired,
+    validate: PropTypes.func,
+};
+
+// ++ ================================= END SECTION =================================================================++
 
 
 
 
+/**
+ * Formik Field for Radio Selections
+ */
 
+interface RadioFieldProps {
+    validate: Function,
+    name: string
+    label: string,
+    defaultValue?: string
+    options: Array<string>,
+}
 
+const RadioField = (props: RadioFieldProps): JSX.Element => {
+    const { validate, name, defaultValue, options, label } = props
 
+    return (
+        <Field name={name} validate={validate} {...props}>
+            {({ field, form }: FieldProps) => (
+                //@ts-ignore
+                <FormControl isInvalid={form.errors[name] && form.touched[name]} mt="5" position="relative">
+                    <FormLabel htmlFor={name} color="gray.600">{label}</FormLabel>
+                    <RadioGroup name={name} id={name} defaultValue={defaultValue} {...field} size="lg">
+                        {options.map((val, idx) => {
+                            return (
+                                <Radio key={`${val}-${idx}`} value={val.toLowerCase()}>{val}</Radio>
+                            )
+                        })}
+                    </RadioGroup>
+                    <FormErrorMessage>{form.errors[name]}</FormErrorMessage>
+                </FormControl>
+            )}
+        </Field>
+    );
+}
 
+RadioField.propTypes = {
+    name: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
+    validate: PropTypes.func,
+    defaultValue: PropTypes.string,
+    options: PropTypes.array.isRequired
+};
 
+// ++ ================================= END SECTION =================================================================++
 
 
 
@@ -164,7 +250,7 @@ const FormikForm = (props: IFormikForm): JSX.Element => {
 
 
 // ====== Export Field Components here ===========
-export { InputField, FormikForm }
+export { InputField, PasswordField, RadioField, FormikForm }
 
 
 
@@ -174,125 +260,3 @@ export { InputField, FormikForm }
 
 
 
-
-
-
-
-// const Signup: React.FC = () => {
-
-//     interface AuthInterface {
-//         fullname: string,
-//         username: string,
-//         password: string,
-//         [key: string]: string
-//     }
-//     const authInit: AuthInterface = {
-//         fullname: "",
-//         username: "",
-//         password: "",
-//     }
-
-//     const handleSubmit = (values: AuthInterface) => {
-//         console.log(values);
-//         const options = values
-//         Accounts.createUser({
-//             email: options.username,
-//             password: options.password,
-//             profile: {
-//                 name: options.fullname
-//             }
-//         }, (error) => {
-//             if (error) {
-//                 console.log(error.message);
-//                 return alert(error.message)
-//             }
-//             else {
-//                 alert(`SIGNUP WAS SUCCESSFUL FOR ${JSON.stringify(Meteor.user())}`)
-//             }
-//         })
-//     }
-
-//     /**
-//      * Formik Field Props to be aware of
-//      *  field, { name, value, onChange, onBlur }
-//         form: {touched, errors}, // also values, setXXXX, handleXXXX, dirty, isValid, status, etc.
-//         meta => uses action handlers like touched... to trigger validation and other login on the Fields component
-//      */
-
-
-
-
-
-//     function validateName(value: string) {
-//         console.log(value);
-//         let error;
-//         if (!value) {
-//             error = "Name is required";
-//         } else if (value !== "Andrew") {
-//             error = "Jeez! You're not a fan 😱";
-//         }
-//         return error;
-//     }
-
-
-
-
-//     return (
-//         <Formik
-//             initialValues={{ ...authInit }}
-//             onSubmit={(values, actions) => {
-//                 setTimeout(() => {
-//                     handleSubmit(values)
-//                     actions.setSubmitting(false);
-//                 }, 1000);
-//             }}
-//         >
-//             {(props: FormikProps<any>) => (
-//                 <form onSubmit={props.handleSubmit}>
-//                     <Field name="fullname" validate={validateName}>
-//                         {({ field, form }: FieldProps) => (
-//                             //@ts-ignore
-//                             <FormControl isInvalid={form.errors.fullname && form.touched.fullname}>
-//                                 <FormLabel htmlFor="fullname">Full name</FormLabel>
-//                                 <Input {...field} id="fullname" placeholder="fullname" focusBorderColor="gray.500" errorBorderColor="red.500" size="lg" />
-//                                 <FormErrorMessage>{form.errors.fullname}</FormErrorMessage>
-//                             </FormControl>
-//                         )}
-//                     </Field>
-//                     <Field name="username">
-//                         {({ field, form }: FieldProps) => (
-//                             //@ts-ignore
-//                             <FormControl isInvalid={form.errors.username && form.touched.username} mt="2">
-//                                 <FormLabel htmlFor="username">Your Email</FormLabel>
-//                                 <Input {...field} id="username" placeholder="email@getfynance.com" focusBorderColor="gray.500" errorBorderColor="red.500" size="lg" />
-//                                 <FormErrorMessage>{form.errors.username}</FormErrorMessage>
-//                             </FormControl>
-//                         )}
-//                     </Field>
-//                     <Field name="password">
-//                         {({ field, form }: FieldProps) => (
-//                             //@ts-ignore
-//                             <>
-//                                 {/* <FormControl isInvalid={form.errors.name && form.touched.name} mt="2"> */}
-//                                 <FormLabel htmlFor="name">Set a Password</FormLabel>
-//                                 <Input {...field} id="password" placeholder="password" focusBorderColor="gray.500" errorBorderColor="red.500" size="lg" />
-//                                 <FormErrorMessage>{form.errors.name}</FormErrorMessage>
-//                                 {/* </FormControl> */}
-//                             </>
-//                         )}
-//                     </Field>
-//                     <Button
-//                         mt={10}
-//                         variantColor="teal"
-//                         isLoading={props.isSubmitting}
-//                         type="submit"
-//                         size='lg'
-//                         width="100%"
-//                     >
-//                         Submit
-//             </Button>
-//                 </form>
-//             )}
-//         </Formik>
-//     );
-// }

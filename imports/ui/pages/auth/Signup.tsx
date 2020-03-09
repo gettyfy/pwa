@@ -3,7 +3,7 @@ import * as Validator from '/imports/lib/validator'
 import { Accounts } from 'meteor/accounts-base';
 import { Meteor } from 'meteor/meteor'
 import { Formik, FormikProps } from 'formik'
-import { InputField, FormikForm } from '/imports/ui/components'
+import { InputField, RadioField, FormikForm, PasswordField } from '/imports/ui/components'
 
 
 const Signup: React.FC = () => {
@@ -55,7 +55,8 @@ const Signup: React.FC = () => {
                 <FormikForm isLoading={props.isSubmitting} analyticName="Signup Form" formProps={props} buttonName="Signup">
                     <InputField label="Your Full Name" placeholder="enter your name" name="fullname" validate={Validator.isRequired} />
                     <InputField label="Your Email" placeholder="enter an email address" name="username" validate={Validator.isEmail} />
-                    <InputField label="Your Password" placeholder="set a password" name="password" validate={Validator.isRequired} />
+                    <PasswordField label="Your Password" placeholder="set a password" name="password" validate={Validator.isRequired} />
+                    <RadioField name="type" label="What Org Type" validate={Validator.isRequired} options={["Organization", "Individual"]} />
                 </FormikForm>
             )}
         </Formik>
