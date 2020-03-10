@@ -154,6 +154,8 @@ const FormikForm = (props: IFormikForm): JSX.Element => {
                 mt={10}
                 withIcon={withIcon}
                 variantColor="blue"
+                type="submit"
+                isLoading={isLoading}
                 //@ts-ignore
                 rightIcon={withIcon && "arrow-forward"}
                 width="100%"

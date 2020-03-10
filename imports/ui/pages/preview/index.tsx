@@ -1,9 +1,14 @@
+/**
+ * This page will act as a preview screen for all our components
+ */
+
+
 import React from 'react';
 import * as Validator from '/imports/lib/validator'
 import { Accounts } from 'meteor/accounts-base';
 import { Meteor } from 'meteor/meteor'
 import { Formik, FormikProps } from 'formik'
-import { InputField, FormikForm, PasswordField, } from '/imports/ui/components'
+import { InputField, RadioField, SelectField, CheckField, FormikForm, RadioButtonField, PasswordField } from '/imports/ui/components'
 
 
 const Signup: React.FC = () => {
@@ -20,10 +25,10 @@ const Signup: React.FC = () => {
         password: "",
     }
 
-    const handleFormSubmit = async (values: AuthInterface) => {
+    const handleSubmit = (values: AuthInterface) => {
         console.log(values);
         const options = values
-        await Accounts.createUser({
+        Accounts.createUser({
             email: options.username,
             password: options.password,
             profile: {
@@ -46,16 +51,20 @@ const Signup: React.FC = () => {
             initialValues={authInit}
             onSubmit={(values, actions) => {
                 setTimeout(() => {
-                    handleFormSubmit(values)
+                    handleSubmit(values)
                     actions.setSubmitting(false);
-                }, 300);
+                }, 10000);
             }}
         >
             {(props: FormikProps<any>) => (
-                <FormikForm withIcon isLoading={props.isSubmitting} analyticName="Signup Form" formProps={props} buttonName="Signup">
+                <FormikForm isLoading={props.isSubmitting} analyticName="Signup Form" formProps={props} buttonName="Signup">
                     <InputField label="Your Full Name" placeholder="enter your name" name="fullname" validate={Validator.isRequired} />
                     <InputField label="Your Email" placeholder="enter an email address" name="username" validate={Validator.isEmail} />
                     <PasswordField label="Your Password" placeholder="set a password" name="password" validate={Validator.isRequired} />
+                    <RadioField name="type" label="What Org Type" validate={Validator.isRequired} options={["Organization", "Individual"]} />
+                    <RadioButtonField name="buttine" label="Radio Button" validate={Validator.isRequired} options={["Customer", "Debtor"]} />
+                    <CheckField name="org-box" boxLabel="Check Item" validate={Validator.isRequired} />
+                    <SelectField placeholder="Search" name="select" label="Select Label" validate={Validator.isRequired} options={["Organization", "Individual"]} />
                 </FormikForm>
             )}
         </Formik>
