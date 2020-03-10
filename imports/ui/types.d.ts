@@ -9,3 +9,12 @@ declare module 'styled' {
 declare module 'money';
 declare module 'number-counter';
 declare module 'raf';
+
+interface IColors {
+	black: string;
+	default: string;
+	tomato: string;
+	text: string;
+	background: string;
+	[key: string]: any;
+}

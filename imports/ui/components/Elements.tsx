@@ -16,12 +16,12 @@ import styled from '@emotion/styled'
 // 	justify-content: ${(props) => (props.justifyContent ? props.justifyContent : 'flex-start')};
 // `;
 
-export const AppIcon = styled.div<{ src: string }>`
+export const AppIcon = styled.div<{ src: string, theme?: { custom: { green: string } } }>`
 	display: flex;
 	flex-direction: column;
 	font-size: 1rem;
-	width: 24px;
-	height: 24px;
+	width: 20px;
+	height: 20px;
 	background-size: cover;
 	cursor: pointer;
 	flex-grow: 0;
@@ -30,6 +30,12 @@ export const AppIcon = styled.div<{ src: string }>`
 	background-repeat: no-repeat;
 	background-position: center;
 	background-image: ${(props) => (props.src ? `url(${props.src})` : 'none')};
+	:hover {
+		color: ${props => props.theme.custom.green};
+		fill: ${props => props.theme.custom.green};
+		fill-opacity: 0.8;
+		opacity: 0.8
+	}
 `;
 
 
