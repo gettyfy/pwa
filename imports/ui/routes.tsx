@@ -20,6 +20,7 @@ import Recover from '/imports/ui/pages/workspace/recover'
 import Transaction from '/imports/ui/pages/workspace/transaction'
 import Customer from '/imports/ui/pages/workspace/customer'
 import Account from '/imports/ui/pages/workspace/account'
+import CreateCustomer from '/imports/ui/pages/workspace/create-customer'
 
 
 
@@ -42,6 +43,7 @@ export default function AppRouter(this: any) {
                     <Route path={path.auth.resetPasswordRoute} component={ResetPassword} />
                     <Route path={path.workspace.transaction} component={Transaction} />
                     <Route path={path.workspace.customer} component={Customer} />
+                    <Route path={path.workspace.createCustomer} component={CreateCustomer} />
                     <Route path={path.workspace.account} component={Account} />
                     <Route path={path.workspace.remind} component={Remind} />
                     <Route path={path.workspace.record} component={Record} />

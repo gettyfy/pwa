@@ -13,10 +13,10 @@ import * as Analytics from '/imports/ui/analytics'
 
 
 
-const FormikButton = styled(Button)`
+const FormikButton = styled(Button) <{ withIcon: boolean | undefined }>`
     border-radius: 0;
     min-height: 54px;
-    justify-content: space-between;
+    justify-content: ${(props) => props.withIcon ? 'space-between' : 'center'};
     align-content: center;
 `
 
@@ -114,6 +114,7 @@ interface IFormikForm {
     children: any,
     isLoading: boolean,
     buttonName: string,
+    withIcon?: boolean | undefined,
     formProps: {
         errors: object,
         values: object,
@@ -122,7 +123,7 @@ interface IFormikForm {
 }
 
 const FormikForm = (props: IFormikForm): JSX.Element => {
-    const { children, buttonName, isLoading, formProps: { errors, values }, analyticName, ...rest } = props;
+    const { children, withIcon, buttonName, isLoading, formProps: { errors, values }, analyticName, ...rest } = props;
     console.log("HERE ARE FORMIK FORM ON SUBMISSION", props.formProps);
 
     // Call Analytics on all Form Submissions
@@ -136,11 +137,10 @@ const FormikForm = (props: IFormikForm): JSX.Element => {
             {children}
             <FormikButton
                 mt={10}
+                withIcon={withIcon}
                 variantColor="blue"
-                rightIcon="arrow-forward"
-                isLoading={isLoading}
-                type="submit"
-                size='lg'
+                //@ts-ignore
+                rightIcon={withIcon && "arrow-forward"}
                 width="100%"
                 {...rest}
             >
@@ -342,7 +342,6 @@ interface CheckFieldProps {
 
 const CheckField = (props: CheckFieldProps): JSX.Element => {
     const { validate, boxLabel, isChecked, name, label } = props
-
     return (
         <Field name={name} validate={validate} {...props}>
             {({ field, form }: FieldProps) => (
