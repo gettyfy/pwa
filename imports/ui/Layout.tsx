@@ -5,6 +5,8 @@ import { TabbedNav } from '/imports/ui/components'
 
 const PageWrapper = styled.section`
     padding: 1rem 1.1rem;
+    padding-bottom: calc(${props => props.theme.custom.tabNavHeight} + 1.7rem);
+	
 `
 
 export default class Wrapper extends React.Component {
