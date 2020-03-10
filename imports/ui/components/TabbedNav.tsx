@@ -23,8 +23,8 @@ const TabLayout = styled.footer`
     background: white;
     bottom: 0;
     padding: .5rem;
+    padding-top: .7rem;
     left: 0;
-    margin-top: calc(${props => props.theme.custom.tabNavHeight} + 1.7rem);
     margin-top: calc(54px + 2rem);
     border-top: 1px #DDD solid;
     display: block;
