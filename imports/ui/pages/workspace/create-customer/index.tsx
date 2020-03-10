@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 
 import { Switch, Route } from 'react-router-dom';
 
-import AccountSetup from './AccountSetup';
-import Verification from './Verification';
-import CompanySetup from './CompanySetup';
+import Success from './Success';
+import Create from './Create';
 import * as Analytics from '/imports/ui/analytics'
+// import CreateCustomer from './index';
 
-export default class Onboarding extends Component {
+export default class CreateCustomer extends Component {
 	constructor(props: any) {
 		super(props);
 		this.state = {
@@ -32,15 +32,15 @@ export default class Onboarding extends Component {
 		console.log(this.state);
 		await Analytics.track('Submit Food Menu', this.state);
 		alert('Thank you')
-		window.location.replace('/kitchen')
+		window.location.replace('/customer')
 	};
 
 	render() {
 		return (
 			<Switch>
-				<Route path="/onboarding" exact><Verification data={this.state} updateState={this.updateState} /></Route>
-				<Route path="/onboarding/account-setup" exact><AccountSetup data={this.state} updateState={this.updateState} /></Route>
-				<Route path="/onboarding/company-setup" exact><CompanySetup data={this.state} updateState={this.updateState} onSubmit={this.onSubmit} /></Route>
+				<Route path="/create-customer" exact><Create data={this.state} updateState={this.updateState} onSubmit={this.onSubmit} /></Route>
+				<Route path="/create-customer/success" exact><Success data={this.state} updateState={this.updateState} /></Route>
+				
 			</Switch>
 		);
 	}
