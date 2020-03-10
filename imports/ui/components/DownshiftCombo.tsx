@@ -46,7 +46,8 @@ const items = [
 ];
 
 
-
+// https://dev.to/aromanarguello/how-to-build-an-autocomplete-dropdown-in-react-using-downshift-1c3o
+// https://www.merrickchristensen.com/articles/headless-user-interface-components/
 function DropdownCombobox() {
     const [inputItems, setInputItems] = useState(items);
     const {
