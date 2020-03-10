@@ -23,6 +23,7 @@ interface IPath {
 		remind: string;
 		recover: string;
 		record: string;
+		createCustomer:string;
 	};
 }
 
@@ -41,7 +42,8 @@ const Path: IPath = {
 		account: '/account',
 		remind: '/remind',
 		recover: '/recover',
-		record: '/record'
+		record: '/record',
+		createCustomer: '/create-customer'
 	}
 };
 
