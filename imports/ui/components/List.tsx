@@ -22,14 +22,14 @@ interface ITransactionList {
     boxPadding: any,
     customerProfile: any,
     cardLink: string,
-    iconName: string,
+    iconName: string | any,
     iconSize: any
 }
 
 
 
 
-const TransactionList = (props: ITransactionList) => {
+const TransactionList = (props: ITransactionList): JSX.Element => {
     const { analyticName, boxPadding, customerProfile, customerName, customerStatus, amount, paymentStatus, overdueAmount, overdueStatus, iconName, iconSize, cardLink } = props
 
     const handleClick = (analyticName: string): any => {
@@ -42,8 +42,6 @@ const TransactionList = (props: ITransactionList) => {
 
     return (
         <Flex>
-            {/* <Box d="flex"> */}
-            {/* <Link to={cardLink}> */}
             <Box p={boxPadding}>
                 <Stack isInline>
                     <Avatar name={customerProfile} src="/" />
