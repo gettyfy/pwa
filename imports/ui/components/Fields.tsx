@@ -6,9 +6,9 @@
 
 import React from 'react';
 import PropTypes, { object } from 'prop-types'
-import styled from '@emotion/styled'
-import { Formik, useField, Form, Field, FieldProps, FieldConfig } from 'formik'
-import { FormControl, Checkbox, FormLabel, RadioGroup, RadioButtonGroup, Icon, IconButton, FormErrorMessage, Input, Button, InputGroup, Radio, InputRightElement } from '@chakra-ui/core'
+import styled, { StyledOptions } from '@emotion/styled'
+import { useField, Form, Field, FieldProps, FieldConfig } from 'formik'
+import { FormControl, Checkbox, FormLabel, Select, RadioGroup, RadioButtonGroup, Icon, IconButton, FormErrorMessage, Input, Button, InputGroup, Radio, InputRightElement, CustomTheme, DefaultTheme } from '@chakra-ui/core'
 import * as Analytics from '/imports/ui/analytics'
 
 
@@ -24,17 +24,32 @@ const FormikInput = styled(Input)`
     border-radius: 0px;
     border-width: 1.3px;
     border-right: none;
+    font-size: ${(props: any) => props.theme.custom.InputFontSize};
     border-top: none;
     border-left: none;
-    min-height: 64px;
+    min-height: ${(props: any) => props.theme.custom.inputMinHeight};
     line-height: 1px;
 
     ::placeholder,
     ::-webkit-input-placeholder {
-        font-size: 16px;
+        font-size: ${(props: any) => props.theme.custom.InputFontSize};
         padding-bottom: 0;
         line-height: 1rem;
         vertical-align: bottom;
+    }
+`
+const FormikSelect = styled(Select)`
+    border-radius: 0px;
+    border-width: 1.3px;
+    border-right: none;
+    border-bottom: 1.3px solid;
+    border-top: none;
+    border-left: none;
+    font-size: ${(props: any) => props.theme.custom.InputFontSize};
+    min-height: ${(props: any) => props.theme.custom.inputMinHeight};
+    ::placeholder,
+    ::-webkit-input-placeholder {
+        font-size: ${(props: any) => props.theme.custom.InputFontSize};
     }
 `
 const FormikLabel = styled(FormLabel)`
@@ -288,8 +303,7 @@ const RadioButtonField = (props: RadioFieldProps): JSX.Element => {
     const { validate, name, defaultValue, options, label, ...rest } = props
     //@ts-ignore
     const [field, meta, helpers] = useField(props);
-
-    console.log(field, meta, helpers);
+    // console.log(field, meta, helpers);
 
     // directly call meta in place of meta.touched to show all errors ::: FIX ISSUE with component not displaying error onDirty
     return (
@@ -367,14 +381,56 @@ CheckField.propTypes = {
 };
 
 // ++ ================================= END SECTION =================================================================++
+/**
+ * Formik Field for Select options
+ */
 
+interface SelectFieldProps {
+    validate: Function,
+    name: string
+    label?: string,
+    placeholder: string
+    defaultValue?: string
+    options: Array<string>,
+}
+
+const SelectField = (props: SelectFieldProps): JSX.Element => {
+    const { validate, placeholder, name, defaultValue, options, label } = props
+
+    return (
+        <Field name={name} validate={validate} {...props}>
+            {({ field, form }: FieldProps) => (
+                //@ts-ignore
+                <FormControl isInvalid={form.errors[name] && form.touched[name]} mt="5" position="relative">
+                    <FormLabel htmlFor={[name, 'select'].join('-')} color="gray.600">{label}</FormLabel>
+                    <FormikSelect variant="filled" placeholder={placeholder} name={name} id={[name, 'select'].join('-')} defaultValue={defaultValue} {...field} size="lg">
+                        {options && options.map((val, idx) => {
+                            return (
+                                <option key={`${val}-${idx}`} value={val.toLowerCase()}>{val}</option>
+                            )
+                        })}
+                    </FormikSelect>
+                    <FormErrorMessage>{form.errors[name]}</FormErrorMessage>
+                </FormControl>
+            )}
+        </Field>
+    );
+}
+
+SelectField.propTypes = {
+    name: PropTypes.string.isRequired,
+    label: PropTypes.string.isRequired,
+    validate: PropTypes.func,
+    defaultValue: PropTypes.string,
+    options: PropTypes.array.isRequired
+};
 
 
 
 
 
 // ====== Export Field Components here ===========
-export { InputField, PasswordField, CheckField, RadioField, RadioButtonField, FormikForm }
+export { InputField, PasswordField, CheckField, RadioField, RadioButtonField, SelectField, FormikForm }
 
 
 

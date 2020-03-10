@@ -19,7 +19,9 @@ const fontSizes = {
 	'6xl': '4rem'
 };
 const custom = {
-	buttonHeight: '48px'
+	buttonHeight: '48px',
+	inputMinHeight: '60px',
+	inputFontSize: '16px'
 };
 const colors = {
 	...chakraTheme.colors,
