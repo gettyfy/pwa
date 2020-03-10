@@ -512,8 +512,8 @@ const AutoCompleteField = (props: AutoCompleteProps): JSX.Element => {
 AutoCompleteField.propTypes = {
     name: PropTypes.string.isRequired,
     label: PropTypes.string.isRequired,
+    placeholder: PropTypes.string,
     validate: PropTypes.func,
-    defaultValue: PropTypes.string,
     options: PropTypes.array.isRequired
 };
 
