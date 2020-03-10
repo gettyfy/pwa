@@ -47,7 +47,7 @@ export default function AppRouter(this: any) {
                     <Route path={path.workspace.account} component={Account} />
                     <Route path={path.workspace.remind} component={Remind} />
                     <Route path={path.workspace.record} component={Record} />
-                    <Route path={path.workspace.transaction} component={Recover} />
+                    <Route path={path.workspace.recover} component={Recover} />
                     <Route path={path.wizard} component={Wizard} />
                     <Route path={path.onboarding} component={Onboarding} />
                     <Route exact={true} path={path.root}><App /></Route>
