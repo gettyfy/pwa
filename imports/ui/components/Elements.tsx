@@ -16,32 +16,31 @@ import styled from '@emotion/styled'
 // 	justify-content: ${(props) => (props.justifyContent ? props.justifyContent : 'flex-start')};
 // `;
 
-// export const ApplicationIcon = styled.div`
-// 	display: flex;
-// 	flex-direction: column;
-// 	font-size: ${(props) => (props.size ? props.size : '1rem')};
-// 	width: ${(props) => (props.width ? props.width : '50px')};
-// 	height: ${(props) => (props.height ? props.height : '50px')};
-// 	background-size: cover;
-// 	flex-grow: 0;
-// 	flex-shrink: 0;
-// 	margin: ${(props) => (props.margin ? props.margin : '0px 0px')};
-// 	border-radius: ${(props) => (props.borderRadius ? props.borderRadius : '0px')};
-// 	background-repeat: no-repeat;
-// 	background-color: ${(props) => (props.backgroundColor ? props.backgroundColor : 'transparent')};
-// 	background-position: center;
-// 	background-image: ${(props) => (props.src ? `url(${props.src})` : 'none')};
-// `;
+export const AppIcon = styled.div<{ src: string }>`
+	display: flex;
+	flex-direction: column;
+	font-size: 1rem;
+	width: 24px;
+	height: 24px;
+	background-size: cover;
+	cursor: pointer;
+	flex-grow: 0;
+	flex-shrink: 0;
+	margin: 0 0%;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-image: ${(props) => (props.src ? `url(${props.src})` : 'none')};
+`;
 
 
 interface IIconBox extends JSX.Element {
-    width: string,
-    height: string
-    borderRadius: string,
-    margin: string,
-    backgroundColor: string,
-    backgroundSize: string,
-    src: string
+	width: string,
+	height: string
+	borderRadius: string,
+	margin: string,
+	backgroundColor: string,
+	backgroundSize: string,
+	src: string
 }
 
 export const IconBox = styled.div<IIconBox>`

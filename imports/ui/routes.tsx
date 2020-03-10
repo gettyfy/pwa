@@ -13,6 +13,7 @@ import App from '/imports/ui/App'
 import { Login, Signup, ResetPassword } from '/imports/ui/pages/auth'
 import Wizard from '/imports/ui/pages/wizard'
 import Onboarding from '/imports/ui/pages/onboarding'
+import Preview from '/imports/ui/pages/preview'
 // =============== Workspace Components ============
 import Remind from '/imports/ui/pages/workspace/remind'
 import Record from '/imports/ui/pages/workspace/record'
@@ -50,6 +51,7 @@ export default function AppRouter(this: any) {
                     <Route path={path.workspace.transaction} component={Recover} />
                     <Route path={path.wizard} component={Wizard} />
                     <Route path={path.onboarding} component={Onboarding} />
+                    <Route path={path.preview} component={Preview} />
                     <Route exact={true} path={path.root}><App /></Route>
                     <Route path="/auth" component={Login} />
                 </Switch>

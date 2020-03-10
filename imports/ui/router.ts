@@ -11,6 +11,7 @@ interface IPath {
 	root: TPath;
 	wizard: TPath;
 	onboarding: TPath;
+	preview: TPath;
 	auth: {
 		loginRoute: string;
 		signupRoute: string;
@@ -23,7 +24,7 @@ interface IPath {
 		remind: string;
 		recover: string;
 		record: string;
-		createCustomer:string;
+		createCustomer: string;
 	};
 }
 
@@ -31,6 +32,7 @@ const Path: IPath = {
 	root: '/',
 	wizard: '/wizard',
 	onboarding: '/onboarding',
+	preview: '/preview',
 	auth: {
 		loginRoute: '/auth/login',
 		signupRoute: '/auth/signup',
