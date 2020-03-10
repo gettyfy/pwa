@@ -1,5 +1,5 @@
 import React from 'react';
-import { Icon, Box } from "@chakra-ui/core";
+import { Icon, Box, Heading, Stack  } from "@chakra-ui/core";
 import styled from '@emotion/styled'
 
 
@@ -16,6 +16,13 @@ export default class record extends React.Component {
         <Box>
           <Icon name="arrow-back" size="24px" />
         </Box>
+
+        <Stack spacing={3} mt="5">
+        <Heading as="h3" size="lg">Record </Heading>
+        <h6>Records of customers and transactions</h6>
+        </Stack>
+
+      
       </StyledRecord>
 
 

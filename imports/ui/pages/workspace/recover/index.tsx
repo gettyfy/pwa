@@ -1,17 +1,17 @@
 import React from 'react'
-import { Box, Stack, Heading, Icon, Divider, Flex, Text, Input} from '@chakra-ui/core'
+import { Box, Stack, Heading, Icon, Divider, Flex, Text, Input } from '@chakra-ui/core'
 import styled from '@emotion/styled'
-import { CustomerList, TransactionList} from '/imports/ui/components'
+import { CustomerList, TransactionList } from '/imports/ui/components'
 
 const StyledRecover = styled.main`
   display: flex;
   flex-direction: column;
 `
 
-export default class recover extends React.Component{
-  render(){
-    return(
-        <StyledRecover>
+export default class recover extends React.Component {
+  render() {
+    return (
+      <StyledRecover>
         <Box>
           <Icon name="arrow-back" size="24px" />
         </Box>
@@ -22,107 +22,107 @@ export default class recover extends React.Component{
           <Box mt="6">
             <h6>Escalate a bad debt to a professional debt collector</h6>
           </Box>
-          </Stack>
+        </Stack>
 
-          <Flex  mt="40px" flexDirection="row">
+        <Flex mt="40px" flexDirection="row">
           <Box ml="100px">
             {/* <Icon name="search" size="13px" /> */}
             <Input placeholder="Find a transaction" />
-            </Box>
+          </Box>
 
-          </Flex>
+        </Flex>
 
         <Flex FlexDirection="row" justify="space-between" mt="6" ml="8" mr="8">
-            <Text fontSize="xs" color="tomato">Payments overdue</Text>
-           <Icon name="drag-handle" size="13px" ml="200px"/> 
-          
+          <Text fontSize="xs" color="tomato">Payments overdue</Text>
+          <Icon name="drag-handle" size="13px" ml="200px" />
+
 
           <Box justify="space-between">
-          <Divider borderColor="grey.200" />
-          </Box>  
+            <Divider borderColor="grey.200" />
+          </Box>
 
 
         </Flex>
 
         <Box mt="10">
 
-        <TransactionList
+          <TransactionList
 
-          boxPadding="2"
-          customerProfile="Sasuke Uchiha"
-          customerStatus="10 days to overdue"
-          customerName="Evans Boateng"
-          amount="GHc233"
-          paymentStatus="PAID"
-          overdueAmount="GHC346"
-          overdueStatus="OVERDUE"
-          cardLink="/signup"
-          iconName="chevron-right"
-          iconSize="24px"
-        />
-        
-        <TransactionList
-           boxPadding="2"
-          customerProfile="Sasuke Uchiha"
-          customerStatus="10 days to overdue"
-          customerName="Evans Boateng"
-          amount="GHc233"
-          paymentStatus="PAID"
-          overdueAmount="GHC346"
-          overdueStatus="OVERDUE"
-          cardLink="/signup"
-          iconName="chevron-right"
-          iconSize="24px"
-        />
-        
+            boxPadding="2"
+            customerProfile="Sasuke Uchiha"
+            customerStatus="10 days to overdue"
+            customerName="Evans Boateng"
+            amount="GHc233"
+            paymentStatus="PAID"
+            overdueAmount="GHC346"
+            overdueStatus="OVERDUE"
+            cardLink="/signup"
+            iconName="chevron-right"
+            iconSize="24px"
+          />
 
-        <TransactionList
-         boxPadding="2"
-          customerProfile="Sasuke Uchiha"
-          customerStatus="10 days to overdue"
-          customerName="Evans Boateng"
-          amount="GHc233"
-          paymentStatus="PAID"
-          overdueAmount="GHC346"
-          overdueStatus="OVERDUE"
-          cardLink="/signup"
-          iconName="chevron-right"
-          iconSize="24px"
-        />
-        
+          <TransactionList
+            boxPadding="2"
+            customerProfile="Sasuke Uchiha"
+            customerStatus="10 days to overdue"
+            customerName="Evans Boateng"
+            amount="GHc233"
+            paymentStatus="PAID"
+            overdueAmount="GHC346"
+            overdueStatus="OVERDUE"
+            cardLink="/signup"
+            iconName="chevron-right"
+            iconSize="24px"
+          />
 
-        <TransactionList
-        boxPadding="2"
-          customerProfile="Sasuke Uchiha"
-          customerStatus="10 days to overdue"
-          customerName="Evans Boateng"
-          amount="GHc233"
-          paymentStatus="PAID"
-          overdueAmount="GHC346"
-          overdueStatus="OVERDUE"
-          cardLink="/signup"
-          iconName="chevron-right"
-          iconSize="24px"
-        />
-        
 
-        <TransactionList
-          boxPadding="2"
-          customerProfile="Sasuke Uchiha"
-          customerStatus="10 days to overdue"
-          customerName="Evans Boateng"
-          amount="GHc233"
-          paymentStatus="PAID"
-          overdueAmount="GHC346"
-          overdueStatus="OVERDUE"
-          cardLink="/signup"
-          iconName="chevron-right"
-          iconSize="24px"
-        />
+          <TransactionList
+            boxPadding="2"
+            customerProfile="Sasuke Uchiha"
+            customerStatus="10 days to overdue"
+            customerName="Evans Boateng"
+            amount="GHc233"
+            paymentStatus="PAID"
+            overdueAmount="GHC346"
+            overdueStatus="OVERDUE"
+            cardLink="/signup"
+            iconName="chevron-right"
+            iconSize="24px"
+          />
+
+
+          <TransactionList
+            boxPadding="2"
+            customerProfile="Sasuke Uchiha"
+            customerStatus="10 days to overdue"
+            customerName="Evans Boateng"
+            amount="GHc233"
+            paymentStatus="PAID"
+            overdueAmount="GHC346"
+            overdueStatus="OVERDUE"
+            cardLink="/signup"
+            iconName="chevron-right"
+            iconSize="24px"
+          />
+
+
+          <TransactionList
+            boxPadding="2"
+            customerProfile="Sasuke Uchiha"
+            customerStatus="10 days to overdue"
+            customerName="Evans Boateng"
+            amount="GHc233"
+            paymentStatus="PAID"
+            overdueAmount="GHC346"
+            overdueStatus="OVERDUE"
+            cardLink="/signup"
+            iconName="chevron-right"
+            iconSize="24px"
+          />
         </Box>
 
 
-        </StyledRecover>
+      </StyledRecover>
 
     )
   }

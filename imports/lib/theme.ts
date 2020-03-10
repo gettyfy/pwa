@@ -29,10 +29,10 @@ const colors = {
 	text: '#1D1D1D',
 	background: '#FCFDFF',
 	blue: {
-		100: '#0476D0'
+		900: '#0476D0'
 	},
 	green: {
-		100: '#028248'
+		900: '#028248'
 	}
 };
 const breakpoints = [ '40em', '52em', '64em' ];
