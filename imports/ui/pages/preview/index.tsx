@@ -44,6 +44,13 @@ const Signup: React.FC = () => {
             }
         })
     }
+    const autoCompleteOptions = [
+        { value: "apple" },
+        { value: "pear" },
+        { value: "orange" },
+        { value: "grape" },
+        { value: "banana" }
+    ]
 
 
     return (
@@ -65,7 +72,7 @@ const Signup: React.FC = () => {
                     <RadioButtonField name="buttine" label="Radio Button" validate={Validator.isRequired} options={["Customer", "Debtor"]} />
                     <CheckField name="org-box" boxLabel="Check Item" validate={Validator.isRequired} />
                     <SelectField placeholder="Search" name="select" label="Select Label" validate={Validator.isRequired} options={["Organization", "Individual"]} />
-                    <AutoCompleteField placeholder="Search" name="select" label="Select Label" validate={Validator.isRequired} options={["Organization", "Individual"]} />
+                    <AutoCompleteField placeholder="Search" name="downshift" label="Select Label" validate={Validator.isRequired} options={autoCompleteOptions} />
                 </FormikForm>
             )}
         </Formik>

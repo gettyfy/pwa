@@ -9,7 +9,7 @@ import PropTypes from 'prop-types'
 import styled from '@emotion/styled'
 import Downshift from "downshift";
 import { useField, Form, Field, FieldProps, FieldConfig } from 'formik'
-import { FormControl, Checkbox, FormLabel, Select, RadioGroup, RadioButtonGroup, Icon, IconButton, FormErrorMessage, Input, Button, InputGroup, Radio, InputRightElement, CustomTheme, DefaultTheme } from '@chakra-ui/core'
+import { FormControl, List, ListItem, Checkbox, FormLabel, Select, RadioGroup, RadioButtonGroup, Icon, IconButton, FormErrorMessage, Input, Button, InputGroup, Radio, InputRightElement, CustomTheme, DefaultTheme } from '@chakra-ui/core'
 import * as Analytics from '/imports/ui/analytics'
 
 
@@ -318,6 +318,7 @@ const RadioButtonField = (props: RadioFieldProps): JSX.Element => {
                 onChange={val => helpers.setTouched(true) && helpers.setValue(val)}
                 defaultValue={"org"}
                 isInline
+                {...rest}
             >
                 {options && options.map((val, idx) => {
                     return (
@@ -442,91 +443,69 @@ interface AutoCompleteProps {
     name: string
     label?: string,
     placeholder: string
-    defaultValue?: string
-    options: Array<string>,
+    options: Array<{ value: string }>,
 }
 
 const AutoCompleteField = (props: AutoCompleteProps): JSX.Element => {
-    const { validate, placeholder, name, defaultValue, options, label } = props
-    const items = [
-        { value: "apple" },
-        { value: "pear" },
-        { value: "orange" },
-        { value: "grape" },
-        { value: "banana" }
-    ];
+    const { validate, placeholder, name, options, label, ...rest } = props
+    const [field, meta, helpers] = useField<any>(props);
+    console.log(field, meta, helpers);
+
+    // const items = ;
 
     return (
-        <Field name={name} validate={validate} {...props}>
-            {({ field, form }: FieldProps) => (
-                //@ts-ignore
-                <FormControl isInvalid={form.errors[name] && form.touched[name]} mt="5" position="relative">
-                    <FormLabel htmlFor={[name, 'select'].join('-')} color="gray.600">{label}</FormLabel>
-                    {/* <FormikSelect variant="filled" placeholder={placeholder} name={name} id={[name, 'select'].join('-')} defaultValue={defaultValue} {...field} size="lg">
-                        {options && options.map((val, idx) => {
-                            return (
-                                <option key={`${val}-${idx}`} value={val.toLowerCase()}>{val}</option>
-                            )
-                        })}
-                    </FormikSelect> */}
-
-
-
-                    <Downshift
-                        onChange={selection =>
-                            alert(selection ? `You selected ${selection.value}` : "Selection Cleared")
-                        }
-                        itemToString={item => (item ? item.value : "")}
-                    >
-                        {({
-                            getInputProps,
-                            getItemProps,
-                            getLabelProps,
-                            getMenuProps,
-                            isOpen,
-                            inputValue,
-                            highlightedIndex,
-                            selectedItem,
-                            getRootProps
-                        }) => (
-                                <div>
-                                    <label {...getLabelProps()}>Enter a fruit</label>
-                                    <div
-                                        style={{ display: "inline-block" }}
-                                        {...getRootProps({}, { suppressRefError: true })}
-                                    >
-                                        <input {...getInputProps()} />
-                                    </div>
-                                    <ul {...getMenuProps()}>
-                                        {isOpen
-                                            ? items
-                                                .filter(item => !inputValue || item.value.includes(inputValue))
-                                                .map((item, index) => (
-                                                    <li
-                                                        {...getItemProps({
-                                                            key: item.value,
-                                                            index,
-                                                            item,
-                                                            style: {
-                                                                backgroundColor:
-                                                                    highlightedIndex === index ? "lightgray" : "white",
-                                                                fontWeight: selectedItem === item ? "bold" : "normal"
-                                                            }
-                                                        })}
-                                                    >
-                                                        {item.value}
-                                                    </li>
-                                                ))
-                                            : null}
-                                    </ul>
-                                </div>
-                            )}
-                    </Downshift>
-
-                    <FormErrorMessage>{form.errors[name]}</FormErrorMessage>
-                </FormControl>
-            )}
-        </Field>
+        <FormControl isInvalid={meta['error'] && meta.touched} mt="5" position="relative">
+            <Downshift
+                onChange={selection =>
+                    //pass in the full object of the field into form hooks
+                    helpers.setTouched(true) && helpers.setValue(selection)
+                }
+                itemToString={item => (item ? item.value : "")}
+            >
+                {({
+                    getInputProps,
+                    getItemProps,
+                    getLabelProps,
+                    getToggleButtonProps,
+                    getMenuProps,
+                    isOpen,
+                    inputValue,
+                    highlightedIndex,
+                    selectedItem,
+                    getRootProps
+                }) => (
+                        <div>
+                            <FormLabel {...getToggleButtonProps()} {...getLabelProps()} color="gray.600">{label}</FormLabel>
+                            <div {...getRootProps({}, { suppressRefError: true })}>
+                                <FormikInput {...field} placeholder={placeholder}  {...getInputProps()} {...rest} validate={validate} />
+                            </div>
+                            <List {...getMenuProps()}>
+                                {isOpen
+                                    ? options
+                                        .filter(item => !inputValue || item.value.includes(inputValue))
+                                        .map((item, index) => (
+                                            <ListItem
+                                                {...getItemProps({
+                                                    key: item.value,
+                                                    index,
+                                                    item,
+                                                    style: {
+                                                        backgroundColor:
+                                                            highlightedIndex === index ? "lightgray" : "white",
+                                                        fontWeight: selectedItem === item ? "bold" : "normal"
+                                                    }
+                                                })}
+                                            >
+                                                {item.value}
+                                            </ListItem>
+                                        ))
+                                    : null}
+                            </List>
+                        </div>
+                    )}
+            </Downshift>
+            <FormErrorMessage>{meta.error && meta.error}</FormErrorMessage>
+        </FormControl>
     );
 }
 
