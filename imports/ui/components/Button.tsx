@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled'
-import { Box as ChakraBox } from '@chakra-ui/core';
+import { Box as ChakraBox, Button } from '@chakra-ui/core';
 import * as Analytics from '/imports/ui/analytics';
 
 
@@ -11,6 +11,42 @@ const Box = styled(ChakraBox)`
     width: 100%;
     height: ${(props) => props.theme.custom.buttonHeight};
 `
+
+const StyledButton = styled(Button) <{ withIcon: boolean | undefined }>`
+    border-radius: 0;
+    min-height: 54px;
+    justify-content: ${(props) => props.withIcon ? 'space-between' : 'center'};
+    align-content: center;
+`
+
+
+interface IFilledButton {
+    analyticName: string,
+    children: any,
+    isLoading: boolean,
+    useSubmit?: boolean | "submit" | "button" | "reset" | undefined,
+    buttonName: string,
+    withIcon?: boolean | undefined
+}
+
+export const FilledButton: React.FC<IFilledButton> = (props) => {
+    const { withIcon, isLoading, useSubmit, buttonName, ...rest } = props
+    return (
+        <StyledButton
+            mt={10}
+            withIcon={withIcon}
+            variantColor="blue"
+            type={useSubmit && 'submit'}
+            isLoading={isLoading}
+            //@ts-ignore
+            rightIcon={withIcon && "arrow-forward"}
+            width="100%"
+            {...rest}
+        >
+            {buttonName}
+        </StyledButton>
+    )
+}
 
 
 interface IButton {
@@ -26,14 +62,12 @@ interface IButton {
 }
 
 
-const FormButton: React.FC<IButton> = (props) => {
+export const FormButton: React.FC<IButton> = (props) => {
     const { analyticName, handleAction, borderColor, buttonColor, buttonName, color, border } = props
 
     const handleClick = (analyticName: string): any => {
         // we will write the handle analytics here
         console.log("console me", analyticName, handleAction)
-
-
         Analytics.track(analyticName, {
             component: `Click LinkTo${buttonName}`
         })
@@ -45,7 +79,3 @@ const FormButton: React.FC<IButton> = (props) => {
         </Box>
     )
 }
-
-
-// export the components as modules to be resuable by other component
-export { FormButton }

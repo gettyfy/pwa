@@ -13,7 +13,8 @@ const ActionCardRow = styled.section`
   text-align: left;
   min-height: 13rem;
   justify-content: space-between;
-  margin-top: 2rem;
+  margin-top: 1rem;
+ 
 
 `
 
