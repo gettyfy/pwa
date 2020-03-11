@@ -37,10 +37,11 @@ const LogoHeader: React.FC = (): JSX.Element => {
 interface IPageHeader {
     useHeader?: boolean,
     title?: string,
-    subTitle?: string
+    subTitle?: string,
+    useTitle?: boolean
 }
 export const PageHeader: React.FC<IPageHeader> = (props): JSX.Element => {
-    const { useHeader, title, subTitle } = props
+    const { useHeader, title, useTitle, subTitle } = props
     const history = useHistory()
     return (
         <React.Fragment>
@@ -56,6 +57,13 @@ export const PageHeader: React.FC<IPageHeader> = (props): JSX.Element => {
                         </Stack>
                     </Box>
             }
+
+            {useTitle && (
+                <Box my="4" mb="10">
+                    <Heading color="blue.700" as="h1" size="lg">{title}</Heading>
+                    <Heading as="h6" fontWeight="normal" size="sm">{subTitle}</Heading>
+                </Box>
+            )}
         </React.Fragment>
     )
 }
