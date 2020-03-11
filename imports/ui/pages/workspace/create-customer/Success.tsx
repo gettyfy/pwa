@@ -23,8 +23,8 @@ const Success: React.FunctionComponent = (props: any) => {
 
             <Box mb="20" marginLeft="10%" alignItems="center">
             <Icon mb="10" name="check-circle" marginLeft="25%" size="6rem" color="green.900" />
-            <strong><h1>Your transaction was completed successfully.</h1>
-                Thanks for using Fynance</strong>
+            <strong><h1>A customer has been created successfully.</h1>
+                </strong>
             </Box>
 
 
