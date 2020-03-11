@@ -20,7 +20,7 @@ const fonts: IThemeProps = {
 	body: `'Barlow', "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif`
 };
 const fontSizes: IThemeProps = {
-	xs: '0.75rem',
+	xs: '0.65rem',
 	sm: '0.875rem',
 	md: '1rem',
 	lg: '1.125rem',
@@ -38,7 +38,7 @@ const custom: IThemeProps = {
 	blue: '#0476D0',
 	green: '#028248',
 	tabNavHeight: '54px',
-	defaultBox: '1.1rem',
+	defaultBox: '1rem',
 	defaultWrapper: '1rem 1.1rem'
 };
 const colors: IColors = {

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled'
-import { Flex, Stack, Box, Avatar, AvatarBadge, Stat, StatNumber, StatHelpText, Text, StatGroup, Heading, Icon, Divider, } from '@chakra-ui/core'
+import { Flex, Stack, Box, Avatar, Stat, StatNumber, StatHelpText, Text, StatGroup, Heading, Icon } from '@chakra-ui/core'
 // import * as Analytics from '/imports/ui/analytics';
 import { ActionCard, ActionCardRow, TransactionList } from '/imports/ui/components/'
 
@@ -139,34 +139,23 @@ export default class Hello extends React.Component {
 
 
         {/* Added a divider */}
-        <Box justifyContent="space-between" mt="1" mb="0">
-          <Divider borderColor="grey.200" />
+        <Box my="2" mt="3">
+          <Flex flexDirection="row" color="red.500" >
+            <Stack isInline spacing="2">
+              <Icon name="drag-handle" color="red.500" mt="1" />
+              <Heading as="h3" size="sm" lineHeight="24px" pt="1"> ACTION REQUIRED </Heading>
+            </Stack >
+          </Flex>
         </Box>
-
-        <Flex flexDirection="row">
-          <Box pr="2">
-            <Icon name="phone" /></Box>
-          <Box pr="1">
-            <Text fontSize="15px" color="tomato" mr="2">
-              ACTION REQUIRED </Text>
-          </Box>
-        </Flex>
-
-        <Box justifyContent="space-between">
-          <Divider borderColor="grey.200" />
-        </Box>
-
 
 
         {/* //Individual customer list */}
         <BreakLayout marginT=".5rem">
-          <Box background="white" p="4" pb="6" borderBottom="1px" borderTop="1px" borderColor="gray.100">
+          <Box background="white" p="4" pb="6" pt="0" borderTop="1px" borderColor="gray.100">
             <TransactionList
-              boxPadding="2"
-              customerProfile="Sasuke Uchiha"
               customerStatus="10 days to overdue"
-              customerName="Evans Boateng"
-              amount="GHc233"
+              customerName="Bukola Saraki"
+              amount="GHC233"
               paymentStatus="PAID"
               overdueAmount="GHC346"
               overdueStatus="OVERDUE"
@@ -176,11 +165,9 @@ export default class Hello extends React.Component {
               analyticName="Click Transaction item"
             />
             <TransactionList
-              boxPadding="2"
-              customerProfile="Sasuke Uchiha"
               customerStatus="10 days to overdue"
-              customerName="Evans Boateng"
-              amount="GHc233"
+              customerName="Cory Henry"
+              amount="GHC233"
               paymentStatus="PAID"
               overdueAmount="GHC346"
               overdueStatus="OVERDUE"
