@@ -68,10 +68,12 @@ export const IconBox = styled.div<IIconBox>`
 
 interface IBreakLayout {
 	marginT?: string,
+	bg?: string,
 	theme?: { custom: { defaultBox: string } }
 }
 export const BreakLayout = styled.section<IBreakLayout>`
 	padding: 0;
+	background: ${props => props.bg ? props.bg : 'inherit'};
 	margin-top: ${props => props.marginT ? props.marginT : '1.5rem'};
 	margin-left: calc(-${ props => props.theme.custom.defaultBox});
 	margin-right: calc(-${ props => props.theme.custom.defaultBox});

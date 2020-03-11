@@ -12,7 +12,7 @@ const Navbar = styled.header`
     margin: 0;
     z-index: 95299999999239;
     background: white;
-    padding: .9rem 1rem .75rem 1rem;
+    padding: 1.1rem 1rem .75rem 1.2rem;
 `
 
 
@@ -35,7 +35,7 @@ const LogoHeader: React.FC = (): JSX.Element => {
 
 
 interface IPageHeader {
-    useHeader: boolean,
+    useHeader?: boolean,
     title?: string,
     subTitle?: string
 }
@@ -46,8 +46,8 @@ export const PageHeader: React.FC<IPageHeader> = (props): JSX.Element => {
         <React.Fragment>
             {
                 useHeader ? <LogoHeader /> :
-                    <Box my="4">
-                        <Box my="2" onClick={() => history.goBack()}>
+                    <Box my="4" background="inherit">
+                        <Box my="2" width="100px" onClick={() => history.goBack()}>
                             <Icon name="arrow-back" size="28px" />
                         </Box>
                         <Stack spacing={3}>

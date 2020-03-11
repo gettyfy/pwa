@@ -1,9 +1,9 @@
 import React from 'react';
-import { Icon, Box, Heading, Tabs, TabList, Tab, TabPanel,TabPanels, Avatar, Text, Flex } from "@chakra-ui/core";
+import { Icon, Box, Heading, Tabs, TabList, Tab, TabPanel, TabPanels, Avatar, Text, Flex } from "@chakra-ui/core";
 import styled from '@emotion/styled'
 import { FormButton } from '/imports/ui/components'
 import { CustomerName, Customer } from '/imports/ui/components/CustomerName';
-import { CustomerList, TransactionList } from '/imports/ui/components'
+import { PageHeader, BreakLayout, TransactionList } from '/imports/ui/components'
 
 
 
@@ -17,21 +17,14 @@ export default class Transaction extends React.Component {
   render() {
     return (
       <StyledTransaction>
-        <Box>
-          <Icon name="arrow-back" size="24px" />
-        </Box>
-        <Heading as="h1" size="2xl">
-              Transactions
-         </Heading>
-         
-         
-         
-            {/* Button */}
-        <Box mt="10">
+        <PageHeader title="Transactions" />
+
+        {/* Button */}
+        <Box my="2">
           <FormButton buttonName="CREATE NEW TRANSACTION" analyticName="Verify" buttonColor="#0B69FF" color="#FFF" handleAction={() => handleSubmit()} />
         </Box>
 
-          <Box mt="10">
+        <Box mt="10">
           <Tabs variant="enclosed">
             <TabList>
               <Tab>Paid</Tab>
@@ -55,11 +48,12 @@ export default class Transaction extends React.Component {
                   Date="30 May 2020"
                 />
               </TabPanel>
-              <TabPanel>
-                <TransactionList
 
-                  boxPadding="2"
-                  customerProfile="Sasuke Uchiha"
+              {/* Second Tab Panel` */}
+              <TabPanel>
+
+                <TransactionList
+                  analyticName="View a Transaction"
                   customerStatus="10 days to overdue"
                   customerName="Evans Boateng"
                   amount="GHc233"
@@ -72,9 +66,7 @@ export default class Transaction extends React.Component {
                 />
 
                 <TransactionList
-
-                  boxPadding="2"
-                  customerProfile="Sasuke Uchiha"
+                  analyticName="View a Transaction"
                   customerStatus="10 days to overdue"
                   customerName="Evans Boateng"
                   amount="GHc233"
@@ -91,21 +83,7 @@ export default class Transaction extends React.Component {
             </TabPanels>
           </Tabs>
         </Box>
-      
-       
 
-        {/* <Flex flexDirection="row">
-          <Avatar name="Christian Nwamba" src="https://bit.ly/code-beast" />
-          <Text fontSize="md" mt="3" ml="2">John Azuma</Text>
-
-        </Flex> */}
-
-
-
-
-
-
-            
       </StyledTransaction>
 
 

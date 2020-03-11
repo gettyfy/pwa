@@ -1,6 +1,7 @@
 import React from 'react';
 import { Icon, Box } from "@chakra-ui/core";
 import styled from '@emotion/styled'
+import { PageHeader } from '/imports/ui/components'
 
 
 const StyledRecord = styled.main`
@@ -13,9 +14,8 @@ export default class record extends React.Component {
   render() {
     return (
       <StyledRecord>
-        <Box>
-          <Icon name="arrow-back" size="24px" />
-        </Box>
+        <PageHeader title="Your Customers" />
+
       </StyledRecord>
 
 

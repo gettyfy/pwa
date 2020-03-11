@@ -3,7 +3,7 @@ import {
   Icon, Box, Stack, Heading, Flex, Text, Select, NumberInput, NumberInputField, NumberInputStepper, NumberIncrementStepper, NumberDecrementStepper, Textarea
 } from "@chakra-ui/core";
 import styled from '@emotion/styled'
-import { FormButton } from '/imports/ui/components'
+import { FormButton.PageHeader } from '/imports/ui/components'
 
 const StyledRecord = styled.main`
   display: flex;
@@ -15,17 +15,10 @@ export default class record extends React.Component {
   render() {
     return (
       <StyledRecord>
-        <Box>
-          <Icon name="arrow-back" size="24px" />
+        <PageHeader title="Create a Reminder" />
+        <Box mt="6">
+          <h6>Select Channels</h6>
         </Box>
-        <Stack spacing={3}>
-          <Heading as="h1" size="2xl">
-            Create a Reminder
-         </Heading>
-          <Box mt="6">
-            <h6>Select Channels</h6>
-          </Box>
-        </Stack>
 
         {/* Channels */}
         <Flex flexDirection="row" mt="10px" justify="space-between" textAlign="center">
@@ -94,7 +87,7 @@ export default class record extends React.Component {
           <FormButton buttonName="Send" analyticName="Verify" buttonColor="#0B69FF" color="#FFF" handleAction={() => handleSubmit()} />
         </Box>
 
-      </StyledRecord>
+      </StyledRecord >
 
 
     )
