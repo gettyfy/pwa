@@ -4,7 +4,7 @@ import { Link, useHistory } from 'react-router-dom'
 import Headroom from 'react-headroom'
 import styled from '@emotion/styled'
 import path from '/imports/ui/router'
-import { AppIcon, LineDivider, BreakLayout } from '/imports/ui/components'
+import { LineDivider, BreakLayout } from '/imports/ui/components'
 
 const Navbar = styled.header`
     min-height: 48px;
@@ -34,22 +34,28 @@ const LogoHeader: React.FC = (): JSX.Element => {
 }
 
 
-
-export const PageHeader: React.FC = (): JSX.Element => {
+interface IPageHeader {
+    useHeader: boolean,
+    title?: string,
+    subTitle?: string
+}
+export const PageHeader: React.FC<IPageHeader> = (props): JSX.Element => {
+    const { useHeader, title, subTitle } = props
+    const history = useHistory()
     return (
         <React.Fragment>
-            <LogoHeader />
-            <Box>
-                <Icon name="arrow-back" size="24px" />
-            </Box>
-            <Stack spacing={3}>
-                <Heading as="h1" size="xl">
-                    Create a Reminder
-                </Heading>
-                <Box mt="6">
-                    <h6>Select Channels</h6>
-                </Box>
-            </Stack>
+            {
+                useHeader ? <LogoHeader /> :
+                    <Box my="4">
+                        <Box my="2" onClick={() => history.goBack()}>
+                            <Icon name="arrow-back" size="28px" />
+                        </Box>
+                        <Stack spacing={3}>
+                            <Heading color="blue.700" as="h2" size="xl">{title}</Heading>
+                            <Heading as="h6" size="sm">{subTitle}</Heading>
+                        </Stack>
+                    </Box>
+            }
         </React.Fragment>
     )
 }

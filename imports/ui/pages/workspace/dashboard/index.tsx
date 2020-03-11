@@ -3,7 +3,7 @@ import styled from '@emotion/styled'
 import path from '/imports/ui/router'
 import { Flex, Stack, Box, Avatar, Stat, StatNumber, StatHelpText, Text, StatGroup, Heading, Icon } from '@chakra-ui/core'
 // import * as Analytics from '/imports/ui/analytics';
-import { ActionCard, ActionCardRow, TransactionList } from '/imports/ui/components/'
+import { ActionCard, ActionCardRow, PageHeader, TransactionList } from '/imports/ui/components/'
 
 
 const Dashboard = styled.main`
@@ -36,6 +36,7 @@ export default class Hello extends React.Component {
     return (
       <Dashboard>
 
+        <PageHeader useHeader />
         <Box d="flex" my="3" mb="8" alignItems="center" justifyContent="space-between">
           <Stack>
             <p>Good Afternoon,</p>
