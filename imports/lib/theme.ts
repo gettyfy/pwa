@@ -39,7 +39,7 @@ const custom: IThemeProps = {
 	green: '#028248',
 	tabNavHeight: '54px',
 	defaultBox: '1rem',
-	defaultWrapper: '1rem 1.1rem'
+	defaultWrapper: '.5rem 1.1rem'
 };
 const colors: IColors = {
 	...chakraTheme.colors,

@@ -30,7 +30,6 @@ const Flex = styled(ChFlex)`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    /* border-bottom: 1px solid #dddddd; */
     transition: cubic-bezier(0.175, 0.885, 0.32, 1.275);
     :hover {
         cursor: pointer;
