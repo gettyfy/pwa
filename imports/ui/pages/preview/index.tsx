@@ -8,7 +8,7 @@ import * as Validator from '/imports/lib/validator'
 import { Accounts } from 'meteor/accounts-base';
 import { Meteor } from 'meteor/meteor'
 import { Formik, FormikProps } from 'formik'
-import { InputField, RadioField, SelectField, AutoCompleteField, CheckField, FormikForm, RadioButtonField, PasswordField } from '/imports/ui/components'
+import { InputField, TransactionList, RadioField, SelectField, AutoCompleteField, CheckField, FormikForm, RadioButtonField, PasswordField,InvoiceList } from '/imports/ui/components'
 
 
 const Signup: React.FC = () => {
@@ -73,6 +73,26 @@ const Signup: React.FC = () => {
                     <CheckField name="org-box" boxLabel="Check Item" validate={Validator.isRequired} />
                     <SelectField placeholder="Search" name="select" label="Select Label" validate={Validator.isRequired} options={["Organization", "Individual"]} />
                     <AutoCompleteField placeholder="Search" name="downshift" label="Select Label" validate={Validator.isRequired} options={autoCompleteOptions} />
+                    <TransactionList
+                        customerStatus="10 days to overdue"
+                        customerName="Bukola Saraki"
+                        amount="GHC233"
+                        paymentStatus="PAID"
+                        overdueAmount="GHC346"
+                        overdueStatus="OVERDUE"
+                        cardLink="/signup"
+                        iconName="chevron-right"
+                        iconSize="24px"
+                        analyticName="Click Transaction item"
+                    />
+                    <InvoiceList
+                        customerName="Joe Bimond"
+                        amount="GHC 200"
+                        date=" 12 Jan 2020"
+                        link="path.workspace.createTransaction"
+
+                    />
+
                 </FormikForm>
             )}
         </Formik>
