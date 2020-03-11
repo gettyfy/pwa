@@ -1,0 +1,42 @@
+{
+	"user": [
+		{
+			"email": "herrik066@gmail.com",
+			"userId": "herrik066@gmail.com",
+			"name": "Henry Nwobdo",
+			"phone": "+2347064696744",
+			"timestamp": {}
+		}
+	],
+	"items": [
+		{
+			"accept_value_on_delivery": null,
+			"amount_to_receive": null,
+			"description": null,
+			"id": null,
+			"item_type": { "code": null, "name": null },
+			"item_type_code": null,
+			"name": null,
+			"package_size_code": null,
+			"quantity": 0,
+			"reference_code": null,
+			"value": null,
+			"weight": null
+		}
+	],
+	"transaction": [
+		{
+			"customer": {
+				"name": "Henry Nwobdo"
+			},
+			"amount": {
+				"dueAmount": "1290",
+				"paidAmount": "600",
+				"totalAmount": "1890"
+			},
+			"startDate": "2019-12-16T19:10:00-05:00",
+			"endDate": "2020-02-16T19:10:00-05:00",
+			"overAgePeriod": "10"
+		}
+	]
+}
