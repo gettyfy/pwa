@@ -1,10 +1,11 @@
 import React from 'react';
 import styled from '@emotion/styled'
+import {Link} from '@chakra-ui/core';
 import { Box as ChakraBox, Button } from '@chakra-ui/core';
 import * as Analytics from '/imports/ui/analytics';
 
 
-
+ 
 const Box = styled(ChakraBox)`
     /* width: 16.8rem; */
     display: block;
@@ -20,7 +21,7 @@ const StyledButton = styled(Button) <{ withIcon: boolean | undefined }>`
 `
 
 
-interface IFilledButton {
+interface ISubmitButton {
     analyticName: string,
     children: any,
     isLoading: boolean,
@@ -29,7 +30,7 @@ interface IFilledButton {
     withIcon?: boolean | undefined
 }
 
-export const FilledButton: React.FC<IFilledButton> = (props) => {
+export const SubmitButton: React.FC<ISubmitButton> = (props) => {
     const { withIcon, isLoading, useSubmit, buttonName, ...rest } = props
     return (
         <StyledButton
@@ -77,5 +78,41 @@ export const FormButton: React.FC<IButton> = (props) => {
         <Box as="button" width="16.5rem" rounded="0" bg={buttonColor || 'blue.500'} size="lg" border={border} borderColor={borderColor} color={color} px={4} h={8} {...props} onClick={() => handleClick(analyticName)}>
             {buttonName}
         </Box>
+    )
+}
+
+
+interface ILinkButton {
+    analyticName: string,
+    buttonName: string,
+    buttonLink: string,
+    //handleAction: Function,
+    buttonColor?: string,
+    color?: string,
+    bg: string,
+    border?: string,
+    borderColor?: string,
+    children?: any,
+    //href: string
+}
+
+
+export const LinkButton: React.FC<ILinkButton> = (props) => {
+    const { analyticName, borderColor, buttonColor, buttonLink, buttonName, color, border } = props
+
+    const handleClick = (analyticName: string): any => {
+        // we will write the handle analytics here
+        console.log("console me", analyticName)
+        Analytics.track(analyticName, {
+            component: `Click LinkTo${buttonName}`
+        })
+        
+    }
+    return (
+        <Link href={buttonLink}>
+        <Box as="button" width="16.5rem" rounded="0" bg={buttonColor || 'blue.500'} size="lg" border={border} borderColor={borderColor} color={color} px={4} h={8} {...props} onClick={() => handleClick(analyticName)}>
+            {buttonName}
+        </Box>
+        </Link>
     )
 }
