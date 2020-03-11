@@ -37,7 +37,9 @@ const custom: IThemeProps = {
 	inputFontSize: '16px',
 	blue: '#0476D0',
 	green: '#028248',
-	tabNavHeight: '54px'
+	tabNavHeight: '54px',
+	defaultBox: '1.1rem',
+	defaultWrapper: '1rem 1.1rem'
 };
 const colors: IColors = {
 	...chakraTheme.colors,
