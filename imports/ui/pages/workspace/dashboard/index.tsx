@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled'
+import path from '/imports/ui/router'
 import { Flex, Stack, Box, Avatar, Stat, StatNumber, StatHelpText, Text, StatGroup, Heading, Icon } from '@chakra-ui/core'
 // import * as Analytics from '/imports/ui/analytics';
 import { ActionCard, ActionCardRow, TransactionList } from '/imports/ui/components/'
@@ -42,7 +43,7 @@ export default class Hello extends React.Component {
           </Stack>
 
           <Stack>
-            <Avatar name="Friend" />
+            <Avatar size="md" name="Friend" />
           </Stack>
         </Box>
 
@@ -92,7 +93,7 @@ export default class Hello extends React.Component {
 
             <ActionCardRow>
               <ActionCard
-                cardLink="/login"
+                cardLink={path.workspace.createCustomer}
                 cardBg="#FFEAE9"
                 cardHeading="Add a Customer"
                 cardSubHeading="Profile"
@@ -102,7 +103,7 @@ export default class Hello extends React.Component {
               />
 
               <ActionCard
-                cardLink="/login"
+                cardLink={path.workspace.createTransaction}
                 cardBg="#E3EDFF"
                 cardHeading="Create a Transation"
                 cardSubHeading="Record"
@@ -115,7 +116,7 @@ export default class Hello extends React.Component {
 
             <ActionCardRow>
               <ActionCard
-                cardLink="/signup"
+                cardLink={path.workspace.remind}
                 cardBg="#EDE4FF"
                 cardHeading="Send a Reminder"
                 cardSubHeading="Pulse"
@@ -125,7 +126,7 @@ export default class Hello extends React.Component {
               />
 
               <ActionCard
-                cardLink="/signup"
+                cardLink={path.workspace.recover}
                 cardBg="#E3FFEF"
                 cardHeading="Escalate Transaction"
                 cardSubHeading="Recover a Debt"
