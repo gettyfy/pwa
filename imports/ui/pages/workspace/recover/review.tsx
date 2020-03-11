@@ -1,7 +1,8 @@
 import React from 'react';
 import { Icon, Box, Heading, Stack, Stat, StatNumber, StatHelpText, StatLabel, Flex, Text, StatGroup, Divider } from "@chakra-ui/core";
 import styled from '@emotion/styled'
-import { FormButton } from '/imports/ui/components'
+import { FormButton, SummaryList, SummaryRow} from '/imports/ui/components'
+
 
 const StyledReview= styled.main`
   display: flex;
@@ -91,48 +92,21 @@ export default class review extends React.Component {
 
 
                 {/* Customer info */}
-                <Flex flexDirection="column">
-                    <Flex flexDirection="row">
-                    <Box>
-                        <Icon name="view" size="15px" />
-                      
-                    </Box>
-                    <Box ml="2" mt="1"> 
-                        <Text fontSize="xs">Evans Boateng</Text>
-                         </Box>
-                    </Flex>
+                <SummaryRow>
+                    <SummaryList
+                        name="Evans Dabo"
+                        phone="020 747 475"
+                        email= "me@gmail.com"
+                        location="22 Aluguntugui East legon Accra"
+                        iconName="view"
+                        iconSize="15px"
+                    />
 
-                    <Flex>
-                    <Box>
-                        <Icon name="phone" size="12px" />
 
-                    </Box>
-                    <Box ml="2" mt="1">
-                        <Text fontSize="xs">020 844 9872</Text>
-                    </Box>
-                    </Flex>
 
-                    <Flex>
-                    <Box>
-                        <Icon name="at-sign" size="12px" />
+                    </SummaryRow>
 
-                    </Box>
-                    <Box ml="2" mt="1">
-                        <Text fontSize="xs">me@gmail.com</Text>
-                    </Box>
-                    </Flex>
-
-                    <Flex>
-                    <Box>
-                        <Icon name="calendar" size="12px" />
-
-                    </Box>
-                    <Box ml="2" mt="1">
-                            <Text fontSize="xs">22 ALUGUNTUGUI STREET, IKEJA LEGON</Text>
-                    </Box>
-                    </Flex>
-                </Flex>
-
+               
 
                 {/* Guarantor Info */}
                 <Flex flexDirection="row" mt="10">

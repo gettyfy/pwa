@@ -8,7 +8,7 @@ import * as Validator from '/imports/lib/validator'
 import { Accounts } from 'meteor/accounts-base';
 import { Meteor } from 'meteor/meteor'
 import { Formik, FormikProps } from 'formik'
-import { InputField, TransactionList, RadioField, SelectField, AutoCompleteField, CheckField, FormikForm, RadioButtonField, PasswordField,InvoiceList } from '/imports/ui/components'
+import { InputField, TransactionList, RadioField, SelectField, AutoCompleteField, CheckField, FormikForm, RadioButtonField, PasswordField, InvoiceList, SummaryList, SummaryRow, Item,ItemList } from '/imports/ui/components'
 
 
 const Signup: React.FC = () => {
@@ -93,8 +93,31 @@ const Signup: React.FC = () => {
 
                     />
 
+                    <SummaryRow>
+                        <SummaryList
+                            name="Evans Dabo"
+                            phone="020 747 475"
+                            email="me@gmail.com"
+                            location="22 Aluguntugui East legon Accra"
+                            iconName="view"
+                            iconSize="15px"
+                        /> 
+                        </SummaryRow>
+
+                    <Item>
+                        <ItemList
+                        customerItem="LG Mini Home"
+                        customerName="Bukola Saraki"  
+                        amount="GHC346"
+                    />
+
+
+                    </Item>
+
                 </FormikForm>
             )}
+           
+
         </Formik>
     );
 }

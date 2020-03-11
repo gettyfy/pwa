@@ -40,7 +40,7 @@ const InvoiceList: React.FC<IInvoiceList> = (props) => {
 
     
  return(
-
+        
         <Flex direction="row" mt="10" alignItems="center">
             <Box width="30%" >
         <Heading as="h5" fontSize="sm">{customerName}</Heading>
