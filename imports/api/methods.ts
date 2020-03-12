@@ -7,7 +7,7 @@
  */
 
 import { Meteor } from 'meteor/meteor';
-import { insertTask, removeTask, setChecked, setPrivate } from './tasks';
+import { insertTask, removeTask, setChecked, setPrivate } from '/imports/api/tasks';
 
 // Define Methods for managing tasks related logic
 const tasks = {

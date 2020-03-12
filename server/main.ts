@@ -3,10 +3,10 @@
  * Meteor Methods required by the Client Service.
  */
 
+//  Refer to Meteor Guide for ideal project structure https://guide.meteor.com/structure.html
+
 import { Meteor } from 'meteor/meteor';
 import '/imports/api/methods';
-
-// Should I import all the collections into this project as well
 
 // import { Links } from '/imports/api/links';
 // function insertLink(title: string, url: string) {

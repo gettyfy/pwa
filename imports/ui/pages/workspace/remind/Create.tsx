@@ -23,7 +23,7 @@ const Create: React.FunctionComponent = (props: any) => {
         customerNumber: string,
         name: string,
         address: string,
-        email: string,
+        select: string,
         phonenumber: string,
         [key: string]: string
     }
@@ -34,7 +34,7 @@ const Create: React.FunctionComponent = (props: any) => {
         customerNumber: "",
         name: "",
         address: "",
-        email: "",
+        select: "",
         phonenumber: "",
     }
 
