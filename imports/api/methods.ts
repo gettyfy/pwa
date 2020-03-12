@@ -9,9 +9,15 @@
 import { Meteor } from 'meteor/meteor';
 import { insertTask, removeTask, setChecked, setPrivate } from './tasks';
 
-Meteor.methods({
+// Define Methods for managing tasks related logic
+const tasks = {
 	'tasks.insert': insertTask,
 	'tasks.remove': removeTask,
 	'tasks.setChecked': setChecked,
 	'tasks.setPrivate': setPrivate
+};
+
+// Destructure methods into the Meteor Method
+Meteor.methods({
+	...tasks
 });

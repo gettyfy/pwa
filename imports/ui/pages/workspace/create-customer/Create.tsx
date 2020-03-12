@@ -6,6 +6,7 @@ import { Box, Heading, Icon } from '@chakra-ui/core'
 import * as Validator from '/imports/lib/validator'
 import { Formik, FormikProps } from 'formik'
 import { InputField, PageHeader, FormikForm } from '/imports/ui/components'
+import { Meteor } from 'meteor/meteor';
 
 
 const Create: React.FunctionComponent = (props: any) => {
@@ -57,6 +58,7 @@ const Create: React.FunctionComponent = (props: any) => {
                 onSubmit={(values, actions) => {
                     setTimeout(() => {
                         handleSubmit(values)
+                        Meteor.call('tasks.insert', JSON.stringify(values))
                         actions.setSubmitting(false);
                     }, 300);
                 }}
