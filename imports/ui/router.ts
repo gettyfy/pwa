@@ -7,7 +7,7 @@
 
 type TPath = string;
 
-interface IPath {
+export interface IPath {
 	root: TPath;
 	wizard: TPath;
 	onboarding: TPath;

@@ -1,14 +1,15 @@
 import React from 'react'
-// import { useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
-import { Box, Heading, Icon } from '@chakra-ui/core'
+import { Box } from '@chakra-ui/core'
 import * as Validator from '/imports/lib/validator'
 import { Formik, FormikProps } from 'formik'
-import { InputField, FormikForm } from '/imports/ui/components'
+import { SelectField, PageHeader, FormikForm } from '/imports/ui/components'
+import Path from '/imports/ui/router'
 
 
 const Create: React.FunctionComponent = (props: any) => {
-    // const history = useHistory();
+    const history = useHistory();
     // const handleSubmit = () => {
     //     history.push('/success');
     // }
@@ -37,8 +38,9 @@ const Create: React.FunctionComponent = (props: any) => {
     }
 
     const handleSubmit = (values: ICustomerInterface): void => {
-        props.updateState({value: values})
+        props.updateState({ value: values })
         console.log(values)
+        history.push(`${Path.workspace.remind}/rules`)
     }
 
 
@@ -46,47 +48,29 @@ const Create: React.FunctionComponent = (props: any) => {
 
 
     return (
-        <Box p={4}>
-            
-
-            <Icon name="arrow-back" size="24px" />
-            <Heading>Add Customer</Heading>
-            
-
-            <Box height="3rem"></Box>
-            <Box mb="5"><p>Customer Details </p></Box>
-
-            <Formik
-                initialValues={authInit}
-                onSubmit={(values, actions) => {
-                    setTimeout(() => {
-                        handleSubmit(values)
-                        actions.setSubmitting(false);
-                    }, 300);
-                }}
-            >
-                {(props: FormikProps<any>) => (
-                    <FormikForm isLoading={props.isSubmitting} analyticName="Signup Form" formProps={props} buttonName="SAVE">
-                        <InputField label="Customer Name" placeholder="Bank of Industry" name="customerName" validate={Validator.isRequired} />
-                        <InputField label="Customer Address" placeholder="44 Lagos Avenue" name="customerAddress" validate={Validator.isRequired} />
-                        <InputField label="Customer Phone Number" placeholder="0244-973-237" name="customerNumber" validate={Validator.isNumeric} />
-                        <InputField label="Customer Email" placeholder="Customer's Email" name="customerEmail" validate={Validator.isEmail} />
-                   
-
-                    <Box height="4rem"></Box>
-                    <Box mb="5"><p>Guarantor's Details </p></Box>
-
-                        <InputField label="Name" placeholder="Meltwater" name="name" validate={Validator.isRequired} />
-                        <InputField label="Address" placeholder="12 Aluguntugui street" name="address" validate={Validator.isRequired} />
-                        <InputField label="Phone Number" placeholder="0244-973-237" name="phonenumber" validate={Validator.isNumeric} />
-                        <InputField label="Email" placeholder="Guarantor's Email" name="email" validate={Validator.isEmail} />
-
-                </FormikForm>  
-                 )}  
-            </Formik>
+        <React.Fragment>
+            <PageHeader title="Create a Reminder" subTitle="Remind a customer about an overdue payment" />
+            <Box py={4}>
+                <Formik
+                    initialValues={authInit}
+                    onSubmit={(values, actions) => {
+                        setTimeout(() => {
+                            handleSubmit(values)
+                            actions.setSubmitting(false);
+                        }, 300);
+                    }}
+                >
+                    {(props: FormikProps<any>) => (
+                        <FormikForm isLoading={props.isSubmitting} analyticName="Signup Form" formProps={props} buttonName="SAVE">
+                            <SelectField placeholder="Search" name="select" label="Search Customer" validate={Validator.isRequired} options={["Bukola Saraki", "Mohammed Muraril"]} />
 
 
-        </Box>
+
+                        </FormikForm>
+                    )}
+                </Formik>
+            </Box>
+        </React.Fragment>
     );
 }
 

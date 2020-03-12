@@ -55,7 +55,7 @@ const Signup: React.FC = () => {
 
     return (
         <>
-            <PageHeader />
+            <PageHeader useHeader />
             <Formik
                 initialValues={authInit}
                 onSubmit={(values, actions) => {

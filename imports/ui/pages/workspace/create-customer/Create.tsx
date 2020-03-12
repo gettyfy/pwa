@@ -1,5 +1,6 @@
 import React from 'react'
-// import { useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
+import path from '/imports/ui/router'
 
 import { Box, Heading, Icon } from '@chakra-ui/core'
 import * as Validator from '/imports/lib/validator'
@@ -8,10 +9,7 @@ import { InputField, PageHeader, FormikForm } from '/imports/ui/components'
 
 
 const Create: React.FunctionComponent = (props: any) => {
-    // const history = useHistory();
-    // const handleSubmit = () => {
-    //     history.push('/success');
-    // }
+    const history = useHistory();
 
 
     interface ICustomerInterface {
@@ -39,6 +37,7 @@ const Create: React.FunctionComponent = (props: any) => {
     const handleSubmit = (values: ICustomerInterface): void => {
         props.updateState({ value: values })
         console.log(values)
+        history.push(`${path.workspace.createCustomer}/success`)
     }
 
 
