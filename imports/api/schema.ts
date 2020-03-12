@@ -3,7 +3,7 @@
  * These are Typescript interfaces are intend to relay the expected collection schema in meteor
  */
 
-interface IPulse {
+export interface IPulse {
 	_id: string;
 	profile: {
 		// We attach a user profile to a pulse and track by ID, name and email
@@ -32,7 +32,7 @@ interface IPulse {
 	channel: string[]; // The is the channel we intend to execute the pulse from from
 }
 
-interface IPulseChannel {
+export interface IPulseChannel {
 	name: string;
 	medium: string;
 	lastUpdated: Date;
@@ -43,7 +43,7 @@ interface IPulseChannel {
  * Interface for the Users Profile
  */
 
-interface IUser {
+export interface IUser {
 	_id: string;
 	email: string;
 	phone: string;
@@ -69,31 +69,57 @@ interface IUser {
 	};
 }
 
+export interface ITask {
+	_id?: string;
+	text: string;
+	createdAt: Date;
+	owner: string;
+	username: string;
+}
+/**
+ * Use the interface to define the nature of the Collection and the Data it requires
+ */
+export interface IWallet {
+	_id?: string;
+	balance: number;
+	prevBalance: number;
+	createdAt: Date;
+	owner: string;
+}
+
+export interface IChat {
+	_id?: string;
+	name: string;
+	message: string;
+	createdAt: Date;
+	announcement?: boolean;
+}
+
 /**
  * These interfaces would manage the models that align with the record feature
  */
 
-interface ITransaction {
+export interface ITransaction {
 	_id: string;
 }
 
-interface ICustomer {
+export interface ICustomer {
 	_id: string;
 }
 
-interface IPaymentPlan {
+export interface IPaymentPlan {
 	_id: string;
 }
-interface IAgreementPlan {
+export interface IAgreementPlan {
 	_id: string;
 }
 
-interface IAgreementTemplate extends IAgreementPlan {
+export interface IAgreementTemplate extends IAgreementPlan {
 	createdAt: Date;
 	lastUpdated: Date;
 }
 
-interface IPaymentTemplate extends IPaymentPlan {
+export interface IPaymentTemplate extends IPaymentPlan {
 	createdAt: Date;
 	lastUpdated: Date;
 }

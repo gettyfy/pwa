@@ -1,11 +1,17 @@
+/**
+ * A Method File will import a defined Named Function and attach it to a method. Example the Function insertTask is exported from tasks and 
+ * attached to a *task.insert* method so that all of task.insert will take arguments and results as defined by insertTask.
+ * 
+ * The Method document handles the naming, and so this is where lowercase method names are created and used on the
+ * client service to invoke the function used by that method.
+ */
+
 import { Meteor } from 'meteor/meteor';
 import { insertTask, removeTask, setChecked, setPrivate } from './tasks';
-import { sendMessage } from "/imports/api/chat";
 
 Meteor.methods({
 	'tasks.insert': insertTask,
 	'tasks.remove': removeTask,
 	'tasks.setChecked': setChecked,
-	'tasks.setPrivate': setPrivate,
-	'sendMessage': sendMessage,
+	'tasks.setPrivate': setPrivate
 });
