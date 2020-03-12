@@ -120,7 +120,7 @@ export default class Hello extends React.Component {
                 cardLink={path.workspace.remind}
                 cardBg="#EDE4FF"
                 cardHeading="Send a Reminder"
-                cardSubHeading="Pulse"
+                cardSubHeading="Quick reminder"
                 analyticName="Create Reminder"
                 name="repeat-clock"
                 iconColor="purple.500"

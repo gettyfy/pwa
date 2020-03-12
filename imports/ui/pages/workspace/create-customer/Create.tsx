@@ -2,7 +2,7 @@ import React from 'react'
 import { useHistory } from 'react-router-dom';
 import path from '/imports/ui/router'
 
-import { Box, Heading, Icon } from '@chakra-ui/core'
+import { Box } from '@chakra-ui/core'
 import * as Validator from '/imports/lib/validator'
 import { Formik, FormikProps } from 'formik'
 import { InputField, PageHeader, FormikForm } from '/imports/ui/components'
@@ -58,7 +58,7 @@ const Create: React.FunctionComponent = (props: any) => {
                 onSubmit={(values, actions) => {
                     setTimeout(() => {
                         handleSubmit(values)
-                        Meteor.call('tasks.insert', JSON.stringify(values))
+                        Meteor.call('customers.insert', values)
                         actions.setSubmitting(false);
                     }, 300);
                 }}
