@@ -34,8 +34,8 @@ const Create: React.FunctionComponent = (props: any) => {
         phonenumber: "",
     }
 
-    const handleSubmit = (values: ICustomerInterface): void => {
-        props.updateState({ value: values })
+    const handleSubmit = async (values: ICustomerInterface) => {
+        await props.updateState({ value: values })
         console.log(values)
         history.push(`${path.workspace.createCustomer}/success`)
     }

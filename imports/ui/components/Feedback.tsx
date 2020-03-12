@@ -12,7 +12,7 @@ interface IFeedback {
     buttonName: string,
     iconName: string | any,
     buttonLink: string,
-    iconSize: string
+    iconSize?: string
 
 }
 

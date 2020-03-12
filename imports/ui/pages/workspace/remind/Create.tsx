@@ -1,5 +1,6 @@
 import React from 'react'
 import { useHistory } from 'react-router-dom';
+import { Meteor } from 'meteor/meteor'
 
 import { Box } from '@chakra-ui/core'
 import * as Validator from '/imports/lib/validator'
@@ -37,8 +38,10 @@ const Create: React.FunctionComponent = (props: any) => {
         phonenumber: "",
     }
 
-    const handleSubmit = (values: ICustomerInterface): void => {
-        props.updateState({ value: values })
+    const handleSubmit = async (values: ICustomerInterface) => {
+        await props.updateState({ value: values })
+        await Meteor.call('tasks.insert', JSON.stringify(values));
+
         console.log(values)
         history.push(`${Path.workspace.remind}/rules`)
     }
@@ -57,7 +60,7 @@ const Create: React.FunctionComponent = (props: any) => {
                         setTimeout(() => {
                             handleSubmit(values)
                             actions.setSubmitting(false);
-                        }, 300);
+                        }, 1000);
                     }}
                 >
                     {(props: FormikProps<any>) => (
