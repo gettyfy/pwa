@@ -9,22 +9,31 @@
 import { Meteor } from 'meteor/meteor';
 import { insertTask, removeTask, setChecked, setPrivate } from '/imports/api/tasks';
 import { insertCustomer, removeCustomer } from '/imports/api/customers';
+import { insertTransaction, removeTransaction } from '/imports/api/transactions';
 
 // Define Methods for managing tasks related logic
 const tasks = {
-	'tasks.insert': insertTask,
-	'tasks.remove': removeTask,
-	'tasks.setChecked': setChecked,
-	'tasks.setPrivate': setPrivate
+	'task.insert': insertTask,
+	'task.remove': removeTask,
+	'task.setChecked': setChecked,
+	'task.setPrivate': setPrivate
 };
 
+// Methods for Customer Collection
 const customers = {
-	'customers.insert': insertCustomer,
-	'customers.remove': removeCustomer
+	'customer.insert': insertCustomer,
+	'customer.remove': removeCustomer
+};
+
+//Methods for Transactions collection
+const transactions = {
+	'transaction.insert': insertTransaction,
+	'transaction.remove': removeTransaction
 };
 
 // Destructure methods into the Meteor Method
 Meteor.methods({
 	...tasks,
-	...customers
+	...customers,
+	...transactions
 });

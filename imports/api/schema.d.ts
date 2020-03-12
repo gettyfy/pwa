@@ -1,3 +1,4 @@
+import { Meteor } from 'meteor/meteor';
 /**
  * Write Schema for Pulse and pulse related models
  * These are Typescript interfaces are intend to relay the expected collection schema in meteor
@@ -23,6 +24,12 @@ export interface IGuarantor {
 	phone: string;
 	createdAt: Date;
 	lastUpdated: Date;
+}
+
+export interface ICurrency {
+	code: 'GHC' | 'NGN' | 'USD';
+	symbol: string;
+	name: string;
 }
 
 // ========================================== END NORMALIZATION TABLE ================================
@@ -89,6 +96,13 @@ export interface IUser {
 			name: string;
 			type: 'organization' | 'individual';
 		};
+		organization: {
+			name: string;
+			country: string;
+			address: string;
+			state: string;
+			currency: ICurrency;
+		};
 		subscription: {
 			type: string; // preferably an ENUM will be used here
 			_pk: string; // the subscription PK is a unique identifier, we may stick to ID
@@ -106,7 +120,7 @@ export interface ITask {
 	text: string;
 	createdAt: Date;
 	owner: string;
-	username: string;
+	ownerName: string;
 }
 
 /**
@@ -115,6 +129,11 @@ export interface ITask {
 
 export interface ITransaction {
 	_id: string;
+	currency: ICurrency;
+	createdAt: Date;
+	owner: Meteor.User | undefined;
+	customerId: string;
+	userId: string;
 }
 
 export interface IEscalation extends ITransaction {
