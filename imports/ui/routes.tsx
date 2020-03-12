@@ -22,6 +22,7 @@ import Transaction from '/imports/ui/pages/workspace/transaction'
 import Customer from '/imports/ui/pages/workspace/customer'
 import Account from '/imports/ui/pages/workspace/account'
 import CreateCustomer from '/imports/ui/pages/workspace/create-customer'
+import Invoice from '/imports/ui/pages/workspace/invoice'
 
 
 
@@ -49,6 +50,7 @@ export default function AppRouter(this: any) {
                     <Route path={path.workspace.remind} component={Remind} />
                     <Route path={path.workspace.record} component={Record} />
                     <Route path={path.workspace.recover} component={Recover} />
+                    <Route path={path.workspace.invoice} component={Invoice} />
                     <Route path={path.wizard} component={Wizard} />
                     <Route path={path.onboarding} component={Onboarding} />
                     <Route path={path.preview} component={Preview} />

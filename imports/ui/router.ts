@@ -26,6 +26,7 @@ interface IPath {
 		record: string;
 		createCustomer: string;
 		createTransaction: string;
+		invoice: string;
 	};
 }
 
@@ -47,7 +48,8 @@ const Path: IPath = {
 		recover: '/recover',
 		record: '/record',
 		createCustomer: '/create-customer',
-		createTransaction: '/create-transaction'
+		createTransaction: '/create-transaction',
+		invoice: '/invoice'
 	}
 };
 
