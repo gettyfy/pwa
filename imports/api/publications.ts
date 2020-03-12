@@ -7,12 +7,11 @@
  */
 
 import { Meteor } from 'meteor/meteor';
-import { Tasks, Wallets } from './collections';
+import { Tasks } from './collections';
 
 if (Meteor.isServer) {
 	// This code only runs on the server
 	Meteor.publish('tasks', tasksPublication);
-	Meteor.publish('wallet', walletPublication);
 }
 
 // Define Tasks Publication for collection Tasks
@@ -22,10 +21,9 @@ export function tasksPublication(this: any) {
 	});
 }
 
-// Define Publication for Wallets Collection
-export function walletPublication(this: any) {
-	console.log(Wallets);
-	return Wallets.find({
-		$or: [ { owner: this.userId } ]
-	});
-}
+// export function walletPublication(this: any) {
+// 	console.log(Wallets);
+// 	return Wallets.find({
+// 		$or: [ { owner: this.userId } ]
+// 	});
+// }

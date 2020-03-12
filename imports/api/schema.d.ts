@@ -3,22 +3,41 @@
  * These are Typescript interfaces are intend to relay the expected collection schema in meteor
  */
 
-interface ITimeStamps {
+// ========= SUB COLLECTIONS FOR SCHEMA DENORMALIZATION ===============================================
+
+export interface IReminderChannel {
+	_id: string;
+	name: string;
+	medium: string;
+	logo?: string;
+	createdAt: Date;
+	lastUpdated: Date;
+	gateway?: string; // This could be the api endpoint or any auth parameter for users, the question mark means it can be optional
+}
+
+export interface IGuarantor {
+	_id: string;
+	_pk: string;
+	email: string;
+	address: string;
+	phone: string;
 	createdAt: Date;
 	lastUpdated: Date;
 }
+
+// ========================================== END NORMALIZATION TABLE ================================
 
 export interface IReminder {
 	_id: string;
 	customer: {
 		// We attach a user profile to a pulse and track by ID, name and email
-		name: string;
 		_id: string;
+		name: string;
 		email: string;
 	};
 	transaction: {
 		// Information about the transaction may be attached to a pulse
-		_txId: string;
+		txId: string;
 		txAmount: number;
 		customer: {
 			id: string; // take the ID of the customer should we need to query information
@@ -32,18 +51,24 @@ export interface IReminder {
 		endDate: Date;
 		createdAt: Date;
 	};
-	executionTime: Date;
 	createdAt: Date;
 	priority: 'high' | 'medium' | 'low'; // could be an Enum to simplify things, we assign a priority to the jobs
 	channels: Array<IReminderChannel>; // The is the channel we intend to execute the pulse from from
 }
 
-export interface IReminderChannel {
+export interface ICustomer {
+	_id: string;
+	_pk: string;
 	name: string;
-	medium: string;
+	email: string;
+	altEmail?: string;
+	phone: string;
+	altPhone?: number;
+	address: string;
+	inDebt: boolean;
 	createdAt: Date;
 	lastUpdated: Date;
-	gateway?: string; // This could be the api endpoint or point of acess, the question mark means it can be optional
+	guarantor: Array<IGuarantor>;
 }
 
 /**
@@ -111,27 +136,4 @@ export interface IAgreementTemplate extends IAgreementPlan {
 export interface IPaymentTemplate extends IPaymentPlan {
 	createdAt: Date;
 	lastUpdated: Date;
-}
-
-export interface ICustomer {
-	_id: string;
-	_pk: string;
-	name: string;
-	email: string;
-	altEmail?: string;
-	phone: string;
-	altPhone?: number;
-	address: string;
-	inDebt: boolean;
-	createdAt: Date;
-	lastUpdated: Date;
-	guarantor: {
-		_id: string;
-		_pk: string;
-		email: string;
-		address: string;
-		phone: string;
-		createdAt: Date;
-		lastUpdated: Date;
-	};
 }
