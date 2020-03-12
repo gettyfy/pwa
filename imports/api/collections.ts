@@ -6,9 +6,21 @@
  * for Building out a multi tenant arch on top of Meteor & Meteor Mongo
  */
 
-import { ITask, IWallet, IChat } from './schema';
+import {
+	ITask,
+	ICustomer,
+	IPaymentPlan,
+	ITransaction,
+	IEscalation,
+	IReminderChannel,
+	IReminder
+} from 'imports/api/schema.d';
 import { Mongo } from 'meteor/mongo';
 
 export const Tasks = new Mongo.Collection<ITask>('tasks');
-export const Wallets = new Mongo.Collection<IWallet>('wallet');
-export const Chats = new Mongo.Collection<IChat>('chat');
+export const Customers = new Mongo.Collection<ICustomer>('customer');
+export const Reminders = new Mongo.Collection<IReminder>('reminder');
+export const Transactions = new Mongo.Collection<ITransaction>('transactions');
+export const Escalations = new Mongo.Collection<IEscalation>('escalations');
+export const PaymentPlans = new Mongo.Collection<IPaymentPlan>('paymentPlans');
+export const Channels = new Mongo.Collection<IReminderChannel>('channels');

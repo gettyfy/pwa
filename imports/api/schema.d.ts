@@ -3,9 +3,14 @@
  * These are Typescript interfaces are intend to relay the expected collection schema in meteor
  */
 
-export interface IPulse {
+interface ITimeStamps {
+	createdAt: Date;
+	lastUpdated: Date;
+}
+
+export interface IReminder {
 	_id: string;
-	profile: {
+	customer: {
 		// We attach a user profile to a pulse and track by ID, name and email
 		name: string;
 		_id: string;
@@ -25,16 +30,18 @@ export interface IPulse {
 		frequency: string;
 		startDate: Date;
 		endDate: Date;
+		createdAt: Date;
 	};
 	executionTime: Date;
 	createdAt: Date;
 	priority: 'high' | 'medium' | 'low'; // could be an Enum to simplify things, we assign a priority to the jobs
-	channel: string[]; // The is the channel we intend to execute the pulse from from
+	channels: Array<IReminderChannel>; // The is the channel we intend to execute the pulse from from
 }
 
-export interface IPulseChannel {
+export interface IReminderChannel {
 	name: string;
 	medium: string;
+	createdAt: Date;
 	lastUpdated: Date;
 	gateway?: string; // This could be the api endpoint or point of acess, the question mark means it can be optional
 }
@@ -76,24 +83,6 @@ export interface ITask {
 	owner: string;
 	username: string;
 }
-/**
- * Use the interface to define the nature of the Collection and the Data it requires
- */
-export interface IWallet {
-	_id?: string;
-	balance: number;
-	prevBalance: number;
-	createdAt: Date;
-	owner: string;
-}
-
-export interface IChat {
-	_id?: string;
-	name: string;
-	message: string;
-	createdAt: Date;
-	announcement?: boolean;
-}
 
 /**
  * These interfaces would manage the models that align with the record feature
@@ -103,8 +92,8 @@ export interface ITransaction {
 	_id: string;
 }
 
-export interface ICustomer {
-	_id: string;
+export interface IEscalation extends ITransaction {
+	_pk: string;
 }
 
 export interface IPaymentPlan {
@@ -122,4 +111,27 @@ export interface IAgreementTemplate extends IAgreementPlan {
 export interface IPaymentTemplate extends IPaymentPlan {
 	createdAt: Date;
 	lastUpdated: Date;
+}
+
+export interface ICustomer {
+	_id: string;
+	_pk: string;
+	name: string;
+	email: string;
+	altEmail?: string;
+	phone: string;
+	altPhone?: number;
+	address: string;
+	inDebt: boolean;
+	createdAt: Date;
+	lastUpdated: Date;
+	guarantor: {
+		_id: string;
+		_pk: string;
+		email: string;
+		address: string;
+		phone: string;
+		createdAt: Date;
+		lastUpdated: Date;
+	};
 }
