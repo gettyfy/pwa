@@ -10,6 +10,7 @@ import { Meteor } from 'meteor/meteor';
 import { insertTask, removeTask, setChecked, setPrivate } from '/imports/api/tasks';
 import { insertCustomer, removeCustomer } from '/imports/api/customers';
 import { insertTransaction, removeTransaction } from '/imports/api/transactions';
+import { insertReminder, removeReminder } from '/imports/api/reminders';
 
 // Define Methods for managing tasks related logic
 const tasks = {
@@ -31,9 +32,16 @@ const transactions = {
 	'transaction.remove': removeTransaction
 };
 
+// Methods for Reminders Collection
+const reminders = {
+	'reminder.insert': insertReminder,
+	'reminder.remove': removeReminder
+};
+
 // Destructure methods into the Meteor Method
 Meteor.methods({
 	...tasks,
 	...customers,
-	...transactions
+	...transactions,
+	...reminders
 });
