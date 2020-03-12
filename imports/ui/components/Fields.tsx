@@ -25,18 +25,15 @@ const FormikInput = styled(Input)`
     border-radius: 0px;
     border-width: 1.3px;
     border-right: none;
+    padding-top: 2.55rem;
+    padding-bottom: 1.1rem;
     font-size: ${(props: any) => props.theme.custom.InputFontSize};
     border-top: none;
     border-left: none;
-    min-height: ${(props: any) => props.theme.custom.inputMinHeight};
-    line-height: 1px;
 
-    ::placeholder,
-    ::-webkit-input-placeholder {
+    ::placeholder, ::-moz-placeholder {
         font-size: ${(props: any) => props.theme.custom.InputFontSize};
-        padding-bottom: 0;
-        line-height: 1rem;
-        vertical-align: bottom;
+        vertical-align: middle;
     }
 `
 const FormikSelect = styled(Select)`
