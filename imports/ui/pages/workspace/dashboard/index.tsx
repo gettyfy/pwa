@@ -127,7 +127,7 @@ export default class Hello extends React.Component {
               />
 
               <ActionCard
-                cardLink={path.workspace.recover}
+                cardLink={path.workspace.recovery}
                 cardBg="#E3FFEF"
                 cardHeading="Escalate Transaction"
                 cardSubHeading="Recover a Debt"

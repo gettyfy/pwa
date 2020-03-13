@@ -17,7 +17,7 @@ import Preview from '/imports/ui/pages/preview'
 // =============== Workspace Components ============
 import Remind from '/imports/ui/pages/workspace/remind'
 import Record from '/imports/ui/pages/workspace/record'
-import Recover from '/imports/ui/pages/workspace/recover/review'
+import Recovery from '/imports/ui/pages/workspace/recovery'
 import Transaction from '/imports/ui/pages/workspace/transaction'
 import Customer from '/imports/ui/pages/workspace/customer'
 import Account from '/imports/ui/pages/workspace/account'
@@ -51,7 +51,7 @@ export default function AppRouter(this: any) {
                     <Route path={path.workspace.account} component={Account} />
                     <Route path={path.workspace.remind} component={Remind} />
                     <Route path={path.workspace.record} component={Record} />
-                    <Route path={path.workspace.recover} component={Recover} />
+                    <Route path={path.workspace.recovery} component={Recovery} />
                     <Route path={path.workspace.invoice} component={Invoice} />
                     <Route path={path.wizard} component={Wizard} />
                     <Route path={path.onboarding} component={Onboarding} />
