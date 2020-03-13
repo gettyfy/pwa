@@ -36,12 +36,6 @@ interface CustomerProps {
         <CustomerStyle>
           {customers.map((val, index) => {
             return (
-          //     <div key={[val._id, index].join('-')}>
-          // <p>{val.customerName}</p>
-          // <p>{val._id}</p>
-          // <p>{val.address}</p>
-          // <p>{val.email}</p>
-          //     </div>
               <CustomerName
                 LinkCard={`${path.workspace.customer}/view/${val._id}`}
                 customerName={val.customerName}

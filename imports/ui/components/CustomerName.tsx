@@ -14,7 +14,7 @@ align-items: center;
 interface ICustomerName {
     customerName: string,
     iconName: string,
-    Date:any,
+    date: Date,
     LinkCard: string,
     PhoneNumber: number
     
@@ -23,7 +23,7 @@ interface ICustomerName {
 
 
 const CustomerName = (props: ICustomerName) => {
-    const {  customerName, iconName, Date, LinkCard, PhoneNumber } = props
+    const {  customerName, iconName, date, LinkCard, PhoneNumber } = props
 
     
     return (
