@@ -16,6 +16,7 @@
 		"downshift": "^5.0.4",
 		"emotion-theming": "^10.0.27",
 		"formik": "^2.1.4",
+		"messagebird": "^3.4.0",
 		"meteor-node-stubs": "^1.0.0",
 		"postmark": "^2.5.0",
 		"prop-types": "^15.7.2",
