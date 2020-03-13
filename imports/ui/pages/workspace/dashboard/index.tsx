@@ -106,7 +106,7 @@ export default class Hello extends React.Component {
               <ActionCard
                 cardLink={path.workspace.createTransaction}
                 cardBg="#E3EDFF"
-                cardHeading="Create a Transation"
+                cardHeading="Create a Transaction"
                 cardSubHeading="Record"
                 analyticName="Create Record"
                 iconColor="blue.600"
