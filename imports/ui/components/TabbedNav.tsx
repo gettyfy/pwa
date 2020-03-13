@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom'
+import { NavLink as Link } from 'react-router-dom'
 import path from '/imports/ui/router'
 import { AppIcon } from '/imports/ui/components'
 import { Flex, Text as ChakraText } from '@chakra-ui/core'

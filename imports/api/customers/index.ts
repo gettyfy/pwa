@@ -23,3 +23,4 @@ export function insertCustomer(this: any, obj: any) {
 		noAuthError
 	);
 }
+

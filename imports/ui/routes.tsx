@@ -45,6 +45,7 @@ export default function AppRouter(this: any) {
                     <Route path={path.auth.resetPasswordRoute} component={ResetPassword} />
                     <Route path={path.workspace.transaction} component={Transaction} />
                     <Route path={path.workspace.customer} component={Customer} />
+                    <Route path={`${path.workspace.customer}/view/:id`} component={Customer} />
                     <Route path={path.workspace.createCustomer} component={CreateCustomer} />
                     <Route path={path.workspace.account} component={Account} />
                     <Route path={path.workspace.remind} component={Remind} />

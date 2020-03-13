@@ -58,7 +58,7 @@ const Create: React.FunctionComponent = (props: any) => {
                 onSubmit={(values, actions) => {
                     setTimeout(() => {
                         handleSubmit(values)
-                        Meteor.call('customers.insert', values)
+                        Meteor.call('customer.insert', values)
                         actions.setSubmitting(false);
                     }, 300);
                 }}
