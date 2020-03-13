@@ -134,7 +134,7 @@ interface InputFieldProps {
 
 
 const InputField = (props: InputFieldProps): JSX.Element => {
-    const { validate, name, placeholder, label } = props
+    const { validate, onChange, name, placeholder, label } = props
 
     /**
      * Formik Field Props to be aware of
@@ -150,7 +150,7 @@ const InputField = (props: InputFieldProps): JSX.Element => {
                 <FormControl isInvalid={form.errors[name] && form.touched[name]} mt="5" position="relative">
                     <FormikLabel id={[name, 'label'].join('-')} htmlFor={[name, 'input'].join('-')} color="gray.600">{label}</FormikLabel>
                     <InputGroup size="lg">
-                        <FormikInput isFullWidth variant="filled" {...field} id={[name, 'input'].join('-')} placeholder={placeholder} focusBorderColor="gray.500" borderColor="gray.500" errorBorderColor="red.500" size="lg" />
+                        <FormikInput {...props} isFullWidth variant="filled" {...field} id={[name, 'input'].join('-')} placeholder={placeholder} focusBorderColor="gray.500" borderColor="gray.500" errorBorderColor="red.500" size="lg" />
                     </InputGroup>
                     <FormErrorMessage>{form.errors[name]}</FormErrorMessage>
                 </FormControl>
