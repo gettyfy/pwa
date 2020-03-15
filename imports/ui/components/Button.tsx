@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '@emotion/styled'
-import { Link } from '@chakra-ui/core';
+import { Link } from 'react-router-dom'
 import { Box as ChakraBox, Button } from '@chakra-ui/core';
 import * as Analytics from '/imports/ui/analytics';
 
@@ -56,6 +56,7 @@ interface IButton {
     handleAction: Function,
     buttonColor?: string,
     color: string,
+    type?: string,
     bg?: string,
     border?: string,
     borderColor?: string,
@@ -64,7 +65,7 @@ interface IButton {
 
 
 export const FormButton: React.FC<IButton> = (props) => {
-    const { analyticName, handleAction, borderColor, buttonColor, buttonName, color, border } = props
+    const { analyticName, type, handleAction, borderColor, buttonColor, buttonName, color, border } = props
 
     const handleClick = (analyticName: string): any => {
         // we will write the handle analytics here
@@ -75,7 +76,7 @@ export const FormButton: React.FC<IButton> = (props) => {
         handleAction && handleAction()
     }
     return (
-        <Box as="button" width="16.5rem" rounded="0" bg={buttonColor || 'blue.500'} size="lg" border={border} borderColor={borderColor} color={color} px={4} h={8} {...props} onClick={() => handleClick(analyticName)}>
+        <Box as="button" type={type} width="16.5rem" rounded="0" bg={buttonColor || 'blue.500'} size="lg" border={border} borderColor={borderColor} color={color} px={4} h={8} {...props} onClick={() => handleClick(analyticName)}>
             {buttonName}
         </Box>
     )
@@ -109,7 +110,7 @@ export const LinkButton: React.FC<ILinkButton> = (props) => {
 
     }
     return (
-        <Link href={buttonLink}>
+        <Link to={buttonLink}>
             <Box as="button" width="16.5rem" rounded="0" bg={buttonColor || 'blue.500'} size="lg" border={border} borderColor={borderColor} color={color} px={4} h={8} {...props} onClick={() => handleClick(analyticName)}>
                 {buttonName}
             </Box>
