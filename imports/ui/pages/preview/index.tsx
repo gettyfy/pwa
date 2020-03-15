@@ -45,11 +45,18 @@ const Signup: React.FC = () => {
         })
     }
     const autoCompleteOptions = [
-        { value: "apple" },
-        { value: "pear" },
-        { value: "orange" },
-        { value: "grape" },
-        { value: "banana" }
+        { value: "Apple" },
+        { value: "Pear" },
+        { value: "Orange" },
+        { value: "Grape" },
+        { value: "Banana" },
+        { value: "Coloran" },
+        { value: "Buran" },
+        { value: "Zeron" },
+        { value: "Fedan" },
+        { value: "Chrysler" },
+        { value: "Ferrari" },
+        { value: "Bugati" }
     ]
 
 
@@ -67,7 +74,7 @@ const Signup: React.FC = () => {
             >
                 {(props: FormikProps<any>) => (
                     <FormikForm isLoading={props.isSubmitting} analyticName="Signup Form" formProps={props} buttonName="Signup">
-                        <TextAreaField placeholder="Type your address here" label="Text Area" validate={Validator.isRequired} name="textarea"/>
+                        <TextAreaField placeholder="Type your address here" label="Text Area" validate={Validator.isRequired} name="textarea" />
                         <InputField label="Your Full Name" placeholder="enter your name" name="fullname" validate={Validator.isRequired} />
                         <InputField label="Your Email" placeholder="enter an email address" name="username" validate={Validator.isEmail} />
                         <PasswordField label="Your Password" placeholder="set a password" name="password" validate={Validator.isRequired} />
