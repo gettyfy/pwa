@@ -16,8 +16,8 @@ type TBreakPoint = Array<string>;
 const fonts: IThemeProps = {
 	...chakraTheme.fonts,
 	mono: `'Menlo', Monaco, Fira Code, Ubuntu Mono, monospace`,
-	heading: `"Barlow", sans-serif'`,
-	body: `'Barlow', "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif`
+	heading: `"Barlow", "Cantarell", "Oxygen", "Ubuntu", sans-serif`,
+	body: `'Barlow', "Segoe UI", "Cantarell", "Oxygen", "Ubuntu", "Roboto", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif`
 };
 const fontSizes: IThemeProps = {
 	xs: '0.65rem',

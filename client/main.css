@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Barlow:400,500,600&display=swap');
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Barlow', "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Barlow', "Segoe UI", "Cantarell", "Oxygen", "Ubuntu", "Roboto", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
 }
 
 /* @media (min-width: 620px) {
@@ -15,7 +15,7 @@ body {
 }
 
 html {
-  font-family: -apple-system, BlinkMacSystemFont, 'Barlow', "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Barlow', "Segoe UI", "Cantarell", "Oxygen", "Ubuntu", "Roboto", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
 }
 
 body {
