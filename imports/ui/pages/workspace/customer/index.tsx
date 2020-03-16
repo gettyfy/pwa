@@ -22,16 +22,15 @@ interface CustomerProps {
 }
 
 
- class Customer extends React.Component<CustomerProps> {
-  
+class Customer extends React.Component<CustomerProps> {
+
   render() {
     console.log(this.props)
     const { customers } = this.props
     return (
 
       <StyledCustomers>
-        <PageHeader title="Your Customers" />
-        {/* <div>{JSON.stringify(this.props.customers)}</div> */}
+        <PageHeader useHeader useTitle title="Your Customers" />
 
         <CustomerStyle>
           {customers.map((val, index) => {
@@ -45,10 +44,10 @@ interface CustomerProps {
 
             )
           })
-        }
+          }
         </CustomerStyle>
 
-        
+
       </StyledCustomers>
 
 
