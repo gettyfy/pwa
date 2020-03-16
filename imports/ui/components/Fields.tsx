@@ -498,7 +498,6 @@ interface AutoCompleteProps {
 const AutoCompleteField = (props: AutoCompleteProps): JSX.Element => {
     const { validate, placeholder, name, options, label, ...rest } = props
     const [field, meta, helpers] = useField(props);
-    console.log(field, meta, helpers);
 
     // const items = ;
 
