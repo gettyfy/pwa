@@ -5,6 +5,8 @@ import styled from '@emotion/styled'
 import { PageHeader } from '/imports/ui/components'
 
 import { CustomerStyle, CustomerName } from '/imports/ui/components'
+// Make the Detail Page Available in routes
+export { CustomerView } from './view'
 
 //imports for API call
 import { Meteor } from 'meteor/meteor'
@@ -22,16 +24,15 @@ interface CustomerProps {
 }
 
 
- class Customer extends React.Component<CustomerProps> {
-  
+class Customer extends React.Component<CustomerProps> {
+
   render() {
     console.log(this.props)
     const { customers } = this.props
     return (
 
       <StyledCustomers>
-        <PageHeader title="Your Customers" />
-        {/* <div>{JSON.stringify(this.props.customers)}</div> */}
+        <PageHeader useHeader useTitle title="Your Customers" />
 
         <CustomerStyle>
           {customers.map((val, index) => {
@@ -45,10 +46,10 @@ interface CustomerProps {
 
             )
           })
-        }
+          }
         </CustomerStyle>
 
-        
+
       </StyledCustomers>
 
 

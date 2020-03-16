@@ -16,7 +16,7 @@ const PageWrapper = styled.section<IPageWrapper>`
 	
 `
 
-export default class Wrapper extends React.Component<{ layoutWrapper: string }> {
+export default class Wrapper extends React.Component<{ layoutWrapper?: string }> {
 
 	static propTypes = {
 		layoutWrapper: PropTypes.string,

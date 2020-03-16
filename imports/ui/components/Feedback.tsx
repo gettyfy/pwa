@@ -28,7 +28,7 @@ export const PositiveFeedback: React.FC<IFeedback> = (props) => {
                 <strong><h1>{message}</h1>
                 </strong>
             </Box>
-            <LinkButton buttonLink={buttonLink} buttonName={buttonName} analyticName="Verify" buttonColor="green.500" color="#FFF" {...rest} {...props} />
+            <LinkButton buttonLink={buttonLink} buttonName={buttonName} analyticName="Complete Funnel" buttonColor="green.500" color="#FFF" {...rest} {...props} />
         </Box>
 
     )

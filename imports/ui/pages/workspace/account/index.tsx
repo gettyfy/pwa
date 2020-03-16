@@ -1,25 +1,52 @@
-import React from 'react';
-import { Icon, Box } from "@chakra-ui/core";
+import React from "react";
+import { Link } from "react-router-dom";
+
+import { Icon, Box, Heading } from "@chakra-ui/core";
 import styled from '@emotion/styled'
-import { PageHeader } from '/imports/ui/components'
+import path from '/imports/ui/router'
+import { PageHeader, BreakLayout } from '/imports/ui/components'
 
 
+const DrawerLink = styled.li`
+    text-decoration: none;
+    padding: 10px 1.2rem;
+    font-weight: bold;
+    list-style: none;
+    border-bottom: 1px solid #EEE;
+    `
+const NavWrapper = styled.ul`
+    text-decoration: none;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 0;
+    margin: 0;
 
-const StyledRecord = styled.main`
-  display: flex;
-  flex-direction: column;
 `
 
+export default function AccountPage(this: any) {
+  return (
+    <div>
+      <PageHeader useHeader title="Your Transactions" />
 
-export default class record extends React.Component {
-  render() {
-    return (
-      <StyledRecord>
-        <PageHeader useHeader />
+      <BreakLayout>
+        <NavWrapper>
+          <DrawerLink><Link to="/">Wallet</Link></DrawerLink>
+          <DrawerLink><Link to={path.onboarding}>Profile</Link> </DrawerLink>
+          <DrawerLink><Link to={path.onboarding}>Upgrade Account</Link> </DrawerLink>
+          <DrawerLink><Link to={path.workspace.transaction}>Transactions</Link></DrawerLink>
+          <DrawerLink><Link to={path.workspace.remind}>Reminders</Link></DrawerLink>
 
-      </StyledRecord>
+          <Box mt="5" width="100%">
+            <Heading as="h1" size="md" pl="4">User Account</Heading>
+            <DrawerLink><Link to={path.auth.loginRoute}>Login</Link></DrawerLink>
+            <DrawerLink><Link to={path.auth.signupRoute}>Signup<Icon name="external-link" mx="2px" /></Link></DrawerLink>
+            <DrawerLink><Link to={path.auth.resetPasswordRoute}>Reset Account <Icon name="external-link" mx="2px" /></Link></DrawerLink>
+          </Box>
+        </NavWrapper>
+      </BreakLayout>
 
-
-    )
-  }
+    </div >
+  );
 }

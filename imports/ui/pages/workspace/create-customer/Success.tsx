@@ -13,8 +13,8 @@ const Success: React.FunctionComponent = () => {
             message="A customer has been created successfully."
             iconName="check-circle"
             // iconSize="6rem"
-            buttonLink={Path.workspace.remind}
-            buttonName="SEND A REMINDER"
+            buttonLink={Path.workspace.customer}
+            buttonName="VIEW CUSTOMERS"
         />
 
 

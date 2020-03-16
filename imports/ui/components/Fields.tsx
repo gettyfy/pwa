@@ -8,8 +8,8 @@ import React from 'react';
 import PropTypes from 'prop-types'
 import styled from '@emotion/styled'
 import Downshift from "downshift";
-import { useField, Form, Field, FieldProps, FieldConfig } from 'formik'
-import { FormControl, List, Textarea, ListItem, Checkbox, FormLabel, Select, RadioGroup, RadioButtonGroup, Icon, IconButton, FormErrorMessage, Input, Button, InputGroup, Radio, InputRightElement, CustomTheme, DefaultTheme } from '@chakra-ui/core'
+import { useField, Form, Field, FieldProps } from 'formik'
+import { FormControl, List, Textarea, ListItem, Checkbox, FormLabel, Select, RadioGroup, RadioButtonGroup, Icon, IconButton, FormErrorMessage, Input, Button, InputGroup, Radio, InputRightElement, CustomTheme, DefaultTheme, Box } from '@chakra-ui/core'
 import * as Analytics from '/imports/ui/analytics'
 
 
@@ -68,7 +68,7 @@ const FormikSelect = styled(Select)`
         font-size: ${(props: any) => props.theme.custom.InputFontSize};
     }
 `
-const FormikLabel = styled(FormLabel)<{fsize: string}>`
+const FormikLabel = styled(FormLabel) <{ fsize?: string }>`
     font-size: ${props => props.fsize ? props.fsize : '12px'};
     position: absolute;
     top: 0;
@@ -109,8 +109,8 @@ const TextAreaField = (props: TextAreaFieldProps): JSX.Element => {
                 //@ts-ignore
                 <FormControl isInvalid={form.errors[name] && form.touched[name]} mt="5" position="relative">
                     <FormikLabel fsize="14px" id={[name, 'label'].join('-')} htmlFor={[name, 'input'].join('-')} color="gray.600">{label}</FormikLabel>
-                      <FormikTextArea isFullWidth variant="filled" {...field} id={[name, 'input'].join('-')} placeholder={placeholder} focusBorderColor="gray.500" borderColor="gray.500" errorBorderColor="red.500" size="lg" />
-                     
+                    <FormikTextArea isFullWidth variant="filled" {...field} id={[name, 'input'].join('-')} placeholder={placeholder} focusBorderColor="gray.500" borderColor="gray.500" errorBorderColor="red.500" size="lg" />
+
                     <FormErrorMessage>{form.errors[name]}</FormErrorMessage>
                 </FormControl>
             )}
@@ -134,7 +134,7 @@ interface InputFieldProps {
 
 
 const InputField = (props: InputFieldProps): JSX.Element => {
-    const { validate, onChange, name, placeholder, label } = props
+    const { validate, name, placeholder, label } = props
 
     /**
      * Formik Field Props to be aware of
@@ -492,11 +492,12 @@ interface AutoCompleteProps {
     label?: string,
     placeholder: string
     options: Array<{ value: string }>,
+    [key: string]: any
 }
 
 const AutoCompleteField = (props: AutoCompleteProps): JSX.Element => {
     const { validate, placeholder, name, options, label, ...rest } = props
-    const [field, meta, helpers] = useField<any>(props);
+    const [field, meta, helpers] = useField(props);
     console.log(field, meta, helpers);
 
     // const items = ;
@@ -525,8 +526,9 @@ const AutoCompleteField = (props: AutoCompleteProps): JSX.Element => {
                         <div>
                             <FormLabel {...getToggleButtonProps()} {...getLabelProps()} color="gray.600">{label}</FormLabel>
                             <div {...getRootProps({}, { suppressRefError: true })}>
-                                <FormikInput {...field} placeholder={placeholder}  {...getInputProps()} {...rest} validate={validate} />
+                                <FormikInput isFullWidth variant="filled"  {...field} placeholder={placeholder}  {...getInputProps()} {...rest} validate={validate} focusBorderColor="gray.500" borderColor="gray.500" errorBorderColor="red.500" size="lg" />
                             </div>
+
                             <List {...getMenuProps()}>
                                 {isOpen
                                     ? options

@@ -23,7 +23,7 @@ interface TransactionProps {
 }
 
 
-class Transaction extends React.Component<TransactionProps>{
+class Transaction extends React.Component<TransactionProps> {
 
   render() {
     console.log(this.props)
@@ -31,8 +31,7 @@ class Transaction extends React.Component<TransactionProps>{
 
     return (
       <StyledTransaction>
-        <PageHeader title="Transactions" />
-        {/* {<div>{JSON.stringify(this.props.transactions)}</div>   */}
+        <PageHeader useHeader title="Your Transactions" />
 
         {/* Button */}
         <Box my="2">
@@ -46,9 +45,10 @@ class Transaction extends React.Component<TransactionProps>{
 
 
                     <TransactionList
+                      key={val._id}
                       analyticName="View a Transaction"
                       customerStatus="10 days to overdue"
-                      customerName={val.customerName}
+                      customerName={val.owner?.profile.name}
                       amount="GHc233"
                       paymentStatus="PAID"
                       overdueAmount="GHC346"

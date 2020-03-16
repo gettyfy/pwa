@@ -11,7 +11,7 @@ import { Meteor } from 'meteor/meteor';
 
 const Reason: React.FunctionComponent = (props: any) => {
     const history = useHistory();
-    
+
 
     interface IReasonInterface {
         itemName: string,
@@ -22,10 +22,10 @@ const Reason: React.FunctionComponent = (props: any) => {
         [key: string]: string
     }
 
-        const init: IReasonInterface = {
+    const init: IReasonInterface = {
         itemName: "",
         quantity: "",
-        price: "",
+        price: "1800",
         amountPaid: "",
         amount: "",
         balance: "",
@@ -36,7 +36,7 @@ const Reason: React.FunctionComponent = (props: any) => {
     const handleSubmit = async (values: IReasonInterface) => {
         await props.updateState(values)
         console.log(values)
-       await Meteor.call('transaction.insert', values)
+        await Meteor.call('transaction.insert', values)
         history.push(`${path.workspace.recovery}/review`)
     }
 
@@ -60,9 +60,9 @@ const Reason: React.FunctionComponent = (props: any) => {
                 {(props: FormikProps<any>) => (
                     <FormikForm isLoading={props.isSubmitting} analyticName="Signup Form" formProps={props} buttonName="NEXT">
                         <InputField label="Price" placeholder="C700" name="price" validate={Validator.isNumeric} />
-                        <InputField label="Amount to recover" placeholder="C300" name="amount" validate={Validator.isNumeric} />
+                        <InputField label="Max Amount to recover" placeholder="C300" name="amount" validate={Validator.isNumeric} />
                         <TextAreaField label="Your reason" placeholder="Why do you want to escalate?" name="reason" />
-                       
+
 
                     </FormikForm>
                 )}

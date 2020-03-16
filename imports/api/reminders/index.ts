@@ -1,3 +1,4 @@
+import { triggerVoice } from './trigger';
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
 import { Reminders } from '../collections';
@@ -10,6 +11,7 @@ export function removeReminder(this: any, id: string): void {
 
 export function insertReminder(this: any, obj: any) {
 	check(obj, Object);
+	triggerVoice();
 
 	// Make sure the user is logged in before inserting a task
 	evaluateAndExecute(
