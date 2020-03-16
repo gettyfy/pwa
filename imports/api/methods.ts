@@ -7,10 +7,11 @@
  */
 
 import { Meteor } from 'meteor/meteor';
-import { insertTask, removeTask, setChecked, setPrivate } from '/imports/api/tasks';
+import { insertTask, removeTask, setChecked, setPrivate } from './template/tasks';
 import { insertCustomer, removeCustomer } from '/imports/api/customers';
 import { insertTransaction, removeTransaction } from '/imports/api/transactions';
 import { insertReminder, removeReminder } from '/imports/api/reminders';
+import { insertEscalation, removeEscalation } from '/imports/api/escalations';
 
 // Define Methods for managing tasks related logic
 const tasks = {
@@ -38,10 +39,17 @@ const reminders = {
 	'reminder.remove': removeReminder
 };
 
+// Methods for Escalation
+const escalations = {
+	'escalation.insert': insertEscalation,
+	'escalation.remove': removeEscalation
+};
+
 // Destructure methods into the Meteor Method
 Meteor.methods({
 	...tasks,
 	...customers,
 	...transactions,
-	...reminders
+	...reminders,
+	...escalations
 });

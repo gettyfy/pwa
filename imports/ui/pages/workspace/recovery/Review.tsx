@@ -1,7 +1,11 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom'
 import { Icon, Box, Heading, Stack, Stat, StatNumber, StatHelpText, StatLabel, Flex, Text, StatGroup, Divider } from "@chakra-ui/core";
 import styled from '@emotion/styled'
-import { FormButton, SummaryList, SummaryRow} from '/imports/ui/components'
+import { FormButton, SummaryList, SummaryRow, PageHeader } from '/imports/ui/components'
+import Path from '/imports/ui/router';
+import { Meteor } from 'meteor/meteor'
+
 
 
 const StyledReview= styled.main`
@@ -18,14 +22,24 @@ const ReviewStat = styled(StatGroup)`
 `
 
 
-export default class review extends React.Component {
-    render() {
-        return (
-            <StyledReview>
+const Review = (props) => {
+  const history = useHistory()
+
+  console.log(props)
+
+  const handleSubmit = () => {
+    Meteor.call('transaction.insert', props.data)
+    history.push(`${Path.workspace.recovery}/success`)
+  }
+
+  return (
+
+    <StyledReview>
                 <Box bg="#F3F5FD">
                 <Flex flexDirection="row" mt="10">
                 <Box>
-                    <Icon name="arrow-back" size="24px" />
+                 <PageHeader title="Review" subTitle="Review this transaction" />
+                  
                 </Box>
                 <Box ml="3">
                  <Heading as="h3" size="lg">Review Request </Heading>
@@ -160,12 +174,12 @@ export default class review extends React.Component {
 
                 {/* Button */}
                 <Box mt="10">
-                    <FormButton buttonName="SUBMIT FOR COLLECITION" analyticName="Verify" buttonColor="#0B69FF" color="#FFF" handleAction={() => handleSubmit()} />
+                    <FormButton buttonName="SUBMIT FOR COLLECTION" analyticName="Verify" buttonColor="#0B69FF" color="#FFF" handleAction={() => handleSubmit()} />
                 </Box>
 
             </StyledReview>
-
-
-        )
-    }
+  )
 }
+
+
+export default Review

@@ -136,8 +136,12 @@ export interface ITransaction {
 	userId: string;
 }
 
-export interface IEscalation extends ITransaction {
+export interface IEscalation {
+	_id: string;
 	_pk: string;
+	reason: string;
+	commission: string;
+	transaction: ITransaction;
 }
 
 export interface IPaymentPlan {
