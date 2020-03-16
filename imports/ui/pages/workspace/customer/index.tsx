@@ -5,6 +5,8 @@ import styled from '@emotion/styled'
 import { PageHeader } from '/imports/ui/components'
 
 import { CustomerStyle, CustomerName } from '/imports/ui/components'
+// Make the Detail Page Available in routes
+export { CustomerView } from './view'
 
 //imports for API call
 import { Meteor } from 'meteor/meteor'
