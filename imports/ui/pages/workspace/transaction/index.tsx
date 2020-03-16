@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Tabs, TabList, Tab, TabPanel, TabPanels, Avatar, Text, Flex } from "@chakra-ui/core";
+import { Box, Avatar} from "@chakra-ui/core";
 import { withTracker } from 'meteor/react-meteor-data';
 import styled from '@emotion/styled'
 import { FormButton } from '/imports/ui/components'
