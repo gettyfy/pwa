@@ -6,11 +6,11 @@ export const allowIsWorkspaceMember = function(userId, workspace) {
 	return workspace && workspace.hasMember(userId);
 };
 
-export const allowIsAnyWorkspaceMember = function(userId, workspaces) {
-	return _.some(workspaces, (workspace) => {
-		return workspace && workspace.hasMember(userId);
-	});
-};
+// export const allowIsAnyWorkspaceMember = function(userId, workspaces) {
+// 	return _.some(workspaces, (workspace) => {
+// 		return workspace && workspace.hasMember(userId);
+// 	});
+// };
 
 export const allowIsWorkspaceMemberCommentOnly = function(userId, workspace) {
 	return workspace && workspace.hasMember(userId) && !workspace.hasCommentOnly(userId);

@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '@emotion/styled'
 import { Link } from 'react-router-dom'
-import { Box, Stack, Avatar, Text, Icon, Flex } from '@chakra-ui/core'
+import { Box, Stack, Avatar, Heading, Text, Icon, Flex as ChFlex } from '@chakra-ui/core'
 import * as Analytics from '/imports/ui/analytics';
 
 
@@ -19,18 +19,44 @@ interface ITransactionList {
     paymentStatus: string,
     overdueAmount: string,
     overdueStatus: string,
-    boxPadding: any,
-    customerProfile: any,
     cardLink: string,
-    iconName: string,
+    iconName: string | any,
     iconSize: any
 }
 
 
+const Flex = styled(ChFlex)`
+    min-height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    :hover {
+        cursor: pointer;
+        opacity: 0.7;
+    }
+`
+const StatusText = styled(Text)`
+    margin: 0;
+    padding: 0;
+    font-size: .65rem;
+    line-height: 6px;
+    text-transform: uppercase;
+`
+
+const LineDivider = styled.div`
+    height: .8px;
+    padding: 0px;
+    margin: 0;
+    margin-left: calc(-${ props => props.theme.custom.defaultBox});
+    margin-right: calc(-${ props => props.theme.custom.defaultBox});
+    background: #eee;
+`
+
 
 
 const TransactionList = (props: ITransactionList) => {
-    const { analyticName, boxPadding, customerProfile, customerName, customerStatus, amount, paymentStatus, overdueAmount, overdueStatus, iconName, iconSize, cardLink } = props
+    const { analyticName, customerName, customerStatus, amount, paymentStatus, overdueAmount, overdueStatus, iconName, iconSize, cardLink } = props
 
     const handleClick = (analyticName: string): any => {
 
@@ -41,43 +67,36 @@ const TransactionList = (props: ITransactionList) => {
     }
 
     return (
-        <Flex>
-            {/* <Box d="flex"> */}
-            {/* <Link to={cardLink}> */}
-            <Box p={boxPadding}>
-                <Stack isInline>
-                    <Avatar name={customerProfile} src="/" />
-                </Stack>
-            </Box>
+        <Link to={cardLink} onClick={handleClick(analyticName)}>
+            <Flex>
+                <Box p="2" width="15%">
+                    <Avatar size="sm" name={customerName} src="/" />
+                </Box>
 
-            <Box>
-                <Text fontSize="xs">{customerStatus}</Text>
-                <Text fontSize="xs">{customerName}</Text>
-            </Box>
+                <Box width="40%">
+                    <StatusText>{customerStatus}</StatusText>
+                    <Heading as="h5" fontSize="sm">{customerName}</Heading>
+                </Box>
 
-            <Box p={boxPadding}>
-                <Text fontSize="xs">{amount}</Text>
-                <Text fontSize="xs">{paymentStatus}</Text>
-            </Box>
+                <Box width="20%">
+                    <Heading as="h6" size="xs">{amount}</Heading>
+                    <Text fontSize="xs" color="green.600">{paymentStatus}</Text>
+                </Box>
 
-            <Box p={boxPadding}>
-                <Text fontSize="xs">{overdueAmount}</Text>
-                <Text fontSize="xs">{overdueStatus}</Text>
+                <Box width="20%">
+                    <Heading as="h6" size="xs">{overdueAmount}</Heading>
+                    <Text fontWeight="bold" fontSize="xs" color="red.700">{overdueStatus}</Text>
+                </Box>
 
-            </Box>
-
-            <Box p={boxPadding} onClick={handleClick(analyticName)}>
-                <Stack isInline>
-                    <Link to={cardLink}>
+                <Box width="5%">
+                    <Stack isInline>
                         <Icon name={iconName} size={iconSize} />
-                    </Link>
-                </Stack>
+                    </Stack>
 
-            </Box>
-
-            {/* </Link> */}
-            {/* </Box> */}
-        </Flex>
+                </Box>
+            </Flex>
+            <LineDivider />
+        </Link>
 
 
 

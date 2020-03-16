@@ -1,102 +1,49 @@
-import React from 'react';
-import {
-  Icon, Box, Stack, Heading, Flex, Text, Select, NumberInput, NumberInputField, NumberInputStepper, NumberIncrementStepper, NumberDecrementStepper, Textarea
-} from "@chakra-ui/core";
-import styled from '@emotion/styled'
-import { FormButton } from '/imports/ui/components'
+import React, { Component } from 'react';
 
-const StyledRecord = styled.main`
-  display: flex;
-  flex-direction: column;
-`
+import { Switch, Route } from 'react-router-dom';
 
+import Success from './Success';
+import Create from './Create';
+import * as Analytics from '/imports/ui/analytics'
+import Remind from './Remind'
+// import CreateCustomer from './index';
 
-export default class record extends React.Component {
-  render() {
-    return (
-      <StyledRecord>
-        <Box>
-          <Icon name="arrow-back" size="24px" />
-        </Box>
-        <Stack spacing={3}>
-          <Heading as="h1" size="2xl">
-            Create a Reminder
-         </Heading>
-          <Box mt="6">
-            <h6>Select Channels</h6>
-          </Box>
-        </Stack>
+export default class CreateCustomer extends Component {
+	constructor(props: any) {
+		super(props);
+		this.state = {
+			
+		}
+	}
 
-        {/* Channels */}
-        <Flex flexDirection="row" mt="10px" justify="space-between" textAlign="center">
-          <Box border="1px" borderRadius="md" w="25%" h="59px" mr="3" style={{ borderColor: "blue" }}>
-            <Box mt="3">
-              <Icon name="phone" size="24px" />
-              <Text fontSize="xs">Call</Text>
-            </Box>
+	updateState = (value: object) => {
+		const oldStore = this.state;
+		const newState = Object.assign(oldStore, value)
+		this.setState({...newState});
+		console.log("STATE HAS BEEN UPDATED WITH NEW VALUES", this.state)
 
-          </Box>
-          <Box border="1px" borderRadius="md" borderColor="blue" w="25%" h="59px" mr="3" style={{ borderColor: "blue" }}>
-            <Box mt="3">
-              <Icon name="email" size="24px" />
-              <Text fontSize="xs">SMS</Text>
-            </Box>
-          </Box>
-          <Box border="1px" borderRadius="md" borderColor="blue" w="25%" h="59px" mr="3" style={{ borderColor: "blue" }}>
-            <Box mt="3">
-              <Icon name="chat" size="24px" />
-              <Text fontSize="xs">Whatsapp</Text>
-            </Box>
-          </Box>
-          <Box border="1px" borderRadius="md" borderColor="blue" w="25%" h="59px" style={{ borderColor: "blue" }}>
-            <Box mt="3">
-              <Icon name="at-sign" size="24px" />
-              <Text fontSize="xs">Email</Text>
-            </Box>
-          </Box>
-        </Flex>
+	}
 
-        {/* Set reminders */}
-        <Stack spacing={2} mt="10">
+	// updateState = (key: string, value: string) => {
+	// 	this.setState({ [key]: value });
+	// 	console.log("STATE HAS BEEN UPDATED WITH NEW VALUES", this.state)
+	// }
 
+	onSubmit = async () => {
+		console.log(this.state);
+		await Analytics.track('Submit Food Menu', this.state);
+		alert('Thank you')
+		window.location.replace('/customer')
+	};
 
-          <Text fontSize="md">Set Intervals</Text>
-
-          <Text fontSize="xs">With intervals you can set what frequency how many times your
-          reminder will be fired to this user.</Text>
-        </Stack>
-
-
-
-
-        {/* Set intervals */}
-        <Stack shouldWrapChildren isInline mt="10">
-          <NumberInput size="sm" defaultValue={15} min={10}>
-            <NumberInputField />
-            <NumberInputStepper>
-              <NumberIncrementStepper />
-              <NumberDecrementStepper />
-            </NumberInputStepper>
-          </NumberInput>
-          <Select placeholder="Select option">
-            <option value="option1">Daily</option>
-            <option value="option2">Weekly</option>
-            <option value="option3">Monthly </option>
-          </Select>
-        </Stack>
-
-        <Box mt="10">
-          <Text fontSize="md">Message Template</Text>
-          <Textarea placeholder="Here is a sample placeholder" />
-        </Box>
-        {/* Button */}
-        <Box mt="10">
-          <FormButton buttonName="Send" analyticName="Verify" buttonColor="#0B69FF" color="#FFF" handleAction={() => handleSubmit()} />
-        </Box>
-
-      </StyledRecord>
-
-
-    )
-  }
+	render() {
+		return (
+			<Switch>
+				<Route path="/remind" exact><Create data={this.state} updateState={this.updateState} onSubmit={this.onSubmit} /></Route>
+				<Route path="/remind/rules" exact><Remind data={this.state} updateState={this.updateState} /></Route>
+				<Route path="/remind/success" exact><Success data={this.state} updateState={this.updateState} /></Route>
+				
+			</Switch>
+		);
+	}
 }

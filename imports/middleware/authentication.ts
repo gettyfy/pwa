@@ -11,6 +11,7 @@ Meteor.startup(() => {
 		return !user.loginDisabled;
 	});
 
+	//@ts-ignore
 	Authentication = {};
 
 	Authentication.checkUserId = function(userId) {

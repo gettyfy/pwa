@@ -8,8 +8,8 @@ import React from 'react';
 import PropTypes from 'prop-types'
 import styled from '@emotion/styled'
 import Downshift from "downshift";
-import { useField, Form, Field, FieldProps, FieldConfig } from 'formik'
-import { FormControl, List, ListItem, Checkbox, FormLabel, Select, RadioGroup, RadioButtonGroup, Icon, IconButton, FormErrorMessage, Input, Button, InputGroup, Radio, InputRightElement, CustomTheme, DefaultTheme } from '@chakra-ui/core'
+import { useField, Form, Field, FieldProps } from 'formik'
+import { FormControl, List, Textarea, ListItem, Checkbox, FormLabel, Select, RadioGroup, RadioButtonGroup, Icon, IconButton, FormErrorMessage, Input, Button, InputGroup, Radio, InputRightElement, CustomTheme, DefaultTheme, Box } from '@chakra-ui/core'
 import * as Analytics from '/imports/ui/analytics'
 
 
@@ -21,22 +21,37 @@ const FormikButton = styled(Button) <{ withIcon: boolean | undefined }>`
     align-content: center;
 `
 
+const FormikTextArea = styled(Textarea)`
+    border-radius: 0px;
+    border-width: 0px;
+    border-right: none;
+    padding-top: 2.55rem;
+    border-bottom: 1.6px solid #979797;
+    padding-bottom: 1rem;
+    font-size: ${(props: any) => props.theme.custom.InputFontSize};
+    border-top: none;
+    border-left: none;
+
+    ::placeholder, ::-moz-placeholder {
+        font-size: ${(props: any) => props.theme.custom.InputFontSize};
+        /* vertical-align: middle; */
+    }
+`
+
+
 const FormikInput = styled(Input)`
     border-radius: 0px;
     border-width: 1.3px;
     border-right: none;
+    padding-top: 2.55rem;
+    padding-bottom: 1.1rem;
     font-size: ${(props: any) => props.theme.custom.InputFontSize};
     border-top: none;
     border-left: none;
-    min-height: ${(props: any) => props.theme.custom.inputMinHeight};
-    line-height: 1px;
 
-    ::placeholder,
-    ::-webkit-input-placeholder {
+    ::placeholder, ::-moz-placeholder {
         font-size: ${(props: any) => props.theme.custom.InputFontSize};
-        padding-bottom: 0;
-        line-height: 1rem;
-        vertical-align: bottom;
+        vertical-align: middle;
     }
 `
 const FormikSelect = styled(Select)`
@@ -53,8 +68,8 @@ const FormikSelect = styled(Select)`
         font-size: ${(props: any) => props.theme.custom.InputFontSize};
     }
 `
-const FormikLabel = styled(FormLabel)`
-    font-size: 12px;
+const FormikLabel = styled(FormLabel) <{ fsize?: string }>`
+    font-size: ${props => props.fsize ? props.fsize : '12px'};
     position: absolute;
     top: 0;
     transition: ease-in 0.2s;
@@ -78,12 +93,45 @@ const FormikLabel = styled(FormLabel)`
  * The form takes in a form name and calls a validation function that will be used within the pages
  */
 
+interface TextAreaFieldProps {
+    name: string,
+    placeholder: string,
+    label: string,
+    validate?: Function
+}
+
+const TextAreaField = (props: TextAreaFieldProps): JSX.Element => {
+    const { validate, placeholder, name, label } = props;
+
+    return (
+        <Field name={name} validate={validate} {...props}>
+            {({ field, form }: FieldProps) => (
+                //@ts-ignore
+                <FormControl isInvalid={form.errors[name] && form.touched[name]} mt="5" position="relative">
+                    <FormikLabel fsize="14px" id={[name, 'label'].join('-')} htmlFor={[name, 'input'].join('-')} color="gray.600">{label}</FormikLabel>
+                    <FormikTextArea isFullWidth variant="filled" {...field} id={[name, 'input'].join('-')} placeholder={placeholder} focusBorderColor="gray.500" borderColor="gray.500" errorBorderColor="red.500" size="lg" />
+
+                    <FormErrorMessage>{form.errors[name]}</FormErrorMessage>
+                </FormControl>
+            )}
+        </Field>
+    );
+}
+
+
+TextAreaField.propTypes = {
+    placeholder: PropTypes.string.isRequired,
+    validate: PropTypes.func,
+};
+
+
 interface InputFieldProps {
     name: string,
     label: string,
     placeholder: string,
     validate?: Function
 }
+
 
 const InputField = (props: InputFieldProps): JSX.Element => {
     const { validate, name, placeholder, label } = props
@@ -102,7 +150,7 @@ const InputField = (props: InputFieldProps): JSX.Element => {
                 <FormControl isInvalid={form.errors[name] && form.touched[name]} mt="5" position="relative">
                     <FormikLabel id={[name, 'label'].join('-')} htmlFor={[name, 'input'].join('-')} color="gray.600">{label}</FormikLabel>
                     <InputGroup size="lg">
-                        <FormikInput isFullWidth variant="filled" {...field} id={[name, 'input'].join('-')} placeholder={placeholder} focusBorderColor="gray.500" borderColor="gray.500" errorBorderColor="red.500" size="lg" />
+                        <FormikInput {...props} isFullWidth variant="filled" {...field} id={[name, 'input'].join('-')} placeholder={placeholder} focusBorderColor="gray.500" borderColor="gray.500" errorBorderColor="red.500" size="lg" />
                     </InputGroup>
                     <FormErrorMessage>{form.errors[name]}</FormErrorMessage>
                 </FormControl>
@@ -444,11 +492,12 @@ interface AutoCompleteProps {
     label?: string,
     placeholder: string
     options: Array<{ value: string }>,
+    [key: string]: any
 }
 
 const AutoCompleteField = (props: AutoCompleteProps): JSX.Element => {
     const { validate, placeholder, name, options, label, ...rest } = props
-    const [field, meta, helpers] = useField<any>(props);
+    const [field, meta, helpers] = useField(props);
     console.log(field, meta, helpers);
 
     // const items = ;
@@ -477,8 +526,9 @@ const AutoCompleteField = (props: AutoCompleteProps): JSX.Element => {
                         <div>
                             <FormLabel {...getToggleButtonProps()} {...getLabelProps()} color="gray.600">{label}</FormLabel>
                             <div {...getRootProps({}, { suppressRefError: true })}>
-                                <FormikInput {...field} placeholder={placeholder}  {...getInputProps()} {...rest} validate={validate} />
+                                <FormikInput isFullWidth variant="filled"  {...field} placeholder={placeholder}  {...getInputProps()} {...rest} validate={validate} focusBorderColor="gray.500" borderColor="gray.500" errorBorderColor="red.500" size="lg" />
                             </div>
+
                             <List {...getMenuProps()}>
                                 {isOpen
                                     ? options
@@ -522,7 +572,7 @@ AutoCompleteField.propTypes = {
 
 
 // ====== Export Field Components here ===========
-export { InputField, PasswordField, CheckField, RadioField, AutoCompleteField, RadioButtonField, SelectField, FormikForm }
+export { InputField, PasswordField, CheckField, RadioField, TextAreaField, AutoCompleteField, RadioButtonField, SelectField, FormikForm }
 
 
 

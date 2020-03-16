@@ -1,0 +1,170 @@
+{
+	"user": {
+		"email": "herrik066@gmail.com",
+		"userId": "herrik066@gmail.com",
+		"name": "Henry Nwobdo",
+		"phone": "+2347064696744",
+		"timestamp": {}
+	},
+	"items": [
+		{
+			"accept_value_on_delivery": null,
+			"amount_to_receive": null,
+			"description": null,
+			"id": null,
+			"item_type": { "code": null, "name": null },
+			"item_type_code": null,
+			"name": null,
+			"package_size_code": null,
+			"quantity": 0,
+			"reference_code": null,
+			"value": null,
+			"weight": null
+		}
+	],
+	"origin_city": null,
+	"origin_country_code": "NG",
+	"origin_email": null,
+	"origin_name": null,
+	"origin_phone": null,
+	"origin_post_code": null,
+	"origin_state_code": "LOS",
+	"origin_street": null,
+	"payment_option": { "code": null, "name": null },
+	"payment_option_code": null,
+	"payment_options": [
+		{
+			"brand": "card",
+			"code": "card",
+			"friendly_brand": "You will be debited from your credit/debit card",
+			"mask": "Credit/Debit Card",
+			"pk": "card"
+		}
+	],
+	"formName": "quote",
+	"payload": {
+		"__page__": "rates",
+		"accept_value_on_delivery": null,
+		"applied_credits": null,
+		"coupon": { "code": null, "description": null, "discount": null, "id": 0 },
+		"coupon_code": null,
+		"coupon_description": null,
+		"credit_amount": null,
+		"credits": null,
+		"delivery_priority_code": "next_day",
+		"delivery_type_code": "last_mile",
+		"destination_address": {
+			"city": "Manches",
+			"country": { "code": "US", "name": "United States Of America", "phone_code": null },
+			"email": null,
+			"name": null,
+			"phone": null,
+			"state": { "code": "NH", "country_code": "US", "name": "New Hampshire" },
+			"street": null
+		},
+		"destination_city": "Manches",
+		"destination_country_code": "US",
+		"destination_email": null,
+		"destination_name": null,
+		"destination_phone": null,
+		"destination_post_code": null,
+		"destination_state_code": "NH",
+		"destination_street": null,
+		"discount": null,
+		"discounts": { "breakdown": null, "value": null },
+		"escrow_reference": null,
+		"fee": null,
+		"fee_before_coupon": null,
+		"fee_before_coupon_without_pickup": null,
+		"fee_without_pickup": null,
+		"fetch_rate_status": "successful",
+		"incoming_option_code": "pickup",
+		"insurance": { "code": null, "description": null, "fee": null },
+		"insurance_option_code": null,
+
+		"max_quoted_fee": 116868,
+		"min_quoted_fee": 116868,
+		"origin_address": {
+			"city": null,
+			"country": { "code": "NG", "name": "Nigeria", "phone_code": null },
+			"email": null,
+			"name": null,
+			"phone": null,
+			"state": { "code": "LOS", "country_code": "NG", "name": "Lagos" },
+			"street": null
+		},
+
+		"pickup_option": {
+			"code": "pickup",
+			"description": "Kindly allow up to 24 working hours for pickup",
+			"fee": 0,
+			"name": "Free Pickup"
+		},
+		"pickup_options": [
+			{
+				"code": "pickup",
+				"description": "Kindly allow up to 24 working hours for pickup",
+				"fee": "0.0",
+				"name": "Free Pickup"
+			}
+		],
+		"quoted_fee": null,
+		"rates": [
+			{
+				"actual_fee": null,
+				"courier": {
+					"icon": "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",
+					"name": "DHL"
+				},
+				"courier_id": 22,
+				"delivery_eta": {},
+				"delivery_priority": {
+					"description": "Deliver within 3 to 5 working days of pickup",
+					"name": "3-5 Days"
+				},
+				"delivery_sla": "5_days",
+				"discount": null,
+				"fee": 116868,
+				"fee_with_return": 0,
+				"fee_without_pickup": 116868,
+				"id": "22",
+				"name": "DHL",
+				"return_fee": 0
+			}
+		],
+		"reason": null,
+		"recurrent_cards": [
+			{
+				"brand": "card",
+				"friendly_brand": "You will be debited from your credit/debit card",
+				"id": null,
+				"mask": "Credit/Debit Card",
+				"pk": "card"
+			}
+		],
+		"rewards": null,
+		"same_day_rates": [],
+		"selected_rate": {
+			"actual_fee": null,
+			"courier": { "icon": null, "name": null },
+			"courier_id": 0,
+			"delivery_eta": null,
+			"delivery_priority": { "description": null, "name": null },
+			"delivery_sla": null,
+			"discount": null,
+			"fee": null,
+			"fee_with_return": null,
+			"fee_without_pickup": null,
+			"id": null,
+			"name": null,
+			"return_fee": null
+		},
+		"selected_rate_id": null,
+		"time_schedule_code": "anytime",
+		"total_quantity": 0,
+		"total_value": 0,
+		"use_selected_rate": null,
+		"vat": null,
+		"weight": 15
+	}
+}

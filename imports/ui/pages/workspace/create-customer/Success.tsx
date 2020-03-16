@@ -1,41 +1,23 @@
 import React from 'react'
-import { Box, Icon } from '@chakra-ui/core'
-import { FormButton } from '/imports/ui/components'
+//import { Box, Icon} from '@chakra-ui/core'
+import { PositiveFeedback } from '/imports/ui/components'
+import Path from '/imports/ui/router';
 
 
-const Success: React.FunctionComponent = (props: any) => {
-    // const history = useHistory();
 
-    const handleSubmit = () => {
-        history.push('/dashboard');
-    }
-
-   
+const Success: React.FunctionComponent = () => {
 
 
     return (
-        <Box p={4}>
-
-            <Icon name="arrow-back" size="24px" />
-
-            <Box height="6rem"></Box>
-            
-
-            <Box mb="20" marginLeft="10%" alignItems="center">
-            <Icon mb="10" name="check-circle" marginLeft="25%" size="6rem" color="green.900" />
-            <strong><h1>Your transaction was completed successfully.</h1>
-                Thanks for using Fynance</strong>
-            </Box>
+        <PositiveFeedback
+            message="A customer has been created successfully."
+            iconName="check-circle"
+            // iconSize="6rem"
+            buttonLink={Path.workspace.customer}
+            buttonName="VIEW CUSTOMERS"
+        />
 
 
-            <FormButton buttonName="RETURN TO DASHBOARD" analyticName="Verify" buttonColor="#4EB191" color="#FFF" handleAction={() => handleSubmit()} />
-        
-
-
-            
-            
-            
-        </Box>
     );
 }
 

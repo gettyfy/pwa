@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { check } from 'meteor/check';
-import { Tasks } from '../collections';
-import { noAuthError, evaluateAndExecute, isUser, isTaskOwner } from '../utils';
+import { Tasks } from '../../collections';
+import { noAuthError, evaluateAndExecute, isUser, isTaskOwner } from '../../helpers/task-utils';
 
 export function setChecked(taskId, setChecked) {
 	check(taskId, String);

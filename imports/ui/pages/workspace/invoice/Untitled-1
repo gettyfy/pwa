@@ -1,0 +1,33 @@
+ {/* <Link to={cardLink} onClick={handleClick(analyticName)}> */}
+                    <Flex>
+                        <Box p="2" width="15%">
+                        
+                        
+                        </Box>
+
+                        {/* <Box width="40%">
+                            <StatusText>{customerStatus}</StatusText>
+                            <Heading as="h5" fontSize="sm">{customerName}</Heading>
+                        </Box>
+
+                        <Box width="20%">
+                            <Heading as="h6" size="xs">{amount}</Heading>
+                            <Text fontSize="xs" color="green.600">{paymentStatus}</Text>
+                        </Box>
+
+                        <Box width="20%">
+                            <Heading as="h6" size="xs">{overdueAmount}</Heading>
+                            <Text fontWeight="bold" fontSize="xs" color="red.700">{overdueStatus}</Text>
+                        </Box>
+
+                        <Box width="5%">
+                            <Stack isInline>
+                                <Icon name={iconName} size={iconSize} />
+                            </Stack>
+
+                        </Box> */}
+                    </Flex>
+                    {/* <LineDivider /> */}
+                {/* </Link> */}
+
+                

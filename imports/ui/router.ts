@@ -7,7 +7,7 @@
 
 type TPath = string;
 
-interface IPath {
+export interface IPath {
 	root: TPath;
 	wizard: TPath;
 	onboarding: TPath;
@@ -22,9 +22,11 @@ interface IPath {
 		customer: string;
 		account: string;
 		remind: string;
-		recover: string;
+		recovery: string;
 		record: string;
 		createCustomer: string;
+		createTransaction: string;
+		invoice: string;
 	};
 }
 
@@ -43,9 +45,11 @@ const Path: IPath = {
 		customer: '/customer',
 		account: '/account',
 		remind: '/remind',
-		recover: '/recover',
+		recovery: '/recovery',
 		record: '/record',
-		createCustomer: '/create-customer'
+		createCustomer: '/create-customer',
+		createTransaction: '/create-transaction',
+		invoice: '/invoice'
 	}
 };
 

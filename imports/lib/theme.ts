@@ -16,11 +16,11 @@ type TBreakPoint = Array<string>;
 const fonts: IThemeProps = {
 	...chakraTheme.fonts,
 	mono: `'Menlo', Monaco, Fira Code, Ubuntu Mono, monospace`,
-	heading: `"Barlow", sans-serif'`,
-	body: `'Barlow', "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif`
+	heading: `"Barlow", "Cantarell", "Oxygen", "Ubuntu", sans-serif`,
+	body: `'Barlow', "Segoe UI", "Cantarell", "Oxygen", "Ubuntu", "Roboto", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif`
 };
 const fontSizes: IThemeProps = {
-	xs: '0.75rem',
+	xs: '0.65rem',
 	sm: '0.875rem',
 	md: '1rem',
 	lg: '1.125rem',
@@ -37,7 +37,9 @@ const custom: IThemeProps = {
 	inputFontSize: '16px',
 	blue: '#0476D0',
 	green: '#028248',
-	tabNavHeight: '54px'
+	tabNavHeight: '54px',
+	defaultBox: '1rem',
+	defaultWrapper: '.5rem 1.1rem'
 };
 const colors: IColors = {
 	...chakraTheme.colors,

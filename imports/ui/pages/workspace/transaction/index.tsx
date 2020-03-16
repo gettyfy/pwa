@@ -1,10 +1,16 @@
 import React from 'react';
-import { Icon, Box, Heading, Tabs, TabList, Tab, TabPanel,TabPanels, Avatar, Text, Flex } from "@chakra-ui/core";
+import { Box, Tabs, TabList, Tab, TabPanel, TabPanels, Avatar, Text, Flex } from "@chakra-ui/core";
+import { withTracker } from 'meteor/react-meteor-data';
 import styled from '@emotion/styled'
 import { FormButton } from '/imports/ui/components'
-import { CustomerName, Customer } from '/imports/ui/components/CustomerName';
-import { CustomerList, TransactionList } from '/imports/ui/components'
+import { PageHeader, BreakLayout, CustomerList, TransactionList } from '/imports/ui/components'
 
+
+//imports for API call
+import { Meteor } from 'meteor/meteor'
+import { Transactions } from '/imports/api/collections'
+import { ITransaction } from '/imports/api/schema';
+import path from '/imports/ui/router';
 
 
 const StyledTransaction = styled.main`
@@ -12,103 +18,93 @@ const StyledTransaction = styled.main`
   flex-direction: column;
 `
 
+interface TransactionProps {
+  transactions: ITransaction[]
+}
 
-export default class Transaction extends React.Component {
+
+class Transaction extends React.Component<TransactionProps> {
+
   render() {
+    console.log(this.props)
+    // const { transactions } = this.props
+
     return (
       <StyledTransaction>
-        <Box>
-          <Icon name="arrow-back" size="24px" />
-        </Box>
-        <Heading as="h1" size="2xl">
-              Transactions
-         </Heading>
-         
-         
-         
-            {/* Button */}
-        <Box mt="10">
+        <PageHeader useHeader title="Your Transactions" />
+
+        {/* Button */}
+        <Box my="2">
           <FormButton buttonName="CREATE NEW TRANSACTION" analyticName="Verify" buttonColor="#0B69FF" color="#FFF" handleAction={() => handleSubmit()} />
         </Box>
 
-          <Box mt="10">
+        <Box mt="10">
           <Tabs variant="enclosed">
             <TabList>
               <Tab>Paid</Tab>
               <Tab>Unpaid</Tab>
             </TabList>
             <TabPanels>
-              <TabPanel>
-                <CustomerName
+              <TabPanel> */}
+                <CustomerList
                   customerName="John Azumah"
                   iconName="Christian Nwamba"
                   Date="15 Feb 2020"
                 />
-                <CustomerName
+                <CustomerList
                   customerName="John Azumah"
                   iconName="Christian Nwamba"
                   Date="11 April 2020"
                 />
-                <CustomerName
+                <CustomerList
                   customerName="John Azumah"
                   iconName="Christian Nwamba"
                   Date="30 May 2020"
                 />
               </TabPanel>
+
+              {/* Second Tab Panel` */}
               <TabPanel>
-                <TransactionList
+                {this.props.transactions.map((val, index) => {
+                  return (
 
-                  boxPadding="2"
-                  customerProfile="Sasuke Uchiha"
-                  customerStatus="10 days to overdue"
-                  customerName="Evans Boateng"
-                  amount="GHc233"
-                  paymentStatus="PAID"
-                  overdueAmount="GHC346"
-                  overdueStatus="OVERDUE"
-                  cardLink="/signup"
-                  iconName="chevron-right"
-                  iconSize="24px"
-                />
 
-                <TransactionList
+                    <TransactionList
+                      key={val._id}
+                      analyticName="View a Transaction"
+                      customerStatus="10 days to overdue"
+                      customerName={val.owner?.profile.name}
+                      amount="GHc233"
+                      paymentStatus="PAID"
+                      overdueAmount="GHC346"
+                      overdueStatus="OVERDUE"
+                      cardLink="/signup"
+                      iconName="chevron-right"
+                      iconSize="24px"
+                    />
 
-                  boxPadding="2"
-                  customerProfile="Sasuke Uchiha"
-                  customerStatus="10 days to overdue"
-                  customerName="Evans Boateng"
-                  amount="GHc233"
-                  paymentStatus="PAID"
-                  overdueAmount="GHC346"
-                  overdueStatus="OVERDUE"
-                  cardLink="/signup"
-                  iconName="chevron-right"
-                  iconSize="24px"
-                />
-
+                  )
+                })
+                }
 
               </TabPanel>
             </TabPanels>
           </Tabs>
         </Box>
-      
-       
 
-        {/* <Flex flexDirection="row">
-          <Avatar name="Christian Nwamba" src="https://bit.ly/code-beast" />
-          <Text fontSize="md" mt="3" ml="2">John Azuma</Text>
-
-        </Flex> */}
-
-
-
-
-
-
-            
       </StyledTransaction>
 
 
     )
   }
 }
+
+
+
+export default withTracker(() => {
+  Meteor.subscribe('transactions')
+  console.log(Transactions.find().fetch())
+  return {
+    transactions: Transactions.find().fetch()
+  };
+})(Transaction);

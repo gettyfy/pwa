@@ -1,4 +1,3 @@
-import React from 'react'
 import styled from '@emotion/styled'
 
 
@@ -65,3 +64,30 @@ export const IconBox = styled.div<IIconBox>`
 	background-size: ${(props) => (props.backgroundSize ? props.backgroundSize : 'cover')};
 	background-image: ${(props) => (props.src ? `url(${props.src})` : 'none')};
 `;
+
+
+interface IBreakLayout {
+	marginT?: string,
+	bg?: string,
+	theme?: { custom: { defaultBox: string } }
+}
+export const BreakLayout = styled.section<IBreakLayout>`
+	padding: 0;
+	background: ${props => props.bg ? props.bg : 'inherit'};
+	margin-top: ${props => props.marginT ? props.marginT : '1.5rem'};
+	margin-left: calc(-${ props => props.theme.custom.defaultBox});
+	margin-right: calc(-${ props => props.theme.custom.defaultBox});
+  `
+
+
+interface ILineDivider {
+	theme?: { custom: { defaultBox: string } }
+}
+export const LineDivider = styled.div<ILineDivider>`
+    height: .8px;
+    padding: 0px;
+    margin: 0;
+    margin-left: calc(-${ props => props.theme.custom.defaultBox});
+    margin-right: calc(-${ props => props.theme.custom.defaultBox});
+    background: #eee;
+`

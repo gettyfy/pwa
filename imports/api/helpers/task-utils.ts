@@ -1,6 +1,6 @@
 // Utilities
 import { Meteor } from 'meteor/meteor';
-import { Tasks } from './collections';
+import { Tasks } from '../collections';
 
 export const noAuthError = new Meteor.Error('NOT AUTHORIZED TO DO THIS');
 export const isUser = (userId) => userId !== null || '';
@@ -33,6 +33,7 @@ export const isTaskOwner = (taskId) => (isUserFunc) => {
 export const evaluateAndExecute = (condition, error = 'FAILED') => {
 	try {
 		condition;
+		console.log('PROCESS WAS SUCCESSFUL');
 	} catch (error) {
 		console.error(error.error);
 	}
