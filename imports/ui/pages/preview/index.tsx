@@ -8,7 +8,19 @@ import * as Validator from '/imports/lib/validator'
 import { Accounts } from 'meteor/accounts-base';
 import { Meteor } from 'meteor/meteor'
 import { Formik, FormikProps } from 'formik'
-import { InputField, PageHeader, TransactionList, RadioField, TextAreaField, SelectField, AutoCompleteField, CheckField, FormikForm, RadioButtonField, PasswordField, InvoiceList, SummaryList, SummaryRow, Item, ItemList } from '/imports/ui/components'
+import {
+    InputField,
+    PageHeader,
+    TransactionList,
+    RadioField,
+    TextAreaField,
+    SelectField,
+    AutoCompleteField,
+    SignatureField,
+    CheckField, FormikForm, RadioButtonField, PasswordField, InvoiceList, SummaryList, SummaryRow,
+    Item,
+    ItemList
+} from '/imports/ui/components'
 
 
 const Signup: React.FC = () => {
@@ -23,6 +35,9 @@ const Signup: React.FC = () => {
         fullname: "",
         username: "",
         password: "",
+        signature: "",
+        buttine: ""
+
     }
 
     const handleSubmit = (values: AuthInterface) => {
@@ -116,13 +131,14 @@ const Signup: React.FC = () => {
 
                         <Item>
                             <ItemList
+                                analyticName="Click Invoice Item"
                                 customerItem="LG Mini Home"
                                 customerName="Bukola Saraki"
                                 amount="GHC346"
                             />
-
-
                         </Item>
+
+                        <SignatureField name="signature" validate={Validator.isRequired} />
 
                     </FormikForm>
                 )}
