@@ -20,6 +20,7 @@ export interface IPath {
 	workspace: {
 		transaction: string;
 		customer: string;
+		customerView: string;
 		account: string;
 		remind: string;
 		recovery: string;
@@ -42,7 +43,8 @@ const Path: IPath = {
 	},
 	workspace: {
 		transaction: '/transaction',
-		customer: '/customer',
+		customer: '/customers',
+		customerView: '/customer',
 		account: '/account',
 		remind: '/remind',
 		recovery: '/recovery',

@@ -14,9 +14,10 @@ align-items: center;
 interface ICustomerName {
     customerName: string,
     iconName: string,
-    date: Date,
+    date?: Date,
     LinkCard: string,
-    PhoneNumber: number
+    PhoneNumber?: number,
+    [key:string]: any
     
     
 }
@@ -31,7 +32,7 @@ const CustomerName = (props: ICustomerName) => {
         <Link to ={LinkCard}>
         <Flex flexDirection="row" mt="3">
            
-            <Avatar name={iconName} src="https://bit.ly/code-beast" />
+            <Avatar name={customerName} size="sm" />
              <Text fontSize="md" mt="3" ml="2">{customerName}</Text>
              <Box mt="3" ml="20">
             <StatHelpText>{PhoneNumber}</StatHelpText>
