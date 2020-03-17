@@ -1,8 +1,8 @@
 // import React, { Fragment } from 'react';
-import React  from 'react';
+import React from 'react';
 // import { useParams } from 'react-router-dom'
 import styled from '@emotion/styled'
-import {Stack, Text } from "@chakra-ui/core";
+import { Stack, Text } from "@chakra-ui/core";
 
 
 import { withTracker } from 'meteor/react-meteor-data';
@@ -28,25 +28,25 @@ const LineDivider = styled.div`
 `
 
 
- const CustomerView: React.FC = (props: any) => {
-    
-    
-    console.log(props.customer);
-     return (
-         <StyledCustomers>
-             <PageHeader useHeader useTitle title=" Details" />
-           
-             <Stack spacing={3}>
-              <Text fontSize="md">Name:{props.customer ? props.customer.customerName : ''}</Text>
-                 <Text fontSize="md">Address:{props.customer ? props.customer.customerAddress : ''}</Text>
-                 <Text fontSize="md">Email:{props.customer ? props.customer.customerEmail : ''}</Text>
-                 <Text fontSize="md">Phone:{props.customer ? props.customer.customerNumber : ''}</Text>
-                  </Stack>
-             <LineDivider />
-         </StyledCustomers>
-       
+const CustomerView: React.FC = (props: any) => {
 
-     );
+
+    console.log(props.customer);
+    return (
+        <StyledCustomers>
+            <PageHeader useHeader useTitle title={props.customer && props.customer.customerName} />
+
+            <Stack spacing={3}>
+                <Text fontSize="md">Name:{props.customer ? props.customer.customerName : ''}</Text>
+                <Text fontSize="md">Address:{props.customer ? props.customer.customerAddress : ''}</Text>
+                <Text fontSize="md">Email:{props.customer ? props.customer.customerEmail : ''}</Text>
+                <Text fontSize="md">Phone:{props.customer ? props.customer.customerNumber : ''}</Text>
+            </Stack>
+            <LineDivider />
+        </StyledCustomers>
+
+
+    );
 }
 
 

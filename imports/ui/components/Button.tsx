@@ -31,13 +31,13 @@ interface ISubmitButton {
 }
 
 export const SubmitButton: React.FC<ISubmitButton> = (props) => {
-    const { withIcon, isLoading, useSubmit, buttonName, ...rest } = props
+    const { withIcon, isLoading, buttonName, ...rest } = props
     return (
         <StyledButton
             mt={10}
             withIcon={withIcon}
             variantColor="blue"
-            type={useSubmit && 'submit'}
+            type="submit"
             isLoading={isLoading}
             //@ts-ignore
             rightIcon={withIcon && "arrow-forward"}
