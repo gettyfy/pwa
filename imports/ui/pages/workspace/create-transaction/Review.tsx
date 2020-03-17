@@ -1,11 +1,9 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom'
-import {
-  Icon, Box, Stack, Heading, Flex, Text, Select, NumberInput, NumberInputField, NumberInputStepper, NumberIncrementStepper, NumberDecrementStepper, Textarea
-} from "@chakra-ui/core";
 import styled from '@emotion/styled'
 import { FormButton, PageHeader } from '/imports/ui/components'
 import Path from '/imports/ui/router';
+import { Meteor } from 'meteor/meteor'
 
 const StyledRecord = styled.main`
   display: flex;
