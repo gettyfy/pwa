@@ -14,6 +14,7 @@ import * as Analytics from '/imports/ui/analytics'
 
 
 
+
 const FormikButton = styled(Button) <{ withIcon: boolean | undefined }>`
     border-radius: 0;
     min-height: 54px;
@@ -436,7 +437,7 @@ interface SelectFieldProps {
     validate: Function,
     name: string
     label?: string,
-    placeholder: string
+    placeholder?: string
     defaultValue?: string
     options: Array<string>,
 }
