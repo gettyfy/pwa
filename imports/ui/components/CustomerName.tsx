@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from '@emotion/styled'
 import { Link } from 'react-router-dom'
-import { Avatar, Text,  Flex,StatHelpText, Box } from '@chakra-ui/core'
+import { Avatar, Text, Icon, Flex, StatHelpText, Box, Heading } from '@chakra-ui/core'
+import { StatusText } from '/imports/ui/components'
 
 
 
@@ -9,42 +10,46 @@ import { Avatar, Text,  Flex,StatHelpText, Box } from '@chakra-ui/core'
 const CustomerStyle = styled.section`
 flex-direction: row;
 align-items: center;
+justify-content: center;
 `
 
 interface ICustomerName {
     customerName: string,
-    iconName: string,
+    iconName: string | any,
     date?: Date,
     LinkCard: string,
     PhoneNumber?: number,
-    [key:string]: any
-    
-    
+    [key: string]: any
+
+
 }
 
 
 const CustomerName = (props: ICustomerName) => {
-    const {  customerName, iconName, date, LinkCard, PhoneNumber } = props
+    const { customerName, iconName, date, LinkCard, PhoneNumber } = props
 
-    
+
     return (
-        <CustomerStyle>
-        <Link to ={LinkCard}>
-        <Flex flexDirection="row" mt="3">
-           
-            <Avatar name={customerName} size="sm" />
-             <Text fontSize="md" mt="3" ml="2">{customerName}</Text>
-             <Box mt="3" ml="20">
-            <StatHelpText>{PhoneNumber}</StatHelpText>
-            </Box>
-           
-        </Flex>
+
+        <Link to={LinkCard}>
+            <Flex align="center" justify="space-between" direction="row" py="2" borderBottom="1px" borderColor="gray.100">
+
+                <Box display="flex" flexDir="row" justifyContent="flex-start">
+                    <Avatar name={customerName} size="sm" />
+                    <Box flexDir="column" pl="3">
+                        <Heading as="h4" size="sm">{customerName}</Heading>
+                        <StatusText fsize=".75rem" >{PhoneNumber}</StatusText>
+                    </Box>
+                </Box>
+
+                <Icon name={iconName} size="1rem" color="blue.500" {...props} />
+
+            </Flex>
         </Link>
-        </CustomerStyle>
 
 
     )
 }
 
 
-export { CustomerStyle, CustomerName}
+export { CustomerStyle, CustomerName }
