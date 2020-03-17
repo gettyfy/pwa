@@ -15,11 +15,13 @@ export interface IPath {
 	auth: {
 		loginRoute: string;
 		signupRoute: string;
+		logoutRoute: string;
 		resetPasswordRoute: string;
 	};
 	workspace: {
 		transaction: string;
 		customer: string;
+		customerView: string;
 		account: string;
 		remind: string;
 		recovery: string;
@@ -38,11 +40,13 @@ const Path: IPath = {
 	auth: {
 		loginRoute: '/auth/login',
 		signupRoute: '/auth/signup',
+		logoutRoute: '/auth/logout',
 		resetPasswordRoute: '/auth/reset-password'
 	},
 	workspace: {
 		transaction: '/transaction',
-		customer: '/customer',
+		customer: '/customers',
+		customerView: '/customer',
 		account: '/account',
 		remind: '/remind',
 		recovery: '/recovery',

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Tabs, TabList, Tab, TabPanel, TabPanels, Avatar, Text, Flex } from "@chakra-ui/core";
+import { Box, Avatar} from "@chakra-ui/core";
 import { withTracker } from 'meteor/react-meteor-data';
 import styled from '@emotion/styled'
 import { FormButton } from '/imports/ui/components'
@@ -39,32 +39,7 @@ class Transaction extends React.Component<TransactionProps> {
         </Box>
 
         <Box mt="10">
-          <Tabs variant="enclosed">
-            <TabList>
-              <Tab>Paid</Tab>
-              <Tab>Unpaid</Tab>
-            </TabList>
-            <TabPanels>
-              <TabPanel> */}
-                <CustomerList
-                  customerName="John Azumah"
-                  iconName="Christian Nwamba"
-                  Date="15 Feb 2020"
-                />
-                <CustomerList
-                  customerName="John Azumah"
-                  iconName="Christian Nwamba"
-                  Date="11 April 2020"
-                />
-                <CustomerList
-                  customerName="John Azumah"
-                  iconName="Christian Nwamba"
-                  Date="30 May 2020"
-                />
-              </TabPanel>
-
-              {/* Second Tab Panel` */}
-              <TabPanel>
+        
                 {this.props.transactions.map((val, index) => {
                   return (
 
@@ -87,9 +62,6 @@ class Transaction extends React.Component<TransactionProps> {
                 })
                 }
 
-              </TabPanel>
-            </TabPanels>
-          </Tabs>
         </Box>
 
       </StyledTransaction>
