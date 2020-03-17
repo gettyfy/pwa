@@ -35,7 +35,7 @@ const LineDivider = styled.div`
      return (
          <StyledCustomers>
              <PageHeader useHeader useTitle title=" Details" />
-
+           
              <Stack spacing={3}>
               <Text fontSize="md">Name:{props.customer ? props.customer.customerName : ''}</Text>
                  <Text fontSize="md">Address:{props.customer ? props.customer.customerAddress : ''}</Text>
