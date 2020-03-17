@@ -38,7 +38,7 @@ const PaymentPlan: React.FunctionComponent = (props: any) => {
 
     const handleSubmit = async (values: IPaymentPlanInterface) => {
         await props.updateState(values)
-        console.log(values)
+        // console.log(values)
         await Meteor.call('transaction.insert', values)
         history.push(`${path.workspace.createTransaction}/review`)
     }
@@ -62,8 +62,8 @@ const PaymentPlan: React.FunctionComponent = (props: any) => {
             >
                 {(props: FormikProps<any>) => (
                     <FormikForm isLoading={props.isSubmitting} analyticName="Signup Form" formProps={props} buttonName="NEXT">
-                        <SelectField label="Frequency" name="select" validate={Validator.isRequired} options={["Monthly", "Weekly", "Bi-weekly"]} />
-                        <SelectField label="Duration" name="select" validate={Validator.isRequired} options={["1 month", "3 months", "6 months"]} />
+                        <SelectField label="Frequency" name="frequency" validate={Validator.isRequired} options={["Monthly", "Weekly", "Bi-weekly"]} />
+                        <SelectField label="Duration" name="duration" validate={Validator.isRequired} options={["1 month", "3 months", "6 months"]} />
                         <InputField label="Start Date" placeholder="St" type="date" name="quantity" validate={Validator.isRequired} />
                         <InputField label="End Date" placeholder="C700" type="date" name="price" validate={Validator.isRequired} />
                         <SignatureField name="signature" validate={Validator.isSignature} />
