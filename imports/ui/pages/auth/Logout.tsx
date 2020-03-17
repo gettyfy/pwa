@@ -9,7 +9,11 @@ export default function Logout() {
 
     // Call the Meteor Logout Function here
     useEffect(() => {
-        Accounts.logout()
+        async function logout() {
+            await Accounts.logout()
+        }
+        logout();
+        history.push('/')
     })
 
     const returnHome = () => {
@@ -20,12 +24,13 @@ export default function Logout() {
         <>
             <PageHeader useHeader />
             <Box display="flex" justifyContent="center" alignItems="center" flexDirection="column">
-                <Stack spacing="8">
+                <Stack spacing="8" alignItems="center">
                     <Box py="6" display="flex" justifyContent="center" alignItems="center">
                         <Icon textAlign="center" margin="auto" name="info-outline" size="6rem" color="green.700" />
                     </Box>
                     <Heading as="h1" size="md">You've successfully logged out</Heading>
                     <FormButton bg="green.700" color="white" handleAction={returnHome} analyticName="Logout" buttonName="Return Home" />
+                    <small>Click the button below if you're not redirected in 10 seconds</small>
                 </Stack>
             </Box>
         </>
