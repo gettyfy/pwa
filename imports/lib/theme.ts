@@ -33,8 +33,9 @@ const fontSizes: IThemeProps = {
 };
 const custom: IThemeProps = {
 	buttonHeight: '48px',
-	inputMinHeight: '60px',
+	inputMinHeight: '48px',
 	inputFontSize: '16px',
+	inputPlaceHolder: '14px',
 	blue: '#0476D0',
 	green: '#028248',
 	tabNavHeight: '54px',
