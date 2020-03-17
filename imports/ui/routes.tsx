@@ -10,7 +10,7 @@ import App from '/imports/ui/App'
 
 
 // ************* All view Components Here *****************************************
-import { Login, Signup, ResetPassword } from '/imports/ui/pages/auth'
+import { Login, Signup, ResetPassword, Logout } from '/imports/ui/pages/auth'
 import Wizard from '/imports/ui/pages/wizard'
 import Onboarding from '/imports/ui/pages/onboarding'
 import Preview from '/imports/ui/pages/preview'
@@ -44,6 +44,7 @@ export default function AppRouter(this: any) {
                 <Switch>
                     <Route path={path.auth.loginRoute} component={Login} />
                     <Route path={path.auth.signupRoute} component={Signup} />
+                    <Route path={path.auth.logoutRoute} component={Logout} />
                     <Route path={path.auth.resetPasswordRoute} component={ResetPassword} />
                     <Route path={path.workspace.transaction} component={Transaction} />
                     <Route path={path.workspace.customer} component={Customer} />
