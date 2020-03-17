@@ -59,6 +59,8 @@ export default function AppRouter(this: any) {
                     <Route path={path.wizard} component={Wizard} />
                     <Route path={path.onboarding} component={Onboarding} />
                     <Route path={path.preview} component={Preview} />
+
+                    {/* ========= Implement your Authentication Logic below  this section ======= */}
                     <Route exact={true} path={path.root}><App /></Route>
                     <Route path="/auth" component={Login} />
                 </Switch>

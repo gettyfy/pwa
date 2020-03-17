@@ -1,23 +1,24 @@
+/**
+ * https://stackoverflow.com/questions/20515989/how-can-i-log-out-a-user-from-the-server-in-meteor-js
+ */
 import React, { useEffect } from 'react';
 import { Accounts } from 'meteor/accounts-base';
-import { useHistory } from 'react-router-dom'
 import { Box, Icon, Heading, Stack } from '@chakra-ui/core'
-import { FormButton, PageHeader } from '../../components';
+import { FormButton, PageHeader } from '/imports/ui/components';
+import Path from '../../router';
 
 export default function Logout() {
-    const history = useHistory()
-
     // Call the Meteor Logout Function here
     useEffect(() => {
         async function logout() {
             await Accounts.logout()
         }
         logout();
-        history.push('/')
+        window && window.location.replace(Path.auth.loginRoute)
     })
 
     const returnHome = () => {
-        history.push('/')
+        window && window.location.replace(Path.auth.loginRoute)
     }
 
     return (
@@ -29,8 +30,8 @@ export default function Logout() {
                         <Icon textAlign="center" margin="auto" name="info-outline" size="6rem" color="green.700" />
                     </Box>
                     <Heading as="h1" size="md">You've successfully logged out</Heading>
-                    <FormButton bg="green.700" color="white" handleAction={returnHome} analyticName="Logout" buttonName="Return Home" />
-                    <small>Click the button below if you're not redirected in 10 seconds</small>
+                    {/* <FormButton bg="green.700" color="white" handleAction={returnHome} analyticName="Logout" buttonName="Return Home" /> */}
+                    <small onClick={returnHome}>Click the button below if you're not redirected in 10 seconds</small>
                 </Stack>
             </Box>
         </>

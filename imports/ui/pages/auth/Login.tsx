@@ -1,10 +1,11 @@
 import React from 'react';
-import { useHistory, Link } from 'react-router-dom'
-import { InputGroup, Stack, Box, Input, Button, InputRightElement } from '@chakra-ui/core'
+import { Link } from 'react-router-dom'
+import { InputGroup, Stack, Input, Button, InputRightElement } from '@chakra-ui/core'
 import { Meteor } from 'meteor/meteor';
 import * as Analytics from '/imports/ui/analytics';
 import { PageHeader } from '/imports/ui/components'
 import path from '/imports/ui/router'
+import Path from '/imports/ui/router';
 
 
 
@@ -13,7 +14,6 @@ import path from '/imports/ui/router'
 const Login: React.FunctionComponent = (): JSX.Element => {
     const [show, setShow] = React.useState(false);
     const handleClick = () => setShow(!show);
-    const history = useHistory()
 
     interface AuthInterface {
         username: string,
@@ -41,20 +41,20 @@ const Login: React.FunctionComponent = (): JSX.Element => {
         console.log(value)
     }
 
-    const handleSubmit = (e: any) => {
+    const handleSubmit = async (e: any) => {
         e.preventDefault()
-        Analytics.identify(value.username)
-        Analytics.track("User Login", value)
-        Meteor.loginWithPassword(value.username, value.password, (error) => {
+        await Analytics.identify(value.username)
+        await Analytics.track("User Login", value)
+        await Meteor.loginWithPassword(value.username, value.password, (error) => {
             if (error) {
                 console.log(error.message);
                 return alert(error.message)
             }
             else {
-                alert(`SIGNUP WAS SUCCESSFUL FOR ${JSON.stringify(Meteor.user())}`)
+                // alert(`LOGIN WAS SUCCESSFUL FOR ${JSON.stringify(Meteor.user())}`)
+                window.location.replace(Path.root)
             }
         });
-        history.push('/');
     }
 
 
