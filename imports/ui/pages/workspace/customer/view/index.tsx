@@ -61,24 +61,31 @@ const CustomerView: React.FC = (props: any) => {
             </Box>
 
 
-             {/* <Box mt="10">
+
+
+            <Box mt="3">
+                <Text fontSize="sm">This customer registerd on 12th February 2020 and is yet to pay this month's installment of GHC200 on 28th of March. Click the action below to schedule a reminder</Text>
+            </Box>
+
+
+            {/* <Box mt="10">
                  <FormButton buttonName="SEND A REMINDER" analyticName="Verify" buttonColor="#0B69FF" color="#FFF" handleAction={() => handleSubmit()} />
              </Box> */}
-             <Box mt="10">
-          <Flex direction="row" justify="space-between" alignItems="center">
-              <Box >
-        <LinkButton buttonLink={`${path.workspace.remind}/rules`} buttonName="Create Reminder" analyticName="SEND A REMINDER" buttonColor="#0B69FF" color="#FFF" />
-        </Box > 
+            <Box mt="10">
+                <Flex direction="row" justify="space-between" alignItems="center">
+                    <Box >
+                        <LinkButton buttonLink={`${path.workspace.remind}/rules`} buttonName="Create Reminder" analyticName="SEND A REMINDER" buttonColor="#0B69FF" color="#FFF" />
+                    </Box >
 
-         <Box >
-        <LinkButton buttonLink={`${path.workspace.createTransaction}/rules`} buttonName="Create Transaction" analyticName="" buttonColor="#0B69FF" color="#FFF" />
-        </Box >
-        </Flex>
-             </Box>
-         </StyledCustomers>
-       
+                    <Box >
+                        <LinkButton buttonLink={`${path.workspace.createTransaction}/item`} buttonName="Create Transaction" analyticName="" buttonColor="#0B69FF" color="#FFF" />
+                    </Box >
+                </Flex>
+            </Box>
+        </StyledCustomers>
 
-     );
+
+    );
 }
 
 
