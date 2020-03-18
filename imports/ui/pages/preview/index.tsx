@@ -74,6 +74,20 @@ const Signup: React.FC = () => {
         { value: "Ferrari" },
         { value: "Bugati" }
     ]
+    const customerOptions = [
+        { customerName: "Udoka", customerNumber: "0240337741", value: "Apple" },
+        { customerName: "Udoka", customerNumber: "0240337741", value: "Pear" },
+        { customerName: "Udoka", customerNumber: "0240337741", value: "Orange" },
+        { customerName: "Udoka", customerNumber: "0240337741", value: "Grape" },
+        { customerName: "Udoka", customerNumber: "0240337741", value: "Banana" },
+        { customerName: "Udoka", customerNumber: "0240337741", value: "Coloran" },
+        { customerName: "Udoka", customerNumber: "0240337741", value: "Buran" },
+        { customerName: "Udoka", customerNumber: "0240337741", value: "Zeron" },
+        { customerName: "Udoka", customerNumber: "0240337741", value: "Fedan" },
+        { customerName: "Udoka", customerNumber: "0240337741", value: "Chrysler" },
+        { customerName: "Udoka", customerNumber: "0240337741", value: "Ferrari" },
+        { customerName: "Udoka", customerNumber: "0240337741", value: "Bugati" }
+    ]
 
 
     return (
@@ -138,8 +152,9 @@ const Signup: React.FC = () => {
                                 amount="GHC346"
                             />
                         </Item>
+                        <CustomerSearchField placeholder="Find Customer" name="customer" label="Search Customer" validate={Validator.isRequired} options={customerOptions} />
 
-                        <CustomerSearchField />
+
 
                         <SignatureField name="signature" validate={Validator.isSignature} />
 
