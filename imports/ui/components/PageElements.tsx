@@ -47,12 +47,12 @@ export const PageHeader: React.FC<IPageHeader> = (props): JSX.Element => {
         <React.Fragment>
             {
                 useHeader ? <LogoHeader /> :
-                    <Box my="4" background="inherit">
+                    <Box my="4" bg="inherit">
                         <Box my="2" width="100px" onClick={() => history.goBack()}>
                             <Icon name="arrow-back" size="28px" />
                         </Box>
                         <Stack spacing={3}>
-                            <Heading color="blue.700" as="h2" size="xl">{title}</Heading>
+                            <Heading color="blue.700" as="h1" size="lg">{title}</Heading>
                             <Heading as="h6" size="sm">{subTitle}</Heading>
                         </Stack>
                     </Box>

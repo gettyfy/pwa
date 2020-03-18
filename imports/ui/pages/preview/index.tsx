@@ -19,7 +19,8 @@ import {
     SignatureField,
     CheckField, FormikForm, RadioButtonField, PasswordField, InvoiceList, SummaryList, SummaryRow,
     Item,
-    ItemList
+    ItemList,
+    CustomerSearchField
 } from '/imports/ui/components'
 
 
@@ -137,6 +138,8 @@ const Signup: React.FC = () => {
                                 amount="GHC346"
                             />
                         </Item>
+
+                        <CustomerSearchField />
 
                         <SignatureField name="signature" validate={Validator.isSignature} />
 
