@@ -13,7 +13,8 @@ import {
 	ITransaction,
 	IEscalation,
 	IReminderChannel,
-	IReminder
+	IReminder,
+	ICurrency
 } from 'imports/api/schema.d';
 import { Mongo } from 'meteor/mongo';
 
@@ -24,3 +25,4 @@ export const Transactions = new Mongo.Collection<ITransaction>('transactions');
 export const Escalations = new Mongo.Collection<IEscalation>('escalations');
 export const PaymentPlans = new Mongo.Collection<IPaymentPlan>('paymentPlans');
 export const Channels = new Mongo.Collection<IReminderChannel>('channels');
+export const Currencies = new Mongo.Collection<ICurrency>('currencies');
