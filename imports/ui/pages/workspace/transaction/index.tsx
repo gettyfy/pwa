@@ -2,7 +2,7 @@ import React from 'react';
 import { Box, Avatar} from "@chakra-ui/core";
 import { withTracker } from 'meteor/react-meteor-data';
 import styled from '@emotion/styled'
-import { FormButton } from '/imports/ui/components'
+import { LinkButton } from '/imports/ui/components'
 import { PageHeader, BreakLayout, CustomerList, TransactionList } from '/imports/ui/components'
 
 
@@ -34,9 +34,13 @@ class Transaction extends React.Component<TransactionProps> {
         <PageHeader useHeader title="Your Transactions" />
 
         {/* Button */}
-        <Box my="2">
+        {/* <Box my="2">
+          <LinkButton />
           <FormButton buttonName="CREATE NEW TRANSACTION" analyticName="Verify" buttonColor="#0B69FF" color="#FFF" handleAction={() => handleSubmit()} />
-        </Box>
+        </Box> */}
+        <Box >
+          <LinkButton buttonLink={`${path.workspace.createTransaction}/`} buttonName="Create Transaction" analyticName="" buttonColor="#0B69FF" color="#FFF" />
+        </Box >
 
         <Box mt="10">
         
@@ -45,7 +49,8 @@ class Transaction extends React.Component<TransactionProps> {
 
 
                     <TransactionList
-                      key={val._id}
+                      // key={val._id}
+                      key={[val.customerName, index].join('-')}
                       analyticName="View a Transaction"
                       customerStatus="10 days to overdue"
                       customerName={val.owner?.profile.name}
@@ -53,9 +58,10 @@ class Transaction extends React.Component<TransactionProps> {
                       paymentStatus="PAID"
                       overdueAmount="GHC346"
                       overdueStatus="OVERDUE"
-                      cardLink="/signup"
+                      cardLink={`${path.workspace.transactionView}/view/${val._id}`}
                       iconName="chevron-right"
                       iconSize="24px"
+                      
                     />
 
                   )

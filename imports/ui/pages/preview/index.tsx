@@ -138,7 +138,7 @@ const Signup: React.FC = () => {
                             />
                         </Item>
 
-                        <SignatureField name="signature" validate={Validator.isRequired} />
+                        <SignatureField name="signature" validate={Validator.isSignature} />
 
                     </FormikForm>
                 )}

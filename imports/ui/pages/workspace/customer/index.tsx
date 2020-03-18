@@ -33,20 +33,18 @@ class Customer extends React.Component<CustomerProps> {
       <StyledCustomers>
         <PageHeader useHeader useTitle title="Your Customers" />
 
-        <CustomerStyle>
-          {customers.map((val, index) => {
-            return (
-              <CustomerName
-                key={[val.customerName, index].join('-')}
-                LinkCard={`${path.workspace.customerView}/view/${val._id}`}
-                customerName={val.customerName}
-                iconName=""
-                PhoneNumber={val.phonenumber}
-              />
+        {customers.map((val, index) => {
+          return (
+            <CustomerName
+              key={[val.customerName, index].join('-')}
+              LinkCard={`${path.workspace.customerView}/view/${val._id}`}
+              customerName={val.customerName}
+              iconName="info-outline"
+              PhoneNumber={val.phonenumber}
+            />
 
-            )
-          })}
-        </CustomerStyle>
+          )
+        })}
 
 
       </StyledCustomers>

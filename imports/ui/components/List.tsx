@@ -21,7 +21,8 @@ interface ITransactionList {
     overdueStatus: string,
     cardLink: string,
     iconName: string | any,
-    iconSize: any
+    iconSize: any,
+    
 }
 
 

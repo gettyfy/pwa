@@ -43,6 +43,7 @@ export default function AccountPage(this: any) {
             <DrawerLink><Link to={path.auth.loginRoute}>Login</Link></DrawerLink>
             <DrawerLink><Link to={path.auth.signupRoute}>Signup<Icon name="external-link" mx="2px" /></Link></DrawerLink>
             <DrawerLink><Link to={path.auth.resetPasswordRoute}>Reset Account <Icon name="external-link" mx="2px" /></Link></DrawerLink>
+            <DrawerLink><Link to={path.auth.logoutRoute}>Logout</Link></DrawerLink>
           </Box>
         </NavWrapper>
       </BreakLayout>

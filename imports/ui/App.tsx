@@ -1,5 +1,7 @@
 import React from 'react';
-import Hello from '/imports/ui/pages/workspace/dashboard';
+import Dashboard from '/imports/ui/pages/workspace/dashboard';
+import { Login } from '/imports/ui/pages/auth'
+import { Accounts } from 'meteor/accounts-base';
 
 // import Layout from './Layout'
 type AppProps = {
@@ -11,14 +13,23 @@ export default class App extends React.Component<{}, AppProps> {
     super(props)
   }
 
+  isLoggedIn = () => {
+    const isUser = Accounts.user()
+    const isUserId = Accounts.userId()
+
+    return isUserId !== null ? <Dashboard /> : <Login />
+
+    // return Accounts.user() && Accounts.userId() ? <Dashboard /> : <Login />
+  }
+
   componentDidMount() {
-    // window && window.analytics ? window.analytics.page() : ''
+    // this.isLoggedIn()
   }
 
   render() {
     return (
       <div>
-        <Hello />
+        <this.isLoggedIn />
       </div>
 
     )

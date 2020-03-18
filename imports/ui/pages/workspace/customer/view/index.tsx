@@ -1,9 +1,10 @@
 // import React, { Fragment } from 'react';
-import React  from 'react';
+import React from 'react';
 // import { useParams } from 'react-router-dom'
 import styled from '@emotion/styled'
 import {Stack, Text, Box, Flex } from "@chakra-ui/core";
 import { LinkButton } from '/imports/ui/components'
+
 
 import { withTracker } from 'meteor/react-meteor-data';
 import { PageHeader } from '/imports/ui/components'
@@ -29,9 +30,9 @@ const LineDivider = styled.div`
 `
 
 
- const CustomerView: React.FC = (props: any) => {
-    
-    
+const CustomerView: React.FC = (props: any) => {
+
+
     console.log(props.customer);
      return (
          <StyledCustomers>

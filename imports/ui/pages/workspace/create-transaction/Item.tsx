@@ -41,7 +41,7 @@ const Item: React.FunctionComponent = (props: any) => {
         await props.updateState(values)
         console.log(values)
        await Meteor.call('transaction.insert', values)
-        history.push(`${path.workspace.createTransaction}/review`)
+        history.push(`${path.workspace.createTransaction}/payment-plan`)
     }
 
 

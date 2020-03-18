@@ -13,6 +13,12 @@ export function isRequired(value: string, values = {}) {
 	if (value && typeof value === 'object' && Object.keys(value).length === 0) return [ 'This field is required' ];
 }
 
+export function isSignature(value: string, values = {}) {
+	if (!value || value === null) return [ 'Sign and save your signature' ];
+	if (value && typeof value === 'string' && validator.isEmpty(value)) return [ 'Signature cannot be empty' ];
+	if (value && typeof value === 'object' && Object.keys(value).length === 0) return [ 'Sign and save signature' ];
+}
+
 export function isEmail(value: string, values = {}) {
 	if (!value) return [ 'This field is required' ];
 	if (value && !validator.isEmail(value)) return [ 'Email address is invalid' ];
