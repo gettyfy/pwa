@@ -15,7 +15,6 @@ interface SignatureProps {
     validate: Function,
     name: string
     label?: string,
-    placeholder: string
     [key: string]: any
 }
 
@@ -57,11 +56,11 @@ export const SignatureField: React.FC<SignatureProps> = (props): JSX.Element => 
             <FormLabel isInvalid={validate} {...field} htmlFor={[name, 'radio-button'].join('__')} color="gray.600">{label}</FormLabel>
             <Box border="2px" borderColor="gray.800" pt="2">
                 <Box>
-                    <SignaturePad  {...field} canvasProps={{ className: "meteor-style-main-css" }} ref={sigCanvas} />
+                    <SignaturePad onBegin={() => helpers.setTouched(true)}  {...field} canvasProps={{ className: "meteor-style-main-css" }} ref={sigCanvas} />
                 </Box>
                 <Flex justify="space-between" bg="gray.100" width="100%">
                     <Button width="100%" borderRadius="0" variant="outline" onClick={clear}>Clear</Button>
-                    <Button width="100%" variantColor="green" borderRadius="0" onClick={save}>Save</Button>
+                    <Button isDisabled={!meta.touched} width="100%" variantColor="green" borderRadius="0" onClick={save}>Save</Button>
                 </Flex>
             </Box>
             <FormErrorMessage>{meta.error && meta.error}</FormErrorMessage>

@@ -1,8 +1,8 @@
 // import React, { Fragment } from 'react';
-import React  from 'react';
+import React from 'react';
 // import { useParams } from 'react-router-dom'
 import styled from '@emotion/styled'
-import {Stack, Text, Box, Flex } from "@chakra-ui/core";
+import { Stack, Text, Box, Flex } from "@chakra-ui/core";
 import { LinkButton } from '/imports/ui/components'
 
 import { withTracker } from 'meteor/react-meteor-data';
@@ -29,55 +29,55 @@ const LineDivider = styled.div`
 `
 
 
- const CustomerView: React.FC = (props: any) => {
-    
-    
+const CustomerView: React.FC = (props: any) => {
+
+
     console.log(props.customer);
-     return (
-         <StyledCustomers>
-             <PageHeader useHeader useTitle title="Customer Details" />
-           
-             <Stack spacing={3}>
-                 
-                 <Text fontSize="md"><strong>NAME: </strong>{props.customer ? props.customer.customerName : ''}</Text>
-                 <Text fontSize="md"><strong>ADDRESS: </strong>{props.customer ? props.customer.customerAddress : ''}</Text>
-                 <Text fontSize="md"><strong>EMAIL: </strong>{props.customer ? props.customer.customerEmail : ''}</Text>
-                 <Text fontSize="md"><strong>PHONE: </strong>{props.customer ? props.customer.customerNumber : ''}</Text>
-                  </Stack>
-             <LineDivider />
+    return (
+        <StyledCustomers>
+            <PageHeader useHeader useTitle title="Customer Details" />
+
+            <Stack spacing={3}>
+
+                <Text fontSize="md"><strong>NAME: </strong>{props.customer ? props.customer.customerName : ''}</Text>
+                <Text fontSize="md"><strong>ADDRESS: </strong>{props.customer ? props.customer.customerAddress : ''}</Text>
+                <Text fontSize="md"><strong>EMAIL: </strong>{props.customer ? props.customer.customerEmail : ''}</Text>
+                <Text fontSize="md"><strong>PHONE: </strong>{props.customer ? props.customer.customerNumber : ''}</Text>
+            </Stack>
+            <LineDivider />
 
 
-                <Box mt="6">
-                    <strong>Customer Info</strong>
-   
-                   </Box>
+            <Box mt="6">
+                <strong>Customer Info</strong>
 
-             
-
-                
-              <Box mt="3"> 
-                 <Text fontSize="sm">This customer registerd on 12th February 2020 and is yet to pay this month's installment of GHC200 on 28th of March. Click the action below to schedule a reminder</Text>
             </Box>
 
 
-             {/* <Box mt="10">
+
+
+            <Box mt="3">
+                <Text fontSize="sm">This customer registerd on 12th February 2020 and is yet to pay this month's installment of GHC200 on 28th of March. Click the action below to schedule a reminder</Text>
+            </Box>
+
+
+            {/* <Box mt="10">
                  <FormButton buttonName="SEND A REMINDER" analyticName="Verify" buttonColor="#0B69FF" color="#FFF" handleAction={() => handleSubmit()} />
              </Box> */}
-             <Box mt="10">
-          <Flex direction="row" justify="space-between" alignItems="center">
-              <Box >
-        <LinkButton buttonLink={`${path.workspace.remind}/rules`} buttonName="Create Reminder" analyticName="SEND A REMINDER" buttonColor="#0B69FF" color="#FFF" />
-        </Box > 
+            <Box mt="10">
+                <Flex direction="row" justify="space-between" alignItems="center">
+                    <Box >
+                        <LinkButton buttonLink={`${path.workspace.remind}/rules`} buttonName="Create Reminder" analyticName="SEND A REMINDER" buttonColor="#0B69FF" color="#FFF" />
+                    </Box >
 
-         <Box >
-        <LinkButton buttonLink={`${path.workspace.createTransaction}/rules`} buttonName="Create Transaction" analyticName="" buttonColor="#0B69FF" color="#FFF" />
-        </Box >
-        </Flex>
-             </Box>
-         </StyledCustomers>
-       
+                    <Box >
+                        <LinkButton buttonLink={`${path.workspace.createTransaction}/item`} buttonName="Create Transaction" analyticName="" buttonColor="#0B69FF" color="#FFF" />
+                    </Box >
+                </Flex>
+            </Box>
+        </StyledCustomers>
 
-     );
+
+    );
 }
 
 

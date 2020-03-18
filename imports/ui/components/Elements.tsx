@@ -1,4 +1,5 @@
 import styled from '@emotion/styled'
+import { Text } from '@chakra-ui/core'
 
 
 // export const OverflowText = styled.div`
@@ -90,4 +91,12 @@ export const LineDivider = styled.div<ILineDivider>`
     margin-left: calc(-${ props => props.theme.custom.defaultBox});
     margin-right: calc(-${ props => props.theme.custom.defaultBox});
     background: #eee;
+`
+
+export const StatusText = styled(Text) <{ fsize?: string }>`
+    margin: 0;
+    padding: 0;
+    font-size: ${props => props.fsize ? props.fsize : '.65rem'};
+    line-height: 6px;
+    text-transform: uppercase;
 `

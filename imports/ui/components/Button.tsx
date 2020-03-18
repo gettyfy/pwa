@@ -31,13 +31,13 @@ interface ISubmitButton {
 }
 
 export const SubmitButton: React.FC<ISubmitButton> = (props) => {
-    const { withIcon, isLoading, useSubmit, buttonName, ...rest } = props
+    const { withIcon, isLoading, buttonName, ...rest } = props
     return (
         <StyledButton
             mt={10}
             withIcon={withIcon}
             variantColor="blue"
-            type={useSubmit && 'submit'}
+            type="submit"
             isLoading={isLoading}
             //@ts-ignore
             rightIcon={withIcon && "arrow-forward"}
@@ -76,7 +76,7 @@ export const FormButton: React.FC<IButton> = (props) => {
         handleAction && handleAction()
     }
     return (
-        <Box as="button" type={type} width="16.5rem" rounded="0" bg={buttonColor || 'blue.500'} size="lg" border={border} borderColor={borderColor} color={color} px={4} h={8} {...props} onClick={() => handleClick(analyticName)}>
+        <Box as="button" fontWeight="bold" type={type} width="16.5rem" rounded="0" bg={buttonColor || 'blue.500'} size="lg" border={border} borderColor={borderColor} color={color} px={4} h={8} {...props} onClick={() => handleClick(analyticName)}>
             {buttonName}
         </Box>
     )

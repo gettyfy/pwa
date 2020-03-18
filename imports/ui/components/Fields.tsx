@@ -1,8 +1,8 @@
 
 /**
  * This File will house the Form Fields that would be re-used across the project
+ * This will be the Formik Fields Hook that extends formik functionality into chakra form fields
  */
-// CREATE FIELDS FOR CONTROL BOX https://chakra-ui.com/controlbox
 
 import React from 'react';
 import PropTypes from 'prop-types'
@@ -11,6 +11,7 @@ import Downshift from "downshift";
 import { useField, Form, Field, FieldProps } from 'formik'
 import { FormControl, List, Textarea, ListItem, Checkbox, FormLabel, Select, RadioGroup, RadioButtonGroup, Icon, IconButton, FormErrorMessage, Input, Button, InputGroup, Radio, InputRightElement, CustomTheme, DefaultTheme, Box } from '@chakra-ui/core'
 import * as Analytics from '/imports/ui/analytics'
+
 
 
 
@@ -25,15 +26,15 @@ const FormikTextArea = styled(Textarea)`
     border-radius: 0px;
     border-width: 0px;
     border-right: none;
-    padding-top: 2.55rem;
+    padding-top: 2.5rem;
     border-bottom: 1.6px solid #979797;
     padding-bottom: 1rem;
-    font-size: ${(props: any) => props.theme.custom.InputFontSize};
+    font-size: ${(props: any) => props.theme.custom.inputFontSize};
     border-top: none;
     border-left: none;
 
     ::placeholder, ::-moz-placeholder {
-        font-size: ${(props: any) => props.theme.custom.InputFontSize};
+        font-size: ${(props: any) => props.theme.custom.inputPlaceHolder};
         /* vertical-align: middle; */
     }
 `
@@ -43,14 +44,14 @@ const FormikInput = styled(Input)`
     border-radius: 0px;
     border-width: 1.3px;
     border-right: none;
-    padding-top: 2.55rem;
-    padding-bottom: 1.1rem;
-    font-size: ${(props: any) => props.theme.custom.InputFontSize};
+    padding-top: 2rem;
+    padding-bottom: 1rem;
+    font-size: ${(props: any) => props.theme.custom.inputFontSize};
     border-top: none;
     border-left: none;
 
     ::placeholder, ::-moz-placeholder {
-        font-size: ${(props: any) => props.theme.custom.InputFontSize};
+        font-size: ${(props: any) => props.theme.custom.inputPlaceHolder};
         vertical-align: middle;
     }
 `
@@ -61,31 +62,24 @@ const FormikSelect = styled(Select)`
     border-bottom: 1.3px solid;
     border-top: none;
     border-left: none;
-    font-size: ${(props: any) => props.theme.custom.InputFontSize};
+    font-size: ${(props: any) => props.theme.custom.inputFontSize};
     min-height: ${(props: any) => props.theme.custom.inputMinHeight};
     ::placeholder,
     ::-webkit-input-placeholder {
-        font-size: ${(props: any) => props.theme.custom.InputFontSize};
+        font-size: ${(props: any) => props.theme.custom.inputFontSize};
     }
 `
 const FormikLabel = styled(FormLabel) <{ fsize?: string }>`
-    font-size: ${props => props.fsize ? props.fsize : '12px'};
+    font-size: ${props => props.fsize ? props.fsize : '11px'};
     position: absolute;
     top: 0;
     transition: ease-in 0.2s;
     z-index: 11111;
     padding: .1rem;
     padding-left: 1rem;
-    /* background: #999999; */
-    /* color: white; */
     padding-right: 10px;
    
 `
-
-/**
- * This will be the Formik Fields Hook that extends formik functionality into chakra form fields
- */
-
 
 
 /**
@@ -443,7 +437,7 @@ interface SelectFieldProps {
     validate: Function,
     name: string
     label?: string,
-    placeholder: string
+    placeholder?: string
     defaultValue?: string
     options: Array<string>,
 }

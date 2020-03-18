@@ -15,6 +15,7 @@ export interface IPath {
 	auth: {
 		loginRoute: string;
 		signupRoute: string;
+		logoutRoute: string;
 		resetPasswordRoute: string;
 	};
 	workspace: {
@@ -39,6 +40,7 @@ const Path: IPath = {
 	auth: {
 		loginRoute: '/auth/login',
 		signupRoute: '/auth/signup',
+		logoutRoute: '/auth/logout',
 		resetPasswordRoute: '/auth/reset-password'
 	},
 	workspace: {
