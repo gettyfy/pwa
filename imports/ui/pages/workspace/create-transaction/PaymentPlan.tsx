@@ -39,7 +39,6 @@ const PaymentPlan: React.FunctionComponent = (props: any) => {
     const handleSubmit = async (values: IPaymentPlanInterface) => {
         await props.updateState(values)
         // console.log(values)
-        await Meteor.call('transaction.insert', values)
         history.push(`${path.workspace.createTransaction}/review`)
     }
 

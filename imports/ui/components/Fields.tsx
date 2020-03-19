@@ -100,8 +100,7 @@ const TextAreaField = (props: TextAreaFieldProps): JSX.Element => {
     return (
         <Field name={name} validate={validate} {...props}>
             {({ field, form }: FieldProps) => (
-                //@ts-ignore
-                <FormControl isInvalid={form.errors[name] && form.touched[name]} mt="5" position="relative">
+                <FormControl isInvalid={form.errors[name] && form.touched[name] ? true : false} mt="5" position="relative">
                     <FormikLabel fsize="14px" id={[name, 'label'].join('-')} htmlFor={[name, 'input'].join('-')} color="gray.600">{label}</FormikLabel>
                     <FormikTextArea isFullWidth variant="filled" {...field} id={[name, 'input'].join('-')} placeholder={placeholder} focusBorderColor="gray.500" borderColor="gray.500" errorBorderColor="red.500" size="lg" />
 
@@ -140,8 +139,7 @@ const InputField = (props: InputFieldProps): JSX.Element => {
     return (
         <Field name={name} validate={validate} {...props}>
             {({ field, form }: FieldProps) => (
-                //@ts-ignore
-                <FormControl isInvalid={form.errors[name] && form.touched[name]} mt="5" position="relative">
+                <FormControl isInvalid={form.errors[name] && form.touched[name] ? true : false} mt="5" position="relative">
                     <FormikLabel id={[name, 'label'].join('-')} htmlFor={[name, 'input'].join('-')} color="gray.600">{label}</FormikLabel>
                     <InputGroup size="lg">
                         <FormikInput {...props} isFullWidth variant="filled" {...field} id={[name, 'input'].join('-')} placeholder={placeholder} focusBorderColor="gray.500" borderColor="gray.500" errorBorderColor="red.500" size="lg" />

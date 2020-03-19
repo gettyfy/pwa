@@ -1,9 +1,9 @@
 import React from 'react';
-import { Box, Avatar} from "@chakra-ui/core";
+import { Box, Avatar } from "@chakra-ui/core";
 import { withTracker } from 'meteor/react-meteor-data';
 import styled from '@emotion/styled'
 import { LinkButton } from '/imports/ui/components'
-import { PageHeader, BreakLayout, CustomerList, TransactionList } from '/imports/ui/components'
+import { PageHeader, BreakLayout, TransactionList } from '/imports/ui/components'
 
 
 //imports for API call
@@ -25,9 +25,13 @@ interface TransactionProps {
 
 class Transaction extends React.Component<TransactionProps> {
 
+  handleSubmit = async () => {
+    const { history } = this.props
+    await history.push(path.workspace.createTransaction)
+  }
+
   render() {
     console.log(this.props)
-    // const { transactions } = this.props
 
     return (
       <StyledTransaction>
@@ -43,30 +47,30 @@ class Transaction extends React.Component<TransactionProps> {
         </Box >
 
         <Box mt="10">
-        
-                {this.props.transactions.map((val, index) => {
-                  return (
+
+          {this.props.transactions.map((val, index) => {
+            return (
 
 
-                    <TransactionList
-                      // key={val._id}
-                      key={[val.customerName, index].join('-')}
-                      analyticName="View a Transaction"
-                      customerStatus="10 days to overdue"
-                      customerName={val.owner?.profile.name}
-                      amount="GHc233"
-                      paymentStatus="PAID"
-                      overdueAmount="GHC346"
-                      overdueStatus="OVERDUE"
-                      cardLink={`${path.workspace.transactionView}/view/${val._id}`}
-                      iconName="chevron-right"
-                      iconSize="24px"
-                      
-                    />
+              <TransactionList
+                // key={val._id}
+                key={[val.customerName, index].join('-')}
+                analyticName="View a Transaction"
+                customerStatus="10 days to overdue"
+                customerName={val.owner?.profile.name}
+                amount={`₵ ${val.price || 0}`}
+                paymentStatus="PAID"
+                overdueAmount={`₵ ${val.balance || 0}`}
+                overdueStatus="OVERDUE"
+                cardLink={`${path.workspace.transactionView}/view/${val._id}`}
+                iconName="chevron-right"
+                iconSize="24px"
 
-                  )
-                })
-                }
+              />
+
+            )
+          })
+          }
 
         </Box>
 

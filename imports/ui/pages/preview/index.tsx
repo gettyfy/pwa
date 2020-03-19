@@ -7,6 +7,7 @@ import React from 'react';
 import * as Validator from '/imports/lib/validator'
 import { Accounts } from 'meteor/accounts-base';
 import { Meteor } from 'meteor/meteor'
+import { Random } from 'meteor/random'
 import { Formik, FormikProps } from 'formik'
 import {
     InputField,
@@ -19,11 +20,17 @@ import {
     SignatureField,
     CheckField, FormikForm, RadioButtonField, PasswordField, InvoiceList, SummaryList, SummaryRow,
     Item,
-    ItemList
+    ItemList,
+    CustomerSearchField
 } from '/imports/ui/components'
 
 
 const Signup: React.FC = () => {
+
+
+    console.log(Random.id());
+    console.log(Random.secret());
+    console.log(Random.hexString(22));
 
     interface AuthInterface {
         fullname: string,
@@ -73,6 +80,20 @@ const Signup: React.FC = () => {
         { value: "Ferrari" },
         { value: "Bugati" }
     ]
+    const customerOptions = [
+        { customerName: "Udoka", customerNumber: "0240337741", value: "Apple" },
+        { customerName: "Udoka", customerNumber: "0240337741", value: "Pear" },
+        { customerName: "Udoka", customerNumber: "0240337741", value: "Orange" },
+        { customerName: "Udoka", customerNumber: "0240337741", value: "Grape" },
+        { customerName: "Udoka", customerNumber: "0240337741", value: "Banana" },
+        { customerName: "Udoka", customerNumber: "0240337741", value: "Coloran" },
+        { customerName: "Udoka", customerNumber: "0240337741", value: "Buran" },
+        { customerName: "Udoka", customerNumber: "0240337741", value: "Zeron" },
+        { customerName: "Udoka", customerNumber: "0240337741", value: "Fedan" },
+        { customerName: "Udoka", customerNumber: "0240337741", value: "Chrysler" },
+        { customerName: "Udoka", customerNumber: "0240337741", value: "Ferrari" },
+        { customerName: "Udoka", customerNumber: "0240337741", value: "Bugati" }
+    ]
 
 
     return (
@@ -89,6 +110,8 @@ const Signup: React.FC = () => {
             >
                 {(props: FormikProps<any>) => (
                     <FormikForm isLoading={props.isSubmitting} analyticName="Signup Form" formProps={props} buttonName="Signup">
+                        <CustomerSearchField placeholder="Find Customer" name="customer" label="Search Customer" validate={Validator.isRequired} options={customerOptions} />
+
                         <TextAreaField placeholder="Type your address here" label="Text Area" validate={Validator.isRequired} name="textarea" />
                         <InputField label="Your Full Name" placeholder="enter your name" name="fullname" validate={Validator.isRequired} />
                         <InputField label="Your Email" placeholder="enter an email address" name="username" validate={Validator.isEmail} />
@@ -137,6 +160,8 @@ const Signup: React.FC = () => {
                                 amount="GHC346"
                             />
                         </Item>
+
+
 
                         <SignatureField name="signature" validate={Validator.isSignature} />
 
