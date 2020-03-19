@@ -27,9 +27,18 @@ export interface IGuarantor {
 }
 
 export interface ICurrency {
-	code: 'GHC' | 'NGN' | 'USD';
+	code: 'GHC' | 'NGN' | 'USD'; //can be Enum
 	symbol: string;
 	name: string;
+}
+
+export interface ILocation {
+	country: string;
+	countryCode: string;
+	state: string;
+	stateCode: string;
+	address?: string;
+	currency: ICurrency;
 }
 
 // ========================================== END NORMALIZATION TABLE ================================
@@ -90,12 +99,15 @@ export interface IUser {
 	verified: boolean;
 	createdAt: Date;
 	lastUpdated: Date;
+	countryCode: string;
+	currencyCode: string;
 	profile: {
 		workspace: {
 			_id: string;
 			name: string;
 			type: 'organization' | 'individual';
 		};
+		location: ILocation;
 		organization: {
 			name: string;
 			country: string;

@@ -8,11 +8,14 @@ import { LineDivider, BreakLayout } from '/imports/ui/components'
 
 const Navbar = styled.header`
     min-height: 48px;
+    height: 60px;
     position: relative;
     margin: 0;
     z-index: 95299999999239;
     background: white;
-    padding: 1.1rem 1rem .75rem 1.2rem;
+    padding: .75rem 1rem .75rem 1.1rem;
+    padding-right: calc(5% + 4px);
+    /* padding-left: calc(5% + 4px); */
 `
 
 
@@ -25,7 +28,7 @@ const LogoHeader: React.FC = (): JSX.Element => {
             >
                 <Navbar >
                     <Link to={path.root}>
-                        <img alt="fynance" width="40%" src="/img/header-logo.svg" aria-label="header logo" />
+                        <img alt="fynance" src="/img/header-logo.svg" aria-label="header logo" />
                     </Link>
                 </Navbar >
             </Headroom >
@@ -47,12 +50,12 @@ export const PageHeader: React.FC<IPageHeader> = (props): JSX.Element => {
         <React.Fragment>
             {
                 useHeader ? <LogoHeader /> :
-                    <Box my="4" background="inherit">
+                    <Box my="4" bg="inherit">
                         <Box my="2" width="100px" onClick={() => history.goBack()}>
                             <Icon name="arrow-back" size="28px" />
                         </Box>
                         <Stack spacing={3}>
-                            <Heading color="blue.700" as="h2" size="xl">{title}</Heading>
+                            <Heading color="blue.700" as="h1" size="lg">{title}</Heading>
                             <Heading as="h6" size="sm">{subTitle}</Heading>
                         </Stack>
                     </Box>

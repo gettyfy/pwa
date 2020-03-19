@@ -10,7 +10,7 @@ import App from '/imports/ui/App'
 
 
 // ************* All view Components Here *****************************************
-import { Login, Signup, ResetPassword } from '/imports/ui/pages/auth'
+import { Login, Signup, ResetPassword, Logout } from '/imports/ui/pages/auth'
 import Wizard from '/imports/ui/pages/wizard'
 import Onboarding from '/imports/ui/pages/onboarding'
 import Preview from '/imports/ui/pages/preview'
@@ -19,7 +19,9 @@ import Remind from '/imports/ui/pages/workspace/remind'
 import Record from '/imports/ui/pages/workspace/record'
 import Recovery from '/imports/ui/pages/workspace/recovery'
 import Transaction from '/imports/ui/pages/workspace/transaction'
-import Customer, { CustomerView } from '/imports/ui/pages/workspace/customer'
+import Customer from '/imports/ui/pages/workspace/customer'
+import CustomerView from '/imports/ui/pages/workspace/customer/view'
+import TransactionView from '/imports/ui/pages/workspace/transaction/view'
 import Account from '/imports/ui/pages/workspace/account'
 import CreateCustomer from '/imports/ui/pages/workspace/create-customer'
 import CreateTransaction from '/imports/ui/pages/workspace/create-transaction'
@@ -43,10 +45,12 @@ export default function AppRouter(this: any) {
                 <Switch>
                     <Route path={path.auth.loginRoute} component={Login} />
                     <Route path={path.auth.signupRoute} component={Signup} />
+                    <Route path={path.auth.logoutRoute} component={Logout} />
                     <Route path={path.auth.resetPasswordRoute} component={ResetPassword} />
                     <Route path={path.workspace.transaction} component={Transaction} />
                     <Route path={path.workspace.customer} component={Customer} />
-                    <Route path={`${path.workspace.customer}/view/:id`} component={CustomerView} />
+                    <Route path={`${path.workspace.customerView}/view/:id`} component={CustomerView} />
+                    <Route path={`${path.workspace.transactionView}/view/:id`} component={TransactionView} />
                     <Route path={path.workspace.createCustomer} component={CreateCustomer} />
                     <Route path={path.workspace.createTransaction} component={CreateTransaction} />
                     <Route path={path.workspace.account} component={Account} />
@@ -57,6 +61,8 @@ export default function AppRouter(this: any) {
                     <Route path={path.wizard} component={Wizard} />
                     <Route path={path.onboarding} component={Onboarding} />
                     <Route path={path.preview} component={Preview} />
+
+                    {/* ========= Implement your Authentication Logic below  this section ======= */}
                     <Route exact={true} path={path.root}><App /></Route>
                     <Route path="/auth" component={Login} />
                 </Switch>

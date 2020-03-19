@@ -5,10 +5,10 @@ import { Box, Stack, Avatar, Heading, Text, Icon, Flex as ChFlex } from '@chakra
 import * as Analytics from '/imports/ui/analytics';
 
 
-const CustomerList = styled.section`
-flex-direction: row;
-align-items: center;
-`
+// const CustomerList = styled.section`
+// flex-direction: row;
+// align-items: center;
+// `
 
 
 interface ITransactionList {
@@ -21,7 +21,8 @@ interface ITransactionList {
     overdueStatus: string,
     cardLink: string,
     iconName: string | any,
-    iconSize: any
+    iconSize: any,
+    
 }
 
 
@@ -105,4 +106,4 @@ const TransactionList = (props: ITransactionList) => {
 
 // export the components as modules to be resuable by other component
 // export default CustomerList
-export { TransactionList, CustomerList }
+export { TransactionList }

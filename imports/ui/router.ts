@@ -8,49 +8,55 @@
 type TPath = string;
 
 export interface IPath {
-	root: TPath;
-	wizard: TPath;
-	onboarding: TPath;
-	preview: TPath;
-	auth: {
-		loginRoute: string;
-		signupRoute: string;
-		resetPasswordRoute: string;
-	};
-	workspace: {
-		transaction: string;
-		customer: string;
-		account: string;
-		remind: string;
-		recovery: string;
-		record: string;
-		createCustomer: string;
-		createTransaction: string;
-		invoice: string;
-	};
+    root: TPath
+    wizard: TPath
+    onboarding: TPath
+    preview: TPath
+    auth: {
+        loginRoute: string
+        signupRoute: string
+        logoutRoute: string
+        resetPasswordRoute: string
+    }
+    workspace: {
+        transaction: string
+        customer: string
+        customerView: string
+        transactionView: string
+        account: string
+        remind: string
+        recovery: string
+        record: string
+        createCustomer: string
+        createTransaction: string
+        invoice: string
+    }
 }
 
 const Path: IPath = {
-	root: '/',
-	wizard: '/wizard',
-	onboarding: '/onboarding',
-	preview: '/preview',
-	auth: {
-		loginRoute: '/auth/login',
-		signupRoute: '/auth/signup',
-		resetPasswordRoute: '/auth/reset-password'
-	},
-	workspace: {
-		transaction: '/transaction',
-		customer: '/customer',
-		account: '/account',
-		remind: '/remind',
-		recovery: '/recovery',
-		record: '/record',
-		createCustomer: '/create-customer',
-		createTransaction: '/create-transaction',
-		invoice: '/invoice'
-	}
-};
+    root: "/",
+    wizard: "/wizard",
+    onboarding: "/onboarding",
+    preview: "/preview",
+    auth: {
+        loginRoute: "/auth/login",
+        signupRoute: "/auth/signup",
+        logoutRoute: "/auth/logout",
+        resetPasswordRoute: "/auth/reset-password",
+    },
+    workspace: {
+        transaction: "/transaction",
+        transactionView: "/transactions",
+        customer: "/customers",
+        customerView: "/customer",
+        account: "/account",
+        remind: "/remind",
+        recovery: "/recovery",
+        record: "/record",
+        createCustomer: "/create-customer",
+        createTransaction: "/create-transaction",
+        invoice: "/invoice",
+    },
+}
 
 export default Path;

@@ -6,7 +6,6 @@ import { PageHeader } from '/imports/ui/components'
 
 import { CustomerStyle, CustomerName } from '/imports/ui/components'
 // Make the Detail Page Available in routes
-export { CustomerView } from './view'
 
 //imports for API call
 import { Meteor } from 'meteor/meteor'
@@ -34,20 +33,18 @@ class Customer extends React.Component<CustomerProps> {
       <StyledCustomers>
         <PageHeader useHeader useTitle title="Your Customers" />
 
-        <CustomerStyle>
-          {customers.map((val, index) => {
-            return (
-              <CustomerName
-                LinkCard={`${path.workspace.customer}/view/${val._id}`}
-                customerName={val.customerName}
-                iconName=""
-                PhoneNumber={val.phonenumber}
-              />
+        {customers.map((val, index) => {
+          return (
+            <CustomerName
+              key={[val.customerName, index].join('-')}
+              LinkCard={`${path.workspace.customerView}/view/${val._id}`}
+              customerName={val.customerName}
+              iconName="info-outline"
+              PhoneNumber={val.phonenumber}
+            />
 
-            )
-          })
-          }
-        </CustomerStyle>
+          )
+        })}
 
 
       </StyledCustomers>
