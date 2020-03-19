@@ -76,7 +76,7 @@ interface ICustomerSearchField {
 
 export const CustomerSearchField: React.FC<ICustomerSearchField> = (props): JSX.Element => {
     const { validate, placeholder, name, options, label, ...rest } = props
-    const [field, meta, helpers] = useField(props);
+    const [field, meta, helpers] = useField<ICustomerSearchField>(props);
 
     // const items = ;
 

@@ -7,6 +7,7 @@ import React from 'react';
 import * as Validator from '/imports/lib/validator'
 import { Accounts } from 'meteor/accounts-base';
 import { Meteor } from 'meteor/meteor'
+import { Random } from 'meteor/random'
 import { Formik, FormikProps } from 'formik'
 import {
     InputField,
@@ -25,6 +26,11 @@ import {
 
 
 const Signup: React.FC = () => {
+
+
+    console.log(Random.id());
+    console.log(Random.secret());
+    console.log(Random.hexString(22));
 
     interface AuthInterface {
         fullname: string,
@@ -104,6 +110,8 @@ const Signup: React.FC = () => {
             >
                 {(props: FormikProps<any>) => (
                     <FormikForm isLoading={props.isSubmitting} analyticName="Signup Form" formProps={props} buttonName="Signup">
+                        <CustomerSearchField placeholder="Find Customer" name="customer" label="Search Customer" validate={Validator.isRequired} options={customerOptions} />
+
                         <TextAreaField placeholder="Type your address here" label="Text Area" validate={Validator.isRequired} name="textarea" />
                         <InputField label="Your Full Name" placeholder="enter your name" name="fullname" validate={Validator.isRequired} />
                         <InputField label="Your Email" placeholder="enter an email address" name="username" validate={Validator.isEmail} />
@@ -152,7 +160,6 @@ const Signup: React.FC = () => {
                                 amount="GHC346"
                             />
                         </Item>
-                        <CustomerSearchField placeholder="Find Customer" name="customer" label="Search Customer" validate={Validator.isRequired} options={customerOptions} />
 
 
 

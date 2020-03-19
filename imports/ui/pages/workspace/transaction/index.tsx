@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Avatar} from "@chakra-ui/core";
+import { Box, Avatar } from "@chakra-ui/core";
 import { withTracker } from 'meteor/react-meteor-data';
 import styled from '@emotion/styled'
 import { FormButton } from '/imports/ui/components'
@@ -25,6 +25,11 @@ interface TransactionProps {
 
 class Transaction extends React.Component<TransactionProps> {
 
+  handleSubmit = async () => {
+    const { history } = this.props
+    await history.push(path.workspace.createTransaction)
+  }
+
   render() {
     console.log(this.props)
     // const { transactions } = this.props
@@ -35,32 +40,32 @@ class Transaction extends React.Component<TransactionProps> {
 
         {/* Button */}
         <Box my="2">
-          <FormButton buttonName="CREATE NEW TRANSACTION" analyticName="Verify" buttonColor="#0B69FF" color="#FFF" handleAction={() => handleSubmit()} />
+          <FormButton buttonName="CREATE NEW TRANSACTION" analyticName="Verify" buttonColor="#0B69FF" color="#FFF" handleAction={() => this.handleSubmit()} />
         </Box>
 
         <Box mt="10">
-        
-                {this.props.transactions.map((val, index) => {
-                  return (
+
+          {this.props.transactions.map((val, index) => {
+            return (
 
 
-                    <TransactionList
-                      key={val._id}
-                      analyticName="View a Transaction"
-                      customerStatus="10 days to overdue"
-                      customerName={val.owner?.profile.name}
-                      amount="GHc233"
-                      paymentStatus="PAID"
-                      overdueAmount="GHC346"
-                      overdueStatus="OVERDUE"
-                      cardLink="/signup"
-                      iconName="chevron-right"
-                      iconSize="24px"
-                    />
+              <TransactionList
+                key={val._id}
+                analyticName="View a Transaction"
+                customerStatus="10 days to overdue"
+                customerName={val.owner?.profile.name}
+                amount={`₵ ${val.price || 0}`}
+                paymentStatus="PAID"
+                overdueAmount={`₵ ${val.balance || 0}`}
+                overdueStatus="OVERDUE"
+                cardLink={path.workspace.transaction}
+                iconName="chevron-right"
+                iconSize="24px"
+              />
 
-                  )
-                })
-                }
+            )
+          })
+          }
 
         </Box>
 
