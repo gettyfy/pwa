@@ -37,11 +37,6 @@ class Transaction extends React.Component<TransactionProps> {
       <StyledTransaction>
         <PageHeader useHeader title="Your Transactions" />
 
-        {/* Button */}
-        {/* <Box my="2">
-          <LinkButton />
-          <FormButton buttonName="CREATE NEW TRANSACTION" analyticName="Verify" buttonColor="#0B69FF" color="#FFF" handleAction={() => handleSubmit()} />
-        </Box> */}
         <Box >
           <LinkButton buttonLink={`${path.workspace.createTransaction}/`} buttonName="Create Transaction" analyticName="" buttonColor="#0B69FF" color="#FFF" />
         </Box >

@@ -23,6 +23,8 @@ export interface IPath {
 		customer: string;
 		customerView: string;
 		transactionView: string;
+		reminder: string;
+		reminderView: string;
 		account: string;
 		remind: string;
 		recovery: string;
@@ -49,10 +51,12 @@ const path: IPath = {
 		transactionView: '/transactions',
 		customer: '/customers',
 		customerView: '/customer',
+		reminder: '/reminders',
+		reminderView: '/reminder',
 		account: '/account',
-		remind: '/remind',
 		recovery: '/recovery',
 		record: '/record',
+		remind: '/remind',
 		createCustomer: '/create-customer',
 		createTransaction: '/create-transaction',
 		invoice: '/invoice'
