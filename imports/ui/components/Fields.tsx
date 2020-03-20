@@ -16,7 +16,7 @@ import * as Analytics from '/imports/ui/analytics'
 
 
 const FormikButton = styled(Button) <{ withIcon: boolean | undefined }>`
-    border-radius: 0;
+    border-radius: 3px;
     min-height: 54px;
     justify-content: ${(props) => props.withIcon ? 'space-between' : 'center'};
     align-content: center;
@@ -239,7 +239,7 @@ const PasswordField = (props: InputFieldProps): JSX.Element => {
                     <FormikLabel htmlFor={name} color="gray.600">{label}</FormikLabel>
                     <InputGroup size="lg">
                         <FormikInput type={show ? "text" : "password"} isFullWidth variant="filled" {...field} id={name} placeholder={placeholder} focusBorderColor="gray.500" borderColor="gray.500" errorBorderColor="red.500" size="lg" />
-                        <InputRightElement width="4.5rem" pt="4">
+                        <InputRightElement width="4.5rem" pt="1">
                             <IconButton
                                 variant="outline"
                                 size="sm"
