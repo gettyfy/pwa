@@ -63,6 +63,13 @@ const PaymentPlan: React.FunctionComponent = (props: any) => {
                         <SelectField label="Frequency" name="frequency" validate={Validator.isRequired} options={["Monthly"]} />
                         <InputField label="Start Date" placeholder="Start" type="date" name="startDate" validate={Validator.isRequired} />
                         <InputField label="End Date" placeholder="End" type="date" name="dueDate" validate={Validator.isRequired} />
+
+                        <Box>
+                            <SelectField label="" name="agreementTemplate" validate={Validator.isRequired} options={["Default Template"]} />
+                        </Box>
+
+
+
                         <SignatureField name="signature" validate={Validator.isSignature} />
 
 

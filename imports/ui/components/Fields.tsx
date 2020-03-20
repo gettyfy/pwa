@@ -140,7 +140,7 @@ const InputField = (props: InputFieldProps): JSX.Element => {
     return (
         <Field name={name} validate={validate} {...props}>
             {({ field, form }: FieldProps) => (
-                <FormControl isInvalid={form.errors[name] && form.touched[name] ? true : false} mt="5" position="relative">
+                <FormControl isInvalid={form.errors[name] && form.touched[name] ? true : false} mt="3" position="relative">
                     <FormikLabel id={[name, 'label'].join('-')} htmlFor={[name, 'input'].join('-')} color="gray.600">{label}</FormikLabel>
                     <InputGroup size="lg">
                         <FormikInput trackInput={trackInput && trackInput(field.value)} {...props} type={type || 'text'} isFullWidth variant="filled" {...field} id={[name, 'input'].join('-')} placeholder={placeholder} focusBorderColor="gray.500" borderColor="gray.500" errorBorderColor="red.500" size="lg" />
@@ -236,7 +236,7 @@ const PasswordField = (props: InputFieldProps): JSX.Element => {
         <Field name={name} validate={validate} {...props}>
             {({ field, form }: FieldProps) => (
                 //@ts-ignore
-                <FormControl isInvalid={form.errors[name] && form.touched[name]} mt="5" position="relative">
+                <FormControl isInvalid={form.errors[name] && form.touched[name]} mt="3" position="relative">
                     <FormikLabel htmlFor={name} color="gray.600">{label}</FormikLabel>
                     <InputGroup size="lg">
                         <FormikInput type={show ? "text" : "password"} isFullWidth variant="filled" {...field} id={name} placeholder={placeholder} focusBorderColor="gray.500" borderColor="gray.500" errorBorderColor="red.500" size="lg" />
@@ -448,7 +448,7 @@ const SelectField = (props: SelectFieldProps): JSX.Element => {
         <Field name={name} validate={validate} {...props}>
             {({ field, form }: FieldProps) => (
                 //@ts-ignore
-                <FormControl isInvalid={form.errors[name] && form.touched[name]} mt="5" position="relative">
+                <FormControl isInvalid={form.errors[name] && form.touched[name]} mt="3" position="relative">
                     <FormLabel htmlFor={[name, 'select'].join('-')} color="gray.600">{label}</FormLabel>
                     <FormikSelect variant="filled" placeholder={placeholder} name={name} id={[name, 'select'].join('-')} defaultValue={defaultValue} {...field} size="lg">
                         {options && options.map((val, idx) => {
