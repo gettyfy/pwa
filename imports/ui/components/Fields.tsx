@@ -59,6 +59,7 @@ const FormikSelect = styled(Select)`
     border-radius: 3px;
     border-width: 1.3px;
     border: 1.3px solid;
+    height: 55px;
     /* border-right: none; */
     /* border-top: none; */
     /* border-left: none; */
@@ -436,20 +437,21 @@ interface SelectFieldProps {
     validate: Function,
     name: string
     label?: string,
+    mt?: string,
     placeholder?: string
     defaultValue?: string
     options: Array<string>,
 }
 
 const SelectField = (props: SelectFieldProps): JSX.Element => {
-    const { validate, placeholder, name, defaultValue, options, label } = props
+    const { validate, placeholder, name, mt, defaultValue, options, label } = props
 
     return (
         <Field name={name} validate={validate} {...props}>
             {({ field, form }: FieldProps) => (
                 //@ts-ignore
-                <FormControl isInvalid={form.errors[name] && form.touched[name]} mt="3" position="relative">
-                    <FormLabel htmlFor={[name, 'select'].join('-')} color="gray.600">{label}</FormLabel>
+                <FormControl isInvalid={form.errors[name] && form.touched[name]} mt={mt || '3'} position="relative" {...props}>
+                    {label && <FormikLabel htmlFor={[name, 'select'].join('-')} color="gray.600">{label}</FormikLabel>}
                     <FormikSelect variant="filled" placeholder={placeholder} name={name} id={[name, 'select'].join('-')} defaultValue={defaultValue} {...field} size="lg">
                         {options && options.map((val, idx) => {
                             return (
@@ -466,7 +468,7 @@ const SelectField = (props: SelectFieldProps): JSX.Element => {
 
 SelectField.propTypes = {
     name: PropTypes.string.isRequired,
-    label: PropTypes.string.isRequired,
+    label: PropTypes.string,
     validate: PropTypes.func,
     defaultValue: PropTypes.string,
     options: PropTypes.array.isRequired
