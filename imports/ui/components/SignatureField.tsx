@@ -6,7 +6,7 @@
 
 
 import React, { useRef, useState, MutableRefObject } from 'react'
-import SignaturePad from 'react-signature-canvas'
+import SignaturePad from 'react-signature-pad-wrapper'
 import { Box, Button, FormErrorMessage, FormLabel, FormControl, Flex } from '@chakra-ui/core'
 import { useField } from 'formik'
 

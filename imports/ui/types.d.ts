@@ -6,6 +6,8 @@ declare module 'styled' {
 	interface DefaultTheme extends ThemeInterface {}
 }
 
+declare module 'react-signature-pad-wrapper'
+
 declare module 'money';
 declare module 'number-counter';
 declare module 'raf';
