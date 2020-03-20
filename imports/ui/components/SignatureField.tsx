@@ -54,7 +54,7 @@ export const SignatureField: React.FC<SignatureProps> = (props): JSX.Element => 
     return (
         <FormControl isInvalid={meta['error'] && meta.touched} mt="5" position="relative">
             <FormLabel isInvalid={validate} {...field} htmlFor={[name, 'radio-button'].join('__')} color="gray.600">{label}</FormLabel>
-            <Box border="2px" borderColor="gray.800" pt="2">
+            <Box border="2px" borderRadius="3px" borderColor="gray.800" pt="2">
                 <Box>
                     <SignaturePad onBegin={() => helpers.setTouched(true)}  {...field} canvasProps={{ className: "meteor-style-main-css" }} ref={sigCanvas} />
                 </Box>

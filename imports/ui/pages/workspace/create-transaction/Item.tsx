@@ -57,18 +57,20 @@ const Item: React.FunctionComponent = (props: any) => {
     interface IItemInterface {
         itemName: string,
         quantity: string,
-        price: string,
+        amountDue: string,
         amountPaid: string,
         dueDate: string,
+        withInstallment: boolean,
         [key: string]: string
     }
 
     const init: IItemInterface = {
         itemName: "",
         quantity: "1",
-        price: "",
+        amountDue: "",
         amountPaid: "0",
         dueDate: "",
+        withInstallment: false,
     }
 
     const handleTracker = (value: string, callback: Function) => {
@@ -88,48 +90,51 @@ const Item: React.FunctionComponent = (props: any) => {
 
 
     return (
-        <Box p={4}>
+        <React.Fragment>
             <PageHeader title="Transaction Detail" subTitle="" />
 
-            <Formik
-                initialValues={init}
-                onSubmit={(values, actions) => {
-                    setTimeout(() => {
-                        handleSubmit(values)
-                        actions.setSubmitting(false);
-                    }, 300);
-                }}
-            >
-                {(props: FormikProps<any>) => (
-                    <FormikForm isLoading={props.isSubmitting} analyticName="Signup Form" formProps={props} buttonName="NEXT" withIcon>
-                        <InputField label="Description" placeholder="Payment for Artwork" name="itemName" validate={Validator.isRequired} />
-                        <Stack isInline>
-                            <Box width="40%">
-                                <InputField label="Quantity" placeholder="1" name="quantity" validate={Validator.isNumeric} />
-                            </Box>
-                            <InputField label="Amount Due" trackInput={(data: string) => handleTracker(data, setAmountDue)} placeholder="700" name="price" validate={Validator.isNumeric} />
-                            <InputField label="Amount Received" trackInput={(data: any) => handleTracker(data, setAmountPaid)} placeholder="0" name="amountPaid" validate={paymentValidation} />
-                        </Stack>
+            <Box py={4}>
 
-                        <InputField type="date" trackInput={(data: string) => handleTracker(data, setDate)} label="When is this payment due?" placeholder="03/30/2021" name="dueDate" validate={Validator.isRequired} />
+                <Formik
+                    initialValues={init}
+                    onSubmit={(values, actions) => {
+                        setTimeout(() => {
+                            handleSubmit(values)
+                            actions.setSubmitting(false);
+                        }, 300);
+                    }}
+                >
+                    {(props: FormikProps<any>) => (
+                        <FormikForm isLoading={props.isSubmitting} analyticName="Signup Form" formProps={props} buttonName="NEXT" withIcon>
+                            <InputField label="Description" placeholder="Payment for Artwork" name="itemName" validate={Validator.isRequired} />
+                            <Stack isInline>
+                                <Box width="40%">
+                                    <InputField label="Quantity" placeholder="1" name="quantity" validate={Validator.isNumeric} />
+                                </Box>
+                                <InputField label="Amount Due" trackInput={(data: string) => handleTracker(data, setAmountDue)} placeholder="700" name="amountDue" validate={Validator.isNumeric} />
+                                <InputField label="Amount Received" trackInput={(data: any) => handleTracker(data, setAmountPaid)} placeholder="0" name="amountPaid" validate={paymentValidation} />
+                            </Stack>
 
-                        {amountDue && date &&
-                            <>
-                                <Flex direction="column" mt="6" bg="gray.100" p="2" borderRadius={theme.custom.defaultRadius}>
-                                    <Text><Span>{`${customer && customer.customerName || ""}'s`} </Span> payment is due by: <Span> {date}</Span></Text>
-                                    <Text><Span>Their payment balance is</Span> <Span>GH₵ {balance}</Span></Text>
-                                </Flex>
-                                <CheckField name="withInstallment" boxLabel="Use an Installment Plan" validate={Validator.isRequired} />
-                            </>
-                        }
+                            <InputField type="date" trackInput={(data: string) => handleTracker(data, setDate)} label="When is this payment due?" placeholder="03/30/2021" name="dueDate" validate={Validator.isRequired} />
 
-
-                    </FormikForm>
-                )}
-            </Formik>
+                            {amountDue && date &&
+                                <>
+                                    <Flex direction="column" mt="6" bg="gray.100" p="2" borderRadius={theme.custom.defaultRadius}>
+                                        <Text><Span>{`${customer && customer.customerName || ""}'s`} </Span> payment is due by: <Span> {date}</Span></Text>
+                                        <Text><Span>Their payment balance is</Span> <Span>GH₵ {balance}</Span></Text>
+                                    </Flex>
+                                    <CheckField name="withInstallment" boxLabel="Use an Installment Plan" validate={Validator.isRequired} />
+                                </>
+                            }
 
 
-        </Box>
+                        </FormikForm>
+                    )}
+                </Formik>
+
+
+            </Box>
+        </React.Fragment>
     );
 }
 
