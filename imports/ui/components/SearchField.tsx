@@ -11,7 +11,8 @@ import styled from '@emotion/styled'
 import Downshift from "downshift";
 import { useField, Form, Field, FieldProps } from 'formik'
 import { FormControl, List, Textarea, ListItem, Checkbox, FormLabel, Select, RadioGroup, RadioButtonGroup, Icon, IconButton, FormErrorMessage, Input, Button, InputGroup, Radio, InputRightElement, CustomTheme, DefaultTheme, Box } from '@chakra-ui/core'
-import { CustomerList } from '/imports/ui/components/List'
+import { CustomerSearch } from '/imports/ui/components/CustomerList'
+import { ICustomer } from '/imports/api/schema'
 
 
 const FormikButton = styled(Button) <{ withIcon: boolean | undefined }>`
@@ -70,13 +71,15 @@ interface ICustomerSearchField {
     name: string
     label?: string,
     placeholder: string
-    options: Array<{ value: string }>,
+    options: Array<ICustomer>,
     [key: string]: any
 }
 
 export const CustomerSearchField: React.FC<ICustomerSearchField> = (props): JSX.Element => {
     const { validate, placeholder, name, options, label, ...rest } = props
     const [field, meta, helpers] = useField<ICustomerSearchField>(props);
+
+
 
     // const items = ;
 
@@ -87,7 +90,7 @@ export const CustomerSearchField: React.FC<ICustomerSearchField> = (props): JSX.
                     //pass in the full object of the field into form hooks
                     helpers.setTouched(true) && helpers.setValue(selection)
                 }
-                itemToString={item => (item ? item.value : "")}
+                itemToString={item => (item ? item.customerName : "")}
             >
                 {({
                     getInputProps,
@@ -100,56 +103,57 @@ export const CustomerSearchField: React.FC<ICustomerSearchField> = (props): JSX.
                     highlightedIndex,
                     selectedItem,
                     getRootProps
-                }) => (
+                }) => {
+                    const triggerList = () => {
+                        getToggleButtonProps();
+                        console.log(!isOpen);
+                        console.log(getToggleButtonProps());
+
+                        return !!isOpen;
+                    }
+                    return (
                         <div>
                             <FormLabel {...getToggleButtonProps()} {...getLabelProps()} color="gray.600">{label}</FormLabel>
                             <div {...getRootProps({}, { suppressRefError: true })}>
-                                <FormikInput isFullWidth variant="filled"  {...field} placeholder={placeholder}  {...getInputProps()} {...rest} validate={validate} focusBorderColor="gray.500" borderColor="gray.500" errorBorderColor="red.500" size="lg" />
+                                <FormikInput onFocus={triggerList} isFullWidth variant="filled"  {...field} placeholder={placeholder}  {...getInputProps()} {...props} validate={validate} focusBorderColor="gray.500" borderColor="gray.500" errorBorderColor="red.500" size="lg" />
                             </div>
 
                             <List {...getMenuProps()}>
                                 {isOpen
                                     ? options
-                                        .filter(item => !inputValue || item.value.includes(inputValue))
+                                        .filter(item => !inputValue || item.customerName.toLowerCase().includes(inputValue))
                                         .map((item, index) => (
-                                            <ListItem
+                                            <CustomerSearch
                                                 {...getItemProps({
-                                                    key: item.value,
+                                                    key: item.customerName,
                                                     index,
                                                     item,
                                                     style: {
                                                         backgroundColor:
-                                                            highlightedIndex === index ? "lightgray" : "white",
+                                                            highlightedIndex === index ? "#f6f6f7" : "white",
                                                         fontWeight: selectedItem === item ? "bold" : "normal"
                                                     }
                                                 })}
-                                            >
-                                                {item.value}
-                                            </ListItem>
+                                                customerName={item.customerName}
+                                            />
+
                                         ))
                                     : null}
                             </List>
                         </div>
-                    )}
+                    )
+                }}
             </Downshift>
             <FormErrorMessage>{meta.error && meta.error}</FormErrorMessage>
         </FormControl>
     );
 }
 
-interface ITransactionList {
-    analyticName: string,
-    customerName: string,
-    customerStatus: string,
-    amount: any,
-    paymentStatus: string,
-    overdueAmount: string,
-    overdueStatus: string,
-    cardLink: string,
-    iconName: string | any,
-    iconSize: any
+export class DofMe extends React.Component {
+    render() {
+        console.log(this.props);
+        return (
+            <Downshift />
+        )
+    }
 }
-
-
-
-

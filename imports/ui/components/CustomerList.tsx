@@ -52,4 +52,22 @@ const CustomerList = (props: ICustomerList) => {
 }
 
 
-export { CustomerStyle, CustomerList }
+const CustomerSearch = (props: ICustomerList) => {
+    const { customerName, PhoneNumber } = props
+
+    return (
+        <Flex align="center" justify="space-between" direction="row" py="2" borderBottom="1px" borderColor="gray.100" {...props}>
+            <Box display="flex" flexDir="row" justifyContent="flex-start">
+                <Avatar name={customerName} size="sm" />
+                <Box flexDir="column" pl="3">
+                    <Heading as="h4" fontWeight="normal" size="sm">{customerName}</Heading>
+                    <StatusText fsize=".75rem" >{PhoneNumber}</StatusText>
+                </Box>
+            </Box>
+            <Icon name="chevron-right" size="1rem" color="blue.500" />
+        </Flex>
+    )
+}
+
+
+export { CustomerStyle, CustomerList, CustomerSearch }

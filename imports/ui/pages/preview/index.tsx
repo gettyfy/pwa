@@ -23,14 +23,15 @@ import {
     ItemList,
     CustomerSearchField
 } from '/imports/ui/components'
+import DropdownCombobox from '../../components/DownshiftCombo';
 
 
 const Signup: React.FC = () => {
 
 
-    console.log(Random.id());
-    console.log(Random.secret());
-    console.log(Random.hexString(22));
+    console.log("ID -", Random.id());
+    console.log("SECRET -", Random.secret());
+    console.log("HEXSTRING[22] - ", Random.hexString(22));
 
     interface AuthInterface {
         fullname: string,
@@ -82,17 +83,17 @@ const Signup: React.FC = () => {
     ]
     const customerOptions = [
         { customerName: "Udoka", customerNumber: "0240337741", value: "Apple" },
-        { customerName: "Udoka", customerNumber: "0240337741", value: "Pear" },
-        { customerName: "Udoka", customerNumber: "0240337741", value: "Orange" },
-        { customerName: "Udoka", customerNumber: "0240337741", value: "Grape" },
-        { customerName: "Udoka", customerNumber: "0240337741", value: "Banana" },
-        { customerName: "Udoka", customerNumber: "0240337741", value: "Coloran" },
-        { customerName: "Udoka", customerNumber: "0240337741", value: "Buran" },
-        { customerName: "Udoka", customerNumber: "0240337741", value: "Zeron" },
-        { customerName: "Udoka", customerNumber: "0240337741", value: "Fedan" },
-        { customerName: "Udoka", customerNumber: "0240337741", value: "Chrysler" },
-        { customerName: "Udoka", customerNumber: "0240337741", value: "Ferrari" },
-        { customerName: "Udoka", customerNumber: "0240337741", value: "Bugati" }
+        { customerName: "Udoma", customerNumber: "0240337741", value: "Pear" },
+        { customerName: "Amanda", customerNumber: "0240337741", value: "Orange" },
+        { customerName: "Kelechi", customerNumber: "0240337741", value: "Grape" },
+        { customerName: "Buhari", customerNumber: "0240337741", value: "Banana" },
+        { customerName: "Buhami", customerNumber: "0240337741", value: "Coloran" },
+        { customerName: "Bukola", customerNumber: "0240337741", value: "Buran" },
+        { customerName: "Saraki", customerNumber: "0240337741", value: "Zeron" },
+        { customerName: "Chinyere", customerNumber: "0240337741", value: "Fedan" },
+        { customerName: "Baba Sanwo", customerNumber: "0240337741", value: "Chrysler" },
+        { customerName: "Udoka Kima", customerNumber: "0240337741", value: "Ferrari" },
+        { customerName: "Udoka Chima", customerNumber: "0240337741", value: "Bugati" }
     ]
 
 
@@ -111,6 +112,7 @@ const Signup: React.FC = () => {
                 {(props: FormikProps<any>) => (
                     <FormikForm isLoading={props.isSubmitting} analyticName="Signup Form" formProps={props} buttonName="Signup">
                         <CustomerSearchField placeholder="Find Customer" name="customer" label="Search Customer" validate={Validator.isRequired} options={customerOptions} />
+                        {/* <DropdownCombobox /> */}
 
                         <TextAreaField placeholder="Type your address here" label="Text Area" validate={Validator.isRequired} name="textarea" />
                         <InputField label="Your Full Name" placeholder="enter your name" name="fullname" validate={Validator.isRequired} />
