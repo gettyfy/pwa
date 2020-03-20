@@ -23,7 +23,6 @@ import {
     ItemList,
     CustomerSearchField
 } from '/imports/ui/components'
-import DropdownCombobox from '../../components/DownshiftCombo';
 
 
 const Signup: React.FC = () => {
@@ -88,8 +87,8 @@ const Signup: React.FC = () => {
         { customerName: "Kelechi", customerNumber: "0240337741", value: "Grape" },
         { customerName: "Buhari", customerNumber: "0240337741", value: "Banana" },
         { customerName: "Buhami", customerNumber: "0240337741", value: "Coloran" },
-        { customerName: "Bukola", customerNumber: "0240337741", value: "Buran" },
-        { customerName: "Saraki", customerNumber: "0240337741", value: "Zeron" },
+        { customerName: "Baba Bukola", customerNumber: "0240337741", value: "Buran" },
+        { customerName: "Baba Saraki", customerNumber: "0240337741", value: "Zeron" },
         { customerName: "Chinyere", customerNumber: "0240337741", value: "Fedan" },
         { customerName: "Baba Sanwo", customerNumber: "0240337741", value: "Chrysler" },
         { customerName: "Udoka Kima", customerNumber: "0240337741", value: "Ferrari" },
@@ -112,7 +111,6 @@ const Signup: React.FC = () => {
                 {(props: FormikProps<any>) => (
                     <FormikForm isLoading={props.isSubmitting} analyticName="Signup Form" formProps={props} buttonName="Signup">
                         <CustomerSearchField placeholder="Find Customer" name="customer" label="Search Customer" validate={Validator.isRequired} options={customerOptions} />
-                        {/* <DropdownCombobox /> */}
 
                         <TextAreaField placeholder="Type your address here" label="Text Area" validate={Validator.isRequired} name="textarea" />
                         <InputField label="Your Full Name" placeholder="enter your name" name="fullname" validate={Validator.isRequired} />

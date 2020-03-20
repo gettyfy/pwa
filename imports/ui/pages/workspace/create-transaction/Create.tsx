@@ -1,20 +1,28 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom';
-import { Meteor } from 'meteor/meteor'
 
 import { Box } from '@chakra-ui/core'
 import * as Validator from '/imports/lib/validator'
 import { Formik, FormikProps } from 'formik'
-import { SelectField, PageHeader, FormikForm } from '/imports/ui/components'
+import { PageHeader, FormikForm, CustomerList, CustomerSearchField } from '/imports/ui/components'
 import Path from '/imports/ui/router'
 
+// API related imports
+import { withTracker } from 'meteor/react-meteor-data'
+import { Meteor } from 'meteor/meteor'
+import { Customers } from '/imports/api/collections'
+import { ICustomer } from '/imports/api/schema';
+import { CustomerSearch } from '/imports/ui/components/CustomerList';
 
-const Create: React.FunctionComponent = (props: any) => {
+type CreateProps = {
+    customers: ICustomer[],
+    [key: string]: any
+}
+
+const Create: React.FunctionComponent<CreateProps> = (props) => {
     const history = useHistory();
-    // const handleSubmit = () => {
-    //     history.push('/success');
-    // }
-
+    const [list, showList] = useState(true)
+    const inputArr = props.customers
 
     interface ICustomerInterface {
         customerName: string,
@@ -27,15 +35,8 @@ const Create: React.FunctionComponent = (props: any) => {
         phonenumber: string,
         [key: string]: string
     }
-    const authInit: ICustomerInterface = {
-        customerName: "",
-        customerAddress: "",
-        customerEmail: "",
-        customerNumber: "",
-        name: "",
-        address: "",
-        select: "",
-        phonenumber: "",
+    const authInit: { customer: ICustomerInterface } = {
+        customer: {}
     }
 
     const handleSubmit = async (values: ICustomerInterface) => {
@@ -45,6 +46,10 @@ const Create: React.FunctionComponent = (props: any) => {
         history.push(`${Path.workspace.createTransaction}/item`)
     }
 
+    const handleChange = () => {
+        console.log(list);
+        showList(false)
+    }
 
 
 
@@ -52,7 +57,7 @@ const Create: React.FunctionComponent = (props: any) => {
     return (
         <React.Fragment>
             <PageHeader title="Create a Transaction" subTitle="" />
-            <Box py={4}>
+            <Box py={3}>
                 <Formik
                     initialValues={authInit}
                     onSubmit={(values, actions) => {
@@ -63,17 +68,44 @@ const Create: React.FunctionComponent = (props: any) => {
                     }}
                 >
                     {(props: FormikProps<any>) => (
-                        <FormikForm isLoading={props.isSubmitting} analyticName="Signup Form" formProps={props} buttonName="SAVE">
-                            <SelectField placeholder="Search" name="select" label="Search Customer" validate={Validator.isRequired} options={["Bukola Saraki", "Mohammed Muraril"]} />
+                        <FormikForm isLoading={props.isSubmitting} analyticName="Search Customer" formProps={props} buttonName="Save" withIcon>
+                            <CustomerSearchField onInput={() => handleChange()} placeholder="Type to find a customer" name="customer" label="Search Customer" validate={Validator.isRequired} options={inputArr} />
 
+
+                            {/* //Render a list of customers */}
+                            {list &&
+                                <Box pt="3">
+                                    {inputArr.map((val, index) => {
+                                        return (
+                                            <CustomerSearch
+                                                key={[val.customerName, index].join('-')}
+                                                customerName={val.customerName}
+                                                PhoneNumber={val.phonenumber}
+                                            />
+
+                                        )
+                                    })}
+                                </Box>
+                            }
 
 
                         </FormikForm>
                     )}
+
                 </Formik>
+
+
             </Box>
         </React.Fragment>
     );
 }
 
-export default Create
+
+
+
+export default withTracker(() => {
+    Meteor.subscribe('customers')
+    return {
+        customers: Customers.find().fetch()
+    };
+})(Create);

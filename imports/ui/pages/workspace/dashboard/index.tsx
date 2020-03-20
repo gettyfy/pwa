@@ -104,14 +104,14 @@ export default class Hello extends React.Component {
               />
 
               <ActionCard
-                cardLink={`${path.workspace.createTransaction}/item`}
-              cardBg="#E3EDFF"
-              cardHeading="Create a Transaction"
-              cardSubHeading="Record"
-              analyticName="Create Record"
-              iconColor="blue.600"
-              name="plus-square"
-            />
+                cardLink={path.workspace.createTransaction}
+                cardBg="#E3EDFF"
+                cardHeading="Create a Transaction"
+                cardSubHeading="Record"
+                analyticName="Create Record"
+                iconColor="blue.600"
+                name="plus-square"
+              />
             </ActionCardRow>
 
 
