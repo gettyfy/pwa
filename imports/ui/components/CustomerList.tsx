@@ -13,7 +13,7 @@ align-items: center;
 justify-content: center;
 `
 
-interface ICustomerName {
+interface ICustomerList {
     customerName: string,
     iconName: string | any,
     date?: Date,
@@ -25,7 +25,7 @@ interface ICustomerName {
 }
 
 
-const CustomerName = (props: ICustomerName) => {
+const CustomerList = (props: ICustomerList) => {
     const { customerName, iconName, date, LinkCard, PhoneNumber } = props
 
 
@@ -52,4 +52,4 @@ const CustomerName = (props: ICustomerName) => {
 }
 
 
-export { CustomerStyle, CustomerName }
+export { CustomerStyle, CustomerList }

@@ -4,7 +4,7 @@ import { withTracker } from 'meteor/react-meteor-data';
 import styled from '@emotion/styled'
 import { PageHeader } from '/imports/ui/components'
 
-import { CustomerStyle, CustomerName } from '/imports/ui/components'
+import { CustomerStyle, CustomerList } from '/imports/ui/components'
 // Make the Detail Page Available in routes
 
 //imports for API call
@@ -35,7 +35,7 @@ class Customer extends React.Component<CustomerProps> {
 
         {customers.map((val, index) => {
           return (
-            <CustomerName
+            <CustomerList
               key={[val.customerName, index].join('-')}
               LinkCard={`${path.workspace.customerView}/view/${val._id}`}
               customerName={val.customerName}
