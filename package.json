@@ -26,6 +26,7 @@
 		"react-headroom": "^3.0.0",
 		"react-router-dom": "^5.1.2",
 		"react-signature-canvas": "^1.0.3",
+		"react-signature-pad-wrapper": "^1.2.9",
 		"validator": "^12.2.0"
 	},
 	"devDependencies": {
