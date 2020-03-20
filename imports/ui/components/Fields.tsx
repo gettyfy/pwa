@@ -17,21 +17,21 @@ import * as Analytics from '/imports/ui/analytics'
 
 const FormikButton = styled(Button) <{ withIcon: boolean | undefined }>`
     border-radius: 3px;
-    min-height: 54px;
+    min-height: 56px;
     justify-content: ${(props) => props.withIcon ? 'space-between' : 'center'};
     align-content: center;
 `
 
 const FormikTextArea = styled(Textarea)`
-    border-radius: 0px;
-    border-width: 0px;
-    border-right: none;
+    border-radius: 3px;
     padding-top: 2.5rem;
-    border-bottom: 1.6px solid #979797;
     padding-bottom: 1rem;
+    border: 1.3px solid #979797;
     font-size: ${(props: any) => props.theme.custom.inputFontSize};
-    border-top: none;
-    border-left: none;
+    border-bottom: 1.4px solid #979797;
+    /* border-right: none; */
+    /* border-top: none; */
+    /* border-left: none; */
 
     ::placeholder, ::-moz-placeholder {
         font-size: ${(props: any) => props.theme.custom.inputPlaceHolder};
@@ -41,14 +41,14 @@ const FormikTextArea = styled(Textarea)`
 
 
 const FormikInput = styled(Input)`
-    border-radius: 0px;
     border-width: 1.3px;
-    border-right: none;
+    border-radius: 3px;
     padding-top: 2rem;
-    padding-bottom: 1rem;
+    padding-bottom: 1.3rem;
     font-size: ${(props: any) => props.theme.custom.inputFontSize};
-    border-top: none;
-    border-left: none;
+    /* border-top: none; */
+    /* border-right: none; */
+    /* border-left: none; */
 
     ::placeholder, ::-moz-placeholder {
         font-size: ${(props: any) => props.theme.custom.inputPlaceHolder};
@@ -56,17 +56,16 @@ const FormikInput = styled(Input)`
     }
 `
 const FormikSelect = styled(Select)`
-    border-radius: 0px;
+    border-radius: 3px;
     border-width: 1.3px;
-    border-right: none;
-    border-bottom: 1.3px solid;
-    border-top: none;
-    border-left: none;
+    border: 1.3px solid;
+    /* border-right: none; */
+    /* border-top: none; */
+    /* border-left: none; */
     font-size: ${(props: any) => props.theme.custom.inputFontSize};
-    min-height: ${(props: any) => props.theme.custom.inputMinHeight};
     ::placeholder,
     ::-webkit-input-placeholder {
-        font-size: ${(props: any) => props.theme.custom.inputFontSize};
+        font-size: ${(props: any) => props.theme.custom.inputPlaceHolder};
     }
 `
 const FormikLabel = styled(FormLabel) <{ fsize?: string }>`
@@ -515,7 +514,7 @@ const AutoCompleteField = (props: AutoCompleteProps): JSX.Element => {
                     getRootProps
                 }) => (
                         <div>
-                            <FormLabel {...getToggleButtonProps()} {...getLabelProps()} color="gray.600">{label}</FormLabel>
+                            <FormikLabel {...getToggleButtonProps()} {...getLabelProps()} color="gray.600">{label}</FormikLabel>
                             <div {...getRootProps({}, { suppressRefError: true })}>
                                 <FormikInput isFullWidth variant="filled"  {...field} placeholder={placeholder}  {...getInputProps()} {...rest} validate={validate} focusBorderColor="gray.500" borderColor="gray.500" errorBorderColor="red.500" size="lg" />
                             </div>
