@@ -25,9 +25,9 @@ const ReviewStat = styled(StatGroup)`
 const Review = (props) => {
   const history = useHistory()
 
-  console.log(props)
 
   const handleSubmit = () => {
+    console.log(props.data)
     Meteor.call('transaction.insert', props.data)
     history.push(`${Path.workspace.createTransaction}/success`)
   }

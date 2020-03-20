@@ -61,7 +61,6 @@ const Item: React.FunctionComponent = (props: any) => {
         amountPaid: string,
         dueDate: string,
         withInstallment: boolean,
-        [key: string]: string
     }
 
     const init: IItemInterface = {
@@ -123,7 +122,7 @@ const Item: React.FunctionComponent = (props: any) => {
                                         <Text><Span>{`${customer && customer.customerName || ""}'s`} </Span> payment is due by: <Span> {date}</Span></Text>
                                         <Text><Span>Their payment balance is</Span> <Span>GH₵ {balance}</Span></Text>
                                     </Flex>
-                                    <CheckField name="withInstallment" boxLabel="Use an Installment Plan" validate={Validator.isRequired} />
+                                    <CheckField name="withInstallment" boxLabel="Use an Installment Plan" />
                                 </>
                             }
 
