@@ -52,14 +52,15 @@ const CustomerList = (props: ICustomerList) => {
 
 type ICustomerSearch = {
     customerName: string,
-    phoneNumber: string
+    phoneNumber: string,
+    onClick?: any
 }
 
 const CustomerSearch = (props: ICustomerSearch) => {
     const { customerName, phoneNumber } = props
 
     return (
-        <Flex align="center" justify="space-between" direction="row" py="2" borderBottom="1px" borderColor="gray.100" {...props}>
+        <Flex align="center" justify="space-between" direction="row" py="2" borderBottom="1px" cursor="pointer" borderColor="gray.100" {...props}>
             <Box display="flex" flexDir="row" justifyContent="flex-start">
                 <Avatar name={customerName} size="sm" />
                 <Box flexDir="column" pl="3">

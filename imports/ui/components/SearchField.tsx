@@ -123,6 +123,7 @@ export const CustomerSearchField: React.FC<ICustomerSearchField> = (props): JSX.
                                                     }
                                                 })}
                                                 customerName={item.customerName}
+                                                phoneNumber={item.customerNumber}
                                             />
 
                                         ))

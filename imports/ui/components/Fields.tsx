@@ -121,13 +121,14 @@ interface InputFieldProps {
     name: string,
     label: string,
     placeholder: string,
+    type?: string,
     validate?: Function,
     trackInput?: Function
 }
 
 
 const InputField = (props: InputFieldProps): JSX.Element => {
-    const { validate, name, placeholder, trackInput, label } = props
+    const { validate, type, name, placeholder, trackInput, label } = props
 
     /**
      * Formik Field Props to be aware of
@@ -142,7 +143,7 @@ const InputField = (props: InputFieldProps): JSX.Element => {
                 <FormControl isInvalid={form.errors[name] && form.touched[name] ? true : false} mt="5" position="relative">
                     <FormikLabel id={[name, 'label'].join('-')} htmlFor={[name, 'input'].join('-')} color="gray.600">{label}</FormikLabel>
                     <InputGroup size="lg">
-                        <FormikInput trackInput={trackInput && trackInput(field.value)} {...props} isFullWidth variant="filled" {...field} id={[name, 'input'].join('-')} placeholder={placeholder} focusBorderColor="gray.500" borderColor="gray.500" errorBorderColor="red.500" size="lg" />
+                        <FormikInput trackInput={trackInput && trackInput(field.value)} {...props} type={type || 'text'} isFullWidth variant="filled" {...field} id={[name, 'input'].join('-')} placeholder={placeholder} focusBorderColor="gray.500" borderColor="gray.500" errorBorderColor="red.500" size="lg" />
                     </InputGroup>
                     <FormErrorMessage>{form.errors[name]}</FormErrorMessage>
                 </FormControl>
