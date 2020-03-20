@@ -46,7 +46,7 @@ const Create: React.FunctionComponent<CreateProps> = (props) => {
         history.push(`${Path.workspace.createTransaction}/item`)
     }
 
-    const handleChange = () => {
+    const handleCustomerList = () => {
         console.log(list);
         showList(false)
     }
@@ -69,8 +69,7 @@ const Create: React.FunctionComponent<CreateProps> = (props) => {
                 >
                     {(props: FormikProps<any>) => (
                         <FormikForm isLoading={props.isSubmitting} analyticName="Search Customer" formProps={props} buttonName="Save" withIcon>
-                            <CustomerSearchField onInput={() => handleChange()} placeholder="Type to find a customer" name="customer" label="Search Customer" validate={Validator.isRequired} options={inputArr} />
-
+                            <CustomerSearchField onInput={handleCustomerList} placeholder="Type to find a customer" name="customer" label="Search Customer" validate={Validator.isRequired} options={inputArr} />
 
                             {/* //Render a list of customers */}
                             {list &&
@@ -80,14 +79,14 @@ const Create: React.FunctionComponent<CreateProps> = (props) => {
                                             <CustomerSearch
                                                 key={[val.customerName, index].join('-')}
                                                 customerName={val.customerName}
-                                                PhoneNumber={val.phonenumber}
+                                                phoneNumber={val.phonenumber}
+                                                onClick={() => handleSubmit({ customer: val })}
                                             />
 
                                         )
                                     })}
                                 </Box>
                             }
-
 
                         </FormikForm>
                     )}
