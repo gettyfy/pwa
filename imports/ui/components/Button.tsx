@@ -14,7 +14,7 @@ const Box = styled(ChakraBox)`
 `
 
 const StyledButton = styled(Button) <{ withIcon: boolean | undefined }>`
-    border-radius: 0;
+    border-radius: 3px;
     min-height: 54px;
     justify-content: ${(props) => props.withIcon ? 'space-between' : 'center'};
     align-content: center;

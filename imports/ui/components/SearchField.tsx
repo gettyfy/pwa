@@ -9,45 +9,24 @@ import React from 'react';
 import PropTypes from 'prop-types'
 import styled from '@emotion/styled'
 import Downshift from "downshift";
-import { useField, Form, Field, FieldProps } from 'formik'
-import { FormControl, List, Textarea, ListItem, Checkbox, FormLabel, Select, RadioGroup, RadioButtonGroup, Icon, IconButton, FormErrorMessage, Input, Button, InputGroup, Radio, InputRightElement, CustomTheme, DefaultTheme, Box } from '@chakra-ui/core'
-import { CustomerList } from '/imports/ui/components/List'
-
-
-const FormikButton = styled(Button) <{ withIcon: boolean | undefined }>`
-    border-radius: 0;
-    min-height: 54px;
-    justify-content: ${(props) => props.withIcon ? 'space-between' : 'center'};
-    align-content: center;
-`
+import { useField } from 'formik'
+import { FormControl, List, FormLabel, IconButton, FormErrorMessage, Input, Button, InputGroup, Radio, InputRightElement, CustomTheme, DefaultTheme, Box } from '@chakra-ui/core'
+import { CustomerSearch } from '/imports/ui/components/CustomerList'
+import { ICustomer } from '/imports/api/schema'
 
 const FormikInput = styled(Input)`
-    border-radius: 0px;
     border-width: 1.3px;
-    border-right: none;
+    border-radius: 3px;
     padding-top: 2rem;
-    padding-bottom: 1rem;
+    padding-bottom: 1.3rem;
     font-size: ${(props: any) => props.theme.custom.inputFontSize};
-    border-top: none;
-    border-left: none;
+    /* border-top: none; */
+    /* border-right: none; */
+    /* border-left: none; */
 
     ::placeholder, ::-moz-placeholder {
         font-size: ${(props: any) => props.theme.custom.inputPlaceHolder};
         vertical-align: middle;
-    }
-`
-const FormikSelect = styled(Select)`
-    border-radius: 0px;
-    border-width: 1.3px;
-    border-right: none;
-    border-bottom: 1.3px solid;
-    border-top: none;
-    border-left: none;
-    font-size: ${(props: any) => props.theme.custom.inputFontSize};
-    min-height: ${(props: any) => props.theme.custom.inputMinHeight};
-    ::placeholder,
-    ::-webkit-input-placeholder {
-        font-size: ${(props: any) => props.theme.custom.inputFontSize};
     }
 `
 const FormikLabel = styled(FormLabel) <{ fsize?: string }>`
@@ -70,13 +49,15 @@ interface ICustomerSearchField {
     name: string
     label?: string,
     placeholder: string
-    options: Array<{ value: string }>,
+    options: Array<ICustomer>,
     [key: string]: any
 }
 
 export const CustomerSearchField: React.FC<ICustomerSearchField> = (props): JSX.Element => {
     const { validate, placeholder, name, options, label, ...rest } = props
     const [field, meta, helpers] = useField<ICustomerSearchField>(props);
+
+
 
     // const items = ;
 
@@ -87,7 +68,7 @@ export const CustomerSearchField: React.FC<ICustomerSearchField> = (props): JSX.
                     //pass in the full object of the field into form hooks
                     helpers.setTouched(true) && helpers.setValue(selection)
                 }
-                itemToString={item => (item ? item.value : "")}
+                itemToString={item => (item ? item.customerName : "")}
             >
                 {({
                     getInputProps,
@@ -100,56 +81,59 @@ export const CustomerSearchField: React.FC<ICustomerSearchField> = (props): JSX.
                     highlightedIndex,
                     selectedItem,
                     getRootProps
-                }) => (
+                }) => {
+                    const triggerList = () => {
+                        getToggleButtonProps();
+                        return !!isOpen;
+                    }
+                    return (
                         <div>
-                            <FormLabel {...getToggleButtonProps()} {...getLabelProps()} color="gray.600">{label}</FormLabel>
+                            <FormikLabel {...getToggleButtonProps()} {...getLabelProps()} color="gray.600">{label}</FormikLabel>
                             <div {...getRootProps({}, { suppressRefError: true })}>
-                                <FormikInput isFullWidth variant="filled"  {...field} placeholder={placeholder}  {...getInputProps()} {...rest} validate={validate} focusBorderColor="gray.500" borderColor="gray.500" errorBorderColor="red.500" size="lg" />
+                                <InputGroup size="lg">
+                                    <FormikInput onFocus={triggerList} isFullWidth variant="filled"  {...field} placeholder={placeholder}  {...getInputProps()} {...props} validate={validate} focusBorderColor="gray.500" borderColor="gray.500" errorBorderColor="red.500" size="lg" {...props} />
+                                    <InputRightElement width="4.5rem" pt="1">
+                                        <IconButton
+                                            variant="outline"
+                                            size="sm"
+                                            isRound
+                                            aria-label="Show Customers"
+                                            icon="search"
+                                            {...getToggleButtonProps()}
+                                        ></IconButton>
+                                    </InputRightElement>
+                                </InputGroup>
                             </div>
 
-                            <List {...getMenuProps()}>
+                            <List {...getMenuProps()} pt="1">
                                 {isOpen
                                     ? options
-                                        .filter(item => !inputValue || item.value.includes(inputValue))
+                                        .filter(item => !inputValue || item.customerName.toLowerCase().includes(inputValue.toLowerCase()))
                                         .map((item, index) => (
-                                            <ListItem
+                                            <CustomerSearch
                                                 {...getItemProps({
-                                                    key: item.value,
+                                                    key: item.customerName,
                                                     index,
                                                     item,
                                                     style: {
-                                                        backgroundColor:
-                                                            highlightedIndex === index ? "lightgray" : "white",
-                                                        fontWeight: selectedItem === item ? "bold" : "normal"
+                                                        backgroundColor: highlightedIndex === index ? "#f6f6f7" : "white",
+                                                        fontWeight: selectedItem === item ? "bold" : "normal",
+                                                        paddingLeft: highlightedIndex === index ? ".05rem" : 'inherit'
+
                                                     }
                                                 })}
-                                            >
-                                                {item.value}
-                                            </ListItem>
+                                                customerName={item.customerName}
+                                                phoneNumber={item.customerNumber}
+                                            />
+
                                         ))
                                     : null}
                             </List>
                         </div>
-                    )}
+                    )
+                }}
             </Downshift>
             <FormErrorMessage>{meta.error && meta.error}</FormErrorMessage>
         </FormControl>
     );
 }
-
-interface ITransactionList {
-    analyticName: string,
-    customerName: string,
-    customerStatus: string,
-    amount: any,
-    paymentStatus: string,
-    overdueAmount: string,
-    overdueStatus: string,
-    cardLink: string,
-    iconName: string | any,
-    iconSize: any
-}
-
-
-
-

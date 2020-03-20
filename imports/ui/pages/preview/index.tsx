@@ -28,9 +28,9 @@ import {
 const Signup: React.FC = () => {
 
 
-    console.log(Random.id());
-    console.log(Random.secret());
-    console.log(Random.hexString(22));
+    console.log("ID -", Random.id());
+    console.log("SECRET -", Random.secret());
+    console.log("HEXSTRING[22] - ", Random.hexString(22));
 
     interface AuthInterface {
         fullname: string,
@@ -82,17 +82,17 @@ const Signup: React.FC = () => {
     ]
     const customerOptions = [
         { customerName: "Udoka", customerNumber: "0240337741", value: "Apple" },
-        { customerName: "Udoka", customerNumber: "0240337741", value: "Pear" },
-        { customerName: "Udoka", customerNumber: "0240337741", value: "Orange" },
-        { customerName: "Udoka", customerNumber: "0240337741", value: "Grape" },
-        { customerName: "Udoka", customerNumber: "0240337741", value: "Banana" },
-        { customerName: "Udoka", customerNumber: "0240337741", value: "Coloran" },
-        { customerName: "Udoka", customerNumber: "0240337741", value: "Buran" },
-        { customerName: "Udoka", customerNumber: "0240337741", value: "Zeron" },
-        { customerName: "Udoka", customerNumber: "0240337741", value: "Fedan" },
-        { customerName: "Udoka", customerNumber: "0240337741", value: "Chrysler" },
-        { customerName: "Udoka", customerNumber: "0240337741", value: "Ferrari" },
-        { customerName: "Udoka", customerNumber: "0240337741", value: "Bugati" }
+        { customerName: "Udoma", customerNumber: "0240337741", value: "Pear" },
+        { customerName: "Amanda", customerNumber: "0240337741", value: "Orange" },
+        { customerName: "Kelechi", customerNumber: "0240337741", value: "Grape" },
+        { customerName: "Buhari", customerNumber: "0240337741", value: "Banana" },
+        { customerName: "Buhami", customerNumber: "0240337741", value: "Coloran" },
+        { customerName: "Baba Bukola", customerNumber: "0240337741", value: "Buran" },
+        { customerName: "Baba Saraki", customerNumber: "0240337741", value: "Zeron" },
+        { customerName: "Chinyere", customerNumber: "0240337741", value: "Fedan" },
+        { customerName: "Baba Sanwo", customerNumber: "0240337741", value: "Chrysler" },
+        { customerName: "Udoka Kima", customerNumber: "0240337741", value: "Ferrari" },
+        { customerName: "Udoka Chima", customerNumber: "0240337741", value: "Bugati" }
     ]
 
 
