@@ -31,7 +31,7 @@ const NegativeMargin = styled.section`
 const AgreementWrapper = styled.div`
     display: block;
     max-height: 250px;
-    overflow: scroll;
+    overflow-y: scroll;
     padding: 1rem;
 `
 
