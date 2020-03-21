@@ -21,7 +21,8 @@ import {
     CheckField, FormikForm, RadioButtonField, PasswordField, InvoiceList, SummaryList, SummaryRow,
     Item,
     ItemList,
-    CustomerSearchField
+    CustomerSearchField,
+    TransactionSearchField
 } from '/imports/ui/components'
 
 
@@ -110,6 +111,7 @@ const Signup: React.FC = () => {
             >
                 {(props: FormikProps<any>) => (
                     <FormikForm isLoading={props.isSubmitting} analyticName="Signup Form" formProps={props} buttonName="Signup">
+                        <TransactionSearchField placeholder="Search Transaction" name="transaction" label="Search Transaction" validate={Validator.isRequired} options={customerOptions} />
                         <CustomerSearchField placeholder="Find Customer" name="customer" label="Search Customer" validate={Validator.isRequired} options={customerOptions} />
 
                         <TextAreaField placeholder="Type your address here" label="Text Area" validate={Validator.isRequired} name="textarea" />

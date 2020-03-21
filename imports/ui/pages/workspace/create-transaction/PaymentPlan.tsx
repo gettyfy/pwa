@@ -11,7 +11,6 @@ import theme from '/imports/lib/theme'
 
 
 import AgreementDoc from './AgreementDoc'
-import { Meteor } from 'meteor/meteor';
 
 const Text = styled.p`
     font-size: 12px;

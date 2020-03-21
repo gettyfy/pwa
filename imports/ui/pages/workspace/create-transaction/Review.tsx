@@ -26,9 +26,9 @@ const Review = (props) => {
   const history = useHistory()
 
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
     console.log(props.data)
-    Meteor.call('transaction.insert', props.data)
+    await Meteor.call('transaction.insert', props.data)
     history.push(`${Path.workspace.createTransaction}/success`)
   }
 

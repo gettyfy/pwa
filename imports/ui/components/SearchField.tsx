@@ -12,7 +12,7 @@ import Downshift from "downshift";
 import { useField } from 'formik'
 import { FormControl, List, FormLabel, IconButton, FormErrorMessage, Input, Button, InputGroup, Radio, InputRightElement, CustomTheme, DefaultTheme, Box } from '@chakra-ui/core'
 import { CustomerSearch } from '/imports/ui/components/CustomerList'
-import { ICustomer } from '/imports/api/schema'
+import { ICustomer, ITransaction } from '/imports/api/schema'
 
 const FormikInput = styled(Input)`
     border-width: 1.3px;
@@ -56,6 +56,102 @@ interface ICustomerSearchField {
 export const CustomerSearchField: React.FC<ICustomerSearchField> = (props): JSX.Element => {
     const { validate, placeholder, name, options, label, ...rest } = props
     const [field, meta, helpers] = useField<ICustomerSearchField>(props);
+
+
+
+    // const items = ;
+
+    return (
+        <FormControl isInvalid={meta['error'] && meta.touched ? true : false} mt="5" position="relative">
+            <Downshift
+                onChange={selection =>
+                    //pass in the full object of the field into form hooks
+                    helpers.setTouched(true) && helpers.setValue(selection)
+                }
+                itemToString={item => (item ? item.customerName : "")}
+            >
+                {({
+                    getInputProps,
+                    getItemProps,
+                    getLabelProps,
+                    getToggleButtonProps,
+                    getMenuProps,
+                    isOpen,
+                    inputValue,
+                    highlightedIndex,
+                    selectedItem,
+                    getRootProps
+                }) => {
+                    const triggerList = () => {
+                        getToggleButtonProps();
+                        return !!isOpen;
+                    }
+                    return (
+                        <div>
+                            <FormikLabel {...getToggleButtonProps()} {...getLabelProps()} color="gray.600">{label}</FormikLabel>
+                            <div {...getRootProps({}, { suppressRefError: true })}>
+                                <InputGroup size="lg">
+                                    <FormikInput onFocus={triggerList} isFullWidth variant="filled"  {...field} placeholder={placeholder}  {...getInputProps()} {...props} validate={validate} focusBorderColor="gray.500" borderColor="gray.500" errorBorderColor="red.500" size="lg" {...props} />
+                                    <InputRightElement width="4.5rem" pt="1">
+                                        <IconButton
+                                            variant="outline"
+                                            size="sm"
+                                            isRound
+                                            aria-label="Show Customers"
+                                            icon="search"
+                                            {...getToggleButtonProps()}
+                                        ></IconButton>
+                                    </InputRightElement>
+                                </InputGroup>
+                            </div>
+
+                            <List {...getMenuProps()} pt="1">
+                                {isOpen
+                                    ? options
+                                        .filter(item => !inputValue || item.customerName.toLowerCase().includes(inputValue.toLowerCase()))
+                                        .map((item, index) => (
+                                            <CustomerSearch
+                                                {...getItemProps({
+                                                    key: item.customerName,
+                                                    index,
+                                                    item,
+                                                    style: {
+                                                        backgroundColor: highlightedIndex === index ? "#f6f6f7" : "white",
+                                                        fontWeight: selectedItem === item ? "bold" : "normal",
+                                                        paddingLeft: highlightedIndex === index ? ".05rem" : 'inherit'
+
+                                                    }
+                                                })}
+                                                customerName={item.customerName}
+                                                phoneNumber={item.customerNumber}
+                                            />
+
+                                        ))
+                                    : null}
+                            </List>
+                        </div>
+                    )
+                }}
+            </Downshift>
+            <FormErrorMessage>{meta.error && meta.error}</FormErrorMessage>
+        </FormControl>
+    );
+}
+
+
+
+interface ITransactionSearchField {
+    validate: Function,
+    name: string
+    label?: string,
+    placeholder: string
+    options: Array<ITransaction>,
+    [key: string]: any
+}
+
+export const TransactionSearchField: React.FC<ITransactionSearchField> = (props): JSX.Element => {
+    const { validate, placeholder, name, options, label, ...rest } = props
+    const [field, meta, helpers] = useField<ITransactionSearchField>(props);
 
 
 

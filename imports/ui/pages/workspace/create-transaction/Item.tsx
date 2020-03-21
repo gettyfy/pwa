@@ -80,7 +80,6 @@ const Item: React.FunctionComponent = (props: any) => {
     const handleSubmit = async (values: IItemInterface) => {
         await props.updateState(values)
         console.log(values)
-        await Meteor.call('transaction.insert', values)
         history.push(`${path.workspace.createTransaction}/payment-plan`)
     }
 
