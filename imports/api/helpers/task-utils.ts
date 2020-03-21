@@ -33,7 +33,7 @@ export const isTaskOwner = (taskId) => (isUserFunc) => {
 export const evaluateAndExecute = (condition, error = 'FAILED') => {
 	try {
 		condition;
-		console.log('PROCESS WAS SUCCESSFUL');
+		console.log('PROCESS WAS SUCCESSFUL EXECUTE/EVALUATE');
 	} catch (error) {
 		console.error(error.error);
 	}
