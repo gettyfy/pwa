@@ -24,6 +24,7 @@ import {
     CustomerSearchField,
     TransactionSearchField
 } from '/imports/ui/components'
+import { CheckButtonField } from '/imports/ui/components/Fields'
 
 
 const Signup: React.FC = () => {
@@ -120,6 +121,7 @@ const Signup: React.FC = () => {
                         <PasswordField label="Your Password" placeholder="set a password" name="password" validate={Validator.isRequired} />
                         <RadioField name="type" label="What Org Type" validate={Validator.isRequired} options={["Organization", "Individual"]} />
                         <RadioButtonField name="buttine" label="Radio Button" validate={Validator.isRequired} options={["Customer", "Debtor"]} />
+                        <CheckButtonField name="checkbutton" label="Check Button" validate={Validator.isRequired} options={["Customer", "Installer", "Merchant", "Debtor"]} />
                         <CheckField name="org-box" boxLabel="Check Item" validate={Validator.isRequired} />
                         <SelectField placeholder="Search" name="select" label="Select Label" validate={Validator.isRequired} options={["Organization", "Individual"]} />
                         <AutoCompleteField placeholder="Search" name="downshift" label="Select Label" validate={Validator.isRequired} options={autoCompleteOptions} />

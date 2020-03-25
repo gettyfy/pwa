@@ -9,7 +9,7 @@ import PropTypes from 'prop-types'
 import styled from '@emotion/styled'
 import Downshift from "downshift";
 import { useField, Form, Field, FieldProps } from 'formik'
-import { FormControl, List, Textarea, ListItem, Checkbox, FormLabel, Select, RadioGroup, RadioButtonGroup, Icon, IconButton, FormErrorMessage, Input, Button, InputGroup, Radio, InputRightElement, CustomTheme, DefaultTheme, Box } from '@chakra-ui/core'
+import { FormControl, List, Textarea, ListItem, Checkbox, FormLabel, Select, RadioGroup, RadioButtonGroup, Icon, IconButton, FormErrorMessage, Input, Button, InputGroup, Radio, InputRightElement, CustomTheme, DefaultTheme, Box, CheckboxGroup } from '@chakra-ui/core'
 import * as Analytics from '/imports/ui/analytics'
 
 
@@ -387,6 +387,38 @@ RadioButtonField.propTypes = {
 
 
 
+const CheckButtonField = (props: RadioFieldProps): JSX.Element => {
+    const { validate, name, defaultValue, options, label, ...rest } = props
+    //@ts-ignore
+    const [field, meta, helpers] = useField(props);
+    // console.log(field, meta, helpers);
+
+    // directly call meta in place of meta.touched to show all errors ::: FIX ISSUE with component not displaying error onDirty
+    return (
+        <FormControl isInvalid={meta['error'] && meta.touched} mt="5" position="relative">
+            <FormLabel {...field} htmlFor={[name, 'radio-button'].join('__')} color="gray.600">{label}</FormLabel>
+            <CheckboxGroup
+                name={name}
+                onChange={val => helpers.setTouched(true) && helpers.setValue(val)}
+
+            >
+                {options && options.map((val, idx) => {
+                    return (
+                        <ButtonComponent
+                            id={[name, 'check-button'].join('__')}
+                            isInline
+                            {...rest}
+                            name={val} key={[val, idx].join('--')} value={val} {...rest}>{val}</ButtonComponent>
+                    )
+                })}
+            </CheckboxGroup>
+            <FormErrorMessage>{meta.error && meta.error}</FormErrorMessage>
+        </FormControl>
+    );
+}
+
+
+
 
 /**
  * Formik Field for Checkbox Selections
@@ -566,7 +598,7 @@ AutoCompleteField.propTypes = {
 
 
 // ====== Export Field Components here ===========
-export { InputField, PasswordField, CheckField, RadioField, TextAreaField, AutoCompleteField, RadioButtonField, SelectField, FormikForm }
+export { InputField, PasswordField, CheckButtonField, CheckField, RadioField, TextAreaField, AutoCompleteField, RadioButtonField, SelectField, FormikForm }
 
 
 
