@@ -4,50 +4,39 @@ import { useHistory } from 'react-router-dom';
 import { Box } from '@chakra-ui/core'
 import * as Validator from '/imports/lib/validator'
 import { Formik, FormikProps } from 'formik'
-import { PageHeader, FormikForm, CustomerSearchField } from '/imports/ui/components'
+import { PageHeader, FormikForm, TransactionSearchField } from '/imports/ui/components'
 import Path from '/imports/ui/router'
 
 // API related imports
 import { withTracker } from 'meteor/react-meteor-data'
 import { Meteor } from 'meteor/meteor'
 import { Customers, Transactions } from '/imports/api/collections'
-import { ICustomer, ITransaction } from '/imports/api/schema';
-import { CustomerSearch } from '/imports/ui/components/CustomerList';
+import { ITransaction } from '/imports/api/schema';
 
 type CreateProps = {
-    customers: ICustomer[],
+    customers: ITransaction[],
     [key: string]: any
 }
 
 const Create: React.FunctionComponent<CreateProps> = (props) => {
     const history = useHistory();
     const [list, showList] = useState(true)
-    const inputArr = props.customers
+    const inputArr = props.transactions
 
     console.log(props);
 
-    interface ICustomerInterface {
-        customerName: string,
-        customerAddress: string,
-        customerEmail: string,
-        customerNumber: string,
-        name: string,
-        address: string,
-        select: string,
-        phonenumber: string,
-        [key: string]: string
-    }
-    const authInit: { customer: ICustomerInterface } = {
-        customer: {}
+    const authInit: { transaction: ITransaction } = {
+        transaction: {}
     }
 
-    const handleSubmit = async (values: ICustomerInterface) => {
+    const handleSubmit = async (values: ITransaction) => {
         await props.updateState(values)
 
         console.log(values)
-        history.push(`${Path.workspace.createTransaction}/item`)
+        history.push(`${Path.workspace.remind}/rules`)
     }
 
+    // Use this function to trigger a Hide function for the Lists rendered before user begins a search
     const handleCustomerList = () => {
         console.log(list);
         showList(false)
@@ -71,7 +60,7 @@ const Create: React.FunctionComponent<CreateProps> = (props) => {
                 >
                     {(props: FormikProps<any>) => (
                         <FormikForm isLoading={props.isSubmitting} analyticName="Search Customer" formProps={props} buttonName="Save" withIcon>
-                            <CustomerSearchField onInput={handleCustomerList} placeholder="Type to find a customer" name="customer" label="Search Customer" validate={Validator.isRequired} options={inputArr} />
+                            <TransactionSearchField onInput={handleCustomerList} placeholder="Type to find a transaction" name="transaction" label="Search Transaction" validate={Validator.isRequired} options={inputArr} />
 
                             {/* //Render a list of customers */}
                             {/* {list &&

@@ -45,6 +45,7 @@ const Create: React.FunctionComponent<CreateProps> = (props) => {
         history.push(`${Path.workspace.createTransaction}/item`)
     }
 
+    // Use this function to trigger a Hide function for the Lists rendered before user begins a search
     const handleCustomerList = () => {
         console.log(list);
         showList(false)

@@ -22,7 +22,7 @@ interface ITransactionList {
     cardLink: string,
     iconName: string | any,
     iconSize: any,
-    
+
 }
 
 
@@ -104,6 +104,52 @@ const TransactionList = (props: ITransactionList) => {
     )
 }
 
+
+const TransactionSearch = (props: ITransactionList) => {
+    const { analyticName, customerName, itemName, amountPaid, paymentStatus, amountDue, overdueStatus } = props
+
+    const handleClick = (analyticName: string): any => {
+
+        // /we will write the handle analytics here
+        Analytics.track(analyticName, {
+            comp: "Dashboard Card"
+        })
+    }
+
+    return (
+        <>
+            <Flex onClick={handleClick(analyticName)}>
+                <Box p="2" width="15%">
+                    <Avatar size="sm" name={customerName} src="/" />
+                </Box>
+
+                <Box width="40%">
+                    <StatusText>{itemName}</StatusText>
+                    <Heading as="h5" fontSize="sm">{customerName}</Heading>
+                </Box>
+
+                <Box width="20%">
+                    <Heading as="h6" size="xs">{amountPaid}</Heading>
+                    <Text fontSize="xs" color="green.600">{paymentStatus}</Text>
+                </Box>
+
+                <Box width="20%">
+                    <Heading as="h6" size="xs">{amountDue}</Heading>
+                    <Text fontWeight="bold" fontSize="xs" color="red.700">{overdueStatus}</Text>
+                </Box>
+
+                <Box width="5%">
+                    <Stack isInline>
+                        <Icon name="chevron-right" />
+                    </Stack>
+
+                </Box>
+            </Flex>
+            <LineDivider />
+        </>
+    )
+}
+
 // export the components as modules to be resuable by other component
 // export default CustomerList
-export { TransactionList }
+export { TransactionList, TransactionSearch }

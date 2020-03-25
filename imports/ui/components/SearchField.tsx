@@ -6,12 +6,12 @@
 
 
 import React from 'react';
-import PropTypes from 'prop-types'
 import styled from '@emotion/styled'
 import Downshift from "downshift";
 import { useField } from 'formik'
-import { FormControl, List, FormLabel, IconButton, FormErrorMessage, Input, Button, InputGroup, Radio, InputRightElement, CustomTheme, DefaultTheme, Box } from '@chakra-ui/core'
+import { FormControl, List, FormLabel, IconButton, FormErrorMessage, Input, InputGroup, InputRightElement, Box } from '@chakra-ui/core'
 import { CustomerSearch } from '/imports/ui/components/CustomerList'
+import { TransactionSearch } from '/imports/ui/components/List'
 import { ICustomer, ITransaction } from '/imports/api/schema'
 
 const FormikInput = styled(Input)`
@@ -57,9 +57,6 @@ export const CustomerSearchField: React.FC<ICustomerSearchField> = (props): JSX.
     const { validate, placeholder, name, options, label, ...rest } = props
     const [field, meta, helpers] = useField<ICustomerSearchField>(props);
 
-
-
-    // const items = ;
 
     return (
         <FormControl isInvalid={meta['error'] && meta.touched ? true : false} mt="5" position="relative">
@@ -204,11 +201,11 @@ export const TransactionSearchField: React.FC<ITransactionSearchField> = (props)
                             <List {...getMenuProps()} pt="1">
                                 {isOpen
                                     ? options
-                                        .filter(item => !inputValue || item.customerName.toLowerCase().includes(inputValue.toLowerCase()))
+                                        .filter(item => !inputValue || item.customer?.customerName.toLowerCase().includes(inputValue.toLowerCase()))
                                         .map((item, index) => (
-                                            <CustomerSearch
+                                            <TransactionSearch
                                                 {...getItemProps({
-                                                    key: item.customerName,
+                                                    key: item._id,
                                                     index,
                                                     item,
                                                     style: {
@@ -218,8 +215,15 @@ export const TransactionSearchField: React.FC<ITransactionSearchField> = (props)
 
                                                     }
                                                 })}
-                                                customerName={item.customerName}
-                                                phoneNumber={item.customerNumber}
+                                                itemName={item.itemName}
+                                                customerName={item.customer?.customerName}
+                                                analyticName="search transaction"
+                                                paymentStatus="PAID"
+                                                amountPaid={`₵ ${item.amountPaid || 0}`}
+                                                amountDue={`₵ ${item.amountDue || 0}`}
+                                                overdueStatus="OVERDUE"
+                                            // customerStatus="10 days to overdue"
+
                                             />
 
                                         ))
