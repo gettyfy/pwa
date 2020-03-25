@@ -67,7 +67,7 @@ const Create: React.FunctionComponent = (props: any) => {
                         <FormikForm isLoading={props.isSubmitting} analyticName="Signup Form" formProps={props} withIcon buttonName="Add Customer">
                             <InputField label="Customer Name" placeholder="Gordon Amaza" name="customerName" validate={Validator.isRequired} />
                             <InputField label="Customer Address" placeholder="44 Lagos Avenue" name="customerAddress" validate={Validator.isRequired} />
-                            <InputField label="Customer Phone Number" placeholder="0244-973-237" name="customerNumber" validate={Validator.isNumeric} />
+                            <InputField label="Customer Phone Number" placeholder="0244-973-237" name="customerNumber" validate={Validator.isMobile} />
                             <InputField label="Customer Email" placeholder="gordon@getfynance.co" name="customerEmail" validate={Validator.isEmail} />
 
 
