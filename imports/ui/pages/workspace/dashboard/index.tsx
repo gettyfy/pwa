@@ -196,7 +196,7 @@ export default withTracker(() => {
   const id = Accounts.userId()
   return {
     user: Accounts.users.findOne({_id: id}),
-    userss: Accounts.user()
+    singleUser: Accounts.user()
   };
 })(DashboardPage);
 
