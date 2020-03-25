@@ -53,10 +53,10 @@ class Transaction extends React.Component<TransactionProps> {
                 key={[val.customerName, index].join('-')}
                 analyticName="View a Transaction"
                 customerStatus="10 days to overdue"
-                customerName={val.owner?.profile.name}
-                amount={`₵ ${val.price || 0}`}
+                customerName={val.customer?.customerName}
+                amount={`₵ ${val.amountPaid || 0}`}
                 paymentStatus="PAID"
-                overdueAmount={`₵ ${val.balance || 0}`}
+                overdueAmount={`₵ ${val.amountDue || 0}`}
                 overdueStatus="OVERDUE"
                 cardLink={`${path.workspace.transactionView}/view/${val._id}`}
                 iconName="chevron-right"

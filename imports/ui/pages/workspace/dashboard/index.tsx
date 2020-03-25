@@ -7,6 +7,7 @@ import { Flex, Stack, Box, Avatar, Stat, StatNumber, StatHelpText, Text, StatGro
 import { ActionCard, ActionCardRow, PageHeader, TransactionList } from '/imports/ui/components/'
 import { greeting } from '/imports/lib/formatter'
 import { Accounts } from 'meteor/accounts-base'
+import { Transactions } from '/imports/api/collections'
 import useLoader, {Loader} from '/imports/lib/loader'
 
 
@@ -66,7 +67,7 @@ class DashboardPage extends React.Component {
 
           <DashboardStat>
             <Stat>
-              <StatNumber>345</StatNumber>
+              <StatNumber>{this.props.deals}</StatNumber>
               <StatHelpText>
                 DEALS
               </StatHelpText>
@@ -210,6 +211,7 @@ export default withTracker(() => {
   const id = Accounts.userId()
   return {
     user: Accounts.user(),
+    deals: Transactions.find().count(),
     isLoading: true
   };
 })(DashboardPage);

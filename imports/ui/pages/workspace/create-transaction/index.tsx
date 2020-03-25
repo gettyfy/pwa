@@ -17,10 +17,10 @@ export default class CreateTransaction extends Component {
 		}
 	}
 
-	updateState = (value: object) => {
+	updateState = async (value: object) => {
 		const oldStore = this.state;
 		const newState = Object.assign(oldStore, value)
-		this.setState({ ...newState });
+		await this.setState({ ...newState });
 		console.log("STATE HAS BEEN UPDATED WITH NEW VALUES", this.state)
 
 	}
