@@ -152,8 +152,6 @@ export const TransactionSearchField: React.FC<ITransactionSearchField> = (props)
 
 
 
-    // const items = ;
-
     return (
         <FormControl isInvalid={meta['error'] && meta.touched ? true : false} mt="5" position="relative">
             <Downshift
@@ -161,7 +159,7 @@ export const TransactionSearchField: React.FC<ITransactionSearchField> = (props)
                     //pass in the full object of the field into form hooks
                     helpers.setTouched(true) && helpers.setValue(selection)
                 }
-                itemToString={item => (item ? item.customerName : "")}
+                itemToString={item => (item ? item.itemName : "")}
             >
                 {({
                     getInputProps,
@@ -201,7 +199,7 @@ export const TransactionSearchField: React.FC<ITransactionSearchField> = (props)
                             <List {...getMenuProps()} pt="1">
                                 {isOpen
                                     ? options
-                                        .filter(item => !inputValue || item.customer?.customerName.toLowerCase().includes(inputValue.toLowerCase()))
+                                        .filter(item => !inputValue || item.itemName.toLowerCase().includes(inputValue.toLowerCase()))
                                         .map((item, index) => (
                                             <TransactionSearch
                                                 {...getItemProps({
@@ -222,7 +220,6 @@ export const TransactionSearchField: React.FC<ITransactionSearchField> = (props)
                                                 amountPaid={`₵ ${item.amountPaid || 0}`}
                                                 amountDue={`₵ ${item.amountDue || 0}`}
                                                 overdueStatus="OVERDUE"
-                                            // customerStatus="10 days to overdue"
 
                                             />
 

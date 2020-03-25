@@ -15,6 +15,7 @@ interface ITransactionList {
     analyticName: string,
     customerName: string,
     customerStatus: string,
+    itemName?: string,
     amount: any,
     paymentStatus: string,
     overdueAmount: string,
@@ -55,15 +56,14 @@ const LineDivider = styled.div`
 `
 
 
-
-const TransactionList = (props: ITransactionList) => {
+const TransactionList: React.FC<ITransactionList> = (props) => {
     const { analyticName, customerName, customerStatus, amount, paymentStatus, overdueAmount, overdueStatus, iconName, iconSize, cardLink } = props
 
     const handleClick = (analyticName: string): any => {
 
         // /we will write the handle analytics here
         Analytics.track(analyticName, {
-            comp: "Dashboard Card"
+            comp: "Transactions List Card"
         })
     }
 
@@ -105,27 +105,36 @@ const TransactionList = (props: ITransactionList) => {
 }
 
 
-const TransactionSearch = (props: ITransactionList) => {
+
+/**
+ * Component for Transactions List
+ */
+
+
+interface ITransactionSearch extends ITransactionList {
+    itemName?: string,
+    amountPaid: string,
+    amountDue: string
+}
+
+
+const TransactionSearch: React.FC<ITransactionSearch> = (props) => {
     const { analyticName, customerName, itemName, amountPaid, paymentStatus, amountDue, overdueStatus } = props
 
     const handleClick = (analyticName: string): any => {
 
         // /we will write the handle analytics here
         Analytics.track(analyticName, {
-            comp: "Dashboard Card"
+            comp: "Transactions Search Card"
         })
     }
 
     return (
         <>
-            <Flex onClick={handleClick(analyticName)}>
-                <Box p="2" width="15%">
-                    <Avatar size="sm" name={customerName} src="/" />
-                </Box>
-
-                <Box width="40%">
-                    <StatusText>{itemName}</StatusText>
-                    <Heading as="h5" fontSize="sm">{customerName}</Heading>
+            <Flex onClick={handleClick(analyticName)} {...props}>
+                <Box width="55%">
+                    <StatusText>{customerName}</StatusText>
+                    <Heading as="h5" fontSize="sm">{itemName}</Heading>
                 </Box>
 
                 <Box width="20%">

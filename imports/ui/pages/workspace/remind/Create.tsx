@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { Box } from '@chakra-ui/core'
 import * as Validator from '/imports/lib/validator'
 import { Formik, FormikProps } from 'formik'
-import { PageHeader, FormikForm, TransactionSearchField } from '/imports/ui/components'
+import { PageHeader, FormikForm, TransactionSearch, TransactionSearchField } from '/imports/ui/components'
 import Path from '/imports/ui/router'
 
 // API related imports
@@ -31,6 +31,7 @@ const Create: React.FunctionComponent<CreateProps> = (props) => {
 
     const handleSubmit = async (values: ITransaction) => {
         await props.updateState(values)
+        console.log(values)
 
         console.log(values)
         history.push(`${Path.workspace.remind}/rules`)
@@ -47,7 +48,7 @@ const Create: React.FunctionComponent<CreateProps> = (props) => {
 
     return (
         <React.Fragment>
-            <PageHeader title="Create a Transaction" subTitle="" />
+            <PageHeader title="Send a Reminder" subTitle="" />
             <Box py={3}>
                 <Formik
                     initialValues={authInit}
@@ -59,25 +60,30 @@ const Create: React.FunctionComponent<CreateProps> = (props) => {
                     }}
                 >
                     {(props: FormikProps<any>) => (
-                        <FormikForm isLoading={props.isSubmitting} analyticName="Search Customer" formProps={props} buttonName="Save" withIcon>
-                            <TransactionSearchField onInput={handleCustomerList} placeholder="Type to find a transaction" name="transaction" label="Search Transaction" validate={Validator.isRequired} options={inputArr} />
+                        <FormikForm isLoading={props.isSubmitting} analyticName="Search Transaction" formProps={props} buttonName="Save" withIcon>
+                            <TransactionSearchField onInput={handleCustomerList} placeholder="Type transaction info to search" name="transaction" label="Find a Transaction" validate={Validator.isRequired} options={inputArr} />
 
                             {/* //Render a list of customers */}
-                            {/* {list &&
+                            {list &&
                                 <Box pt="3">
-                                    {inputArr.map((val, index) => {
+                                    {inputArr.map((item, index) => {
                                         return (
-                                            <CustomerSearch
-                                                key={[val.customerName, index].join('-')}
-                                                customerName={val.customerName}
-                                                phoneNumber={val.phonenumber}
-                                                onClick={() => handleSubmit({ customer: val })}
+                                            <TransactionSearch
+                                                key={[item._id, index].join('-')}
+                                                itemName={item.itemName}
+                                                customerName={item.customer?.customerName}
+                                                analyticName="search transaction"
+                                                paymentStatus="PAID"
+                                                amountPaid={`₵ ${item.amountPaid || 0}`}
+                                                amountDue={`₵ ${item.amountDue || 0}`}
+                                                overdueStatus="OVERDUE"
+                                                onClick={() => handleSubmit({ transaction: item })}
                                             />
 
                                         )
                                     })}
                                 </Box>
-                            } */}
+                            }
 
                         </FormikForm>
                     )}
