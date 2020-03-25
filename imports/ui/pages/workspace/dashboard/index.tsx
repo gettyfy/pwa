@@ -1,9 +1,11 @@
 import React from 'react';
 import styled from '@emotion/styled'
 import path from '/imports/ui/router'
+import { withTracker } from 'meteor/react-meteor-data'
 import { Flex, Stack, Box, Avatar, Stat, StatNumber, StatHelpText, Text, StatGroup, Heading, Icon } from '@chakra-ui/core'
 // import * as Analytics from '/imports/ui/analytics';
 import { ActionCard, ActionCardRow, PageHeader, TransactionList } from '/imports/ui/components/'
+import { Accounts} from 'meteor/accounts-base'
 
 
 const Dashboard = styled.main`
@@ -31,8 +33,9 @@ const BreakLayout = styled.section<IBreakLayout>`
 
 
 
-export default class Hello extends React.Component {
+class DashboardPage extends React.Component {
   render() {
+    console.log(this.props)
     return (
       <Dashboard>
 
@@ -187,6 +190,15 @@ export default class Hello extends React.Component {
     )
   }
 }
+
+
+export default withTracker(() => {
+  const id = Accounts.userId()
+  return {
+    user: Accounts.users.findOne({_id: id}),
+    singleUser: Accounts.user()
+  };
+})(DashboardPage);
 
 
 
