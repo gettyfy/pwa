@@ -4,7 +4,7 @@ import { useHistory } from 'react-router-dom';
 import { Box } from '@chakra-ui/core'
 import * as Validator from '/imports/lib/validator'
 import { Formik, FormikProps } from 'formik'
-import { PageHeader, FormikForm, CustomerSearchField } from '/imports/ui/components'
+import { PageHeader, FormikForm, CustomerSearch, CustomerSearchField } from '/imports/ui/components'
 import Path from '/imports/ui/router'
 
 // API related imports
@@ -12,7 +12,6 @@ import { withTracker } from 'meteor/react-meteor-data'
 import { Meteor } from 'meteor/meteor'
 import { Customers } from '/imports/api/collections'
 import { ICustomer } from '/imports/api/schema';
-import { CustomerSearch } from '/imports/ui/components/CustomerList';
 
 type CreateProps = {
     customers: ICustomer[],
