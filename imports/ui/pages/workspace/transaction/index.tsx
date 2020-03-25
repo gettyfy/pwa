@@ -32,6 +32,7 @@ class Transaction extends React.Component<TransactionProps> {
 
   render() {
     console.log(this.props)
+    const { transactions } = this.props
 
     return (
       <StyledTransaction>
@@ -43,7 +44,7 @@ class Transaction extends React.Component<TransactionProps> {
 
         <Box mt="10">
 
-          {this.props.transactions.map((val, index) => {
+          { transactions && transactions.map((val, index) => {
             return (
 
 
