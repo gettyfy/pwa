@@ -1,36 +1,63 @@
 import { useHistory } from 'react-router-dom';
 import React from 'react'
-import path from '/imports/ui/router'
+import styled from '@emotion/styled';
 
-import { Box } from '@chakra-ui/core'
+import { Box, Flex, } from '@chakra-ui/core'
 import * as Validator from '/imports/lib/validator'
 import { Formik, FormikProps } from 'formik'
-import { InputField, SelectField, PageHeader, FormikForm, SignatureField } from '/imports/ui/components'
-import { Meteor } from 'meteor/meteor';
+import { InputField, SelectField, PageHeader, FormikForm, SignatureField, BreakLayout } from '/imports/ui/components'
+import path from '/imports/ui/router'
+import theme from '/imports/lib/theme'
+
+
+import AgreementDoc from './AgreementDoc'
+
+const Text = styled.p`
+    font-size: 12px;
+    display: flex;
+    flex: 1
+`
+const Span = styled.span`
+    font-weight: bold;
+    padding-right: 2px;
+`
+
+
+
+const NegativeMargin = styled.section`
+    margin-left: -2px;
+`
+const AgreementWrapper = styled.div`
+    display: block;
+    max-height: 250px;
+    overflow-y: scroll;
+    padding: 1rem;
+`
 
 
 const PaymentPlan: React.FunctionComponent = (props: any) => {
     const history = useHistory();
-    //const [total, setTotal] = useState(330);
-
+    const propData = props.data
 
 
 
     interface IPaymentPlanInterface {
-        itemName: string,
-        quantity: string,
-        price: string,
-        amountPaid: string,
-        balance: string,
+        frequency: string,
+        startDate: string,
+        dueDate: string,
+        agreementTemplate: string,
+        signature: string,
         [key: string]: string
     }
 
     const init: IPaymentPlanInterface = {
-        itemName: "",
-        quantity: "",
-        price: "",
-        amountPaid: "",
-        balance: "",
+        frequency: "monthly",
+        startDate: "",
+        dueDate: "",
+        agreementTemplate: "default",
+        signature: ""
+
+
     }
 
 
@@ -45,37 +72,62 @@ const PaymentPlan: React.FunctionComponent = (props: any) => {
 
 
 
-
     return (
-        <Box p={4}>
+        <React.Fragment>
             <PageHeader title="Payment Plan" subTitle="" />
+            <Box py={4}>
 
-            <Formik
-                initialValues={init}
-                onSubmit={(values, actions) => {
-                    setTimeout(() => {
-                        handleSubmit(values)
-                        actions.setSubmitting(false);
-                    }, 300);
-                }}
-            >
-                {(props: FormikProps<any>) => (
-                    <FormikForm isLoading={props.isSubmitting} analyticName="Signup Form" formProps={props} buttonName="NEXT">
-                        <SelectField label="Frequency" name="frequency" validate={Validator.isRequired} options={["Monthly", "Weekly", "Bi-weekly"]} />
-                        <SelectField label="Duration" name="duration" validate={Validator.isRequired} options={["1 month", "3 months", "6 months"]} />
-                        <InputField label="Start Date" placeholder="St" type="date" name="quantity" validate={Validator.isRequired} />
-                        <InputField label="End Date" placeholder="C700" type="date" name="price" validate={Validator.isRequired} />
-                        <SignatureField name="signature" validate={Validator.isSignature} />
+                <Formik
+                    initialValues={init}
+                    onSubmit={(values, actions) => {
+                        setTimeout(() => {
+                            handleSubmit(values)
+                            actions.setSubmitting(false);
+                        }, 300);
+                    }}
+                >
+                    {(props: FormikProps<any>) => (
+                        <FormikForm isLoading={props.isSubmitting} analyticName="Signup Form" formProps={props} buttonName="CREATE PAYMENT PLAN" withIcon>
+                            <SelectField label="Frequency" name="frequency" validate={Validator.isRequired} options={["Monthly"]} />
+                            <InputField label="Start Date" placeholder="Start" type="date" name="startDate" validate={Validator.isRequired} />
+                            <InputField label="End Date" placeholder="End" type="date" name="dueDate" validate={Validator.isRequired} />
+
+                            <Flex direction="column" mt="6" bg="gray.100" p="2" borderRadius={theme.custom.defaultRadius}>
+                                <Text><Span>Payment Plan Generated for:</Span></Text>
+                                <Text><Span>{propData && propData.amountDue || " "}</Span> <Span>GH₵ {'balance'}</Span></Text>
+                            </Flex>
+
+                            <BreakLayout>
+                                <NegativeMargin>
+                                    <Box p="5" pt="1" width="100.5%" m="0" bg="gray.200">
+                                        <small>Use Agreement Template</small>
+                                        <SelectField mt="0" name="agreementTemplate" validate={Validator.isRequired} options={["Default Template"]} />
+                                    </Box>
+
+                                    {/* Box to hold the agreement wrapper */}
+                                    <Box border='1px' width="100.5%" bg="white">
+                                        <AgreementWrapper>
+                                            <AgreementDoc />
+                                        </AgreementWrapper>
+
+                                    </Box>
+                                </NegativeMargin>
+                            </BreakLayout>
+                            <SignatureField label="Input your signature" name="signature" validate={Validator.isSignature} />
 
 
 
 
-                    </FormikForm>
-                )}
-            </Formik>
 
 
-        </Box>
+
+                        </FormikForm>
+                    )}
+                </Formik>
+
+
+            </Box>
+        </React.Fragment>
     );
 }
 

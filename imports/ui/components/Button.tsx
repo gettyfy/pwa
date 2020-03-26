@@ -14,7 +14,7 @@ const Box = styled(ChakraBox)`
 `
 
 const StyledButton = styled(Button) <{ withIcon: boolean | undefined }>`
-    border-radius: 0;
+    border-radius: 3px;
     min-height: 54px;
     justify-content: ${(props) => props.withIcon ? 'space-between' : 'center'};
     align-content: center;
@@ -111,8 +111,8 @@ export const LinkButton: React.FC<ILinkButton> = (props) => {
     }
     return (
         <Link to={buttonLink}>
-            <Box as="button" width="16.5rem" rounded="0" bg={buttonColor || 'blue.500'} size="lg" border={border} borderColor={borderColor} color={color} px={4} h={8} {...props} onClick={() => handleClick(analyticName)}>
-                {buttonName}
+            <Box as="button" width="16.5rem" rounded="3px" bg={buttonColor || 'blue.500'} size="lg" border={border} borderColor={borderColor} color={color} px={4} h={8} {...props} onClick={() => handleClick(analyticName)}>
+                <strong> {buttonName}</strong>
             </Box>
         </Link>
     )

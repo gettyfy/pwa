@@ -11,6 +11,7 @@ export function removeReminder(this: any, id: string): void {
 
 export function insertReminder(this: any, obj: any) {
 	check(obj, Object);
+	console.log(obj, 'OBJECT IS HERE -->>>>');
 	triggerVoice();
 
 	// Make sure the user is logged in before inserting a task

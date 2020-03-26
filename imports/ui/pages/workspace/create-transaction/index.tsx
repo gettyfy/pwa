@@ -8,21 +8,19 @@ import Review from './Review';
 import Item from './Item';
 import PaymentPlan from './PaymentPlan'
 import * as Analytics from '/imports/ui/analytics'
-import CreateTransaction from './CreateTransaction'
-// import CreateCustomer from './index';
 
 export default class CreateTransaction extends Component {
 	constructor(props: any) {
 		super(props);
 		this.state = {
-			
+
 		}
 	}
 
-	updateState = (value: object) => {
+	updateState = async (value: object) => {
 		const oldStore = this.state;
 		const newState = Object.assign(oldStore, value)
-		this.setState({...newState});
+		await this.setState({ ...newState });
 		console.log("STATE HAS BEEN UPDATED WITH NEW VALUES", this.state)
 
 	}
@@ -35,8 +33,7 @@ export default class CreateTransaction extends Component {
 	onSubmit = async () => {
 		console.log(this.state);
 		await Analytics.track('Submit Food Menu', this.state);
-		alert('Thank you')
-		window.location.replace('/customer')
+		window.location.replace('/transactions')
 	};
 
 	render() {
@@ -47,7 +44,6 @@ export default class CreateTransaction extends Component {
 				<Route path="/create-transaction/payment-plan" exact><PaymentPlan data={this.state} updateState={this.updateState} /></Route>
 				<Route path="/create-transaction/review" exact><Review data={this.state} updateState={this.updateState} /></Route>
 				<Route path="/create-transaction/success" exact><Success data={this.state} updateState={this.updateState} /></Route>
-				
 			</Switch>
 		);
 	}

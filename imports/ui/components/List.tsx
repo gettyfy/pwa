@@ -15,6 +15,7 @@ interface ITransactionList {
     analyticName: string,
     customerName: string,
     customerStatus: string,
+    itemName?: string,
     amount: any,
     paymentStatus: string,
     overdueAmount: string,
@@ -22,7 +23,7 @@ interface ITransactionList {
     cardLink: string,
     iconName: string | any,
     iconSize: any,
-    
+
 }
 
 
@@ -55,15 +56,14 @@ const LineDivider = styled.div`
 `
 
 
-
-const TransactionList = (props: ITransactionList) => {
+const TransactionList: React.FC<ITransactionList> = (props) => {
     const { analyticName, customerName, customerStatus, amount, paymentStatus, overdueAmount, overdueStatus, iconName, iconSize, cardLink } = props
 
     const handleClick = (analyticName: string): any => {
 
         // /we will write the handle analytics here
         Analytics.track(analyticName, {
-            comp: "Dashboard Card"
+            comp: "Transactions List Card"
         })
     }
 
@@ -104,6 +104,61 @@ const TransactionList = (props: ITransactionList) => {
     )
 }
 
+
+
+/**
+ * Component for Transactions List
+ */
+
+
+interface ITransactionSearch extends ITransactionList {
+    itemName?: string,
+    amountPaid: string,
+    amountDue: string
+}
+
+
+const TransactionSearch: React.FC<ITransactionSearch> = (props) => {
+    const { analyticName, customerName, itemName, amountPaid, paymentStatus, amountDue, overdueStatus } = props
+
+    const handleClick = (analyticName: string): any => {
+
+        // /we will write the handle analytics here
+        Analytics.track(analyticName, {
+            comp: "Transactions Search Card"
+        })
+    }
+
+    return (
+        <>
+            <Flex onClick={handleClick(analyticName)} {...props}>
+                <Box width="55%">
+                    <StatusText>{customerName}</StatusText>
+                    <Heading as="h5" fontSize="sm">{itemName}</Heading>
+                </Box>
+
+                <Box width="20%">
+                    <Heading as="h6" size="xs">{amountPaid}</Heading>
+                    <Text fontSize="xs" color="green.600">{paymentStatus}</Text>
+                </Box>
+
+                <Box width="20%">
+                    <Heading as="h6" size="xs">{amountDue}</Heading>
+                    <Text fontWeight="bold" fontSize="xs" color="red.700">{overdueStatus}</Text>
+                </Box>
+
+                <Box width="5%">
+                    <Stack isInline>
+                        <Icon name="chevron-right" />
+                    </Stack>
+
+                </Box>
+            </Flex>
+            <LineDivider />
+        </>
+    )
+}
+
 // export the components as modules to be resuable by other component
 // export default CustomerList
-export { TransactionList }
+export { TransactionList, TransactionSearch }

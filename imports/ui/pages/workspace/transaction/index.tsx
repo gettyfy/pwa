@@ -32,23 +32,19 @@ class Transaction extends React.Component<TransactionProps> {
 
   render() {
     console.log(this.props)
+    const { transactions } = this.props
 
     return (
       <StyledTransaction>
         <PageHeader useHeader title="Your Transactions" />
 
-        {/* Button */}
-        {/* <Box my="2">
-          <LinkButton />
-          <FormButton buttonName="CREATE NEW TRANSACTION" analyticName="Verify" buttonColor="#0B69FF" color="#FFF" handleAction={() => handleSubmit()} />
-        </Box> */}
         <Box >
           <LinkButton buttonLink={`${path.workspace.createTransaction}/`} buttonName="Create Transaction" analyticName="" buttonColor="#0B69FF" color="#FFF" />
         </Box >
 
         <Box mt="10">
 
-          {this.props.transactions.map((val, index) => {
+          { transactions && transactions.map((val, index) => {
             return (
 
 
@@ -57,10 +53,10 @@ class Transaction extends React.Component<TransactionProps> {
                 key={[val.customerName, index].join('-')}
                 analyticName="View a Transaction"
                 customerStatus="10 days to overdue"
-                customerName={val.owner?.profile.name}
-                amount={`₵ ${val.price || 0}`}
+                customerName={val.customer?.customerName}
+                amount={`₵ ${val.amountPaid || 0}`}
                 paymentStatus="PAID"
-                overdueAmount={`₵ ${val.balance || 0}`}
+                overdueAmount={`₵ ${val.amountDue || 0}`}
                 overdueStatus="OVERDUE"
                 cardLink={`${path.workspace.transactionView}/view/${val._id}`}
                 iconName="chevron-right"
@@ -87,6 +83,6 @@ export default withTracker(() => {
   Meteor.subscribe('transactions')
   console.log(Transactions.find().fetch())
   return {
-    transactions: Transactions.find().fetch()
+    transactions: Transactions.find({}, { sort: { createdAt: -1 } }).fetch()
   };
 })(Transaction);

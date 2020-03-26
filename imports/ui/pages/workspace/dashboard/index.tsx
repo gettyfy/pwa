@@ -1,9 +1,15 @@
 import React from 'react';
 import styled from '@emotion/styled'
 import path from '/imports/ui/router'
-import { Flex, Stack, Box, Avatar, Stat, StatNumber, StatHelpText, Text, StatGroup, Heading, Icon } from '@chakra-ui/core'
+import { withTracker } from 'meteor/react-meteor-data'
+import { Flex, Stack, Box, Avatar, Stat, StatNumber, StatHelpText, Text, StatGroup, Heading, Icon, Spinner } from '@chakra-ui/core'
 // import * as Analytics from '/imports/ui/analytics';
-import { ActionCard, ActionCardRow, PageHeader, TransactionList } from '/imports/ui/components/'
+import { ActionCard, ActionCardRow, StatusText, PageHeader, TransactionList } from '/imports/ui/components/'
+import { greeting, formatNumber } from '/imports/lib/formatter'
+import { Accounts } from 'meteor/accounts-base'
+import { Transactions } from '/imports/api/collections'
+import { Loader } from '/imports/lib/loader'
+
 
 
 const Dashboard = styled.main`
@@ -31,26 +37,38 @@ const BreakLayout = styled.section<IBreakLayout>`
 
 
 
-export default class Hello extends React.Component {
+class DashboardPage extends React.Component {
+
+
   render() {
+    console.log(this.props)
+    const { earnings, user } = this.props
+
+    if (!this.props.user) {
+      return (
+        <Flex align="center" justify="center" margin="auto">
+          <Loader />
+        </Flex>
+      )
+    }
     return (
       <Dashboard>
 
         <PageHeader useHeader />
         <Box d="flex" my="3" mb="8" alignItems="center" justifyContent="space-between">
           <Stack>
-            <p>Good Afternoon,</p>
-            <Heading as="h3" size="lg">Kofi Andrew</Heading>
+            <p>{greeting()}</p>
+            <Heading as="h3" size="lg">{user.profile.name}</Heading>
           </Stack>
 
           <Stack>
-            <Avatar size="md" name="Friend" />
+            <Avatar size="md" name={user.profile.name} />
           </Stack>
         </Box>
 
         <DashboardStat>
           <Stat>
-            <StatNumber>345</StatNumber>
+            <StatNumber>{this.props.deals}</StatNumber>
             <StatHelpText>
               DEALS
               </StatHelpText>
@@ -75,15 +93,16 @@ export default class Hello extends React.Component {
 
           <Stack spacing={3}>
             <Heading as="h3" size="lg">
-              Earnings
+              Expected Earnings
             </Heading>
-            <Text>Total Balance</Text>
+            <StatusText fsize="12px">Total Collected</StatusText>
           </Stack>
 
           <Stack>
             <Heading as="h1" size="lg">
-              ₵ 65,430
-          </Heading>
+              {`₵ ${formatNumber(earnings.expected)}`}
+            </Heading>
+            <StatusText fsize="12px"> {`₵ ${formatNumber(earnings.collected)}`}</StatusText>
           </Stack>
         </Flex>
 
@@ -104,14 +123,14 @@ export default class Hello extends React.Component {
               />
 
               <ActionCard
-                cardLink={`${path.workspace.createTransaction}/item`}
-              cardBg="#E3EDFF"
-              cardHeading="Create a Transaction"
-              cardSubHeading="Record"
-              analyticName="Create Record"
-              iconColor="blue.600"
-              name="plus-square"
-            />
+                cardLink={path.workspace.createTransaction}
+                cardBg="#E3EDFF"
+                cardHeading="Create a Transaction"
+                cardSubHeading="Record"
+                analyticName="Create Record"
+                iconColor="blue.600"
+                name="plus-square"
+              />
             </ActionCardRow>
 
 
@@ -187,6 +206,27 @@ export default class Hello extends React.Component {
     )
   }
 }
+
+
+
+export default withTracker(() => {
+  const id = Accounts.userId()
+  let collectedEarnings: number = 0;
+  let expectedEarnings: number = 0;
+  // calculate overdue sum based on amountDue
+  Transactions.find({}, { fields: { amountPaid: 1, amountDue: 1 } }).fetch().forEach((arr) => expectedEarnings += parseFloat(arr.amountDue))
+  Transactions.find({}, { fields: { amountPaid: 1, amountDue: 1 } }).fetch().forEach((arr) => collectedEarnings += parseFloat(arr.amountPaid))
+
+  return {
+    user: Accounts.user(),
+    deals: Transactions.find().count(),
+    payments: Transactions.find({}, { fields: { amountPaid: 1, amountDue: 1 } }).fetch(),
+    earnings: {
+      collected: collectedEarnings,
+      expected: expectedEarnings
+    }
+  };
+})(DashboardPage);
 
 
 

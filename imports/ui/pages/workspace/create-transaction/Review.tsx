@@ -1,6 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom'
-import { Icon, Box, Heading, Stack, Stat, StatNumber, StatHelpText, StatLabel, Flex, Text, StatGroup, Divider } from "@chakra-ui/core";
+import { Icon, Box, Heading, Stat, StatNumber, StatHelpText, StatLabel, Flex, Text, StatGroup, Divider } from "@chakra-ui/core";
 import styled from '@emotion/styled'
 import { FormButton, SummaryList, SummaryRow, PageHeader } from '/imports/ui/components'
 import Path from '/imports/ui/router';
@@ -25,10 +25,10 @@ const ReviewStat = styled(StatGroup)`
 const Review = (props) => {
   const history = useHistory()
 
-  console.log(props)
 
-  const handleSubmit = () => {
-    Meteor.call('transaction.insert', props.data)
+  const handleSubmit = async () => {
+    console.log(props.data)
+    await Meteor.call('transaction.insert', props.data)
     history.push(`${Path.workspace.createTransaction}/success`)
   }
 

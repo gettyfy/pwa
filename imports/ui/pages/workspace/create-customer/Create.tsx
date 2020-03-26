@@ -2,7 +2,7 @@ import React from 'react'
 import { useHistory } from 'react-router-dom';
 import path from '/imports/ui/router'
 
-import { Box } from '@chakra-ui/core'
+import { Box, Accordion, AccordionItem, AccordionHeader, AccordionIcon, AccordionPanel, Icon } from '@chakra-ui/core'
 import * as Validator from '/imports/lib/validator'
 import { Formik, FormikProps } from 'formik'
 import { InputField, PageHeader, FormikForm } from '/imports/ui/components'
@@ -46,45 +46,63 @@ const Create: React.FunctionComponent = (props: any) => {
 
 
     return (
-        <Box p={4}>
+        <React.Fragment>
             <PageHeader title="Add Customer" subTitle="Fill the form to add a new customer" />
+            <Box pb={4}>
+
+                <Box height="3rem"></Box>
+                <Box mb="5"><p>Customer Details </p></Box>
+
+                <Formik
+                    initialValues={authInit}
+                    onSubmit={(values, actions) => {
+                        setTimeout(() => {
+                            handleSubmit(values)
+                            Meteor.call('customer.insert', values)
+                            actions.setSubmitting(false);
+                        }, 300);
+                    }}
+                >
+                    {(props: FormikProps<any>) => (
+                        <FormikForm isLoading={props.isSubmitting} analyticName="Signup Form" formProps={props} withIcon buttonName="Add Customer">
+                            <InputField label="Customer Name" placeholder="Gordon Amaza" name="customerName" validate={Validator.isRequired} />
+                            <InputField label="Customer Address" placeholder="44 Lagos Avenue" name="customerAddress" validate={Validator.isRequired} />
+                            <InputField label="Customer Phone Number" placeholder="0244-973-237" name="customerNumber" validate={Validator.isMobile} />
+                            <InputField label="Customer Email" placeholder="gordon@getfynance.co" name="customerEmail" validate={Validator.isEmail} />
 
 
-            <Box height="3rem"></Box>
-            <Box mb="5"><p>Customer Details </p></Box>
+                            <Box height="2rem"></Box>
 
-            <Formik
-                initialValues={authInit}
-                onSubmit={(values, actions) => {
-                    setTimeout(() => {
-                        handleSubmit(values)
-                        Meteor.call('customer.insert', values)
-                        actions.setSubmitting(false);
-                    }, 300);
-                }}
-            >
-                {(props: FormikProps<any>) => (
-                    <FormikForm isLoading={props.isSubmitting} analyticName="Signup Form" formProps={props} withIcon buttonName="Add Customer">
-                        <InputField label="Customer Name" placeholder="Gordon Amaza" name="customerName" validate={Validator.isRequired} />
-                        <InputField label="Customer Address" placeholder="44 Lagos Avenue" name="customerAddress" validate={Validator.isRequired} />
-                        <InputField label="Customer Phone Number" placeholder="0244-973-237" name="customerNumber" validate={Validator.isNumeric} />
-                        <InputField label="Customer Email" placeholder="gordon@getfynance.co" name="customerEmail" validate={Validator.isEmail} />
+                            {/* Add Accordion Section for Optional Guarantor Form */}
+                            <Accordion defaultIndex={3} allowToggle>
+                                <AccordionItem>
+                                    {({ isExpanded }) => (
+                                        <>
+                                            <AccordionHeader>
+                                                <Box flex="1" textAlign="left">Add a Guarantor</Box>
+                                                <Icon size="12px" name={isExpanded ? "minus" : "add"} />
+                                            </AccordionHeader>
+                                            <AccordionPanel pb={8}>
+                                                <InputField label="Name" placeholder="Benjamin Kwame" name="name" />
+                                                <InputField label="Address" placeholder="12 Aluguntugui street" name="address" />
+                                                <InputField label="Phone Number" placeholder="0244-973-237" name="phonenumber" />
+                                                <InputField label="Email" placeholder="benj@getfynance.co" name="email" />
 
-
-                        <Box height="4rem"></Box>
-                        <Box mb="5"><p>Guarantor's Details </p></Box>
-
-                        <InputField label="Name" placeholder="Benjamin Kwame" name="name" validate={Validator.isRequired} />
-                        <InputField label="Address" placeholder="12 Aluguntugui street" name="address" validate={Validator.isRequired} />
-                        <InputField label="Phone Number" placeholder="0244-973-237" name="phonenumber" validate={Validator.isNumeric} />
-                        <InputField label="Email" placeholder="benj@getfynance.co" name="email" validate={Validator.isEmail} />
-
-                    </FormikForm>
-                )}
-            </Formik>
+                                            </AccordionPanel>
+                                        </>
+                                    )}
+                                </AccordionItem>
+                            </Accordion>
+                            <Box height="3rem"></Box>
 
 
-        </Box>
+
+                        </FormikForm>
+                    )}
+                </Formik>
+            </Box>
+
+        </React.Fragment >
     );
 }
 

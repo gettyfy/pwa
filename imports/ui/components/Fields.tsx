@@ -9,29 +9,29 @@ import PropTypes from 'prop-types'
 import styled from '@emotion/styled'
 import Downshift from "downshift";
 import { useField, Form, Field, FieldProps } from 'formik'
-import { FormControl, List, Textarea, ListItem, Checkbox, FormLabel, Select, RadioGroup, RadioButtonGroup, Icon, IconButton, FormErrorMessage, Input, Button, InputGroup, Radio, InputRightElement, CustomTheme, DefaultTheme, Box } from '@chakra-ui/core'
+import { FormControl, List, Textarea, ListItem, Checkbox, FormLabel, Select, RadioGroup, RadioButtonGroup, Icon, IconButton, FormErrorMessage, Input, Button, InputGroup, Radio, InputRightElement, CustomTheme, DefaultTheme, Box, CheckboxGroup } from '@chakra-ui/core'
 import * as Analytics from '/imports/ui/analytics'
 
 
 
 
 const FormikButton = styled(Button) <{ withIcon: boolean | undefined }>`
-    border-radius: 0;
-    min-height: 54px;
+    border-radius: 3px;
+    min-height: 56px;
     justify-content: ${(props) => props.withIcon ? 'space-between' : 'center'};
     align-content: center;
 `
 
 const FormikTextArea = styled(Textarea)`
-    border-radius: 0px;
-    border-width: 0px;
-    border-right: none;
+    border-radius: 3px;
     padding-top: 2.5rem;
-    border-bottom: 1.6px solid #979797;
     padding-bottom: 1rem;
+    border: 1.3px solid #979797;
     font-size: ${(props: any) => props.theme.custom.inputFontSize};
-    border-top: none;
-    border-left: none;
+    border-bottom: 1.4px solid #979797;
+    /* border-right: none; */
+    /* border-top: none; */
+    /* border-left: none; */
 
     ::placeholder, ::-moz-placeholder {
         font-size: ${(props: any) => props.theme.custom.inputPlaceHolder};
@@ -41,14 +41,14 @@ const FormikTextArea = styled(Textarea)`
 
 
 const FormikInput = styled(Input)`
-    border-radius: 0px;
     border-width: 1.3px;
-    border-right: none;
+    border-radius: 3px;
     padding-top: 2rem;
-    padding-bottom: 1rem;
+    padding-bottom: 1.3rem;
     font-size: ${(props: any) => props.theme.custom.inputFontSize};
-    border-top: none;
-    border-left: none;
+    /* border-top: none; */
+    /* border-right: none; */
+    /* border-left: none; */
 
     ::placeholder, ::-moz-placeholder {
         font-size: ${(props: any) => props.theme.custom.inputPlaceHolder};
@@ -56,17 +56,17 @@ const FormikInput = styled(Input)`
     }
 `
 const FormikSelect = styled(Select)`
-    border-radius: 0px;
+    border-radius: 3px;
     border-width: 1.3px;
-    border-right: none;
-    border-bottom: 1.3px solid;
-    border-top: none;
-    border-left: none;
+    border: 1.3px solid;
+    height: 55px;
+    /* border-right: none; */
+    /* border-top: none; */
+    /* border-left: none; */
     font-size: ${(props: any) => props.theme.custom.inputFontSize};
-    min-height: ${(props: any) => props.theme.custom.inputMinHeight};
     ::placeholder,
     ::-webkit-input-placeholder {
-        font-size: ${(props: any) => props.theme.custom.inputFontSize};
+        font-size: ${(props: any) => props.theme.custom.inputPlaceHolder};
     }
 `
 const FormikLabel = styled(FormLabel) <{ fsize?: string }>`
@@ -122,12 +122,14 @@ interface InputFieldProps {
     name: string,
     label: string,
     placeholder: string,
-    validate?: Function
+    type?: string,
+    validate?: Function,
+    trackInput?: Function
 }
 
 
 const InputField = (props: InputFieldProps): JSX.Element => {
-    const { validate, name, placeholder, label } = props
+    const { validate, type, name, placeholder, trackInput, label } = props
 
     /**
      * Formik Field Props to be aware of
@@ -139,10 +141,10 @@ const InputField = (props: InputFieldProps): JSX.Element => {
     return (
         <Field name={name} validate={validate} {...props}>
             {({ field, form }: FieldProps) => (
-                <FormControl isInvalid={form.errors[name] && form.touched[name] ? true : false} mt="5" position="relative">
+                <FormControl isInvalid={form.errors[name] && form.touched[name] ? true : false} mt="3" position="relative">
                     <FormikLabel id={[name, 'label'].join('-')} htmlFor={[name, 'input'].join('-')} color="gray.600">{label}</FormikLabel>
                     <InputGroup size="lg">
-                        <FormikInput {...props} isFullWidth variant="filled" {...field} id={[name, 'input'].join('-')} placeholder={placeholder} focusBorderColor="gray.500" borderColor="gray.500" errorBorderColor="red.500" size="lg" />
+                        <FormikInput trackInput={trackInput && trackInput(field.value)} {...props} type={type || 'text'} isFullWidth variant="filled" {...field} id={[name, 'input'].join('-')} placeholder={placeholder} focusBorderColor="gray.500" borderColor="gray.500" errorBorderColor="red.500" size="lg" />
                     </InputGroup>
                     <FormErrorMessage>{form.errors[name]}</FormErrorMessage>
                 </FormControl>
@@ -235,11 +237,11 @@ const PasswordField = (props: InputFieldProps): JSX.Element => {
         <Field name={name} validate={validate} {...props}>
             {({ field, form }: FieldProps) => (
                 //@ts-ignore
-                <FormControl isInvalid={form.errors[name] && form.touched[name]} mt="5" position="relative">
+                <FormControl isInvalid={form.errors[name] && form.touched[name]} mt="3" position="relative">
                     <FormikLabel htmlFor={name} color="gray.600">{label}</FormikLabel>
                     <InputGroup size="lg">
                         <FormikInput type={show ? "text" : "password"} isFullWidth variant="filled" {...field} id={name} placeholder={placeholder} focusBorderColor="gray.500" borderColor="gray.500" errorBorderColor="red.500" size="lg" />
-                        <InputRightElement width="4.5rem" pt="4">
+                        <InputRightElement width="4.5rem" pt="1">
                             <IconButton
                                 variant="outline"
                                 size="sm"
@@ -385,6 +387,38 @@ RadioButtonField.propTypes = {
 
 
 
+const CheckButtonField = (props: RadioFieldProps): JSX.Element => {
+    const { validate, name, defaultValue, options, label, ...rest } = props
+    //@ts-ignore
+    const [field, meta, helpers] = useField(props);
+    // console.log(field, meta, helpers);
+
+    // directly call meta in place of meta.touched to show all errors ::: FIX ISSUE with component not displaying error onDirty
+    return (
+        <FormControl isInvalid={meta['error'] && meta.touched} mt="5" position="relative">
+            <FormLabel {...field} htmlFor={[name, 'radio-button'].join('__')} color="gray.600">{label}</FormLabel>
+            <CheckboxGroup
+                name={name}
+                onChange={val => helpers.setTouched(true) && helpers.setValue(val)}
+
+            >
+                {options && options.map((val, idx) => {
+                    return (
+                        <ButtonComponent
+                            id={[name, 'check-button'].join('__')}
+                            isInline
+                            {...rest}
+                            name={val} key={[val, idx].join('--')} value={val} {...rest}>{val}</ButtonComponent>
+                    )
+                })}
+            </CheckboxGroup>
+            <FormErrorMessage>{meta.error && meta.error}</FormErrorMessage>
+        </FormControl>
+    );
+}
+
+
+
 
 /**
  * Formik Field for Checkbox Selections
@@ -435,20 +469,21 @@ interface SelectFieldProps {
     validate: Function,
     name: string
     label?: string,
+    mt?: string,
     placeholder?: string
     defaultValue?: string
     options: Array<string>,
 }
 
 const SelectField = (props: SelectFieldProps): JSX.Element => {
-    const { validate, placeholder, name, defaultValue, options, label } = props
+    const { validate, placeholder, name, mt, defaultValue, options, label } = props
 
     return (
         <Field name={name} validate={validate} {...props}>
             {({ field, form }: FieldProps) => (
                 //@ts-ignore
-                <FormControl isInvalid={form.errors[name] && form.touched[name]} mt="5" position="relative">
-                    <FormLabel htmlFor={[name, 'select'].join('-')} color="gray.600">{label}</FormLabel>
+                <FormControl isInvalid={form.errors[name] && form.touched[name]} mt={mt || '3'} position="relative" {...props}>
+                    {label && <FormikLabel htmlFor={[name, 'select'].join('-')} color="gray.600">{label}</FormikLabel>}
                     <FormikSelect variant="filled" placeholder={placeholder} name={name} id={[name, 'select'].join('-')} defaultValue={defaultValue} {...field} size="lg">
                         {options && options.map((val, idx) => {
                             return (
@@ -465,7 +500,7 @@ const SelectField = (props: SelectFieldProps): JSX.Element => {
 
 SelectField.propTypes = {
     name: PropTypes.string.isRequired,
-    label: PropTypes.string.isRequired,
+    label: PropTypes.string,
     validate: PropTypes.func,
     defaultValue: PropTypes.string,
     options: PropTypes.array.isRequired
@@ -515,7 +550,7 @@ const AutoCompleteField = (props: AutoCompleteProps): JSX.Element => {
                     getRootProps
                 }) => (
                         <div>
-                            <FormLabel {...getToggleButtonProps()} {...getLabelProps()} color="gray.600">{label}</FormLabel>
+                            <FormikLabel {...getToggleButtonProps()} {...getLabelProps()} color="gray.600">{label}</FormikLabel>
                             <div {...getRootProps({}, { suppressRefError: true })}>
                                 <FormikInput isFullWidth variant="filled"  {...field} placeholder={placeholder}  {...getInputProps()} {...rest} validate={validate} focusBorderColor="gray.500" borderColor="gray.500" errorBorderColor="red.500" size="lg" />
                             </div>
@@ -563,7 +598,7 @@ AutoCompleteField.propTypes = {
 
 
 // ====== Export Field Components here ===========
-export { InputField, PasswordField, CheckField, RadioField, TextAreaField, AutoCompleteField, RadioButtonField, SelectField, FormikForm }
+export { InputField, PasswordField, CheckButtonField, CheckField, RadioField, TextAreaField, AutoCompleteField, RadioButtonField, SelectField, FormikForm }
 
 
 

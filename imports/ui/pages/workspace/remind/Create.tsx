@@ -1,59 +1,55 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom';
-import { Meteor } from 'meteor/meteor'
 
 import { Box } from '@chakra-ui/core'
 import * as Validator from '/imports/lib/validator'
 import { Formik, FormikProps } from 'formik'
-import { SelectField, PageHeader, FormikForm } from '/imports/ui/components'
+import { PageHeader, FormikForm, TransactionSearch, TransactionSearchField } from '/imports/ui/components'
 import Path from '/imports/ui/router'
 
+// API related imports
+import { withTracker } from 'meteor/react-meteor-data'
+import { Meteor } from 'meteor/meteor'
+import { Customers, Transactions } from '/imports/api/collections'
+import { ITransaction } from '/imports/api/schema';
 
-const Create: React.FunctionComponent = (props: any) => {
+type CreateProps = {
+    customers: ITransaction[],
+    [key: string]: any
+}
+
+const Create: React.FunctionComponent<CreateProps> = (props) => {
     const history = useHistory();
-    // const handleSubmit = () => {
-    //     history.push('/success');
-    // }
+    const [list, showList] = useState(true)
+    const inputArr = props.transactions
 
+    console.log(props);
 
-    interface ICustomerInterface {
-        customerName: string,
-        customerAddress: string,
-        customerEmail: string,
-        customerNumber: string,
-        name: string,
-        address: string,
-        select: string,
-        phonenumber: string,
-        [key: string]: string
-    }
-    const authInit: ICustomerInterface = {
-        customerName: "",
-        customerAddress: "",
-        customerEmail: "",
-        customerNumber: "",
-        name: "",
-        address: "",
-        select: "",
-        phonenumber: "",
+    const authInit: { transaction: ITransaction } = {
+        transaction: {}
     }
 
-    const handleSubmit = async (values: ICustomerInterface) => {
-        await props.updateState({ value: values })
-        await Meteor.call('tasks.insert', JSON.stringify(values));
+    const handleSubmit = async (values: ITransaction) => {
+        await props.updateState(values)
+        console.log(values)
 
         console.log(values)
         history.push(`${Path.workspace.remind}/rules`)
     }
 
+    // Use this function to trigger a Hide function for the Lists rendered before user begins a search
+    const handleCustomerList = () => {
+        console.log(list);
+        showList(false)
+    }
 
 
 
 
     return (
         <React.Fragment>
-            <PageHeader title="Create a Reminder" subTitle="Remind a customer about an overdue payment" />
-            <Box py={4}>
+            <PageHeader title="Send a Reminder" subTitle="" />
+            <Box py={3}>
                 <Formik
                     initialValues={authInit}
                     onSubmit={(values, actions) => {
@@ -64,17 +60,49 @@ const Create: React.FunctionComponent = (props: any) => {
                     }}
                 >
                     {(props: FormikProps<any>) => (
-                        <FormikForm isLoading={props.isSubmitting} analyticName="Signup Form" formProps={props} buttonName="SAVE">
-                            <SelectField placeholder="Search" name="select" label="Search Customer" validate={Validator.isRequired} options={["Bukola Saraki", "Mohammed Muraril"]} />
+                        <FormikForm isLoading={props.isSubmitting} analyticName="Search Transaction" formProps={props} buttonName="Save" withIcon>
+                            <TransactionSearchField onInput={handleCustomerList} placeholder="Type transaction info to search" name="transaction" label="Find a Transaction" validate={Validator.isRequired} options={inputArr} />
 
+                            {/* //Render a list of customers */}
+                            {list &&
+                                <Box pt="3">
+                                    {inputArr.map((item, index) => {
+                                        return (
+                                            <TransactionSearch
+                                                key={[item._id, index].join('-')}
+                                                itemName={item.itemName}
+                                                customerName={item.customer?.customerName}
+                                                analyticName="search transaction"
+                                                paymentStatus="PAID"
+                                                amountPaid={`₵ ${item.amountPaid || 0}`}
+                                                amountDue={`₵ ${item.amountDue || 0}`}
+                                                overdueStatus="OVERDUE"
+                                                onClick={() => handleSubmit({ transaction: item })}
+                                            />
 
+                                        )
+                                    })}
+                                </Box>
+                            }
 
                         </FormikForm>
                     )}
+
                 </Formik>
+
+
             </Box>
         </React.Fragment>
     );
 }
 
-export default Create
+
+
+
+export default withTracker(() => {
+    Meteor.subscribe('transactions')
+    return {
+        customers: Customers.find().fetch(),
+        transactions: Transactions.find().fetch()
+    };
+})(Create);

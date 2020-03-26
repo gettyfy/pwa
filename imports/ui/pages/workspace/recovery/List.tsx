@@ -111,7 +111,7 @@ const List: React.FunctionComponent = (props: any) => {
             <TransactionList
 
               customerStatus="10 days to overdue"
-              customerName="Evans Boateng"
+              customerName="Muri Boateng"
               amount="GHc233"
               paymentStatus="PAID"
               overdueAmount="GHC346"
@@ -123,20 +123,7 @@ const List: React.FunctionComponent = (props: any) => {
 
             <TransactionList
               customerStatus="10 days to overdue"
-              customerName="Evans Boateng"
-              amount="GHc233"
-              paymentStatus="PAID"
-              overdueAmount="GHC346"
-              overdueStatus="OVERDUE"
-              cardLink="/recovery/reason"
-              iconName="chevron-right"
-              iconSize="24px"
-            />
-
-
-            <TransactionList
-              customerStatus="10 days to overdue"
-              customerName="Evans Boateng"
+              customerName="Kuma Asamoa"
               amount="GHc233"
               paymentStatus="PAID"
               overdueAmount="GHC346"
@@ -149,7 +136,20 @@ const List: React.FunctionComponent = (props: any) => {
 
             <TransactionList
               customerStatus="10 days to overdue"
-              customerName="Evans Boateng"
+              customerName="Loveline Henry"
+              amount="GHc233"
+              paymentStatus="PAID"
+              overdueAmount="GHC346"
+              overdueStatus="OVERDUE"
+              cardLink="/recovery/reason"
+              iconName="chevron-right"
+              iconSize="24px"
+            />
+
+
+            <TransactionList
+              customerStatus="10 days to overdue"
+              customerName="Kili Manjaro"
               amount="GHc233"
               paymentStatus="PAID"
               overdueAmount="GHC346"

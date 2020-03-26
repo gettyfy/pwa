@@ -6,8 +6,10 @@
 import validator from 'validator';
 
 const nigerian = /^([0]{1})([7-9]{1})([0|1]{1})([\d]{1})([\d]{7,8})$/g;
+const mobile = /^(\+[1-9][0-9]*(\([0-9]*\)|-[0-9]*-))?[0]?[1-9][0-9\- ]*$/g;
+const intMobile = /^(\+\d{1,3}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{2,5}$/g; //stackoverflow.com/questions/16699007/regular-expression-to-match-standard-10-digit-phone-number
 
-export function isRequired(value: string, values = {}) {
+https: export function isRequired(value: string, values = {}) {
 	if (!value || value === null) return [ 'Missing required field' ];
 	if (value && typeof value === 'string' && validator.isEmpty(value)) return [ 'Field cannot be empty' ];
 	if (value && typeof value === 'object' && Object.keys(value).length === 0) return [ 'This field is required' ];
@@ -27,6 +29,11 @@ export function isEmail(value: string, values = {}) {
 export function isNumeric(value: string, values = {}) {
 	if (!value) return [ 'This field is required' ];
 	if (value && !validator.isNumeric(value)) return [ 'Please Input a Number' ];
+}
+
+export function isMobile(value: string, values = {}) {
+	if (!value) return [ 'This field is required' ];
+	if (value && mobile.test(value)) return [ 'Phone must start with (+) country code' ];
 }
 
 export function notLessThan(value: number, base: number, minimum: number) {
