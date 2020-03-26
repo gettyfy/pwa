@@ -2,12 +2,12 @@ import React from 'react';
 import styled from '@emotion/styled'
 import path from '/imports/ui/router'
 import { withTracker } from 'meteor/react-meteor-data'
-import { Flex, Stack, Box, Avatar, Stat, StatNumber, StatHelpText, Text, StatGroup, Heading, Icon, Spinner } from '@chakra-ui/core'
+import { Flex, Stack, Box, Avatar, Stat, StatNumber, StatHelpText, Text, StatGroup, Heading, Icon, Spinner, StatArrow } from '@chakra-ui/core'
 // import * as Analytics from '/imports/ui/analytics';
 import { ActionCard, ActionCardRow, StatusText, PageHeader, TransactionList } from '/imports/ui/components/'
 import { greeting, formatNumber } from '/imports/lib/formatter'
 import { Accounts } from 'meteor/accounts-base'
-import { Transactions } from '/imports/api/collections'
+import { Transactions, Customers } from '/imports/api/collections'
 import { Loader } from '/imports/lib/loader'
 
 
@@ -42,7 +42,7 @@ class DashboardPage extends React.Component {
 
   render() {
     console.log(this.props)
-    const { earnings, user } = this.props
+    const { earnings, customersCount, user } = this.props
 
     if (!this.props.user) {
       return (
@@ -55,7 +55,7 @@ class DashboardPage extends React.Component {
       <Dashboard>
 
         <PageHeader useHeader />
-        <Box d="flex" my="3" mb="8" alignItems="center" justifyContent="space-between">
+        <Box d="flex" my="1" mb="8" alignItems="center" justifyContent="space-between">
           <Stack>
             <p>{greeting()}</p>
             <Heading as="h3" size="lg">{user.profile.name}</Heading>
@@ -68,22 +68,23 @@ class DashboardPage extends React.Component {
 
         <DashboardStat>
           <Stat>
-            <StatNumber>{this.props.deals}</StatNumber>
+            <StatNumber>{this.props.dealsCount}</StatNumber>
             <StatHelpText>
               DEALS
               </StatHelpText>
           </Stat>
 
           <Stat>
-            <StatNumber>45</StatNumber>
+            <StatNumber>{customersCount}</StatNumber>
             <StatHelpText>
-              PAYMENT DUE
+              CUSTOMERS
               </StatHelpText>
           </Stat>
           <Stat>
-            <StatNumber>39</StatNumber>
+            {/* Add dummy data for Payments overdue */}
+            <StatNumber>{this.props.dealsCount - 2}</StatNumber>
             <StatHelpText>
-              OVERDUE
+              PAYMENTS DUE
               </StatHelpText>
           </Stat>
         </DashboardStat>
@@ -99,10 +100,13 @@ class DashboardPage extends React.Component {
           </Stack>
 
           <Stack>
-            <Heading as="h1" size="lg">
+            <Heading as="h2" size="lg">
               {`₵ ${formatNumber(earnings.expected)}`}
             </Heading>
-            <StatusText fsize="12px"> {`₵ ${formatNumber(earnings.collected)}`}</StatusText>
+            <StatusText fsize="14px">
+              <StatArrow type="increase" />
+              {`₵ ${formatNumber(earnings.collected)}`}
+            </StatusText>
           </Stack>
         </Flex>
 
@@ -210,17 +214,19 @@ class DashboardPage extends React.Component {
 
 
 export default withTracker(() => {
-  const id = Accounts.userId()
+  // const id = Accounts.userId()
   let collectedEarnings: number = 0;
   let expectedEarnings: number = 0;
+
   // calculate overdue sum based on amountDue
   Transactions.find({}, { fields: { amountPaid: 1, amountDue: 1 } }).fetch().forEach((arr) => expectedEarnings += parseFloat(arr.amountDue))
   Transactions.find({}, { fields: { amountPaid: 1, amountDue: 1 } }).fetch().forEach((arr) => collectedEarnings += parseFloat(arr.amountPaid))
 
   return {
     user: Accounts.user(),
-    deals: Transactions.find().count(),
-    payments: Transactions.find({}, { fields: { amountPaid: 1, amountDue: 1 } }).fetch(),
+    dealsCount: Transactions.find().count(),
+    customersCount: Customers.find().count(),
+    payments: Transactions.find({ amountPaid: { $in: ["100"] } }).fetch(),
     earnings: {
       collected: collectedEarnings,
       expected: expectedEarnings

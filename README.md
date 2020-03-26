@@ -20,3 +20,5 @@ mongodb://heroku_f28jh6q9:vabfsmo4t3sp6scf1hs1gofkfj@ds015403.mlab.com:15403/her
 - [ ] https://github.com/VeliovGroup/meteor-base64 - Simple package to implement URL Friendly Base64
 - [ ] Write your own Base64 implementation using NodeJS.crypto package https://stackoverflow.com/questions/18469255/how-can-i-encode-a-string-in-base64-using-meteor
 - [ ] Google `lib phonenumber` https://www.npmjs.com/package/google-libphonenumber
+- [ ] Implement Private Routes. https://tylermcginnis.com/react-router-protected-routes-authentication/
+
