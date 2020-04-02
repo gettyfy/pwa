@@ -47,8 +47,8 @@ const path: IPath = {
 		resetPasswordRoute: '/auth/reset-password'
 	},
 	workspace: {
-		transaction: '/transaction',
-		transactionView: '/transactions',
+		transaction: '/transactions',
+		transactionView: '/transaction',
 		customer: '/customers',
 		customerView: '/customer',
 		reminder: '/reminders',
