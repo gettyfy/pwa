@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom';
 
-import { Box } from '@chakra-ui/core'
+import { Box, Heading } from '@chakra-ui/core'
 import * as Validator from '/imports/lib/validator'
 import { Formik, FormikProps } from 'formik'
 import { PageHeader, FormikForm, TransactionSearch, TransactionSearchField } from '/imports/ui/components'
@@ -60,12 +60,13 @@ const Create: React.FunctionComponent<CreateProps> = (props) => {
                     }}
                 >
                     {(props: FormikProps<any>) => (
-                        <FormikForm isLoading={props.isSubmitting} analyticName="Search Transaction" formProps={props} buttonName="Save" withIcon>
-                            <TransactionSearchField onInput={handleCustomerList} placeholder="Type transaction info to search" name="transaction" label="Find a Transaction" validate={Validator.isRequired} options={inputArr} />
+                        <FormikForm isLoading={props.isSubmitting} analyticName="Search Transaction" formProps={props} buttonName="NEXT" withIcon>
+                            <TransactionSearchField onInput={handleCustomerList} placeholder="Type transaction info to search" name="transaction" label="Select a Transaction" validate={Validator.isRequired} options={inputArr} />
 
                             {/* //Render a list of customers */}
                             {list &&
                                 <Box pt="3">
+                                    <Heading fontWeight="bold" as="h4" size="sm">Recent Transactions</Heading>
                                     {inputArr.map((item, index) => {
                                         return (
                                             <TransactionSearch
