@@ -33,34 +33,39 @@ const TabLayout = styled.footer`
     z-index: 111111;
 `
 
+const activeLinkStyle = {
+    color: '#111111',
+    borderBottom: "1.5px solid #111111",
+}
 
 
-export const TabbedNav = (): JSX.Element {
+
+export const TabbedNav = (): JSX.Element => {
     return (
         <TabLayout>
             <Flex justify="space-around">
-                <Link to={path.root}>
+                <Link to={path.root} exact activeStyle={{ ...activeLinkStyle }}>
                     <LinkList>
                         <AppIcon src="/icons/nav/dashboard.svg" />
                         <Text>HOME</Text>
                     </LinkList>
                 </Link>
 
-                <Link to={path.workspace.customer}>
+                <Link to={path.workspace.customer} activeStyle={{ ...activeLinkStyle }}>
                     <LinkList>
                         <AppIcon src="/icons/nav/users.svg" />
                         <Text>CUSTOMER</Text>
                     </LinkList>
                 </Link>
 
-                <Link to={path.workspace.transaction}>
+                <Link to={path.workspace.transaction} activeStyle={{ ...activeLinkStyle }}>
                     <LinkList>
                         <AppIcon src="/icons/nav/transactions.svg" />
                         <Text>TRANSACTIONS</Text>
                     </LinkList>
                 </Link>
 
-                <Link to={path.workspace.account}>
+                <Link to={path.workspace.account} activeStyle={{ ...activeLinkStyle }}>
                     <LinkList>
                         <AppIcon src="/icons/nav/settings.svg" />
                         <Text>ACCOUNT</Text>
