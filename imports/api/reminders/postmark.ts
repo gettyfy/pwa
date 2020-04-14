@@ -1,6 +1,6 @@
 const postmark = require('postmark');
 
-let serverToken = '263a223c-379d-485a-a4de-11a6781ee515';
+let serverToken = PROCESS.ENV.PM_SV;
 let accountToken = 'yyyyyy-yyyyy-yyyyy-yyyyyy';
 
 let client = new postmark.ServerClient(serverToken);
