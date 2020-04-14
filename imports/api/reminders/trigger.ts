@@ -1,5 +1,4 @@
-// var messagebird = require('messagebird')('yZs6Tc1YLN36SEKSCdpqU5t0y'); //TEST API KEY
-var messagebird = require('messagebird')('S0oxNGGI7kpJ9JoZLbQxhcWVT'); //LIVE API KEY
+const messagebird = require('messagebird')(PROCESS.ENV.MB); //TEST API KEY
 
 /**
  * Methods to manage messaging Triggers =
