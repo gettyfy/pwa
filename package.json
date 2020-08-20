@@ -12,7 +12,7 @@
 		"@chakra-ui/core": "^0.5.2",
 		"@emotion/core": "^10.0.27",
 		"@emotion/styled": "^10.0.27",
-		"bcrypt": "^4.0.1",
+		"bcrypt": "^5.0.0",
 		"downshift": "^5.0.4",
 		"emotion-theming": "^10.0.27",
 		"formik": "^2.1.4",
